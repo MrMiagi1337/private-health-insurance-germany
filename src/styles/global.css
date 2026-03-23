@@ -1,8 +1,8 @@
 /* ── Design tokens ── */
 :root {
-  --red:       #d64c2b;
-  --red-dk:    #b83d20;
-  --red-lt:    #fdf1ed;
+  --red:       #1877F2;
+  --red-dk:    #0d6efd;
+  --red-lt:    #e8f0fe;
   --bg:        #f9f8f6;
   --card:      #ffffff;
   --border:    #eae6e0;
@@ -82,13 +82,13 @@ button, input { font-family: inherit; }
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(214,76,43,.32);
+  box-shadow: 0 4px 14px rgba(24,119,242,.32);
   transition: background var(--ease), transform var(--ease), box-shadow var(--ease);
 }
 .btn-primary:hover {
   background: var(--red-dk);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(214,76,43,.42);
+  box-shadow: 0 6px 20px rgba(24,119,242,.42);
 }
 .btn-primary:active { transform: none; }
 
