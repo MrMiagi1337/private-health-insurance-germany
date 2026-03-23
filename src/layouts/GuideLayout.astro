@@ -1,0 +1,216 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  emoji?: string;
+  readTime?: string;
+  updatedDate?: string;
+  showInsuranceCTA?: boolean;
+}
+
+const {
+  title,
+  description,
+  emoji = '📖',
+  readTime = '5 min read',
+  updatedDate = '2025',
+  showInsuranceCTA = true,
+} = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <main>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb container" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-hidden="true">›</li>
+        <li><a href="/guides">Guides</a></li>
+        <li aria-hidden="true">›</li>
+        <li aria-current="page">{title}</li>
+      </ol>
+    </nav>
+
+    <div class="guide-wrap container">
+      <!-- Main article -->
+      <article class="guide-article">
+        <header class="guide-header">
+          <div class="guide-emoji" aria-hidden="true">{emoji}</div>
+          <h1>{title}</h1>
+          <p class="guide-lead">{description}</p>
+          <div class="guide-meta">
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              {readTime}
+            </span>
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Updated {updatedDate}
+            </span>
+          </div>
+        </header>
+
+        <div class="guide-body">
+          <slot />
+        </div>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="guide-sidebar">
+        {showInsuranceCTA && (
+          <div class="sidebar-card sidebar-insurance">
+            <div class="sc-tag">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Don't miss this
+            </div>
+            <h3>Save up to €300/month on health insurance</h3>
+            <p>Earning over €77,400/year? You may qualify for private health insurance (PKV) — and pay significantly less than GKV.</p>
+            <a href="/guides/health-insurance" class="btn-primary" style="width:100%;justify-content:center;font-size:.88rem;padding:10px 16px">
+              Check my eligibility →
+            </a>
+            <span class="sc-note">Free consultation. No commitment.</span>
+          </div>
+        )}
+
+        <div class="sidebar-card sidebar-toc">
+          <h3>On this page</h3>
+          <slot name="toc" />
+        </div>
+
+        <div class="sidebar-card sidebar-related">
+          <h3>Related guides</h3>
+          <slot name="related" />
+        </div>
+      </aside>
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  .breadcrumb {
+    padding-top: 1.25rem; padding-bottom: 0;
+  }
+  .breadcrumb ol {
+    display: flex; align-items: center; gap: .4rem;
+    list-style: none; flex-wrap: wrap;
+  }
+  .breadcrumb li { font-size: .82rem; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); transition: color var(--ease); }
+  .breadcrumb a:hover { color: var(--red); }
+  .breadcrumb [aria-current="page"] { color: var(--text); font-weight: 500; }
+
+  .guide-wrap {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 3.5rem;
+    align-items: start;
+  }
+
+  /* Article */
+  .guide-header { margin-bottom: 2rem; }
+  .guide-emoji { font-size: 2.75rem; margin-bottom: .75rem; }
+  .guide-header h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 800; letter-spacing: -.03em; line-height: 1.2;
+    margin-bottom: .6rem;
+  }
+  .guide-lead { font-size: 1.05rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .guide-meta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .guide-meta span {
+    display: flex; align-items: center; gap: 5px;
+    font-size: .8rem; color: var(--muted); font-weight: 500;
+  }
+  .guide-meta svg { flex-shrink: 0; }
+
+  /* Guide body typography */
+  .guide-body { line-height: 1.75; }
+  .guide-body :global(h2) {
+    font-size: 1.35rem; font-weight: 700; letter-spacing: -.02em;
+    margin: 2.25rem 0 .75rem; padding-top: .5rem;
+    border-top: 1px solid var(--border);
+  }
+  .guide-body :global(h3) {
+    font-size: 1.05rem; font-weight: 700; margin: 1.75rem 0 .5rem;
+  }
+  .guide-body :global(p) { margin-bottom: 1.1rem; color: var(--text); }
+  .guide-body :global(ul), .guide-body :global(ol) {
+    margin: .75rem 0 1.1rem 1.4rem;
+  }
+  .guide-body :global(li) { margin-bottom: .4rem; }
+  .guide-body :global(a) {
+    color: var(--red); text-decoration: underline; text-underline-offset: 3px;
+    transition: color var(--ease);
+  }
+  .guide-body :global(a:hover) { color: var(--red-dk); }
+  .guide-body :global(strong) { font-weight: 700; }
+  .guide-body :global(blockquote) {
+    border-left: 3px solid var(--red); padding-left: 1rem;
+    margin: 1.25rem 0; color: var(--muted); font-style: italic;
+  }
+  .guide-body :global(.callout) {
+    background: var(--red-lt); border: 1px solid rgba(214,76,43,.2);
+    border-radius: var(--radius); padding: 1rem 1.25rem; margin: 1.5rem 0;
+  }
+  .guide-body :global(.callout p) { margin: 0; }
+
+  /* Sidebar */
+  .guide-sidebar { display: flex; flex-direction: column; gap: 1.25rem; position: sticky; top: 78px; }
+
+  .sidebar-card {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem;
+    box-shadow: var(--sh-sm);
+  }
+
+  .sidebar-insurance {
+    background: linear-gradient(135deg, var(--red) 0%, #c0391a 100%);
+    color: #fff; border-color: transparent;
+    box-shadow: 0 6px 24px rgba(214,76,43,.25);
+  }
+  .sc-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,.2);
+    font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px; margin-bottom: .7rem;
+  }
+  .sidebar-insurance h3 {
+    font-size: .98rem; font-weight: 700; margin-bottom: .5rem; line-height: 1.35;
+  }
+  .sidebar-insurance p {
+    font-size: .83rem; opacity: .88; line-height: 1.5; margin-bottom: 1rem;
+  }
+  .sc-note {
+    display: block; font-size: .75rem; opacity: .75; text-align: center; margin-top: .5rem;
+  }
+
+  .sidebar-toc h3,
+  .sidebar-related h3 {
+    font-size: .82rem; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: .75rem;
+  }
+  .sidebar-toc :global(ul) { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+  .sidebar-toc :global(a) {
+    font-size: .86rem; color: var(--muted); transition: color var(--ease);
+  }
+  .sidebar-toc :global(a:hover) { color: var(--red); }
+  .sidebar-related :global(ul) { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+  .sidebar-related :global(a) {
+    font-size: .86rem; color: var(--muted); transition: color var(--ease);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .sidebar-related :global(a:hover) { color: var(--red); }
+
+  @media (max-width: 860px) {
+    .guide-wrap { grid-template-columns: 1fr; }
+    .guide-sidebar { position: static; }
+    .sidebar-toc { display: none; }
+  }
+</style>

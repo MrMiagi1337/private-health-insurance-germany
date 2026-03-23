@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://living-in-germany.org/sitemap-index.xml
