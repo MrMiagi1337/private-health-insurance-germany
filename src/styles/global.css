@@ -1,12 +1,12 @@
 /* ── Design tokens ── */
 :root {
-  --red:       #1877F2;
-  --red-dk:    #0d6efd;
-  --red-lt:    #e8f0fe;
-  --bg:        #f9f8f6;
+  --red:       #e8632a;
+  --red-dk:    #c9521e;
+  --red-lt:    #fdf0e8;
+  --bg:        #f5f1eb;
   --card:      #ffffff;
-  --border:    #eae6e0;
-  --text:      #18181b;
+  --border:    #e8e2d9;
+  --text:      #1c1c1e;
   --muted:     #6b6760;
   --radius:    14px;
   --sh-sm:     0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
