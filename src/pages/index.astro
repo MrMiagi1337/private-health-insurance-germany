@@ -2,85 +2,96 @@
 import Layout from '../layouts/Layout.astro';
 
 const insurers = [
-  { name: 'Debeka', tag: 'Most stable premiums', href: '/top-insurers/debeka' },
-  { name: 'Allianz', tag: 'Best English support', href: '/top-insurers/allianz' },
-  { name: 'DKV', tag: 'Largest PKV insurer', href: '/top-insurers/dkv' },
-  { name: 'HanseMerkur', tag: 'Best value', href: '/top-insurers/hansemerkur' },
-  { name: 'Hallesche', tag: 'Best dental cover', href: '/top-insurers/hallesche' },
-  { name: 'AXA', tag: 'Expat-friendly', href: '/top-insurers/axa' },
-  { name: 'Barmenia', tag: 'Best mental health', href: '/top-insurers/barmenia' },
-  { name: 'Signal Iduna', tag: 'Solid mid-range', href: '/top-insurers/signal-iduna' },
-  { name: 'Gothaer', tag: '200+ years history', href: '/top-insurers/gothaer' },
-  { name: 'Continentale', tag: 'Most flexible', href: '/top-insurers/continentale' },
+  { name: 'Debeka',       tag: 'Most stable premiums',   href: '/top-insurers/debeka' },
+  { name: 'Allianz',      tag: 'Best English support',   href: '/top-insurers/allianz' },
+  { name: 'DKV',          tag: 'Largest PKV insurer',    href: '/top-insurers/dkv' },
+  { name: 'HanseMerkur',  tag: 'Best value',             href: '/top-insurers/hansemerkur' },
+  { name: 'Hallesche',    tag: 'Best dental cover',      href: '/top-insurers/hallesche' },
+  { name: 'AXA',          tag: 'Expat-friendly',         href: '/top-insurers/axa' },
+  { name: 'Barmenia',     tag: 'Best mental health',     href: '/top-insurers/barmenia' },
+  { name: 'Signal Iduna', tag: 'Solid mid-range',        href: '/top-insurers/signal-iduna' },
+  { name: 'Gothaer',      tag: '200+ years history',     href: '/top-insurers/gothaer' },
+  { name: 'Continentale', tag: 'Most flexible',          href: '/top-insurers/continentale' },
 ];
 ---
 
 <Layout
-  title="PKV Germany"
+  title="Private Health Insurance Germany — Expat Guide to PKV 2026"
   description="Private health insurance in Germany for expats, explained in plain English. Compare GKV vs PKV, check eligibility, calculate your costs, and get matched with a licensed broker. Free."
 >
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner container">
+    <div class="hero-inner container-wide">
       <div class="hero-content">
-        <div class="hero-badge">Private Health Insurance Germany</div>
-        <h1>Stop overpaying for health insurance in Germany.</h1>
-        <p class="hero-lead">If you earn over €73,800/year or are self-employed, private health insurance (PKV) could save you <strong>€200–500/month</strong> compared to public GKV — with better coverage. We connect you with licensed brokers who speak English.</p>
+        <div class="hero-tag">Private Health Insurance · Germany</div>
+        <h1>Pay less.<br/>Get better care.</h1>
+        <p class="hero-sub">Expats earning over €73,800/year — or self-employed — can switch from public GKV to private PKV and save <strong>€200–500 per month</strong> with better hospital access. We match you with licensed English-speaking brokers.</p>
         <div class="hero-actions">
-          <a href="/quiz" class="btn-hero-primary">Check my eligibility — free →</a>
-          <a href="/compare" class="btn-hero-ghost">GKV vs PKV comparison</a>
+          <a href="/quiz" class="btn-hero">Check my eligibility — free →</a>
+          <a href="/compare" class="btn-hero-ghost">GKV vs PKV →</a>
         </div>
-        <div class="hero-proof">
-          <span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            §34d licensed brokers
-          </span>
-          <span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            English speaking
-          </span>
-          <span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            100% free service
-          </span>
+        <div class="hero-trust">
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>§34d licensed brokers</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>English speaking</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>100% free</span>
         </div>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="cost-comparison">
-          <div class="cost-card cost-gkv">
-            <div class="cost-label">GKV — Public insurance</div>
-            <div class="cost-system">at €70,000/year salary</div>
-            <div class="cost-amount cost-high">€580<span>/mo</span></div>
-            <div class="cost-note">Scales with income. No private room. Long waits.</div>
+
+      <div class="hero-card" aria-hidden="true">
+        <div class="hcard-row hcard-gkv">
+          <div class="hcard-meta">
+            <span class="hcard-label">GKV — Public</span>
+            <span class="hcard-detail">€70,000 salary · age 32</span>
           </div>
-          <div class="cost-vs">VS</div>
-          <div class="cost-card cost-pkv">
-            <div class="cost-label">PKV — Private insurance</div>
-            <div class="cost-system">same person, age 32</div>
-            <div class="cost-amount cost-low">€280<span>/mo</span></div>
-            <div class="cost-note">Fixed by age. Private room. Choose any specialist.</div>
-            <div class="cost-saving">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-              Save €300/month · €3,600/year
-            </div>
+          <div class="hcard-price red">€580<span>/mo</span></div>
+        </div>
+        <div class="hcard-divider">
+          <div class="hcard-divider-line"></div>
+          <span>vs</span>
+          <div class="hcard-divider-line"></div>
+        </div>
+        <div class="hcard-row hcard-pkv">
+          <div class="hcard-meta">
+            <span class="hcard-label">PKV — Private</span>
+            <span class="hcard-detail">same person, mid-range plan</span>
+          </div>
+          <div class="hcard-price green">€280<span>/mo</span></div>
+        </div>
+        <div class="hcard-saving">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          Save €300/month · €3,600/year
+        </div>
+        <div class="hcard-features">
+          <div class="hcard-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Private hospital room
+          </div>
+          <div class="hcard-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Choose any specialist directly
+          </div>
+          <div class="hcard-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Premium fixed by age, not income
           </div>
         </div>
+        <a href="/quiz" class="hcard-cta">Check if I qualify →</a>
       </div>
     </div>
   </section>
 
   <!-- STATS BAR -->
   <div class="stats-bar">
-    <div class="container stats-inner">
+    <div class="container-wide stats-inner">
       <div class="stat-item">
         <span class="stat-num">10</span>
-        <span class="stat-label">Top insurers compared</span>
+        <span class="stat-label">Insurers compared</span>
       </div>
       <div class="stat-div"></div>
       <div class="stat-item">
         <span class="stat-num">€300+</span>
-        <span class="stat-label">Average monthly saving</span>
+        <span class="stat-label">Avg. monthly saving</span>
       </div>
       <div class="stat-div"></div>
       <div class="stat-item">
@@ -95,610 +106,489 @@ const insurers = [
     </div>
   </div>
 
-  <main>
-
-    <!-- HOW IT WORKS -->
-    <section class="section-how">
-      <div class="container">
-        <div class="section-label">How it works</div>
-        <h2 class="section-title">Switch to PKV in 3 steps</h2>
-        <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-num">01</div>
-            <h3>Check your eligibility</h3>
-            <p>Answer 5 quick questions about your employment, income, and age. Takes 2 minutes. Instant result.</p>
-            <a href="/quiz" class="step-link">Take the quiz →</a>
-          </div>
-          <div class="step-connector" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="step-card">
-            <div class="step-num">02</div>
-            <h3>Get matched with a broker</h3>
-            <p>A §34d licensed broker who speaks English reviews your profile and compares quotes from all major PKV insurers.</p>
-            <a href="/contact" class="step-link">Book a free call →</a>
-          </div>
-          <div class="step-connector" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="step-card">
-            <div class="step-num">03</div>
-            <h3>Switch and start saving</h3>
-            <p>Your broker handles all the paperwork. Policies typically start within 2–4 weeks of your application.</p>
-            <a href="/checklist" class="step-link">See what you need →</a>
-          </div>
+  <!-- HOW IT WORKS -->
+  <section class="section-white">
+    <div class="container-wide">
+      <div class="section-kicker">How it works</div>
+      <h2 class="section-title">Three steps to private coverage</h2>
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <h3>Check your eligibility</h3>
+          <p>Answer 5 quick questions about your employment, income, and age. Takes 2 minutes. Instant result.</p>
+          <a href="/quiz" class="step-link">Take the quiz →</a>
+        </div>
+        <div class="step-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="step-item">
+          <div class="step-num">02</div>
+          <h3>Get matched with a broker</h3>
+          <p>A §34d licensed broker who speaks English reviews your profile and compares quotes from all major PKV insurers.</p>
+          <a href="/contact" class="step-link">Book a free call →</a>
+        </div>
+        <div class="step-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="step-item">
+          <div class="step-num">03</div>
+          <h3>Switch and start saving</h3>
+          <p>Your broker handles all the paperwork. Policies typically start within 2–4 weeks of application.</p>
+          <a href="/checklist" class="step-link">See what you need →</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- WHY PKV — BENEFITS -->
-    <section class="section-benefits">
-      <div class="container">
-        <div class="benefits-grid">
-          <div class="benefits-left">
-            <div class="section-label">Why switch to PKV</div>
-            <h2 class="section-title">Private insurance, not a luxury</h2>
-            <p class="benefits-intro">For expats above the income threshold, PKV usually delivers better healthcare at a lower monthly cost. Here is why.</p>
-            <a href="/private-health-insurance" class="btn-primary">Full PKV guide →</a>
-          </div>
-          <div class="benefits-right">
-            <div class="benefit-row">
-              <div class="benefit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              </div>
-              <div>
-                <strong>Lower monthly premiums</strong>
-                <p>Premium is fixed by your age at entry — not your income. At €70k, you pay half of what GKV costs.</p>
-              </div>
-            </div>
-            <div class="benefit-row">
-              <div class="benefit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-              </div>
-              <div>
-                <strong>Better access to care</strong>
-                <p>Private room in hospital. Choose any specialist directly, no GP referral. Shorter waiting times.</p>
-              </div>
-            </div>
-            <div class="benefit-row">
-              <div class="benefit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div>
-                <strong>English-speaking support</strong>
-                <p>Brokers and several insurers offer full English-language service. No German required.</p>
-              </div>
-            </div>
-            <div class="benefit-row">
-              <div class="benefit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div>
-                <strong>Lock in your rate early</strong>
-                <p>Entry age determines your base premium for life. Every year you wait costs more in the long run.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- BENEFITS -->
+  <section class="section-gray">
+    <div class="container-wide benefits-grid">
+      <div class="benefits-left">
+        <div class="section-kicker">Why PKV</div>
+        <h2 class="section-title">Private insurance,<br/>not a luxury</h2>
+        <p class="benefits-intro">For expats above the income threshold, PKV typically delivers better healthcare at a lower monthly cost.</p>
+        <a href="/private-health-insurance" class="btn-primary">Full PKV guide →</a>
       </div>
-    </section>
-
-    <!-- TOOLS -->
-    <section class="section-tools">
-      <div class="container">
-        <div class="section-label">Free tools</div>
-        <h2 class="section-title">Understand your options before you commit</h2>
-        <div class="tools-grid">
-          <a href="/quiz" class="tool-card tool-primary">
-            <div class="tool-tag">2 minutes</div>
-            <h3>Eligibility Quiz</h3>
-            <p>5 questions to find out if you qualify for PKV and whether it makes financial sense for you.</p>
-            <span class="tool-cta">Check eligibility →</span>
-          </a>
-          <a href="/calculator" class="tool-card">
-            <div class="tool-tag">Instant estimate</div>
-            <h3>Cost Calculator</h3>
-            <p>Enter your age, income, and health status to get a realistic PKV premium range.</p>
-            <span class="tool-cta">Calculate costs →</span>
-          </a>
-          <a href="/compare" class="tool-card">
-            <div class="tool-tag">Side-by-side</div>
-            <h3>GKV vs PKV</h3>
-            <p>Full comparison of Germany's public and private health insurance systems for expats.</p>
-            <span class="tool-cta">Compare now →</span>
-          </a>
-          <a href="/checklist" class="tool-card">
-            <div class="tool-tag">Printable</div>
-            <h3>Application Checklist</h3>
-            <p>All documents you need to apply for PKV, in the right order.</p>
-            <span class="tool-cta">View checklist →</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- INSURERS -->
-    <section class="section-insurers">
-      <div class="container">
-        <div class="ins-header">
+      <div class="benefits-right">
+        <div class="benefit-row">
+          <div class="benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
           <div>
-            <div class="section-label">Insurer reviews</div>
-            <h2 class="section-title">All major PKV insurers, independently reviewed</h2>
+            <strong>Lower monthly premiums</strong>
+            <p>Premium is fixed by your age at entry, not your income. At €70k salary you pay roughly half of GKV costs.</p>
           </div>
-          <a href="/top-insurers" class="btn-outline ins-all-btn">See full reviews →</a>
         </div>
-        <div class="ins-grid">
-          {insurers.map(ins => (
-            <a href={ins.href} class="ins-card">
-              <div class="ins-initial">{ins.name.charAt(0)}</div>
-              <div class="ins-body">
-                <div class="ins-name">{ins.name}</div>
-                <div class="ins-tag">{ins.tag}</div>
-              </div>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="section-testi">
-      <div class="container">
-        <div class="testi-header">
-          <div class="section-label">Expat stories</div>
-          <h2 class="section-title">Real people, real savings</h2>
-        </div>
-        <div class="testi-grid">
-          <div class="testi-card">
-            <div class="testi-stars">★★★★★</div>
-            <blockquote>"I was paying €540/month for GKV. After switching to PKV I pay €240/month. Same doctor, better room in hospital. Wish I had done it in my first year."</blockquote>
-            <div class="testi-person">
-              <div class="testi-avatar">J</div>
-              <div>
-                <div class="testi-name">James K.</div>
-                <div class="testi-role">Software Engineer · Berlin</div>
-              </div>
-            </div>
+        <div class="benefit-row">
+          <div class="benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
-          <div class="testi-card">
-            <div class="testi-stars">★★★★★</div>
-            <blockquote>"As a freelancer I had no idea I could switch. The broker handled everything in English. It took two weeks and I now save €280/month."</blockquote>
-            <div class="testi-person">
-              <div class="testi-avatar">P</div>
-              <div>
-                <div class="testi-name">Priya M.</div>
-                <div class="testi-role">Independent Consultant · Munich</div>
-              </div>
-            </div>
+          <div>
+            <strong>Better access to care</strong>
+            <p>Private room in hospital. Choose any specialist directly, no GP referral. Shorter waiting times.</p>
           </div>
-          <div class="testi-card">
-            <div class="testi-stars">★★★★★</div>
-            <blockquote>"The guide explained the differences better than my German colleagues ever could. The broker found me a plan that costs half my old GKV contribution."</blockquote>
-            <div class="testi-person">
-              <div class="testi-avatar">T</div>
-              <div>
-                <div class="testi-name">Thomas B.</div>
-                <div class="testi-role">Finance Manager · Frankfurt</div>
-              </div>
-            </div>
+        </div>
+        <div class="benefit-row">
+          <div class="benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <strong>English-speaking support</strong>
+            <p>Brokers and several insurers offer full English-language service. No German required.</p>
+          </div>
+        </div>
+        <div class="benefit-row">
+          <div class="benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <strong>Lock in your rate early</strong>
+            <p>Entry age determines your base premium for life. Every year you wait costs more in the long run.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FINAL CTA -->
-    <section class="section-cta">
-      <div class="container">
-        <div class="cta-box">
-          <div class="cta-content">
-            <h2>Find out how much you could save</h2>
-            <p>A licensed §34d broker will review your situation, compare quotes from all major PKV insurers, and give you a clear recommendation. Free of charge, in English, no obligation.</p>
-            <div class="cta-actions">
-              <a href="/contact" class="btn-cta-primary">Get free broker advice →</a>
-              <a href="/quiz" class="btn-cta-ghost">Check eligibility first</a>
+  <!-- TOOLS -->
+  <section class="section-white">
+    <div class="container-wide">
+      <div class="section-kicker">Free tools</div>
+      <h2 class="section-title">Understand your options before you commit</h2>
+      <div class="tools-grid">
+        <a href="/quiz" class="tool-card tool-active">
+          <span class="tool-tag">2 minutes</span>
+          <strong>Eligibility Quiz</strong>
+          <p>5 questions to find out if you qualify for PKV and whether it makes financial sense for you.</p>
+          <span class="tool-cta">Check eligibility →</span>
+        </a>
+        <a href="/calculator" class="tool-card">
+          <span class="tool-tag">Instant estimate</span>
+          <strong>Cost Calculator</strong>
+          <p>Enter your age, income, and health status to get a realistic PKV premium range.</p>
+          <span class="tool-cta">Calculate costs →</span>
+        </a>
+        <a href="/compare" class="tool-card">
+          <span class="tool-tag">Side-by-side</span>
+          <strong>GKV vs PKV</strong>
+          <p>Full comparison of Germany's public and private health insurance systems for expats.</p>
+          <span class="tool-cta">Compare now →</span>
+        </a>
+        <a href="/checklist" class="tool-card">
+          <span class="tool-tag">Printable</span>
+          <strong>Document Checklist</strong>
+          <p>All documents you need to apply for PKV, in the right order.</p>
+          <span class="tool-cta">View checklist →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSURERS -->
+  <section class="section-gray">
+    <div class="container-wide">
+      <div class="ins-header">
+        <div>
+          <div class="section-kicker">Insurer reviews</div>
+          <h2 class="section-title">All major PKV insurers, independently reviewed</h2>
+        </div>
+        <a href="/top-insurers" class="btn-outline">See full reviews →</a>
+      </div>
+      <div class="ins-grid">
+        {insurers.map(ins => (
+          <a href={ins.href} class="ins-card">
+            <div class="ins-avatar">{ins.name[0]}</div>
+            <div class="ins-info">
+              <strong>{ins.name}</strong>
+              <span>{ins.tag}</span>
             </div>
-            <div class="cta-trust">
-              <span>§34d licensed</span>
-              <span>·</span>
-              <span>GDPR compliant</span>
-              <span>·</span>
-              <span>Free for you</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-white">
+    <div class="container-wide">
+      <div class="section-kicker">Expat stories</div>
+      <h2 class="section-title">Real people, real savings</h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"I was paying €540/month for GKV. After switching to PKV I pay €240/month. Same doctor, better room in hospital. Wish I had done it in my first year."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">J</div>
+            <div>
+              <strong>James K.</strong>
+              <span>Software Engineer · Berlin</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"As a freelancer I had no idea I could switch. The broker handled everything in English. It took two weeks and I now save €280/month."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">P</div>
+            <div>
+              <strong>Priya M.</strong>
+              <span>Independent Consultant · Munich</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"The guide explained the differences better than my German colleagues ever could. The broker found me a plan that costs half my old GKV contribution."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">T</div>
+            <div>
+              <strong>Thomas B.</strong>
+              <span>Finance Manager · Frankfurt</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <!-- FINAL CTA -->
+  <section class="section-cta">
+    <div class="container-wide cta-inner">
+      <h2>Find out how much you could save</h2>
+      <p>A licensed §34d broker will review your situation, compare quotes from all major PKV insurers, and give you a clear recommendation. Free of charge, in English, no obligation.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="btn-hero">Get free broker advice →</a>
+        <a href="/quiz" class="btn-hero-ghost">Check eligibility first</a>
+      </div>
+      <div class="cta-meta">§34d licensed &nbsp;·&nbsp; GDPR compliant &nbsp;·&nbsp; Free for you</div>
+    </div>
+  </section>
+
 </Layout>
 
 <style>
   /* ── HERO ── */
   .hero {
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(3rem, 6vw, 5rem);
+    background: linear-gradient(135deg, #0d2137 0%, #0a3040 45%, #0d3535 100%);
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,201,167,.08) 0%, transparent 70%);
+    pointer-events: none;
   }
   .hero-inner {
     display: grid;
     grid-template-columns: 1fr 420px;
-    gap: clamp(2.5rem, 5vw, 5rem);
+    gap: clamp(3rem, 6vw, 6rem);
     align-items: center;
+    position: relative;
   }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: .4rem;
-    font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--red); background: var(--red-lt); padding: 5px 14px;
-    border-radius: 999px; border: 1px solid rgba(30,138,154,.2);
-    margin-bottom: 1.5rem;
+  .hero-tag {
+    display: inline-block;
+    font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--primary); margin-bottom: 1.5rem;
   }
   .hero h1 {
-    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    font-size: clamp(2.8rem, 6vw, 4.2rem);
     font-weight: 900;
-    letter-spacing: -.045em;
+    letter-spacing: -.05em;
     line-height: 1.0;
-    color: var(--text);
-    margin-bottom: 1.25rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
   }
-  .hero-lead {
-    font-size: clamp(.95rem, 1.5vw, 1.08rem);
-    color: var(--muted);
-    max-width: 460px;
-    line-height: 1.7;
-    margin-bottom: 2rem;
+  .hero-sub {
+    font-size: clamp(.95rem, 1.4vw, 1.05rem);
+    color: rgba(255,255,255,.65);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.25rem;
   }
-  .hero-lead strong { color: var(--text); font-weight: 700; }
-  .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .btn-hero-primary {
+  .hero-sub strong { color: #fff; font-weight: 600; }
+  .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .btn-hero {
     display: inline-flex; align-items: center;
-    background: var(--red); color: #fff;
-    font-size: .95rem; font-weight: 700;
-    padding: .85rem 1.75rem;
-    border-radius: 10px; text-decoration: none;
-    box-shadow: 0 4px 14px rgba(30,138,154,.3);
+    background: var(--primary); color: var(--ink);
+    font-size: .95rem; font-weight: 800;
+    padding: .9rem 1.8rem; border-radius: 10px;
+    letter-spacing: -.01em;
+    box-shadow: 0 4px 20px rgba(0,201,167,.35);
     transition: background var(--ease), transform var(--ease), box-shadow var(--ease);
   }
-  .btn-hero-primary:hover { background: var(--red-dk); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,138,154,.35); }
+  .btn-hero:hover { background: var(--primary-dk); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,201,167,.45); }
   .btn-hero-ghost {
     display: inline-flex; align-items: center;
-    background: transparent; color: var(--text);
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.2);
+    color: rgba(255,255,255,.85);
     font-size: .95rem; font-weight: 600;
-    padding: .85rem 1.75rem;
-    border-radius: 10px; text-decoration: none;
-    border: 1.5px solid var(--border);
-    transition: border-color var(--ease), color var(--ease);
+    padding: .9rem 1.8rem; border-radius: 10px;
+    backdrop-filter: blur(4px);
+    transition: background var(--ease), border-color var(--ease);
   }
-  .btn-hero-ghost:hover { border-color: var(--red); color: var(--red); }
-  .hero-proof { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .hero-proof span {
-    display: inline-flex; align-items: center; gap: .35rem;
-    font-size: .82rem; font-weight: 500; color: var(--muted);
+  .btn-hero-ghost:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.35); }
+  .hero-trust { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .hero-trust span {
+    display: inline-flex; align-items: center; gap: .4rem;
+    font-size: .8rem; font-weight: 500; color: rgba(255,255,255,.5);
   }
-  .hero-proof svg { color: #16a34a; flex-shrink: 0; }
+  .hero-trust svg { color: var(--primary); flex-shrink: 0; }
 
-  /* Cost comparison card */
-  .cost-comparison {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    box-shadow: var(--sh-md);
+  /* Hero card */
+  .hero-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 20px;
+    padding: 1.75rem;
+    backdrop-filter: blur(12px);
   }
-  .cost-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
+  .hcard-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+  .hcard-meta { display: flex; flex-direction: column; gap: .2rem; }
+  .hcard-label { font-size: .72rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+  .hcard-detail { font-size: .78rem; color: rgba(255,255,255,.35); }
+  .hcard-price { font-size: 2.4rem; font-weight: 900; letter-spacing: -.05em; line-height: 1; white-space: nowrap; }
+  .hcard-price span { font-size: .9rem; font-weight: 400; }
+  .hcard-price.red { color: #f87171; }
+  .hcard-price.green { color: var(--primary); }
+  .hcard-divider {
+    display: flex; align-items: center; gap: .75rem;
+    margin: 1.25rem 0;
   }
-  .cost-card + .cost-card { margin-top: .5rem; }
-  .cost-label { font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: .15rem; }
-  .cost-system { font-size: .75rem; color: var(--muted); margin-bottom: .6rem; }
-  .cost-amount { font-size: 2.2rem; font-weight: 900; letter-spacing: -.04em; line-height: 1; margin-bottom: .35rem; }
-  .cost-amount span { font-size: .9rem; font-weight: 400; color: var(--muted); }
-  .cost-high { color: #dc2626; }
-  .cost-low { color: #16a34a; }
-  .cost-note { font-size: .78rem; color: var(--muted); line-height: 1.45; }
-  .cost-saving {
-    display: inline-flex; align-items: center; gap: .35rem;
+  .hcard-divider-line { flex: 1; height: 1px; background: rgba(255,255,255,.1); }
+  .hcard-divider span { font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+  .hcard-saving {
+    display: inline-flex; align-items: center; gap: .4rem;
     margin-top: .75rem;
-    background: #f0fdf4; color: #15803d;
-    border: 1px solid #bbf7d0;
+    background: rgba(0,201,167,.15); color: var(--primary);
+    border: 1px solid rgba(0,201,167,.25);
     font-size: .78rem; font-weight: 700;
-    padding: 4px 12px; border-radius: 999px;
+    padding: 5px 14px; border-radius: 999px;
   }
-  .cost-vs {
-    text-align: center;
-    font-size: .7rem; font-weight: 800; letter-spacing: .08em;
-    color: var(--muted);
-    padding: .4rem 0;
+  .hcard-features { margin-top: 1.25rem; display: flex; flex-direction: column; gap: .5rem; }
+  .hcard-feat {
+    display: flex; align-items: center; gap: .5rem;
+    font-size: .8rem; color: rgba(255,255,255,.55);
   }
+  .hcard-feat svg { color: var(--primary); flex-shrink: 0; }
+  .hcard-cta {
+    display: block; text-align: center;
+    margin-top: 1.5rem;
+    background: var(--primary); color: var(--ink);
+    font-size: .88rem; font-weight: 800;
+    padding: .75rem 1rem; border-radius: 10px;
+    transition: background var(--ease);
+  }
+  .hcard-cta:hover { background: var(--primary-dk); }
 
   /* ── STATS BAR ── */
   .stats-bar {
-    background: #fff;
-    border-bottom: 1px solid var(--border);
+    background: var(--ink);
     padding: 1.25rem 0;
   }
   .stats-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(1rem, 4vw, 3rem);
-    flex-wrap: wrap;
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(1rem, 4vw, 3rem); flex-wrap: wrap;
   }
   .stat-item { display: flex; flex-direction: column; align-items: center; gap: .1rem; }
-  .stat-num { font-size: 1.35rem; font-weight: 900; letter-spacing: -.03em; color: var(--red); }
-  .stat-label { font-size: .72rem; font-weight: 500; color: var(--muted); white-space: nowrap; }
-  .stat-div { width: 1px; height: 32px; background: var(--border); }
+  .stat-num { font-size: 1.3rem; font-weight: 900; letter-spacing: -.03em; color: var(--primary); }
+  .stat-label { font-size: .7rem; font-weight: 500; color: rgba(255,255,255,.4); white-space: nowrap; }
+  .stat-div { width: 1px; height: 30px; background: rgba(255,255,255,.1); }
 
-  /* ── SHARED SECTION STYLES ── */
-  .section-label {
-    font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--red); margin-bottom: .5rem;
+  /* ── SECTION BASES ── */
+  .section-white { background: #fff; padding: clamp(3.5rem, 6vw, 5.5rem) 0; }
+  .section-gray  { background: var(--surface); padding: clamp(3.5rem, 6vw, 5.5rem) 0; }
+
+  .section-kicker {
+    font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--primary); margin-bottom: .6rem;
   }
   .section-title {
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    font-weight: 800;
-    letter-spacing: -.04em;
-    color: var(--text);
-    margin-bottom: 2rem;
-    line-height: 1.15;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 800; letter-spacing: -.04em;
+    color: var(--text); margin-bottom: 2.5rem; line-height: 1.1;
   }
 
   /* ── HOW IT WORKS ── */
-  .section-how {
-    padding: clamp(3rem, 7vw, 5rem) 0;
-    background: var(--bg);
-  }
   .steps-grid {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
-    gap: 0;
-    align-items: start;
+    display: flex; align-items: flex-start; gap: 1rem;
   }
-  .step-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.75rem;
-    box-shadow: var(--sh-sm);
+  .step-item {
+    flex: 1;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem 1.75rem;
   }
   .step-num {
-    font-size: .7rem; font-weight: 800; letter-spacing: .1em;
-    color: var(--red); margin-bottom: .85rem;
-    background: var(--red-lt); border-radius: 999px;
-    display: inline-block; padding: 3px 10px;
+    font-size: .72rem; font-weight: 800; letter-spacing: .1em;
+    color: var(--primary); margin-bottom: 1rem;
   }
-  .step-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: .5rem; }
-  .step-card p { font-size: .88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
-  .step-link { font-size: .84rem; font-weight: 700; color: var(--red); text-decoration: none; transition: gap var(--ease); }
+  .step-item h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: .6rem; letter-spacing: -.02em; }
+  .step-item p { font-size: .85rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem; }
+  .step-link { font-size: .85rem; font-weight: 700; color: var(--primary); }
   .step-link:hover { text-decoration: underline; }
-  .step-connector {
-    display: flex; align-items: center; justify-content: center;
-    padding: 0 1rem; color: var(--muted); margin-top: 2.5rem;
-  }
+  .step-arrow { color: var(--border); flex-shrink: 0; margin-top: 2.5rem; }
 
   /* ── BENEFITS ── */
-  .section-benefits {
-    padding: clamp(3rem, 7vw, 5rem) 0;
-    background: #fff;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
   .benefits-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: clamp(2.5rem, 6vw, 5rem);
-    align-items: start;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(3rem, 6vw, 6rem); align-items: start;
   }
-  .benefits-left .section-title { margin-bottom: 1rem; }
-  .benefits-intro { font-size: .95rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.75rem; }
-  .benefits-right { display: flex; flex-direction: column; gap: 1.25rem; }
-  .benefit-row {
-    display: flex; gap: 1rem; align-items: flex-start;
-    padding: 1.1rem 1.25rem;
-    background: var(--bg);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-  }
+  .benefits-intro { font-size: .95rem; color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+  .benefits-right { display: flex; flex-direction: column; gap: 1.5rem; }
+  .benefit-row { display: flex; align-items: flex-start; gap: 1rem; }
   .benefit-icon {
     width: 38px; height: 38px; flex-shrink: 0;
-    background: var(--red-lt); border-radius: 10px;
+    background: var(--primary-lt); border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    color: var(--red);
+    color: var(--primary-dk);
   }
-  .benefit-row strong { display: block; font-size: .92rem; font-weight: 700; margin-bottom: .25rem; }
-  .benefit-row p { font-size: .83rem; color: var(--muted); line-height: 1.55; margin: 0; }
+  .benefit-row strong { display: block; font-size: .9rem; font-weight: 700; color: var(--text); margin-bottom: .25rem; letter-spacing: -.01em; }
+  .benefit-row p { font-size: .83rem; color: var(--muted); line-height: 1.6; margin: 0; }
 
   /* ── TOOLS ── */
-  .section-tools {
-    padding: clamp(3rem, 7vw, 5rem) 0;
-    background: var(--bg);
-  }
   .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
   }
   .tool-card {
-    background: #fff;
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 1.5rem;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 14px; padding: 1.5rem;
     display: flex; flex-direction: column; gap: .5rem;
-    text-decoration: none;
-    transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
-    box-shadow: var(--sh-sm);
+    transition: border-color var(--ease), box-shadow var(--ease);
+    text-decoration: none; color: inherit;
   }
-  .tool-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); border-color: var(--red); }
-  .tool-primary { border-color: var(--red); background: var(--red-lt); }
-  .tool-tag {
-    font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--red); margin-bottom: .25rem;
-  }
-  .tool-card h3 { font-size: .95rem; font-weight: 800; color: var(--text); }
-  .tool-card p { font-size: .82rem; color: var(--muted); line-height: 1.55; flex: 1; }
-  .tool-cta { font-size: .82rem; font-weight: 700; color: var(--red); margin-top: .25rem; }
+  .tool-card:hover { border-color: var(--primary); box-shadow: var(--sh-md); }
+  .tool-card.tool-active { border-color: var(--primary); background: var(--primary-lt); }
+  .tool-tag { font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--primary); }
+  .tool-card strong { font-size: .95rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; }
+  .tool-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .tool-cta { font-size: .8rem; font-weight: 700; color: var(--primary); margin-top: .25rem; }
 
   /* ── INSURERS ── */
-  .section-insurers {
-    padding: clamp(3rem, 7vw, 5rem) 0;
-    background: #fff;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
   .ins-header {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 2rem;
+    flex-wrap: wrap;
   }
   .ins-header .section-title { margin-bottom: 0; }
-  .ins-all-btn { white-space: nowrap; }
   .ins-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: .75rem;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: .75rem;
   }
   .ins-card {
     display: flex; align-items: center; gap: .75rem;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: .9rem 1rem;
-    text-decoration: none;
-    transition: background var(--ease), border-color var(--ease), transform var(--ease);
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: .9rem 1rem;
+    text-decoration: none; color: inherit;
+    transition: border-color var(--ease), box-shadow var(--ease);
   }
-  .ins-card:hover { background: #fff; border-color: var(--red); transform: translateY(-2px); }
-  .ins-initial {
-    width: 36px; height: 36px; flex-shrink: 0;
-    background: var(--red); color: #fff;
-    border-radius: 9px;
+  .ins-card:hover { border-color: var(--primary); box-shadow: var(--sh-sm); }
+  .ins-avatar {
+    width: 32px; height: 32px; flex-shrink: 0;
+    background: var(--ink); color: var(--primary);
+    border-radius: 8px; font-size: .8rem; font-weight: 800;
     display: flex; align-items: center; justify-content: center;
-    font-size: .9rem; font-weight: 800;
   }
-  .ins-body { flex: 1; min-width: 0; }
-  .ins-name { font-size: .88rem; font-weight: 700; color: var(--text); }
-  .ins-tag { font-size: .72rem; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .ins-card > svg { color: var(--muted); flex-shrink: 0; }
+  .ins-info { flex: 1; min-width: 0; }
+  .ins-info strong { display: block; font-size: .82rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ins-info span { font-size: .7rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+  .ins-card > svg { color: var(--border); flex-shrink: 0; }
+  .ins-card:hover > svg { color: var(--primary); }
 
   /* ── TESTIMONIALS ── */
-  .section-testi {
-    padding: clamp(3rem, 7vw, 5rem) 0;
-    background: var(--bg);
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
   }
-  .testi-header { margin-bottom: 2rem; }
-  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
   .testi-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.75rem;
-    box-shadow: var(--sh-sm);
-    display: flex; flex-direction: column; gap: .75rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.75rem;
+    display: flex; flex-direction: column; gap: 1rem;
   }
-  .testi-stars { color: #f59e0b; font-size: 1rem; letter-spacing: .05em; }
-  .testi-card blockquote {
-    font-size: .9rem; color: var(--text); line-height: 1.7;
-    font-style: italic; flex: 1;
-    border-left: 3px solid var(--red-lt); padding-left: .9rem;
-  }
-  .testi-person { display: flex; align-items: center; gap: .75rem; }
+  .stars { color: #f59e0b; font-size: 1rem; letter-spacing: .05em; }
+  .testi-card p { font-size: .88rem; color: var(--text); line-height: 1.7; flex: 1; }
+  .testi-author { display: flex; align-items: center; gap: .75rem; padding-top: .5rem; border-top: 1px solid var(--border); }
   .testi-avatar {
     width: 36px; height: 36px; flex-shrink: 0;
-    background: var(--red); color: #fff;
-    border-radius: 50%;
+    background: var(--ink); color: var(--primary);
+    border-radius: 50%; font-size: .8rem; font-weight: 800;
     display: flex; align-items: center; justify-content: center;
-    font-size: .85rem; font-weight: 800;
   }
-  .testi-name { font-size: .85rem; font-weight: 700; color: var(--text); }
-  .testi-role { font-size: .75rem; color: var(--muted); }
+  .testi-author strong { display: block; font-size: .85rem; font-weight: 700; color: var(--text); }
+  .testi-author span { font-size: .75rem; color: var(--muted); }
 
   /* ── FINAL CTA ── */
   .section-cta {
-    padding: clamp(3rem, 7vw, 5rem) 0;
-    background: #fff;
-    border-top: 1px solid var(--border);
+    background: linear-gradient(135deg, #0d2137 0%, #0a3040 45%, #0d3535 100%);
+    padding: clamp(4rem, 7vw, 6rem) 0;
+    position: relative; overflow: hidden;
   }
-  .cta-box {
-    background: linear-gradient(135deg, #0f5f6d 0%, #1e8a9a 60%, #2aa8bc 100%);
-    border-radius: 20px;
-    padding: clamp(2.5rem, 6vw, 4rem);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(30,138,154,.25);
-  }
-  .cta-box::before {
+  .section-cta::before {
     content: '';
-    position: absolute; top: -60px; right: -60px;
-    width: 260px; height: 260px;
-    border-radius: 50%; background: rgba(255,255,255,.06);
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(0,201,167,.1) 0%, transparent 70%);
+    pointer-events: none;
   }
-  .cta-box::after {
-    content: '';
-    position: absolute; bottom: -40px; left: -40px;
-    width: 180px; height: 180px;
-    border-radius: 50%; background: rgba(255,255,255,.05);
+  .cta-inner { text-align: center; position: relative; }
+  .cta-inner h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900;
+    letter-spacing: -.05em; color: #fff; margin-bottom: 1rem;
   }
-  .cta-content { position: relative; z-index: 1; }
-  .cta-box h2 {
-    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-    font-weight: 900; letter-spacing: -.04em;
-    color: #fff; margin-bottom: .75rem;
+  .cta-inner p {
+    font-size: clamp(.9rem, 1.3vw, 1rem); color: rgba(255,255,255,.6);
+    max-width: 540px; margin: 0 auto 2rem; line-height: 1.75;
   }
-  .cta-box p {
-    font-size: clamp(.9rem, 1.5vw, 1rem);
-    color: rgba(255,255,255,.85);
-    max-width: 520px; margin: 0 auto 2rem;
-    line-height: 1.7;
-  }
-  .cta-actions { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.25rem; }
-  .btn-cta-primary {
-    display: inline-flex; align-items: center;
-    background: #fff; color: var(--red-dk);
-    font-size: .95rem; font-weight: 800;
-    padding: .9rem 2rem;
-    border-radius: 10px; text-decoration: none;
-    box-shadow: 0 4px 14px rgba(0,0,0,.12);
-    transition: transform var(--ease), box-shadow var(--ease);
-  }
-  .btn-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
-  .btn-cta-ghost {
-    display: inline-flex; align-items: center;
-    background: rgba(255,255,255,.15); color: #fff;
-    font-size: .95rem; font-weight: 600;
-    padding: .9rem 2rem;
-    border-radius: 10px; text-decoration: none;
-    border: 1.5px solid rgba(255,255,255,.35);
-    transition: background var(--ease);
-  }
-  .btn-cta-ghost:hover { background: rgba(255,255,255,.22); }
-  .cta-trust {
-    display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap;
-    font-size: .78rem; color: rgba(255,255,255,.65);
-  }
+  .cta-actions { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+  .cta-meta { margin-top: 1.5rem; font-size: .75rem; color: rgba(255,255,255,.3); letter-spacing: .03em; }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    .ins-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-  @media (max-width: 860px) {
+  @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-    .steps-grid { grid-template-columns: 1fr; }
-    .step-connector { display: none; }
+    .hero-card { display: none; }
     .benefits-grid { grid-template-columns: 1fr; }
     .tools-grid { grid-template-columns: repeat(2, 1fr); }
     .ins-grid { grid-template-columns: repeat(2, 1fr); }
     .testi-grid { grid-template-columns: 1fr; }
-    .ins-header { flex-direction: column; align-items: flex-start; }
+    .steps-grid { flex-direction: column; }
+    .step-arrow { display: none; }
   }
-  @media (max-width: 520px) {
+  @media (max-width: 600px) {
     .tools-grid { grid-template-columns: 1fr; }
     .ins-grid { grid-template-columns: 1fr; }
-    .stat-div { display: none; }
+    .ins-header { flex-direction: column; align-items: flex-start; }
   }
 </style>
