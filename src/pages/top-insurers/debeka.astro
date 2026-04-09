@@ -1,0 +1,244 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const insurer = {
+  name: 'Debeka',
+  tagline: 'Germany\'s largest PKV insurer. Best known for civil servants, but excellent for employees and families too.',
+  founded: '1905',
+  hq: 'Koblenz',
+  type: 'Mutual insurer',
+  englishSupport: '★★★☆☆',
+  pricing: '★★★★★',
+  coverage: '★★★★☆',
+  service: '★★★★☆',
+  pros: [
+    'Largest PKV insurer — exceptional financial stability',
+    'Among the lowest premium increases historically',
+    'Excellent Beihilfe-supplement tariffs for civil servants',
+    'Strong dental and hospital coverage',
+    'Very competitive family pricing',
+  ],
+  cons: [
+    'Limited English-language customer support',
+    'More conservative coverage options than some competitors',
+    'Digital tools less advanced than newer insurers',
+    'Some tariffs are only available through direct agents, not all brokers',
+  ],
+  tariffs: [
+    { name: 'TOP', level: 'Premium', desc: 'Full private hospital room, 100% outpatient, comprehensive dental' },
+    { name: 'KombiMed', level: 'Mid-range', desc: 'Good all-round coverage at competitive price point' },
+    { name: 'Sicherheitslinie', level: 'Entry', desc: 'Lower premium, higher deductible, basic-plus coverage' },
+  ],
+  bestFor: 'Civil servants (Beamte), employees prioritizing financial stability and low premium increases, families.',
+  verdict: 'Debeka is the benchmark against which other PKV insurers are often measured. Its financial strength, history of stable premiums, and breadth of tariffs make it the default recommendation for many brokers. The main limitation for expats is the limited English support. If you can manage German-language correspondence, Debeka is difficult to beat on long-term value.',
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Debeka PKV Review 2026 — Private Health Insurance Germany",
+      "author": { "@type": "Person", "name": "Marco Maurelli", "url": "https://private-health-insurance-germany.com/about" },
+      "dateModified": "2026-04-01"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Top Insurers", "item": "https://private-health-insurance-germany.com/top-insurers" },
+        { "@type": "ListItem", "position": 3, "name": "Debeka", "item": "https://private-health-insurance-germany.com/top-insurers/debeka" }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Debeka PKV Review 2026 — Private Health Insurance Germany"
+  description="Independent review of Debeka private health insurance in Germany. Pros, cons, tariffs, pricing, English support, and who Debeka PKV is best for in 2026."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <main>
+    <div class="review-wrap container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a href="/top-insurers">Top Insurers</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">{insurer.name}</li>
+        </ol>
+      </nav>
+
+      <header class="review-header">
+        <span class="page-tag">Insurer Review</span>
+        <h1>{insurer.name} Private Health Insurance Review</h1>
+        <p class="review-tagline">{insurer.tagline}</p>
+        <div class="meta-row">
+          <span class="meta-item">By Marco Maurelli</span>
+          <span class="meta-item">Updated April 2026</span>
+          <span class="meta-item">5 min read</span>
+        </div>
+      </header>
+
+      <div class="review-grid">
+        <div class="review-main">
+
+          <div class="scores-card">
+            <div class="score-item"><span class="score-label">English support</span><span class="score-stars">{insurer.englishSupport}</span></div>
+            <div class="score-item"><span class="score-label">Pricing</span><span class="score-stars">{insurer.pricing}</span></div>
+            <div class="score-item"><span class="score-label">Coverage</span><span class="score-stars">{insurer.coverage}</span></div>
+            <div class="score-item"><span class="score-label">Service</span><span class="score-stars">{insurer.service}</span></div>
+          </div>
+
+          <div class="review-body">
+            <h2>Overview</h2>
+            <p>Founded in {insurer.founded} and headquartered in {insurer.hq}, {insurer.name} is Germany's largest private health insurer by number of insured persons. As a {insurer.type}, it operates for the benefit of its members rather than external shareholders, which is often cited as a reason for its historically restrained premium increases.</p>
+            <p>Debeka insures over 2 million people in PKV across Germany and has a particularly strong presence among civil servants, government employees, and military personnel, though its products are available to all eligible applicants.</p>
+
+            <h2>Pros</h2>
+            <ul>
+              {insurer.pros.map(pro => <li>{pro}</li>)}
+            </ul>
+
+            <h2>Cons</h2>
+            <ul>
+              {insurer.cons.map(con => <li>{con}</li>)}
+            </ul>
+
+            <h2>Key Tariffs</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tariff</th>
+                  <th>Level</th>
+                  <th>What it covers</th>
+                </tr>
+              </thead>
+              <tbody>
+                {insurer.tariffs.map(t => (
+                  <tr>
+                    <td><strong>{t.name}</strong></td>
+                    <td>{t.level}</td>
+                    <td>{t.desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <h2>Best For</h2>
+            <p>{insurer.bestFor}</p>
+
+            <h2>Verdict</h2>
+            <p>{insurer.verdict}</p>
+
+            <div class="cta-inline">
+              <p>Want a personalized Debeka quote alongside other top insurers?</p>
+              <a href="/contact" class="btn-primary">Get free broker comparison →</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="review-sidebar">
+          <div class="sidebar-card">
+            <div class="sc-top"></div>
+            <div class="sc-body">
+              <p class="sc-eyebrow">Quick facts</p>
+              <dl class="quick-facts">
+                <dt>Founded</dt><dd>{insurer.founded}</dd>
+                <dt>HQ</dt><dd>{insurer.hq}</dd>
+                <dt>Type</dt><dd>{insurer.type}</dd>
+                <dt>English</dt><dd>{insurer.englishSupport}</dd>
+              </dl>
+              <a href="/contact" class="sc-btn">Get a quote →</a>
+            </div>
+          </div>
+          <div class="sidebar-nav-card">
+            <p class="sidebar-label">Other reviews</p>
+            <ul>
+              <li><a href="/top-insurers/allianz">Allianz</a></li>
+              <li><a href="/top-insurers/dkv">DKV</a></li>
+              <li><a href="/top-insurers/hansemerkur">HanseMerkur</a></li>
+              <li><a href="/top-insurers/hallesche">Hallesche</a></li>
+              <li><a href="/top-insurers">All 10 insurers →</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .review-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
+
+  .breadcrumb ol { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .breadcrumb li { font-size: .8rem; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); transition: color var(--ease); }
+  .breadcrumb a:hover { color: var(--text); }
+
+  .review-header { margin-bottom: 2rem; }
+  .page-tag {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem;
+  }
+  h1 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: .6rem; }
+  .review-tagline { font-size: 1rem; color: var(--muted); line-height: 1.65; max-width: 600px; margin-bottom: .75rem; }
+  .meta-row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .meta-item { font-size: .8rem; color: var(--muted); font-weight: 500; }
+
+  .review-grid { display: grid; grid-template-columns: 1fr 260px; gap: 2.5rem; align-items: start; }
+
+  .scores-card {
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 1.25rem 1.5rem; margin-bottom: 1.75rem;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: .85rem;
+    box-shadow: var(--sh-sm);
+  }
+  .score-item { display: flex; flex-direction: column; gap: .15rem; }
+  .score-label { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .score-stars { font-size: .95rem; color: #f59e0b; }
+
+  .review-body { font-size: 1rem; line-height: 1.8; color: #3a3a42; }
+  .review-body h2 { font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; color: var(--text); margin: 2rem 0 .6rem; }
+  .review-body p { margin-bottom: 1rem; }
+  .review-body ul { margin: .5rem 0 1.25rem 1.25rem; }
+  .review-body li { margin-bottom: .5rem; padding-left: .25rem; }
+  .review-body strong { font-weight: 700; color: var(--text); }
+  .review-body a { color: var(--text); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; transition: color var(--ease); }
+  .review-body a:hover { color: var(--red); }
+
+  .review-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .review-body th { background: var(--bg); padding: .6rem .9rem; text-align: left; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .review-body td { padding: .6rem .9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .review-body tr:last-child td { border-bottom: none; }
+
+  .cta-inline { background: var(--red-lt); border: 1px solid rgba(30,138,154,.2); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .cta-inline p { font-size: .93rem; color: var(--text); font-weight: 500; margin: 0; }
+
+  .sidebar-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--sh-sm); margin-bottom: 1rem; }
+  .sc-top { height: 4px; background: var(--red); }
+  .sc-body { padding: 1.1rem 1.25rem; }
+  .sc-eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--red); margin-bottom: .75rem; }
+  .quick-facts { display: grid; grid-template-columns: auto 1fr; gap: .3rem .75rem; font-size: .83rem; margin-bottom: 1rem; }
+  .quick-facts dt { color: var(--muted); font-weight: 500; }
+  .quick-facts dd { color: var(--text); font-weight: 600; }
+  .sc-btn { display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--red); color: #fff; font-size: .83rem; font-weight: 700; padding: .65rem 1rem; border-radius: 8px; transition: background var(--ease); width: 100%; }
+  .sc-btn:hover { background: var(--red-dk); }
+
+  .sidebar-nav-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; box-shadow: var(--sh-sm); }
+  .sidebar-label { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: .65rem; }
+  .sidebar-nav-card ul { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+  .sidebar-nav-card a { display: block; font-size: .84rem; color: var(--muted); padding: .25rem 0; padding-left: .6rem; border-left: 2px solid transparent; transition: color var(--ease), border-color var(--ease); }
+  .sidebar-nav-card a:hover { color: var(--red); border-left-color: var(--red); }
+
+  @media (max-width: 800px) {
+    .review-grid { grid-template-columns: 1fr; }
+    .review-sidebar { order: -1; }
+    .scores-card { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 500px) {
+    .scores-card { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

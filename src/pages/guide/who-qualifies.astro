@@ -1,0 +1,139 @@
+---
+import GuideLayout from '../../layouts/GuideLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Who Qualifies for Private Health Insurance (PKV) in Germany?",
+      "author": { "@type": "Person", "name": "Marco Maurelli", "url": "https://private-health-insurance-germany.com/about" },
+      "dateModified": "2026-04-01",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Guide", "item": "https://private-health-insurance-germany.com/guide" },
+        { "@type": "ListItem", "position": 3, "name": "Who Qualifies", "item": "https://private-health-insurance-germany.com/guide/who-qualifies" }
+      ]
+    }
+  ]
+};
+---
+
+<GuideLayout
+  title="Who Qualifies for Private Health Insurance (PKV) in Germany?"
+  description="Detailed guide to PKV eligibility in Germany 2026: the €77,400 income threshold, employee rules, freelancer rules, civil servants, students, and pre-existing conditions."
+  readTime="8 min read"
+  updatedDate="April 2026"
+  category="PKV Guide"
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+
+  <fragment slot="toc">
+    <ul>
+      <li><a href="#threshold">The income threshold</a></li>
+      <li><a href="#employees">Rules for employees</a></li>
+      <li><a href="#self-employed">Self-employed and freelancers</a></li>
+      <li><a href="#civil-servants">Civil servants</a></li>
+      <li><a href="#students">Students</a></li>
+      <li><a href="#age">Age considerations</a></li>
+      <li><a href="#pre-existing">Pre-existing conditions</a></li>
+    </ul>
+  </fragment>
+
+  <fragment slot="related">
+    <ul>
+      <li><a href="/guide/how-to-switch">How to switch from GKV</a></li>
+      <li><a href="/guide/costs-and-contributions">PKV costs in 2026</a></li>
+      <li><a href="/guide/for-freelancers">PKV for freelancers</a></li>
+      <li><a href="/quiz">Eligibility quiz</a></li>
+    </ul>
+  </fragment>
+
+  <p>Not everyone in Germany can choose private health insurance. The system is designed so that lower earners remain in the public (GKV) pool, while higher earners and self-employed people can opt out into private insurance. This guide explains the exact rules for 2026.</p>
+
+  <h2 id="threshold">The Income Threshold (JAEG)</h2>
+
+  <p>The key number for employees is the <strong>Jahresarbeitsentgeltgrenze (JAEG)</strong>, also called the <em>Versicherungspflichtgrenze</em>. For 2026, this threshold is <strong>€77,400 gross annual income</strong>.</p>
+
+  <p>The JAEG is updated by the German government each year, typically rising slightly in line with average wage growth. It has increased from €69,300 in 2022 to €77,400 in 2026. Always check the current year's figure before planning a switch.</p>
+
+  <p>What counts toward the threshold? Your regular salary, including fixed bonuses and recurring allowances that are part of your employment contract. One-off bonuses and overtime payments that are not guaranteed do not usually count.</p>
+
+  <h2 id="employees">Rules for Employees</h2>
+
+  <p>Employees who want to switch from GKV to PKV must meet two conditions:</p>
+
+  <ol>
+    <li><strong>Current year threshold:</strong> Your expected gross annual income in the current year must exceed €77,400.</li>
+    <li><strong>Previous year threshold:</strong> Your gross income in the previous year must also have exceeded the previous year's JAEG. Exception: if you are starting a new job and your contract salary already exceeds the current threshold, you can switch immediately without waiting.</li>
+  </ol>
+
+  <p>Once you have been above the threshold for an uninterrupted period, you can apply to switch PKV at the start of the following year. The most common switch date is January 1.</p>
+
+  <div class="info-box">
+    <strong>The waiting period:</strong> If you just crossed the threshold for the first time this year, you must remain insured through GKV for the rest of this calendar year. You can apply to PKV from October onwards for a January 1 start date the following year.
+  </div>
+
+  <h3>What if my income drops below the threshold later?</h3>
+
+  <p>If your income falls back below the JAEG for three consecutive years, you become obligatorily insured in GKV again. This can happen if you take a pay cut, reduce working hours significantly, or change to a lower-paying job. In practice, this is the main route back into GKV for employees without retiring.</p>
+
+  <h2 id="self-employed">Self-Employed People and Freelancers</h2>
+
+  <p>Self-employed individuals, both those running a commercial business (<em>Gewerbetreibende</em>) and liberal professionals (<em>Freiberufler</em>), can always choose PKV. There is no income threshold requirement. You can join PKV on day one of your self-employment, at any income level.</p>
+
+  <p>This is a significant advantage. A freelancer earning €40,000 per year can switch to PKV, whereas an employee at the same income cannot. The rationale in German law is that self-employed people are not subject to mandatory GKV enrollment.</p>
+
+  <p>The main practical consideration for freelancers is that there is no employer sharing the premium. You pay the full monthly amount yourself. For a freelancer in their early 30s, this might be €300-400/month for a solid plan. Compare this with GKV: a freelancer on €60,000 annual income would pay roughly €870/month for GKV (14.6% contribution + 1.5% supplement, no employer share). PKV is often substantially cheaper.</p>
+
+  <p>Full guide: <a href="/guide/for-freelancers">PKV for freelancers and self-employed</a>.</p>
+
+  <h2 id="civil-servants">Civil Servants (Beamte)</h2>
+
+  <p>Civil servants have a special arrangement: the government pays a portion of their healthcare costs through a system called <strong>Beihilfe</strong>. The Beihilfe covers between 50% and 80% of medical costs depending on family status (higher percentage for those with children). A Beihilfe-complementary PKV plan covers the remainder.</p>
+
+  <p>Because Beihilfe covers such a large share of costs, civil servants typically pay very low PKV premiums, often €80-150/month for a comprehensive plan. This makes PKV almost always the right choice for civil servants. GKV does not integrate with Beihilfe, so civil servants who use GKV cannot claim Beihilfe reimbursements and must pay the full premium themselves.</p>
+
+  <h2 id="students">Students</h2>
+
+  <p>Students under 25 who are in a family insurance scheme (GKV, covered by a parent's policy at no extra cost) can remain there as long as they are enrolled and under the age cap. This is usually the cheapest option.</p>
+
+  <p>Students who are not covered by a parent's GKV can choose student PKV tariffs. These are lower-cost plans specifically designed for enrolled students. They cover the essentials but often have lower reimbursement rates and may require top-up coverage for dental or hospitalisation.</p>
+
+  <p>Students over 25 lose the free family coverage entitlement and must either enroll in student GKV (discounted rates apply until age 30 or 14 semesters) or switch to PKV. For healthy students in their late 20s, PKV can be competitive, but GKV's predictability is often preferred during studies.</p>
+
+  <h2 id="age">Age Considerations</h2>
+
+  <p>You can join PKV at any age, but premiums rise sharply with age at entry. The difference between joining at 28 and joining at 42 can be €200-300/month for the same plan level. This is because PKV premiums are actuarially calculated: older entrants have fewer years to build up the aging reserves that help stabilize premiums in retirement.</p>
+
+  <p>The general rule is: the younger you switch, the lower your lifetime costs. If you are eligible now and plan to stay in Germany long term, delaying the switch is rarely financially advantageous.</p>
+
+  <p>There is no maximum age for joining PKV, but most insurers become very selective (or significantly surcharge) applicants over age 55. It is still possible, but the premium savings over GKV at that age are usually minimal.</p>
+
+  <h2 id="pre-existing">Pre-Existing Conditions</h2>
+
+  <p>PKV uses individual underwriting, meaning every applicant must complete a health questionnaire. Insurers ask about conditions in the past five to ten years. Based on your answers, they may:</p>
+
+  <ul>
+    <li>Accept you at standard rates (if fully healthy)</li>
+    <li>Exclude specific conditions from coverage (e.g. a pre-existing knee problem is excluded from reimbursement)</li>
+    <li>Apply a risk surcharge (an additional monthly premium, typically 10-50%)</li>
+    <li>Decline to insure you (rare, but possible for serious or chronic conditions)</li>
+  </ul>
+
+  <div class="info-box">
+    <strong>Always answer honestly.</strong> Withholding information on a health questionnaire is insurance fraud and gives the insurer grounds to void your coverage entirely at the worst possible moment, when you actually need it.
+  </div>
+
+  <p>Having pre-existing conditions does not automatically disqualify you. Many conditions that seem significant are treated with minor exclusions or surcharges by most insurers. A good broker can approach multiple insurers anonymously to get preliminary underwriting assessments before you commit to an application.</p>
+
+  <h3>What about GKV if I have pre-existing conditions?</h3>
+
+  <p>GKV cannot reject anyone and must accept applicants with any health history at standard rates. If you have significant pre-existing conditions that would lead to high surcharges or broad exclusions in PKV, staying in GKV might be more appropriate for your situation.</p>
+
+  <p>Ready to check if you qualify? Take our <a href="/quiz">free 2-minute eligibility quiz</a> or <a href="/contact">speak with a licensed broker</a>.</p>
+</GuideLayout>

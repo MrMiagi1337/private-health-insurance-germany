@@ -1,0 +1,164 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const insurers = [
+  { rank: 1, name: 'Debeka', slug: 'debeka', tagline: 'Best for civil servants and families', highlight: 'Largest PKV insurer, very stable premiums', badge: 'Top pick' },
+  { rank: 2, name: 'Allianz', slug: 'allianz', tagline: 'Premium coverage, strong global network', highlight: 'Excellent service, English-friendly', badge: 'Premium' },
+  { rank: 3, name: 'DKV', slug: 'dkv', tagline: 'Largest private insurer by market share', highlight: 'Comprehensive tariff range for all profiles', badge: 'Most popular' },
+  { rank: 4, name: 'HanseMerkur', slug: 'hansemerkur', tagline: 'Flexible plans, great for new expats', highlight: 'Good English support, competitive pricing', badge: 'Expat-friendly' },
+  { rank: 5, name: 'Signal Iduna', slug: 'signal-iduna', tagline: 'Competitive rates, solid coverage', highlight: 'Good customer service, transparent pricing', badge: '' },
+  { rank: 6, name: 'AXA', slug: 'axa', tagline: 'International-friendly, digital-first', highlight: 'Strong digital tools, global brand', badge: '' },
+  { rank: 7, name: 'Barmenia', slug: 'barmenia', tagline: 'Balanced coverage and cost', highlight: 'Good mid-range tariffs, stable history', badge: '' },
+  { rank: 8, name: 'Hallesche', slug: 'hallesche', tagline: 'Excellent coverage, top insurer ratings', highlight: 'Very high customer satisfaction scores', badge: 'Highly rated' },
+  { rank: 9, name: 'Gothaer', slug: 'gothaer', tagline: 'Reliable, long-established insurer', highlight: 'Good tariff flexibility, solid financials', badge: '' },
+  { rank: 10, name: 'Continentale', slug: 'continentale', tagline: 'Strong for civil servants and employees', highlight: 'Competitive Beihilfe-supplement tariffs', badge: '' },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Top Insurers", "item": "https://private-health-insurance-germany.com/top-insurers" }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Top 10 Private Health Insurers in Germany for Expats (2026)"
+  description="Reviewed: the 10 best PKV private health insurance providers in Germany for expats. Pros, cons, English support, tariff overview, and who each insurer is best for."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+
+  <main>
+    <div class="page-wrap container">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">Top Insurers</li>
+        </ol>
+      </nav>
+
+      <header class="page-header">
+        <span class="page-tag">Insurer Reviews</span>
+        <h1>Top 10 Private Health Insurers in Germany</h1>
+        <p class="page-lead">An independent review of the 10 most recommended PKV insurers for expats in Germany. Each review covers coverage, pricing, English support, and the type of customer they suit best.</p>
+        <div class="meta-row">
+          <span class="meta-item">By Marco Maurelli</span>
+          <span class="meta-item">Updated April 2026</span>
+        </div>
+      </header>
+
+      <div class="intro-box">
+        <p>Germany has around 40 private health insurers. The 10 below are the most commonly recommended by licensed brokers for expats and international workers. They vary in price, service quality, and specialization. Reading through the individual reviews, especially for the top 3-4 that match your profile, is time well spent before committing to a policy.</p>
+      </div>
+
+      <div class="insurers-list">
+        {insurers.map(ins => (
+          <a href={`/top-insurers/${ins.slug}`} class="insurer-row">
+            <div class="ir-rank">{ins.rank}</div>
+            <div class="ir-body">
+              <div class="ir-top">
+                <span class="ir-name">{ins.name}</span>
+                {ins.badge && <span class="ir-badge">{ins.badge}</span>}
+              </div>
+              <div class="ir-tagline">{ins.tagline}</div>
+              <div class="ir-highlight">{ins.highlight}</div>
+            </div>
+            <div class="ir-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="compare-note">
+        <h2>How to choose the right insurer</h2>
+        <p>The best insurer depends on your profile. Key factors:</p>
+        <ul>
+          <li><strong>Age:</strong> Premiums are set at entry age. Some insurers price younger applicants more competitively, others are better for entries in your 40s.</li>
+          <li><strong>Employment type:</strong> Civil servants need Beihilfe-complement tariffs. Freelancers need good self-employed tariffs. Employees have the most options.</li>
+          <li><strong>Family situation:</strong> If you have children or a non-working spouse to insure, compare total family costs across providers.</li>
+          <li><strong>Health history:</strong> Some insurers are more lenient with minor pre-existing conditions. A broker can do anonymous pre-screening.</li>
+          <li><strong>English support:</strong> For expats, having English-speaking customer service and English claims forms matters significantly.</li>
+        </ul>
+        <p>The most reliable way to find your best match is through a licensed independent broker who can compare exact quotes across all providers for your specific situation.</p>
+        <a href="/contact" class="btn-primary">Get matched with a broker →</a>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .page-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
+
+  .breadcrumb ol { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .breadcrumb li { font-size: .8rem; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); transition: color var(--ease); }
+  .breadcrumb a:hover { color: var(--text); }
+
+  .page-header { margin-bottom: 1.75rem; }
+  .page-tag {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem;
+  }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: .75rem; }
+  .page-lead { font-size: 1.05rem; color: var(--muted); line-height: 1.65; max-width: 640px; margin-bottom: .75rem; }
+  .meta-row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .meta-item { font-size: .8rem; color: var(--muted); font-weight: 500; }
+
+  .intro-box {
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+    font-size: .93rem; line-height: 1.7; color: var(--text);
+    box-shadow: var(--sh-sm);
+  }
+
+  .insurers-list { display: flex; flex-direction: column; gap: .75rem; margin-bottom: 3rem; }
+
+  .insurer-row {
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1.25rem;
+    box-shadow: var(--sh-sm);
+    transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+  }
+  .insurer-row:hover { transform: translateY(-2px); box-shadow: var(--sh-md); border-color: var(--red); }
+
+  .ir-rank {
+    width: 2.25rem; height: 2.25rem; border-radius: 50%;
+    background: var(--bg); border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; font-weight: 800; color: var(--text); flex-shrink: 0;
+  }
+  .insurer-row:hover .ir-rank { background: var(--red-lt); border-color: var(--red); color: var(--red); }
+
+  .ir-body { flex: 1; }
+  .ir-top { display: flex; align-items: center; gap: .6rem; margin-bottom: .2rem; }
+  .ir-name { font-size: 1rem; font-weight: 800; color: var(--text); }
+  .ir-badge {
+    font-size: .65rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    background: var(--red-lt); color: var(--red); padding: 2px 8px; border-radius: 999px;
+  }
+  .ir-tagline { font-size: .87rem; color: var(--text); font-weight: 500; margin-bottom: .15rem; }
+  .ir-highlight { font-size: .8rem; color: var(--muted); }
+
+  .ir-arrow { color: var(--muted); flex-shrink: 0; transition: color var(--ease), transform var(--ease); }
+  .insurer-row:hover .ir-arrow { color: var(--red); transform: translateX(3px); }
+
+  .compare-note {
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 2rem; box-shadow: var(--sh-sm);
+  }
+  .compare-note h2 { font-size: 1.2rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: .75rem; }
+  .compare-note p { font-size: .93rem; color: var(--text); line-height: 1.7; margin-bottom: .85rem; }
+  .compare-note ul { margin: 0 0 1rem 1.25rem; }
+  .compare-note li { font-size: .9rem; color: var(--text); margin-bottom: .5rem; line-height: 1.55; }
+  .compare-note strong { font-weight: 700; }
+</style>

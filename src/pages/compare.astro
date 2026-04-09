@@ -1,0 +1,318 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "GKV vs PKV — Public vs Private Health Insurance in Germany (2026)",
+      "author": { "@type": "Person", "name": "Marco Maurelli", "url": "https://private-health-insurance-germany.com/about" },
+      "dateModified": "2026-04-01",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
+        { "@type": "ListItem", "position": 2, "name": "GKV vs PKV", "item": "https://private-health-insurance-germany.com/compare" }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="GKV vs PKV — Public vs Private Health Insurance in Germany (2026)"
+  description="Comprehensive GKV vs PKV comparison for expats in Germany 2026. Coverage differences, costs, family rules, dental, switching back, and a decision framework."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+
+  <main>
+    <div class="page-wrap container">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">GKV vs PKV</li>
+        </ol>
+      </nav>
+
+      <header class="compare-header">
+        <span class="page-tag">Comparison</span>
+        <h1>GKV vs PKV: Which is Better for Expats?</h1>
+        <p class="page-lead">A comprehensive side-by-side breakdown of Germany's public and private health insurance systems. Costs, coverage, eligibility, family rules, and a clear decision framework.</p>
+        <div class="meta-row">
+          <span class="meta-item">By Marco Maurelli</span>
+          <span class="meta-item">Updated April 2026</span>
+          <span class="meta-item">15 min read</span>
+        </div>
+      </header>
+
+      <div class="article-body">
+
+        <p>Germany offers two parallel health insurance systems, and choosing between them is one of the most important financial decisions an expat makes. Get it right and you could save hundreds of euros per month while getting better coverage. Get it wrong and switching back is very difficult.</p>
+
+        <h2>The Essential Difference</h2>
+
+        <p>GKV (<em>gesetzliche Krankenversicherung</em>) is Germany's statutory public health insurance. Contributions are calculated as a percentage of your gross salary, split between you and your employer. It covers everyone at the same rate regardless of age or health.</p>
+
+        <p>PKV (<em>private Krankenversicherung</em>) is private insurance where your premium is set by your age and health at entry, not by your income. Better coverage options are available, but each person in your household requires their own policy.</p>
+
+        <h2>Cost Comparison</h2>
+
+        <p>The financial case for or against PKV depends primarily on your income and age. Here is how the numbers compare for an employee in 2026:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Annual salary</th>
+              <th>GKV employee share/month</th>
+              <th>PKV at 32 (mid plan)/month</th>
+              <th>Employee net difference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>€80,000</td><td>~€548/month</td><td>€310/month (employer pays ~€310)</td><td>PKV ~€238 cheaper</td></tr>
+            <tr><td>€100,000</td><td>~€548/month (capped)</td><td>€310/month (employer pays ~€310)</td><td>PKV ~€238 cheaper</td></tr>
+            <tr><td>€120,000</td><td>~€548/month (capped)</td><td>€310/month (employer pays ~€310)</td><td>PKV ~€238 cheaper</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Important context:</strong> GKV employee contributions are capped at the Beitragsbemessungsgrenze (€66,150/year in 2026, so ~€548/month employee share). For high earners, GKV caps at this level. PKV premiums also have a ceiling, set by your plan choice. At salaries above ~€80k, the financial advantage of PKV for employees is roughly €150-300/month depending on plan and age.
+        </div>
+
+        <h2>Full Side-by-Side Comparison</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>GKV (Public)</th>
+              <th>PKV (Private)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Premium basis</strong></td>
+              <td>% of gross income (14.6% + supplement)</td>
+              <td>Fixed by age and health at entry</td>
+            </tr>
+            <tr>
+              <td><strong>Family coverage</strong></td>
+              <td>Free for non-earning spouse and children under 25</td>
+              <td>Separate premium per person (including children)</td>
+            </tr>
+            <tr>
+              <td><strong>Hospital room</strong></td>
+              <td>Shared ward, assigned physician</td>
+              <td>Private or semi-private room (plan dependent)</td>
+            </tr>
+            <tr>
+              <td><strong>Choice of doctor</strong></td>
+              <td>General ward physician</td>
+              <td>Chief physician / senior consultant of your choice</td>
+            </tr>
+            <tr>
+              <td><strong>Waiting times</strong></td>
+              <td>Typically longer for specialists</td>
+              <td>Generally faster access</td>
+            </tr>
+            <tr>
+              <td><strong>Dental coverage</strong></td>
+              <td>Basic routine care only</td>
+              <td>Comprehensive including implants (plan dependent)</td>
+            </tr>
+            <tr>
+              <td><strong>Vision</strong></td>
+              <td>Not covered for adults</td>
+              <td>Covered in many plans (glasses/contacts)</td>
+            </tr>
+            <tr>
+              <td><strong>Alternative medicine</strong></td>
+              <td>Very limited</td>
+              <td>Often included (osteopathy, acupuncture)</td>
+            </tr>
+            <tr>
+              <td><strong>Mental health</strong></td>
+              <td>Covered, long waiting lists</td>
+              <td>Covered, faster access</td>
+            </tr>
+            <tr>
+              <td><strong>Prescription drugs</strong></td>
+              <td>Covered with co-pay</td>
+              <td>Covered at reimbursement rate</td>
+            </tr>
+            <tr>
+              <td><strong>Who can join</strong></td>
+              <td>Everyone (mandatory below threshold)</td>
+              <td>Employees above €77,400, self-employed, civil servants</td>
+            </tr>
+            <tr>
+              <td><strong>Rejection risk</strong></td>
+              <td>Cannot be rejected</td>
+              <td>Pre-existing conditions can cause surcharges or exclusions</td>
+            </tr>
+            <tr>
+              <td><strong>Employer contribution</strong></td>
+              <td>~50% of total contribution</td>
+              <td>Up to ~€421/month (half GKV equivalent)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Family Coverage: The Key PKV Disadvantage</h2>
+
+        <p>This is the most commonly underestimated factor when switching to PKV. In GKV, your non-earning spouse and children under 25 (and in education) are covered for free under your policy. A family of four costs the same as a single person in GKV.</p>
+
+        <p>In PKV, every person requires their own contract and premium. A 35-year-old with a non-working spouse and two young children might face:</p>
+
+        <ul>
+          <li>Their own PKV: €420/month (employer pays ~€210)</li>
+          <li>Spouse's PKV (age 34): €380/month (full cost, no employer contribution)</li>
+          <li>Child 1 PKV: €100-130/month</li>
+          <li>Child 2 PKV: €100-130/month</li>
+          <li>Total family PKV: approximately €1,000-1,060/month</li>
+        </ul>
+
+        <p>Compare to the GKV family total: roughly €548/month (employee share only, family covered free).</p>
+
+        <p>For families with children and a non-working spouse, PKV is often significantly more expensive, even at high incomes. Run the numbers carefully before switching if this applies to you.</p>
+
+        <h2>Coverage Differences in Detail</h2>
+
+        <h3>Dental</h3>
+
+        <p>GKV covers preventive checkups twice a year and basic extractions and fillings. Restorative work (crowns, bridges, implants) is only partially covered, often requiring large patient co-payments. Good dental work in Germany typically requires either private supplement insurance or significant out-of-pocket spending for GKV patients.</p>
+
+        <p>PKV plans with good dental coverage (typically 70-100% for major work) eliminate this issue entirely. Over a lifetime, the dental coverage difference can offset thousands of euros in out-of-pocket costs.</p>
+
+        <h3>Mental Health</h3>
+
+        <p>Both GKV and PKV cover psychotherapy and psychiatric treatment. The practical difference is access speed. GKV patients typically wait 3-6 months for a psychological assessment and therapy slot. PKV patients are private patients and generally find appointments within 1-2 weeks.</p>
+
+        <h3>Specialist Access</h3>
+
+        <p>GKV patients often need a referral from their GP to see a specialist, and waiting times for initial specialist appointments can be months in busy cities. PKV patients can self-refer and are generally prioritized in specialist scheduling as private-pay patients.</p>
+
+        <h2>Switching Back from PKV to GKV</h2>
+
+        <p>This is one of the most important points many guides overlook: <strong>returning to GKV after switching to PKV is genuinely difficult.</strong></p>
+
+        <p>Employees can return to GKV only if:</p>
+        <ul>
+          <li>Their income drops below the JAEG threshold for three consecutive calendar years</li>
+          <li>They become unemployed and claim unemployment benefits (ALG I), which reinstates GKV enrollment automatically</li>
+          <li>They retire (over 55 in some circumstances, but PKV remains the norm for most retirees)</li>
+        </ul>
+
+        <p>Self-employed people can return to GKV only if they become employees earning below the threshold. Simply having lower freelance income is not sufficient.</p>
+
+        <p>The restriction exists because, without it, people would switch back to GKV when they become expensive to insure (older, sicker) and drain the public pool. As a result, switching to PKV should be considered a long-term, potentially permanent decision.</p>
+
+        <h2>Who Should Choose PKV: Decision Framework</h2>
+
+        <div class="decision-grid">
+          <div class="decision-card decision-yes">
+            <div class="decision-label">PKV is likely better if you are:</div>
+            <ul>
+              <li>Single, no children, or all children are earning</li>
+              <li>Earning above €90,000/year as an employee</li>
+              <li>Self-employed at almost any income level</li>
+              <li>A civil servant (with Beihilfe)</li>
+              <li>Young and healthy (under 40)</li>
+              <li>Planning to stay in Germany long-term</li>
+              <li>Wanting faster specialist access and better hospital care</li>
+            </ul>
+          </div>
+          <div class="decision-card decision-no">
+            <div class="decision-label">GKV may be better if you are:</div>
+            <ul>
+              <li>Married with young children and a non-working spouse</li>
+              <li>Earning close to the €77,400 threshold with income risk</li>
+              <li>Over 45 with pre-existing conditions</li>
+              <li>Planning to leave Germany within 2-3 years</li>
+              <li>A KSK-registered artist or journalist</li>
+              <li>Expecting your income to drop below the threshold</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>How to Make the Decision</h2>
+
+        <p>The most reliable approach is a personalized comparison. A licensed broker can calculate your exact GKV cost (based on your salary) and get real PKV quotes based on your age, health history, and coverage preferences. This takes the guesswork out of the comparison.</p>
+
+        <p>The eligibility quiz takes 2 minutes and gives you an initial read on whether you qualify. The full broker consultation (free) gives you exact numbers.</p>
+
+        <div class="cta-inline">
+          <h3>Get a personalized GKV vs PKV comparison</h3>
+          <p>A licensed broker will compare both options for your exact situation, for free.</p>
+          <div class="cta-inline-btns">
+            <a href="/quiz" class="btn-primary">Take the eligibility quiz</a>
+            <a href="/contact" class="btn-outline">Speak with a broker</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .page-wrap { padding-top: 1.5rem; padding-bottom: 5rem; max-width: 820px; }
+
+  .breadcrumb ol { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .breadcrumb li { font-size: .8rem; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); transition: color var(--ease); }
+  .breadcrumb a:hover { color: var(--text); }
+
+  .compare-header { margin-bottom: 2.5rem; }
+  .page-tag {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem;
+  }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: .75rem; }
+  .page-lead { font-size: 1.05rem; color: var(--muted); line-height: 1.65; max-width: 640px; margin-bottom: .75rem; }
+  .meta-row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .meta-item { font-size: .8rem; color: var(--muted); font-weight: 500; }
+
+  .article-body { font-size: 1rem; line-height: 1.8; color: #3a3a42; }
+  .article-body h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -.025em; color: var(--text); margin: 2.5rem 0 .8rem; }
+  .article-body h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); margin: 1.75rem 0 .5rem; }
+  .article-body p { margin-bottom: 1.15rem; }
+  .article-body ul { margin: .5rem 0 1.25rem 1.25rem; }
+  .article-body li { margin-bottom: .5rem; padding-left: .25rem; }
+  .article-body a { color: var(--text); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; font-weight: 500; transition: color var(--ease), text-decoration-color var(--ease); }
+  .article-body a:hover { color: var(--red); text-decoration-color: var(--red); }
+  .article-body strong { font-weight: 700; color: var(--text); }
+
+  .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .9rem; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .article-body th { background: var(--bg); padding: .65rem 1rem; text-align: left; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .article-body td { padding: .65rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .article-body tr:last-child td { border-bottom: none; }
+  .article-body tr:hover td { background: #faf9f8; }
+
+  .callout {
+    background: #f0f9fa; border: 1px solid #b2dde3; border-left: 3px solid var(--red);
+    border-radius: 8px; padding: .9rem 1.25rem; margin: 1.75rem 0;
+    font-size: .93rem;
+  }
+  .callout strong { color: var(--red-dk); }
+
+  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0 2rem; }
+  .decision-card { border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+  .decision-yes { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+  .decision-no { background: #fff7ed; border: 1.5px solid #fed7aa; }
+  .decision-label { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .75rem; color: var(--text); }
+  .decision-card ul { margin: 0 0 0 1.1rem; }
+  .decision-card li { font-size: .87rem; margin-bottom: .4rem; }
+
+  .cta-inline { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-top: 2rem; text-align: center; box-shadow: var(--sh-sm); }
+  .cta-inline h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: .4rem; }
+  .cta-inline p { font-size: .93rem; color: var(--muted); margin-bottom: 1.25rem; }
+  .cta-inline-btns { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 600px) { .decision-grid { grid-template-columns: 1fr; } }
+</style>

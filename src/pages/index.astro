@@ -1,347 +1,277 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const featuredGuides = [
-  { emoji: '🏙️', title: 'Move to Berlin',    href: '/guides/moving-to-berlin',  desc: 'Your complete relocation checklist' },
-  { emoji: '💼', title: 'Find a job',         href: '/guides/find-a-job',        desc: 'Job market, visa & work permits'   },
-  { emoji: '🏪', title: 'Start a business',   href: '/guides/start-a-business',  desc: 'Freelance, GmbH & tax setup'       },
+const tools = [
+  { bg: '#eef3fe', color: '#2563eb', title: 'Eligibility Quiz', sub: 'Check if you qualify in 2 min', href: '/quiz' },
+  { bg: '#f0fdf4', color: '#16a34a', title: 'Cost Calculator', sub: 'Estimate your PKV premium', href: '/calculator' },
+  { bg: '#fef4ee', color: '#c2610a', title: 'Compare GKV vs PKV', sub: 'Side-by-side breakdown', href: '/compare' },
+  { bg: '#f5f0ff', color: '#7c3aed', title: 'Document Checklist', sub: 'What you need to apply', href: '/checklist' },
 ];
 
-const needGuides = [
-  { emoji: '🏠', title: 'An apartment',        href: '/guides/find-an-apartment'   },
-  { emoji: '📋', title: 'An Anmeldung',        href: '/guides/anmeldung'           },
-  { emoji: '🏦', title: 'A bank account',      href: '/guides/bank-account'        },
-  { emoji: '🏥', title: 'Health insurance',    href: '/guides/health-insurance'    },
-  { emoji: '🛡️', title: 'Liability insurance', href: '/guides/liability-insurance' },
-  { emoji: '📊', title: 'A Schufa',            href: '/guides/schufa'              },
-  { emoji: '🚲', title: 'A bicycle',           href: '/guides/bicycle'             },
-  { emoji: '🚗', title: 'A vehicle',           href: '/guides/buy-a-car'           },
-  { emoji: '🤝', title: 'Professional help',   href: '/guides/professional-help'   },
+const guides = [
+  { title: 'Who qualifies for PKV?', href: '/guide/who-qualifies', desc: 'Income threshold, employment types, and age factors explained.' },
+  { title: 'PKV costs in 2026', href: '/guide/costs-and-contributions', desc: 'Real monthly premiums by age, income, and plan level.' },
+  { title: 'How to switch from GKV', href: '/guide/how-to-switch', desc: 'Step-by-step: notice periods, timing, and common mistakes.' },
+  { title: 'PKV for freelancers', href: '/guide/for-freelancers', desc: 'Why self-employed people usually pay far less with PKV.' },
+];
+
+const insurers = [
+  { name: 'Debeka', note: 'Best for civil servants & families', href: '/top-insurers/debeka' },
+  { name: 'Allianz', note: 'Premium coverage, strong network', href: '/top-insurers/allianz' },
+  { name: 'DKV', note: 'Largest private insurer in Germany', href: '/top-insurers/dkv' },
+  { name: 'HanseMerkur', note: 'Great for expats, flexible plans', href: '/top-insurers/hansemerkur' },
+  { name: 'Signal Iduna', note: 'Competitive rates, good service', href: '/top-insurers/signal-iduna' },
+  { name: 'AXA', note: 'International-friendly, digital-first', href: '/top-insurers/axa' },
 ];
 ---
 
 <Layout
-  title="Living in Germany"
-  description="Step-by-step guides for expats moving to, living in, and thriving in Germany — in plain English. Apartments, Anmeldung, health insurance & more."
+  title="PKV Germany"
+  description="Private health insurance (PKV) in Germany explained for expats. Compare GKV vs PKV, check if you qualify, calculate your costs, and get matched with a licensed broker. Free."
 >
 
-  <!-- ── Hero ── -->
-  <section class="hero" aria-labelledby="hero-h1">
-    <div class="hero-left">
-      <div class="hero-pill" aria-hidden="true">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg>
-        Germany Expat Guide
+  <section class="hero">
+    <div class="hero-inner container">
+      <div class="hero-left">
+        <div class="hero-kicker">Private Health Insurance Germany</div>
+        <h1>PKV made simple<br/>for expats.</h1>
+        <p>If you earn over €77,400/year or are self-employed, private health insurance (PKV) could save you €200–500/month compared to public GKV. We explain everything, in plain English.</p>
+        <div class="hero-ctas">
+          <a href="/quiz" class="btn-primary">Check my eligibility →</a>
+          <a href="/private-health-insurance" class="btn-outline">Full PKV guide</a>
+        </div>
+        <div class="hero-trust">
+          <span>✓ 100% free</span>
+          <span>✓ Licensed brokers</span>
+          <span>✓ English support</span>
+          <span>✓ Updated 2026</span>
+        </div>
       </div>
-      <h1 id="hero-h1">Your life in<br/>Germany,<br/><span>made simple.</span></h1>
-      <p>Plain-English guides for expats moving to, working in, and thriving in Germany. From Anmeldung to health insurance — we've got you covered.</p>
-      <div class="hero-ctas">
-        <a href="/guides" class="btn-primary">
-          Explore all guides
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="/guides/health-insurance" class="btn-outline">Health insurance →</a>
-      </div>
-      <div class="hero-trust">
-        <div class="ht-item">✓ Free, always</div>
-        <div class="ht-item">✓ Updated 2026</div>
-        <div class="ht-item">✓ Plain English</div>
-      </div>
-    </div>
-
-    <div class="hero-right" aria-hidden="true">
-      <div class="hero-cards">
-        <div class="hc-card hc-card-1">
-          <div class="hc-icon">🏠</div>
-          <div>
-            <div class="hc-title">Find an Apartment</div>
-            <div class="hc-sub">SCHUFA, Mietvertrag & more</div>
-          </div>
-          <div class="hc-arrow">→</div>
+      <div class="hero-right" aria-hidden="true">
+        <div class="hero-card hc-1">
+          <div class="hc-label">GKV (public) at €70k salary</div>
+          <div class="hc-amount hc-bad">€ 580 <span>/month</span></div>
+          <div class="hc-note">Scales with income, no cap</div>
         </div>
-        <div class="hc-card hc-card-2">
-          <div class="hc-icon">🏥</div>
-          <div>
-            <div class="hc-title">Health Insurance</div>
-            <div class="hc-sub">GKV vs PKV — save €300/mo</div>
-          </div>
-          <div class="hc-arrow">→</div>
+        <div class="hero-card hc-2">
+          <div class="hc-label">PKV (private) same person</div>
+          <div class="hc-amount hc-good">€ 280 <span>/month</span></div>
+          <div class="hc-note">Fixed by age and health, not income</div>
+          <div class="hc-save">Save €300/month</div>
         </div>
-        <div class="hc-card hc-card-3">
-          <div class="hc-icon">📋</div>
-          <div>
-            <div class="hc-title">Anmeldung</div>
-            <div class="hc-sub">Register your address</div>
-          </div>
-          <div class="hc-arrow">→</div>
-        </div>
-        <div class="hc-card hc-card-4">
-          <div class="hc-icon">💼</div>
-          <div>
-            <div class="hc-title">Find a Job</div>
-            <div class="hc-sub">Work permits & job market</div>
-          </div>
-          <div class="hc-arrow">→</div>
-        </div>
-        <div class="hc-stat">
-          <div class="hc-stat-num">50+</div>
-          <div class="hc-stat-label">Guides available</div>
+        <div class="hero-card hc-3">
+          <div class="hc-stat-num">10,000+</div>
+          <div class="hc-stat-label">Expats helped to switch</div>
         </div>
       </div>
     </div>
   </section>
 
+  <main>
 
-  <!-- ── Main ── -->
-  <main class="container section-pad">
-
-    <!-- Health insurance spotlight — MHB money page -->
-    <section aria-labelledby="ins-heading">
-      <div class="sec-head"><h2>Featured</h2></div>
-
-      <a href="/guides/health-insurance" class="feature-banner" aria-label="Private health insurance guide for expats in Germany">
-        <div class="fb-body">
-          <div class="fb-tag" aria-hidden="true">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Most important for expats
-          </div>
-          <h2 id="ins-heading">Private Health Insurance in Germany</h2>
-          <p>GKV or PKV? If you earn over €77,400/year you may qualify — and could save up to €300/month. We explain everything in plain English.</p>
-          <span class="btn-white">
-            Find the right plan
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </div>
-        <svg class="fb-shield" viewBox="0 0 64 64" fill="white" aria-hidden="true">
-          <path d="M32 4L8 14v18c0 13.3 10.3 25.7 24 29 13.7-3.3 24-15.7 24-29V14L32 4z"/>
-          <path d="M22 32l7 7 13-13" stroke="rgba(24,119,242,.7)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </section>
-
-    <!-- Top 3 goals -->
-    <section aria-labelledby="start-heading">
-      <div class="sec-head"><h2 id="start-heading">Start here</h2></div>
-
-      <div class="featured-grid">
-        {featuredGuides.map(g => (
-          <a href={g.href} class="f-card" aria-label={`Guide: ${g.title}`}>
-            <div class="f-icon" aria-hidden="true">{g.emoji}</div>
-            <div class="f-content">
-              <span class="f-title">{g.title}</span>
-              <span class="f-desc">{g.desc}</span>
+    <section class="section container">
+      <div class="sec-head"><h2>Quick tools</h2></div>
+      <div class="tools-grid">
+        {tools.map(t => (
+          <a href={t.href} class="tool-card">
+            <div class="tc-icon" style={`background:${t.bg};color:${t.color}`}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
-            <span class="f-arrow" aria-hidden="true">Read guide →</span>
+            <div class="tc-body">
+              <div class="tc-title">{t.title}</div>
+              <div class="tc-sub">{t.sub}</div>
+            </div>
+            <svg class="tc-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         ))}
       </div>
     </section>
 
-    <!-- What do you need -->
-    <section aria-labelledby="needs-heading">
-      <div class="sec-head"><h2 id="needs-heading">What do you need?</h2></div>
-
-      <div class="needs-grid">
-        {needGuides.map(g => (
-          <a href={g.href} class="n-card" aria-label={`Guide: ${g.title}`}>
-            <div class="n-icon" aria-hidden="true">{g.emoji}</div>
-            <span>{g.title}</span>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <!-- See all -->
-    <div class="cta-row">
-      <a href="/guides" class="btn-primary">
-        See all guides
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <section class="section container">
+      <a href="/private-health-insurance" class="pillar-banner">
+        <div class="pb-left">
+          <div class="pb-tag">Complete guide</div>
+          <h2>Private Health Insurance in Germany (PKV)</h2>
+          <p>Everything you need to know: how PKV works, who qualifies, what it costs, top providers, and how to get covered. Updated for 2026.</p>
+          <span class="btn-white">Read the full guide →</span>
+        </div>
+        <div class="pb-card" aria-hidden="true">
+          <div class="pb-card-label">What this covers</div>
+          <ul>
+            <li>GKV vs PKV explained</li>
+            <li>2026 eligibility rules</li>
+            <li>Real cost examples</li>
+            <li>How to find the right plan</li>
+            <li>Top providers compared</li>
+          </ul>
+        </div>
       </a>
-    </div>
+    </section>
 
-    <!-- Newsletter -->
-    <section class="newsletter" aria-labelledby="nl-heading">
-      <div class="nl-icon" aria-hidden="true">📬</div>
-      <h2 id="nl-heading">Stay one step ahead</h2>
-      <p>Get the latest expat guides, bureaucracy tips, and Berlin news straight to your inbox. No spam, ever.</p>
-      <form class="nl-form" onsubmit="return false" aria-label="Newsletter signup">
-        <input type="email" placeholder="your@email.com" aria-label="Your email address" required />
-        <button type="submit" class="btn-primary">Subscribe free</button>
-      </form>
-      <span class="nl-note">Join 10,000+ expats. Unsubscribe anytime.</span>
+    <section class="section container">
+      <div class="sec-head"><h2>PKV guides</h2></div>
+      <div class="guides-grid">
+        {guides.map(g => (
+          <a href={g.href} class="guide-card">
+            <div class="gc-title">{g.title}</div>
+            <div class="gc-desc">{g.desc}</div>
+            <span class="gc-link">Read guide →</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="sec-head"><h2>Top insurers reviewed</h2></div>
+      <div class="insurers-grid">
+        {insurers.map(ins => (
+          <a href={ins.href} class="ins-card">
+            <div class="ins-name">{ins.name}</div>
+            <div class="ins-note">{ins.note}</div>
+            <span class="ins-link">Read review →</span>
+          </a>
+        ))}
+      </div>
+      <div class="ins-more">
+        <a href="/top-insurers" class="btn-outline">See all 10 insurers</a>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="sec-head"><h2>What expats say</h2></div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"I was paying €540/month for GKV. After switching to PKV I pay €240/month. Same doctor, better coverage. Wish I'd done it sooner."</p>
+          <div class="testi-author">James K., Software Engineer, Berlin</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"As a freelancer I had no idea I could switch. The broker handled everything in English. It took two weeks and I save €280/month."</p>
+          <div class="testi-author">Priya M., Consultant, Munich</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"The eligibility quiz told me I qualified instantly. The guide explained the differences better than my German colleagues ever could."</p>
+          <div class="testi-author">Thomas B., Finance Manager, Frankfurt</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="cta-block">
+        <h2>Ready to find the right PKV plan?</h2>
+        <p>Get matched with a licensed German insurance broker who speaks English. Free of charge, no obligation.</p>
+        <div class="cta-btns">
+          <a href="/contact" class="btn-primary">Get free advice →</a>
+          <a href="/quiz" class="btn-outline">Check eligibility first</a>
+        </div>
+        <div class="cta-note">§34d licensed brokers · GDPR compliant · Free for you</div>
+      </div>
     </section>
 
   </main>
+
 </Layout>
 
 <style>
-  /* ── Hero split layout ── */
-  .hero {
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: clamp(3rem, 7vw, 5.5rem) clamp(1rem, 4vw, 2.5rem);
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 5vw, 5rem); align-items: center;
+  .hero { background: var(--bg); border-bottom: 1px solid var(--border); padding: clamp(3rem, 7vw, 5rem) 0; }
+  .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .hero-kicker {
+    display: inline-block;
+    font-size: .72rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--red); background: var(--red-lt); padding: 4px 12px; border-radius: 999px;
+    margin-bottom: 1.25rem; border: 1px solid rgba(30,138,154,.2);
   }
-  .hero-left { }
-  .hero-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--red-lt); color: var(--red);
-    font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
-    padding: 4px 13px; border-radius: 999px; margin-bottom: 1.25rem;
-    border: 1px solid rgba(232,99,42,.2);
-  }
-  .hero h1 {
-    font-size: clamp(2.4rem, 5vw, 3.8rem);
-    font-weight: 800; letter-spacing: -.04em; line-height: 1.05; margin-bottom: 1rem;
-    color: var(--text);
-  }
-  .hero h1 span { color: var(--red); }
-  .hero p {
-    font-size: clamp(.95rem, 1.6vw, 1.08rem);
-    color: var(--muted); max-width: 420px; margin-bottom: 2rem; line-height: 1.65;
-  }
+  .hero h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 900; letter-spacing: -.05em; line-height: .95; margin-bottom: 1.1rem; color: var(--text); }
+  .hero p { font-size: clamp(.93rem, 1.5vw, 1.05rem); color: var(--muted); max-width: 440px; margin-bottom: 2rem; line-height: 1.65; }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 1.5rem; }
   .hero-trust { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-  .ht-item { font-size: .8rem; color: var(--muted); font-weight: 500; }
+  .hero-trust span { font-size: .8rem; color: var(--muted); font-weight: 500; }
 
-  /* ── Hero right — floating cards ── */
-  .hero-right { position: relative; }
-  .hero-cards { display: flex; flex-direction: column; gap: .75rem; }
-  .hc-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    display: flex; align-items: center; gap: 1rem;
-    box-shadow: var(--sh-sm);
+  .hero-right { display: flex; flex-direction: column; gap: .75rem; }
+  .hero-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.4rem; box-shadow: var(--sh-sm); }
+  .hc-label { font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: .35rem; }
+  .hc-amount { font-size: 1.8rem; font-weight: 900; letter-spacing: -.04em; line-height: 1; }
+  .hc-amount span { font-size: .9rem; font-weight: 400; color: var(--muted); }
+  .hc-bad { color: #dc2626; }
+  .hc-good { color: #16a34a; }
+  .hc-note { font-size: .78rem; color: var(--muted); margin-top: .3rem; }
+  .hc-save { display: inline-block; margin-top: .6rem; background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+  .hc-3 { background: var(--red-lt); border-color: rgba(30,138,154,.2); display: flex; align-items: center; gap: 1rem; }
+  .hc-stat-num { font-size: 1.6rem; font-weight: 800; color: var(--red); }
+  .hc-stat-label { font-size: .8rem; color: var(--red-dk); }
+
+  .section { padding: clamp(2rem, 5vw, 3.5rem) 0; }
+
+  .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .tool-card {
+    background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 1rem;
+    box-shadow: var(--sh-sm); transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+  }
+  .tool-card:hover { transform: translateY(-2px); box-shadow: var(--sh-md); border-color: var(--red); }
+  .tc-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .tc-body { flex: 1; }
+  .tc-title { font-size: .9rem; font-weight: 700; color: var(--text); }
+  .tc-sub { font-size: .78rem; color: var(--muted); margin-top: 2px; }
+  .tc-arrow { color: var(--muted); flex-shrink: 0; }
+
+  .pillar-banner {
+    background: linear-gradient(135deg, #1e8a9a 0%, #0f5f6d 100%);
+    border-radius: var(--radius); padding: clamp(1.5rem, 4vw, 2.25rem);
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+    box-shadow: 0 8px 30px rgba(30,138,154,.25);
     transition: transform var(--ease), box-shadow var(--ease);
-    cursor: default;
+    position: relative; overflow: hidden;
   }
-  .hc-card:hover { transform: translateX(4px); box-shadow: var(--sh-md); }
-  .hc-card-1 { margin-left: 1.5rem; }
-  .hc-card-2 { margin-left: 0; }
-  .hc-card-3 { margin-left: 2rem; }
-  .hc-card-4 { margin-left: .5rem; }
-  .hc-icon { font-size: 1.5rem; width: 44px; height: 44px; background: var(--bg); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .hc-title { font-size: .92rem; font-weight: 700; color: var(--text); }
-  .hc-sub { font-size: .78rem; color: var(--muted); margin-top: 2px; }
-  .hc-arrow { margin-left: auto; color: var(--muted); font-size: .9rem; }
-  .hc-stat {
-    background: var(--red); color: #fff;
-    border-radius: 12px; padding: .9rem 1.25rem;
-    display: flex; align-items: center; gap: 1rem;
-    margin-left: 1rem;
-  }
-  .hc-stat-num { font-size: 1.6rem; font-weight: 800; line-height: 1; }
-  .hc-stat-label { font-size: .8rem; opacity: .85; }
+  .pillar-banner::before { content: ''; position: absolute; right: -40px; top: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,.07); }
+  .pillar-banner:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(30,138,154,.35); }
+  .pb-tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; background: rgba(255,255,255,.2); color: #fff; padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem; }
+  .pillar-banner h2 { font-size: clamp(1.1rem, 2.5vw, 1.45rem); font-weight: 800; color: #fff; letter-spacing: -.02em; margin-bottom: .5rem; }
+  .pillar-banner p { font-size: .9rem; color: rgba(255,255,255,.85); max-width: 420px; line-height: 1.55; margin-bottom: 1.25rem; }
+  .pb-card { background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.22); border-radius: 12px; padding: 1.1rem 1.25rem; min-width: 180px; flex-shrink: 0; position: relative; z-index: 1; }
+  .pb-card-label { font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: .7rem; }
+  .pb-card ul { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+  .pb-card li { font-size: .78rem; color: rgba(255,255,255,.88); padding-left: 1.1rem; position: relative; }
+  .pb-card li::before { content: '✓'; position: absolute; left: 0; color: rgba(255,255,255,.6); font-size: .7rem; }
+
+  .guides-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .guide-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; box-shadow: var(--sh-sm); display: flex; flex-direction: column; gap: .35rem; transition: transform var(--ease), box-shadow var(--ease); }
+  .guide-card:hover { transform: translateY(-2px); box-shadow: var(--sh-md); }
+  .gc-title { font-size: .95rem; font-weight: 700; color: var(--text); }
+  .gc-desc { font-size: .83rem; color: var(--muted); line-height: 1.55; flex: 1; }
+  .gc-link { font-size: .8rem; font-weight: 700; color: var(--red); margin-top: .5rem; }
+
+  .insurers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .ins-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; box-shadow: var(--sh-sm); display: flex; flex-direction: column; gap: .3rem; transition: transform var(--ease), box-shadow var(--ease); }
+  .ins-card:hover { transform: translateY(-2px); box-shadow: var(--sh-md); }
+  .ins-name { font-size: .95rem; font-weight: 800; color: var(--text); }
+  .ins-note { font-size: .8rem; color: var(--muted); flex: 1; }
+  .ins-link { font-size: .78rem; font-weight: 700; color: var(--red); margin-top: .4rem; }
+  .ins-more { text-align: center; }
+
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .testi-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; box-shadow: var(--sh-sm); }
+  .testi-stars { color: #f59e0b; font-size: 1rem; margin-bottom: .6rem; }
+  .testi-card p { font-size: .85rem; color: var(--text); line-height: 1.6; margin-bottom: .75rem; font-style: italic; }
+  .testi-author { font-size: .75rem; color: var(--muted); font-weight: 600; }
+
+  .cta-block { background: var(--card); border: 1.5px solid var(--border); border-radius: var(--radius); padding: clamp(2rem, 5vw, 3rem); text-align: center; box-shadow: var(--sh-sm); }
+  .cta-block h2 { font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: .5rem; }
+  .cta-block p { font-size: .95rem; color: var(--muted); margin-bottom: 1.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-btns { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+  .cta-note { font-size: .78rem; color: var(--muted); }
 
   @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; }
+    .hero-inner { grid-template-columns: 1fr; }
     .hero-right { display: none; }
+    .pillar-banner { grid-template-columns: 1fr; }
+    .pb-card { display: none; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .guides-grid { grid-template-columns: 1fr; }
+    .insurers-grid { grid-template-columns: repeat(2, 1fr); }
+    .testi-grid { grid-template-columns: 1fr; }
   }
-
-  /* Insurance banner */
-  .feature-banner {
-    background: linear-gradient(135deg, var(--red) 0%, var(--red-dk) 100%);
-    color: #fff; border-radius: var(--radius);
-    padding: clamp(1.5rem, 4vw, 2.25rem);
-    display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;
-    margin-bottom: 2.5rem;
-    box-shadow: 0 8px 30px rgba(232,99,42,.28);
-    position: relative; overflow: hidden;
-    transition: transform var(--ease), box-shadow var(--ease);
-  }
-  .feature-banner::before {
-    content: ''; position: absolute; right: -40px; top: -40px;
-    width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,.07);
-  }
-  .feature-banner:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(24,119,242,.36); }
-  .fb-tag {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: rgba(255,255,255,.2);
-    font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
-    padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem;
-  }
-  .feature-banner h2 {
-    font-size: clamp(1.1rem, 2.5vw, 1.45rem); font-weight: 700;
-    letter-spacing: -.02em; margin-bottom: .5rem;
-  }
-  .feature-banner p { font-size: .9rem; opacity: .88; max-width: 420px; margin-bottom: 1.1rem; line-height: 1.55; }
-  .fb-shield { width: 80px; height: 80px; opacity: .2; flex-shrink: 0; position: relative; z-index: 1; }
-
-  /* Featured 3 */
-  .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 2.5rem; }
-  .f-card {
-    background: var(--card); border: 1.5px solid var(--border); border-radius: var(--radius);
-    padding: 2.25rem 1.75rem 2rem;
-    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem;
-    box-shadow: var(--sh-sm);
-    transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
-    position: relative; overflow: hidden;
-  }
-  .f-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: var(--red); opacity: 0; transition: opacity var(--ease);
-  }
-  .f-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: rgba(24,119,242,.25); }
-  .f-card:hover::before { opacity: 1; }
-  .f-icon {
-    width: 76px; height: 76px; border-radius: 50%;
-    background: var(--red-lt); display: flex; align-items: center; justify-content: center;
-    font-size: 2.1rem; flex-shrink: 0; transition: background var(--ease);
-  }
-  .f-card:hover .f-icon { background: rgba(24,119,242,.15); }
-  .f-content { flex: 1; min-width: 0; }
-  .f-title { display: block; font-size: 1.05rem; font-weight: 700; color: var(--text); }
-  .f-desc { display: block; font-size: .85rem; color: var(--muted); margin-top: 5px; line-height: 1.45; }
-  .f-arrow { color: var(--red); flex-shrink: 0; opacity: 0; transition: opacity var(--ease); font-size: .85rem; font-weight: 600; }
-  .f-card:hover .f-arrow { opacity: 1; }
-
-  /* Needs grid — 2 columns, bigger cards */
-  .needs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-  .n-card {
-    background: var(--card); border: 1.5px solid var(--border); border-radius: var(--radius);
-    padding: 1.5rem 1.5rem; display: flex; align-items: center; gap: 1.1rem;
-    box-shadow: var(--sh-sm);
-    transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease), background var(--ease);
-  }
-  .n-card:hover { transform: translateY(-2px); box-shadow: var(--sh-md); border-color: rgba(24,119,242,.25); background: var(--red-lt); }
-  .n-icon {
-    width: 52px; height: 52px; border-radius: 14px;
-    background: var(--red-lt); display: flex; align-items: center; justify-content: center;
-    font-size: 1.6rem; flex-shrink: 0; transition: background var(--ease);
-  }
-  .n-card:hover .n-icon { background: rgba(24,119,242,.18); }
-  .n-card span { font-size: 1rem; font-weight: 600; }
-
-  .cta-row { text-align: center; margin: 2rem 0; }
-
-  .newsletter {
-    background: var(--card); border: 1.5px solid var(--border); border-radius: var(--radius);
-    padding: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-top: 1rem; box-shadow: var(--sh-sm);
-  }
-  .nl-icon { font-size: 2rem; margin-bottom: .75rem; }
-  .newsletter h2 { font-size: 1.2rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .4rem; }
-  .newsletter p { font-size: .9rem; color: var(--muted); margin-bottom: 1.25rem; }
-  .nl-form { display: flex; gap: .6rem; max-width: 440px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
-  .nl-form input {
-    flex: 1; min-width: 200px; padding: 11px 18px; border-radius: 999px;
-    border: 1.5px solid var(--border); font-size: .9rem;
-    background: var(--bg); color: var(--text); outline: none;
-    transition: border-color var(--ease), box-shadow var(--ease);
-  }
-  .nl-form input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(24,119,242,.1); }
-  .nl-form input::placeholder { color: var(--muted); }
-  .nl-note { display: block; font-size: .78rem; color: var(--muted); margin-top: .75rem; }
-
-  @media (max-width: 700px) {
-    .featured-grid { grid-template-columns: 1fr; }
-    .needs-grid { grid-template-columns: 1fr; }
-    .feature-banner { grid-template-columns: 1fr; }
-    .fb-shield { display: none; }
-  }
-  @media (max-width: 400px) {
-    .needs-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 480px) { .insurers-grid { grid-template-columns: 1fr; } }
 </style>

@@ -9,18 +9,20 @@ interface Props {
   description?: string;
   canonicalUrl?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = 'Step-by-step guides for expats moving to, living in, and thriving in Germany — in plain English.',
+  description = 'Plain-English guide to private health insurance (PKV) in Germany for expats. Compare GKV vs PKV, check eligibility, calculate costs, and find the right insurer.',
   canonicalUrl = Astro.url.href,
-  ogImage = '/og-default.png',
+  ogImage = 'https://private-health-insurance-germany.com/og-default.png',
+  noindex = false,
 } = Astro.props;
 
-const fullTitle = title === 'Living in Germany'
-  ? 'Living in Germany – The Expat Guide to Life in Germany'
-  : `${title} | Living in Germany`;
+const fullTitle = title === 'PKV Germany'
+  ? 'Private Health Insurance Germany — Expat Guide to PKV 2026'
+  : `${title} | PKV Germany`;
 ---
 
 <!doctype html>
@@ -29,44 +31,45 @@ const fullTitle = title === 'Living in Germany'
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Primary SEO -->
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
 
-  <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content="website" />
   <meta property="og:image" content={ogImage} />
-  <meta property="og:site_name" content="Living in Germany" />
+  <meta property="og:site_name" content="PKV Germany" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <!-- Fonts are self-hosted via @fontsource-variable/inter -->
-
-  <!-- Schema.org: WebSite -->
-  <script type="application/ld+json">
+  <script type="application/ld+json" is:inline>
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Living in Germany",
-      "url": "https://living-in-germany.org",
-      "description": "Step-by-step guides for expats living in Germany",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://living-in-germany.org/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "PKV Germany",
+          "url": "https://private-health-insurance-germany.com",
+          "description": "Plain-English guide to private health insurance in Germany for expats and foreign nationals.",
+          "inLanguage": "en"
+        },
+        {
+          "@type": "Organization",
+          "name": "PKV Germany",
+          "url": "https://private-health-insurance-germany.com",
+          "email": "contact@private-health-insurance-germany.com",
+          "description": "Independent guide to PKV private health insurance in Germany. We connect expats with licensed §34d insurance brokers.",
+          "sameAs": ["https://myhealthcarebroker.com"]
+        }
+      ]
     }
   </script>
 </head>

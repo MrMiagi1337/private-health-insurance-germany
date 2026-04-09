@@ -1,0 +1,214 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const spokes = [
+  {
+    title: 'Who Qualifies for PKV?',
+    href: '/guide/who-qualifies',
+    desc: 'The €77,400 income threshold, employment types, age considerations, and pre-existing conditions explained.',
+    time: '8 min read',
+  },
+  {
+    title: 'PKV Costs and Contributions',
+    href: '/guide/costs-and-contributions',
+    desc: 'Real monthly premiums by age and plan level, employer contributions, and what happens at retirement.',
+    time: '9 min read',
+  },
+  {
+    title: 'How to Switch from GKV to PKV',
+    href: '/guide/how-to-switch',
+    desc: 'Step-by-step: notice periods, health questionnaire, timing, and the most common mistakes to avoid.',
+    time: '10 min read',
+  },
+  {
+    title: 'PKV for Freelancers',
+    href: '/guide/for-freelancers',
+    desc: 'Why self-employed people often save hundreds per month with PKV, even without employer contribution.',
+    time: '9 min read',
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
+        { "@type": "ListItem", "position": 2, "name": "PKV Guide", "item": "https://private-health-insurance-germany.com/guide" }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="PKV Guide: Step-by-Step for Expats in Germany"
+  description="The complete step-by-step guide to private health insurance (PKV) in Germany for expats. Covers eligibility, costs, switching, and more. Updated 2026."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+
+  <main>
+    <div class="page-wrap container">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">PKV Guide</li>
+        </ol>
+      </nav>
+
+      <header class="page-header">
+        <span class="page-tag">Complete Guide</span>
+        <h1>PKV Guide: Step-by-Step for Expats</h1>
+        <p class="page-lead">Everything you need to understand private health insurance in Germany, broken down into four focused guides. Start with the overview or jump straight to the topic you need.</p>
+      </header>
+
+      <div class="hub-intro">
+        <p>Germany's private health insurance system (PKV) can save eligible expats €200-500 per month compared to public GKV. But it is a major, hard-to-reverse decision. This guide hub covers the four questions every expat should answer before switching.</p>
+        <div class="hub-ctas">
+          <a href="/private-health-insurance" class="btn-primary">Read the full PKV overview</a>
+          <a href="/quiz" class="btn-outline">Check my eligibility first</a>
+        </div>
+      </div>
+
+      <section class="spokes-section">
+        <div class="sec-head"><h2>The four PKV guides</h2></div>
+        <div class="spokes-grid">
+          {spokes.map((s, i) => (
+            <a href={s.href} class="spoke-card">
+              <div class="spoke-num">{i + 1}</div>
+              <div class="spoke-body">
+                <h2 class="spoke-title">{s.title}</h2>
+                <p class="spoke-desc">{s.desc}</p>
+                <span class="spoke-meta">{s.time} →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="tools-section">
+        <div class="sec-head"><h2>Quick tools</h2></div>
+        <div class="tools-row">
+          <a href="/quiz" class="tool-item">
+            <div class="ti-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="ti-text">
+              <div class="ti-title">Eligibility Quiz</div>
+              <div class="ti-sub">2-minute check</div>
+            </div>
+          </a>
+          <a href="/calculator" class="tool-item">
+            <div class="ti-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+            </div>
+            <div class="ti-text">
+              <div class="ti-title">Cost Calculator</div>
+              <div class="ti-sub">Estimate your premium</div>
+            </div>
+          </a>
+          <a href="/compare" class="tool-item">
+            <div class="ti-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <div class="ti-text">
+              <div class="ti-title">GKV vs PKV</div>
+              <div class="ti-sub">Full comparison</div>
+            </div>
+          </a>
+          <a href="/checklist" class="tool-item">
+            <div class="ti-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="ti-text">
+              <div class="ti-title">Document Checklist</div>
+              <div class="ti-sub">What you need to apply</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <div class="cta-block">
+        <h2>Not sure where to start?</h2>
+        <p>Take the 2-minute quiz to find out if you qualify for PKV, then connect with a licensed broker who speaks English.</p>
+        <a href="/quiz" class="btn-primary">Take the eligibility quiz →</a>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .page-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
+
+  .breadcrumb ol { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .breadcrumb li { font-size: .8rem; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); transition: color var(--ease); }
+  .breadcrumb a:hover { color: var(--text); }
+
+  .page-header { margin-bottom: 2rem; }
+  .page-tag {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem;
+  }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: .75rem; }
+  .page-lead { font-size: 1.05rem; color: var(--muted); line-height: 1.65; max-width: 620px; }
+
+  .hub-intro {
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 1.75rem 2rem; margin-bottom: 3rem;
+    box-shadow: var(--sh-sm);
+  }
+  .hub-intro p { font-size: .97rem; color: var(--text); line-height: 1.7; margin-bottom: 1.25rem; }
+  .hub-ctas { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+  .spokes-section { margin-bottom: 3rem; }
+  .spokes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .spoke-card {
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 1.5rem 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start;
+    box-shadow: var(--sh-sm); transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+  }
+  .spoke-card:hover { transform: translateY(-2px); box-shadow: var(--sh-md); border-color: var(--red); }
+  .spoke-num {
+    width: 2rem; height: 2rem; border-radius: 50%; background: var(--red); color: #fff;
+    font-size: .85rem; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .spoke-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: .4rem; letter-spacing: -.01em; }
+  .spoke-desc { font-size: .85rem; color: var(--muted); line-height: 1.55; margin-bottom: .6rem; }
+  .spoke-meta { font-size: .8rem; font-weight: 700; color: var(--red); }
+
+  .tools-section { margin-bottom: 3rem; }
+  .tools-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: .85rem; }
+  .tool-item {
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 1.1rem; display: flex; flex-direction: column; align-items: center; gap: .6rem; text-align: center;
+    box-shadow: var(--sh-sm); transition: transform var(--ease), border-color var(--ease);
+  }
+  .tool-item:hover { transform: translateY(-2px); border-color: var(--red); }
+  .ti-icon {
+    width: 40px; height: 40px; background: var(--red-lt); color: var(--red);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  }
+  .ti-title { font-size: .88rem; font-weight: 700; color: var(--text); }
+  .ti-sub { font-size: .75rem; color: var(--muted); }
+
+  .cta-block {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 2.5rem; text-align: center; box-shadow: var(--sh-sm);
+  }
+  .cta-block h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: .5rem; }
+  .cta-block p { font-size: .95rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+  @media (max-width: 720px) {
+    .spokes-grid { grid-template-columns: 1fr; }
+    .tools-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .tools-row { grid-template-columns: 1fr; }
+  }
+</style>
