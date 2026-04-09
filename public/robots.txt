@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://living-in-germany.org/sitemap-index.xml
+Sitemap: https://private-health-insurance-germany.com/sitemap-index.xml

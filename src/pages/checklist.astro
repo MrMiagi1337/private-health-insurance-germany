@@ -1,0 +1,362 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="PKV Application Checklist"
+  description="Complete checklist of documents needed to apply for private health insurance (PKV) in Germany. Download or print for your insurance consultation."
+>
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-badge">Free Checklist</div>
+        <h1>PKV Application Checklist</h1>
+        <p class="hero-sub">Everything you need to prepare before applying for private health insurance in Germany. Use this list in your broker consultation.</p>
+      </div>
+    </section>
+
+    <section class="checklist-section">
+      <div class="container checklist-grid">
+
+        <div class="checklist-main">
+
+          <div class="checklist-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <h2>Personal identification</h2>
+            </div>
+            <ul class="doc-list">
+              <li>
+                <input type="checkbox" id="doc1" />
+                <label for="doc1">
+                  <strong>Valid passport or national ID card</strong>
+                  <span>Must be valid for the duration of the policy start</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc2" />
+                <label for="doc2">
+                  <strong>German residence registration (Anmeldung)</strong>
+                  <span>Confirmation letter from the Einwohnermeldeamt</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc3" />
+                <label for="doc3">
+                  <strong>EU Blue Card / work visa / residence permit</strong>
+                  <span>Any permit granting you right to work in Germany</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc4" />
+                <label for="doc4">
+                  <strong>Tax ID number (Steueridentifikationsnummer)</strong>
+                  <span>Sent by post after Anmeldung — 11-digit number</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="checklist-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+              </div>
+              <h2>Employment and income documents</h2>
+            </div>
+            <ul class="doc-list">
+              <li>
+                <input type="checkbox" id="doc5" />
+                <label for="doc5">
+                  <strong>Employment contract (Arbeitsvertrag)</strong>
+                  <span>Shows your employer, role and gross salary</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc6" />
+                <label for="doc6">
+                  <strong>Last 3 months' payslips (Gehaltsabrechnung)</strong>
+                  <span>Confirms current income for premium calculation</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc7" />
+                <label for="doc7">
+                  <strong>Last year's income tax return (if available)</strong>
+                  <span>Especially important for freelancers and self-employed</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc8" />
+                <label for="doc8">
+                  <strong>Freelancers: Gewerbeschein or Freiberufler confirmation</strong>
+                  <span>Proof of self-employment registration with Finanzamt</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="checklist-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <h2>Health information</h2>
+            </div>
+            <p class="card-note">PKV underwriting requires a full health declaration. Inaccurate answers can lead to policy cancellation. Have the following ready.</p>
+            <ul class="doc-list">
+              <li>
+                <input type="checkbox" id="doc9" />
+                <label for="doc9">
+                  <strong>List of all current medications</strong>
+                  <span>Generic name, dosage, and reason for use</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc10" />
+                <label for="doc10">
+                  <strong>Medical history: diagnoses from last 5 years</strong>
+                  <span>Include hospital stays, surgeries, chronic conditions</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc11" />
+                <label for="doc11">
+                  <strong>Previous GKV/PKV membership confirmation</strong>
+                  <span>Your current insurer can issue a Versicherungsnachweis</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc12" />
+                <label for="doc12">
+                  <strong>Specialist letters or recent lab results (if applicable)</strong>
+                  <span>Helps broker recommend the right insurer for your profile</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="checklist-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+              </div>
+              <h2>Bank and contact details</h2>
+            </div>
+            <ul class="doc-list">
+              <li>
+                <input type="checkbox" id="doc13" />
+                <label for="doc13">
+                  <strong>German bank account (IBAN)</strong>
+                  <span>Premiums are collected by direct debit (SEPA Lastschrift)</span>
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="doc14" />
+                <label for="doc14">
+                  <strong>German mobile number or contact email</strong>
+                  <span>For policy documents and communication from insurer</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="progress-summary" id="progressSummary">
+            <div class="summary-bar">
+              <div class="summary-fill" id="summaryFill" style="width: 0%"></div>
+            </div>
+            <span id="summaryText">0 of 14 items checked</span>
+          </div>
+
+        </div>
+
+        <aside class="side-panel">
+          <div class="tips-card">
+            <h3>Tips from brokers</h3>
+            <ul class="tip-list">
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Apply as young as possible. Entry age is locked in and affects your premium for life.
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Never lie on the health declaration. Insurers can cancel or deny claims retroactively.
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Get quotes from at least 3 insurers — premiums for identical coverage vary by 30-40%.
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Give your notice to GKV by the end of the month you want to leave (2-month notice period for most plans).
+              </li>
+            </ul>
+          </div>
+
+          <div class="timeline-card">
+            <h3>Typical timeline</h3>
+            <ol class="timeline">
+              <li>
+                <span class="tl-dot"></span>
+                <div>
+                  <strong>Week 1</strong>
+                  <p>Consultation with broker — compare quotes</p>
+                </div>
+              </li>
+              <li>
+                <span class="tl-dot"></span>
+                <div>
+                  <strong>Week 2-3</strong>
+                  <p>Submit health declaration — receive underwriting decision</p>
+                </div>
+              </li>
+              <li>
+                <span class="tl-dot"></span>
+                <div>
+                  <strong>Week 4</strong>
+                  <p>Sign application and receive provisional insurance certificate</p>
+                </div>
+              </li>
+              <li>
+                <span class="tl-dot"></span>
+                <div>
+                  <strong>Month 2</strong>
+                  <p>Cancel GKV (2-month notice) and confirm PKV start date</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <a href="/contact" class="cta-card">
+            <strong>Ready to apply?</strong>
+            <span>A broker will guide you through the paperwork step by step. Free of charge.</span>
+            <span class="cta-arrow">Get free advice →</span>
+          </a>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  const checkboxes = document.querySelectorAll('.doc-list input[type="checkbox"]');
+  const total = checkboxes.length;
+
+  function updateProgress() {
+    const checked = document.querySelectorAll('.doc-list input[type="checkbox"]:checked').length;
+    const pct = (checked / total) * 100;
+    (document.getElementById('summaryFill') as HTMLElement).style.width = pct + '%';
+    document.getElementById('summaryText')!.textContent = `${checked} of ${total} items checked`;
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+</script>
+
+<style>
+  main { background: var(--bg); }
+
+  .hero-section {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem);
+    text-align: center;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    background: #ecfdf5; color: #059669;
+    font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: .3rem .8rem; border-radius: 20px; margin-bottom: 1rem;
+  }
+  .hero-section h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: .75rem; }
+  .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 1.65; }
+
+  .checklist-section { padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2rem); }
+  .checklist-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; }
+
+  .checklist-main { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .checklist-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+  }
+  .card-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.1rem; }
+  .card-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: #fff8f8;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--red);
+  }
+  .card-header h2 { font-size: 1rem; font-weight: 800; margin: 0; }
+  .card-note { font-size: .82rem; color: var(--muted); background: #fffbeb; border-radius: 8px; padding: .6rem .9rem; margin-bottom: 1rem; line-height: 1.55; }
+
+  .doc-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+  .doc-list li { display: flex; gap: .75rem; align-items: flex-start; }
+  .doc-list input[type="checkbox"] {
+    margin-top: .3rem; flex-shrink: 0;
+    width: 16px; height: 16px;
+    accent-color: var(--red); cursor: pointer;
+  }
+  .doc-list label { cursor: pointer; }
+  .doc-list strong { display: block; font-size: .9rem; margin-bottom: .15rem; }
+  .doc-list span { font-size: .8rem; color: var(--muted); }
+
+  .progress-summary {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .summary-bar { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .summary-fill { height: 100%; background: #059669; border-radius: 4px; transition: width .3s ease; }
+  .progress-summary span { font-size: .85rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
+
+  /* Side panel */
+  .side-panel { display: flex; flex-direction: column; gap: 1.25rem; }
+  .tips-card, .timeline-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+  .tips-card h3, .timeline-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 1rem; }
+
+  .tip-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+  .tip-list li { display: flex; gap: .6rem; align-items: flex-start; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+  .tip-list svg { color: #d97706; flex-shrink: 0; margin-top: .15rem; }
+
+  .timeline { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .timeline li { display: flex; gap: .75rem; align-items: flex-start; }
+  .tl-dot {
+    width: 10px; height: 10px; flex-shrink: 0;
+    background: var(--red); border-radius: 50%;
+    margin-top: .35rem;
+  }
+  .timeline strong { font-size: .88rem; display: block; margin-bottom: .15rem; }
+  .timeline p { font-size: .82rem; color: var(--muted); margin: 0; line-height: 1.45; }
+
+  .cta-card {
+    display: flex; flex-direction: column; gap: .4rem;
+    background: var(--red);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: background var(--ease);
+  }
+  .cta-card:hover { background: var(--red-dk); }
+  .cta-card strong { font-size: 1rem; color: #fff; }
+  .cta-card span { font-size: .82rem; color: rgba(255,255,255,.8); line-height: 1.5; }
+  .cta-arrow { font-size: .88rem !important; font-weight: 700; color: #fff !important; margin-top: .25rem; }
+
+  @media (max-width: 860px) {
+    .checklist-grid { grid-template-columns: 1fr; }
+    .side-panel { order: -1; }
+  }
+</style>

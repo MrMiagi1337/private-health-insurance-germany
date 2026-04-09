@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://living-in-germany.org',
+  site: 'https://private-health-insurance-germany.com',
   integrations: [
     sitemap({
       // Exclude any pages you don't want indexed

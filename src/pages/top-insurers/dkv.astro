@@ -1,0 +1,181 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const insurer = {
+  name: "DKV",
+  tagline: "One of Germany's oldest and most trusted PKV insurers, strong in outpatient care and preventive health.",
+  founded: "1927",
+  hq: "Cologne",
+  type: "Stock insurer (Ergo Group)",
+  englishSupport: "&#9733;&#9733;&#9733;&#9734;&#9734;",
+  pricing: "&#9733;&#9733;&#9733;&#9733;&#9734;",
+  coverage: "&#9733;&#9733;&#9733;&#9733;&#9734;",
+  service: "&#9733;&#9733;&#9733;&#9733;&#9734;",
+  pros: ["Nearly 100 years of PKV experience", "Excellent outpatient and preventive care coverage", "Strong digital tools and mobile app", "Wide network of partner hospitals and specialists", "Good value in the mid-price segment"],
+  cons: ["English support less comprehensive than Allianz", "Some tariffs require GP referral to see specialists", "Premium increases moderate but not the lowest", "Part of ERGO/Munich Re, less independence than mutual insurers"],
+  tariffs: [{"name": "KomfortSelect", "level": "Premium", "desc": "Single room, choice of specialist, comprehensive outpatient and dental"}, {"name": "MedicalBalance", "level": "Mid-range", "desc": "Strong outpatient focus, two-bed hospital room, deductible options"}, {"name": "AktivStart", "level": "Entry", "desc": "Lower premium entry tariff with higher co-payment structure"}],
+  bestFor: "Employed professionals who use healthcare regularly, families, people focused on preventive and outpatient care.",
+  verdict: "DKV sits comfortably in the upper-mid tier of German PKV. Its century of history and solid financial backing through Munich Re make it a dependable choice. Coverage is strong across the board, especially for outpatient care and preventive health. It is not the cheapest option, but it offers genuine value and peace of mind.",
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "DKV PKV Review 2026 - Private Health Insurance Germany",
+      "author": { "@type": "Person", "name": "Marco Maurelli", "url": "https://private-health-insurance-germany.com/about" },
+      "dateModified": "2026-04-01"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Top Insurers", "item": "https://private-health-insurance-germany.com/top-insurers" },
+        { "@type": "ListItem", "position": 3, "name": "DKV", "item": "https://private-health-insurance-germany.com/top-insurers/dkv" }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="DKV PKV Review 2026 - Private Health Insurance Germany"
+  description="Independent review of DKV private health insurance in Germany. Pros, cons, tariffs, English support, and who DKV PKV is best for in 2026."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <main>
+    <div class="review-wrap container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">&#8250;</li>
+          <li><a href="/top-insurers">Top Insurers</a></li>
+          <li aria-hidden="true">&#8250;</li>
+          <li aria-current="page">{insurer.name}</li>
+        </ol>
+      </nav>
+
+      <header class="review-header">
+        <span class="page-tag">Insurer Review</span>
+        <h1>{insurer.name} Private Health Insurance Review</h1>
+        <p class="review-tagline">{insurer.tagline}</p>
+        <div class="meta-row">
+          <span class="meta-item">By Marco Maurelli</span>
+          <span class="meta-item">Updated April 2026</span>
+          <span class="meta-item">5 min read</span>
+        </div>
+      </header>
+
+      <div class="review-grid">
+        <div class="review-main">
+          <div class="scores-card">
+            <div class="score-item"><span class="score-label">English support</span><span class="score-stars" set:html={insurer.englishSupport}></span></div>
+            <div class="score-item"><span class="score-label">Pricing</span><span class="score-stars" set:html={insurer.pricing}></span></div>
+            <div class="score-item"><span class="score-label">Coverage</span><span class="score-stars" set:html={insurer.coverage}></span></div>
+            <div class="score-item"><span class="score-label">Service</span><span class="score-stars" set:html={insurer.service}></span></div>
+          </div>
+
+          <div class="review-body">
+            <h2>Overview</h2>
+            <p>Founded in {insurer.founded} and headquartered in {insurer.hq}, {insurer.name} is a well-established name in the German PKV market. As a {insurer.type}, it brings distinct advantages in terms of how it balances policyholder interests with long-term financial sustainability.</p>
+
+            <h2>Pros</h2>
+            <ul>{insurer.pros.map(pro => <li>{pro}</li>)}</ul>
+
+            <h2>Cons</h2>
+            <ul>{insurer.cons.map(con => <li>{con}</li>)}</ul>
+
+            <h2>Key Tariffs</h2>
+            <table>
+              <thead><tr><th>Tariff</th><th>Level</th><th>What it covers</th></tr></thead>
+              <tbody>{insurer.tariffs.map(t => (<tr><td><strong>{t.name}</strong></td><td>{t.level}</td><td>{t.desc}</td></tr>))}</tbody>
+            </table>
+
+            <h2>Best For</h2>
+            <p>{insurer.bestFor}</p>
+
+            <h2>Verdict</h2>
+            <p>{insurer.verdict}</p>
+
+            <div class="cta-inline">
+              <p>Want a personalised {insurer.name} quote alongside other top insurers?</p>
+              <a href="/contact" class="btn-primary">Get free broker comparison &#8594;</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="review-sidebar">
+          <div class="sidebar-card">
+            <div class="sc-top"></div>
+            <div class="sc-body">
+              <p class="sc-eyebrow">Quick facts</p>
+              <dl class="quick-facts">
+                <dt>Founded</dt><dd>{insurer.founded}</dd>
+                <dt>HQ</dt><dd>{insurer.hq}</dd>
+                <dt>Type</dt><dd>{insurer.type}</dd>
+              </dl>
+              <a href="/contact" class="sc-btn">Get a quote &#8594;</a>
+            </div>
+          </div>
+          <div class="sidebar-nav-card">
+            <p class="sidebar-label">Other reviews</p>
+            <ul>
+              <li><a href="/top-insurers/debeka">Debeka</a></li>
+              <li><a href="/top-insurers/allianz">Allianz</a></li>
+              <li><a href="/top-insurers/dkv">DKV</a></li>
+              <li><a href="/top-insurers/hallesche">Hallesche</a></li>
+              <li><a href="/top-insurers">All 10 insurers &#8594;</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .review-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
+  .breadcrumb ol { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .breadcrumb li { font-size: .8rem; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); transition: color var(--ease); }
+  .breadcrumb a:hover { color: var(--text); }
+  .review-header { margin-bottom: 2rem; }
+  .page-tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem; }
+  h1 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: .6rem; }
+  .review-tagline { font-size: 1rem; color: var(--muted); line-height: 1.65; max-width: 600px; margin-bottom: .75rem; }
+  .meta-row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .meta-item { font-size: .8rem; color: var(--muted); font-weight: 500; }
+  .review-grid { display: grid; grid-template-columns: 1fr 260px; gap: 2.5rem; align-items: start; }
+  .scores-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: .85rem; box-shadow: var(--sh-sm); }
+  .score-item { display: flex; flex-direction: column; gap: .15rem; }
+  .score-label { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .score-stars { font-size: .95rem; color: #f59e0b; }
+  .review-body { font-size: 1rem; line-height: 1.8; color: #3a3a42; }
+  .review-body h2 { font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; color: var(--text); margin: 2rem 0 .6rem; }
+  .review-body p { margin-bottom: 1rem; }
+  .review-body ul { margin: .5rem 0 1.25rem 1.25rem; }
+  .review-body li { margin-bottom: .5rem; padding-left: .25rem; }
+  .review-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .review-body th { background: var(--bg); padding: .6rem .9rem; text-align: left; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .review-body td { padding: .6rem .9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .review-body tr:last-child td { border-bottom: none; }
+  .cta-inline { background: var(--red-lt); border: 1px solid rgba(30,138,154,.2); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .cta-inline p { font-size: .93rem; color: var(--text); font-weight: 500; margin: 0; }
+  .sidebar-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--sh-sm); margin-bottom: 1rem; }
+  .sc-top { height: 4px; background: var(--red); }
+  .sc-body { padding: 1.1rem 1.25rem; }
+  .sc-eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--red); margin-bottom: .75rem; }
+  .quick-facts { display: grid; grid-template-columns: auto 1fr; gap: .3rem .75rem; font-size: .83rem; margin-bottom: 1rem; }
+  .quick-facts dt { color: var(--muted); font-weight: 500; }
+  .quick-facts dd { color: var(--text); font-weight: 600; }
+  .sc-btn { display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--red); color: #fff; font-size: .83rem; font-weight: 700; padding: .65rem 1rem; border-radius: 8px; transition: background var(--ease); width: 100%; text-decoration: none; }
+  .sc-btn:hover { background: var(--red-dk); }
+  .sidebar-nav-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; box-shadow: var(--sh-sm); }
+  .sidebar-label { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: .65rem; }
+  .sidebar-nav-card ul { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+  .sidebar-nav-card a { display: block; font-size: .84rem; color: var(--muted); padding: .25rem 0; padding-left: .6rem; border-left: 2px solid transparent; transition: color var(--ease), border-color var(--ease); }
+  .sidebar-nav-card a:hover { color: var(--red); border-left-color: var(--red); }
+  @media (max-width: 800px) { .review-grid { grid-template-columns: 1fr; } .review-sidebar { order: -1; } .scores-card { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 500px) { .scores-card { grid-template-columns: repeat(2, 1fr); } }
+</style>

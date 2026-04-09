@@ -1,0 +1,330 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Private Health Insurance Cost Calculator Germany"
+  description="Estimate your private health insurance (PKV) costs in Germany 2026. Enter your age, income and health status to get a realistic monthly premium range based on real tariff data."
+>
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-badge">Free Tool</div>
+        <h1>Private Health Insurance Cost Calculator — Germany 2026</h1>
+        <p class="hero-sub">Get a realistic estimate of your private health insurance (PKV) premium in Germany. Based on real 2026 tariff data from Debeka, Allianz, DKV, and other leading insurers.</p>
+      </div>
+    </section>
+
+    <section class="calc-section">
+      <div class="container calc-grid">
+
+        <div class="calc-card">
+          <h2>Your details</h2>
+
+          <div class="input-group">
+            <label for="age">Your age</label>
+            <input type="number" id="age" min="18" max="65" value="32" />
+          </div>
+
+          <div class="input-group">
+            <label>Employment status</label>
+            <div class="toggle-group" id="employmentGroup">
+              <button class="toggle-btn active" data-value="employed">Employed</button>
+              <button class="toggle-btn" data-value="freelancer">Freelancer</button>
+              <button class="toggle-btn" data-value="civil-servant">Civil servant</button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="income">Gross monthly income (€)</label>
+            <input type="number" id="income" min="1000" max="30000" value="7000" step="100" />
+          </div>
+
+          <div class="input-group">
+            <label>Health status</label>
+            <div class="toggle-group" id="healthGroup">
+              <button class="toggle-btn active" data-value="good">Good</button>
+              <button class="toggle-btn" data-value="average">Average</button>
+              <button class="toggle-btn" data-value="pre-existing">Pre-existing conditions</button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Deductible (Selbstbehalt)</label>
+            <div class="toggle-group" id="deductibleGroup">
+              <button class="toggle-btn active" data-value="0">None</button>
+              <button class="toggle-btn" data-value="600">€600/yr</button>
+              <button class="toggle-btn" data-value="1200">€1,200/yr</button>
+              <button class="toggle-btn" data-value="2400">€2,400/yr</button>
+            </div>
+          </div>
+
+          <button class="calc-btn" id="calcBtn">Calculate my estimate</button>
+        </div>
+
+        <div class="result-panel">
+          <div class="result-card" id="resultCard">
+            <div class="result-placeholder" id="resultPlaceholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h.01M15 9h.01M9 15h.01M15 15h.01M12 12h.01"/></svg>
+              <p>Fill in your details and click "Calculate" to see your estimate.</p>
+            </div>
+
+            <div class="result-output" id="resultOutput" style="display:none">
+              <div class="result-header">
+                <span class="result-label">Estimated monthly premium</span>
+                <div class="result-range">
+                  <span class="range-low" id="rangeLow">–</span>
+                  <span class="range-sep"> – </span>
+                  <span class="range-high" id="rangeHigh">–</span>
+                </div>
+                <span class="result-note">Per month, based on your profile</span>
+              </div>
+
+              <div class="result-breakdown" id="resultBreakdown"></div>
+
+              <div class="result-compare">
+                <div class="compare-row">
+                  <span>Your GKV equivalent (est.)</span>
+                  <span class="gkv-cost" id="gkvCost">–</span>
+                </div>
+                <div class="compare-row highlight">
+                  <span>PKV estimate (mid-range)</span>
+                  <span class="pkv-cost" id="pkvMid">–</span>
+                </div>
+                <div class="compare-row savings">
+                  <span>Potential monthly saving</span>
+                  <span class="saving-amt" id="savingAmt">–</span>
+                </div>
+              </div>
+
+              <a href="/contact" class="result-cta">Get exact quotes from a broker</a>
+              <p class="result-disclaimer">Estimates are indicative only. Actual premiums depend on your full health declaration and the specific tariff chosen.</p>
+            </div>
+          </div>
+
+          <div class="info-cards">
+            <div class="info-card">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div>
+                <strong>Why does age matter so much?</strong>
+                <p>PKV premiums are calculated based on your age at entry. The younger you switch, the lower your base premium — and it stays lower for life.</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div>
+                <strong>What does the deductible do?</strong>
+                <p>Choosing a higher Selbstbehalt (deductible) lowers your monthly premium significantly — ideal if you rarely need healthcare.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  // Toggle buttons
+  document.querySelectorAll('.toggle-group').forEach(group => {
+    group.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  });
+
+  document.getElementById('calcBtn')?.addEventListener('click', calculate);
+
+  function getActive(groupId: string): string {
+    const group = document.getElementById(groupId);
+    return (group?.querySelector('.toggle-btn.active') as HTMLButtonElement)?.dataset.value ?? '';
+  }
+
+  function calculate() {
+    const age = parseInt((document.getElementById('age') as HTMLInputElement).value) || 32;
+    const income = parseInt((document.getElementById('income') as HTMLInputElement).value) || 7000;
+    const employment = getActive('employmentGroup');
+    const health = getActive('healthGroup');
+    const deductible = parseInt(getActive('deductibleGroup')) || 0;
+
+    // Base rate calculation (simplified model)
+    let base = 180 + (age - 18) * 4.5;
+
+    // Employment modifier
+    if (employment === 'freelancer') base *= 1.85; // full premium, no employer subsidy
+    else if (employment === 'civil-servant') base *= 0.55; // Beihilfe covers 50%+
+    else base *= 1.0; // employer pays ~half
+
+    // Health modifier
+    if (health === 'average') base *= 1.08;
+    else if (health === 'pre-existing') base *= 1.35;
+
+    // Deductible discount
+    const discounts: Record<number, number> = { 0: 0, 600: 0.06, 1200: 0.11, 2400: 0.18 };
+    base *= (1 - (discounts[deductible] ?? 0));
+
+    const low = Math.round(base * 0.88 / 5) * 5;
+    const high = Math.round(base * 1.18 / 5) * 5;
+    const mid = Math.round(base / 5) * 5;
+
+    // GKV comparison
+    const gkvRate = employment === 'freelancer' ? 0.148 : 0.074;
+    const gkv = Math.round(Math.min(income, 5512) * gkvRate / 5) * 5;
+    const saving = gkv - mid;
+
+    document.getElementById('resultPlaceholder')!.style.display = 'none';
+    document.getElementById('resultOutput')!.style.display = 'block';
+    document.getElementById('rangeLow')!.textContent = `€${low}`;
+    document.getElementById('rangeHigh')!.textContent = `€${high}`;
+    document.getElementById('gkvCost')!.textContent = `€${gkv}/mo`;
+    document.getElementById('pkvMid')!.textContent = `€${mid}/mo`;
+
+    const savingEl = document.getElementById('savingAmt')!;
+    if (saving > 0) {
+      savingEl.textContent = `€${saving}/mo`;
+      savingEl.style.color = '#059669';
+    } else {
+      savingEl.textContent = `€${Math.abs(saving)}/mo more`;
+      savingEl.style.color = '#dc2626';
+    }
+  }
+</script>
+
+<style>
+  main { background: var(--bg); }
+
+  .hero-section {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem);
+    text-align: center;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    background: #eff6ff; color: #2563eb;
+    font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: .3rem .8rem; border-radius: 20px; margin-bottom: 1rem;
+  }
+  .hero-section h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: .75rem; }
+  .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 1.65; }
+
+  .calc-section { padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2rem); }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+
+  .calc-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .calc-card h2 { font-size: 1.2rem; font-weight: 800; margin-bottom: -.5rem; }
+
+  .input-group { display: flex; flex-direction: column; gap: .5rem; }
+  .input-group label { font-size: .85rem; font-weight: 600; }
+  .input-group input {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: .7rem 1rem;
+    font-size: 1rem; font-family: inherit;
+    outline: none; transition: border-color var(--ease);
+  }
+  .input-group input:focus { border-color: var(--red); }
+
+  .toggle-group { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .toggle-btn {
+    padding: .45rem .9rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: #fff; font-size: .82rem; font-weight: 500; font-family: inherit;
+    cursor: pointer; transition: all var(--ease);
+    color: var(--muted);
+  }
+  .toggle-btn:hover { border-color: var(--red); color: var(--red); }
+  .toggle-btn.active { background: var(--red); border-color: var(--red); color: #fff; font-weight: 600; }
+
+  .calc-btn {
+    background: var(--red); color: #fff;
+    border: none; border-radius: 10px;
+    padding: .85rem 1.5rem;
+    font-size: 1rem; font-weight: 700; font-family: inherit;
+    cursor: pointer; transition: background var(--ease);
+  }
+  .calc-btn:hover { background: var(--red-dk); }
+
+  /* Result panel */
+  .result-panel { display: flex; flex-direction: column; gap: 1.25rem; }
+  .result-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    min-height: 320px;
+  }
+  .result-placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100%; min-height: 280px; text-align: center;
+    color: var(--muted);
+  }
+  .result-placeholder svg { margin-bottom: 1rem; opacity: .4; }
+  .result-placeholder p { font-size: .9rem; max-width: 220px; line-height: 1.55; }
+
+  .result-header { text-align: center; margin-bottom: 1.5rem; }
+  .result-label { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .result-range {
+    font-size: 2.2rem; font-weight: 900;
+    color: var(--text); margin: .3rem 0;
+  }
+  .range-low, .range-high { color: var(--red); }
+  .result-note { font-size: .8rem; color: var(--muted); }
+
+  .result-compare {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .compare-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .75rem 1rem;
+    font-size: .88rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row.highlight { background: #fff8f8; }
+  .compare-row.savings { background: #f0fdf4; }
+  .gkv-cost { font-weight: 600; color: var(--muted); }
+  .pkv-cost { font-weight: 700; color: var(--red); }
+  .saving-amt { font-weight: 700; }
+
+  .result-cta {
+    display: block; text-align: center;
+    background: var(--red); color: #fff;
+    border-radius: 10px; padding: .85rem;
+    font-weight: 700; font-size: .95rem;
+    text-decoration: none; margin-bottom: .75rem;
+    transition: background var(--ease);
+  }
+  .result-cta:hover { background: var(--red-dk); }
+  .result-disclaimer { font-size: .75rem; color: var(--muted); text-align: center; line-height: 1.5; }
+
+  .info-cards { display: flex; flex-direction: column; gap: .75rem; }
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    display: flex; gap: .75rem; align-items: flex-start;
+  }
+  .info-card svg { color: var(--red); flex-shrink: 0; margin-top: .1rem; }
+  .info-card strong { font-size: .88rem; display: block; margin-bottom: .25rem; }
+  .info-card p { font-size: .82rem; color: var(--muted); margin: 0; line-height: 1.5; }
+
+  @media (max-width: 800px) {
+    .calc-grid { grid-template-columns: 1fr; }
+  }
+</style>
