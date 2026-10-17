@@ -1,0 +1,47 @@
+---
+// S10: two-column intro with image, then a 2x2 grid of facts.
+interface Fact { title: string; text: string }
+interface Props { title?: string; text?: string; image?: string; alt?: string; facts?: Fact[] }
+const {
+  title = 'Advice that holds up, today and later.',
+  text = 'Choosing private cover is a long-term decision. We make sure you understand it before you sign, and we stay available when your situation changes.',
+  image = '/images/photos/nb-couple-sofa.jpg', alt = 'Couple going through their insurance options together',
+  facts = [
+    { title: 'Independent consultants', text: 'We are not tied to one insurer. We compare 40+ insurers and recommend what fits your case.' },
+    { title: 'Free of charge', text: 'The consultation and the comparison cost you nothing and come without obligation.' },
+    { title: 'English-speaking', text: 'We guide you through every form and term in plain English.' },
+    { title: 'Clear on the numbers', text: 'The 2026 threshold is EUR 77,400 per year (EUR 6,450 per month). EUR 84,150 is expected for 2027.' },
+  ],
+} = Astro.props;
+---
+<div class="rel">
+  <div class="rel-top">
+    <div class="rel-copy">
+      <h3>{title}</h3>
+      <p>{text}</p>
+    </div>
+    <div class="rel-img"><img src={image} alt={alt} width="370" height="240" loading="lazy" /></div>
+  </div>
+  <div class="rel-grid">
+    {facts.map((f) => <div><h4>{f.title}</h4><p>{f.text}</p></div>)}
+  </div>
+</div>
+
+<style>
+  .rel { max-width: var(--narrow); margin: 0 auto; }
+  .rel-top { display: grid; grid-template-columns: minmax(0, 1fr) 370px; gap: 40px; align-items: start; }
+  .rel-copy h3 { margin: 0 0 16px; font-size: 32px; line-height: 40px; font-weight: var(--fw-heading); }
+  .rel-copy p { margin: 0; font-size: var(--fs-intro); line-height: var(--lh-intro); color: var(--text); }
+  .rel-img { height: 240px; border-radius: var(--radius-tile); overflow: hidden; background: var(--pastel-blue); }
+  .rel-img img { width: 100%; height: 100%; object-fit: cover; }
+  .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 40px; margin-top: 60px; }
+  .rel-grid h4 { margin: 0 0 8px; font-size: var(--fs-h3); line-height: var(--lh-h3); }
+  .rel-grid p { margin: 0; color: var(--text); }
+  @media (max-width: 759px) {
+    .rel-top { grid-template-columns: 1fr; gap: 24px; }
+    .rel-img { order: -1; height: 200px; }
+    .rel-copy h3 { font-size: 26px; line-height: 32px; }
+    .rel-copy p { font-size: var(--fs-lead-sm); line-height: var(--lh-lead-sm); }
+    .rel-grid { grid-template-columns: 1fr; gap: 28px; margin-top: 36px; }
+  }
+</style>

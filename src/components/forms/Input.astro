@@ -1,0 +1,27 @@
+---
+interface Props { label: string; name: string; type?: string; required?: boolean; optional?: boolean; autocomplete?: string; placeholder?: string; inputmode?: string; uid?: string; }
+const { label, name, type = 'text', required = false, optional = false, autocomplete, placeholder, inputmode, uid = '' } = Astro.props;
+const id = `f-${uid ? uid + '-' : ''}${name}`;
+const errId = `err-${uid ? uid + '-' : ''}${name}`;
+// Placeholder-led field: the label stays in the DOM for screen readers.
+const ph = placeholder ?? (optional ? `${label} (optional)` : label);
+---
+<div class="field">
+  <label for={id} class="sr">{label}{optional && ' (optional)'}</label>
+  <input id={id} name={name} type={type} required={required} aria-required={required ? 'true' : undefined} aria-describedby={errId} autocomplete={autocomplete} placeholder={ph} inputmode={inputmode} />
+  <p class="field-err" id={errId} data-err-for={name} hidden></p>
+</div>
+<style>
+  .field { display: flex; flex-direction: column; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  input {
+    height: 56px; padding: 0 16px; font: inherit; font-size: var(--fs-body); color: var(--navy);
+    background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-input);
+    transition: border-color var(--ease), box-shadow var(--ease); width: 100%; box-sizing: border-box;
+  }
+  input::placeholder { color: var(--text-muted); opacity: 1; }
+  input:hover { border-color: var(--text-faint); }
+  input:focus-visible { outline: 0; border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+  input[aria-invalid="true"] { border-color: var(--error); box-shadow: 0 0 0 1px var(--error); }
+  .field-err { margin: 6px 0 0; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--error); }
+</style>

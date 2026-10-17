@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHCB Site Structure</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f5f7; padding: 32px; color: #1a1a2e; }
+
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #1a1a2e; }
+  .subtitle { font-size: 13px; color: #6b7280; margin-bottom: 32px; }
+
+  /* NAV BAR */
+  .nav-section { margin-bottom: 40px; }
+  .nav-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #9ca3af; margin-bottom: 12px; }
+  .navbar {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    border: 1px solid #e5e7eb;
+  }
+  .nav-logo { font-weight: 800; font-size: 15px; color: #1a1a2e; margin-right: 24px; }
+  .nav-item {
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-item.active { background: #1a1a2e; color: #fff; }
+  .nav-item.ghost { background: #f3f4f6; color: #374151; }
+  .nav-cta { margin-left: auto; background: #16a34a; color: #fff; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; }
+  .nav-chevron { font-size: 10px; opacity: 0.6; }
+
+  /* MAIN GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .col-header {
+    border-radius: 12px 12px 0 0;
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .col-header .icon { font-size: 18px; }
+
+  .col-private .col-header { background: #1a1a2e; }
+  .col-public  .col-header { background: #0f766e; }
+  .col-expat   .col-header { background: #7c3aed; }
+
+  .col-body {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    border: 1px solid #e5e7eb;
+    border-top: none;
+    overflow: hidden;
+  }
+
+  .page-item {
+    padding: 10px 20px;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .page-item:last-child { border-bottom: none; }
+
+  .page-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    border-radius: 99px;
+    white-space: nowrap;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .tag-hub    { background: #fef9c3; color: #854d0e; }
+  .tag-sub    { background: #f3f4f6; color: #6b7280; }
+  .tag-win    { background: #dcfce7; color: #15803d; }
+
+  .page-info { flex: 1; }
+  .page-url { font-size: 12px; font-weight: 600; color: #374151; font-family: 'SF Mono', monospace; }
+  .page-desc { font-size: 11px; color: #9ca3af; margin-top: 1px; }
+  .page-vol { font-size: 11px; font-weight: 700; color: #6366f1; margin-top: 1px; }
+
+  .section-divider {
+    padding: 8px 20px 6px;
+    background: #f9fafb;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #9ca3af;
+    border-bottom: 1px solid #f3f4f6;
+    border-top: 1px solid #f3f4f6;
+  }
+
+  /* BOTTOM ROW */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .bottom-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+  .bottom-card-header {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .bg-blue   { background: #2563eb; }
+  .bg-orange { background: #ea580c; }
+  .bg-gray   { background: #6b7280; }
+  .bg-green  { background: #16a34a; }
+
+  .bottom-card-body { padding: 10px 0; }
+  .bottom-item {
+    padding: 6px 16px;
+    font-size: 11px;
+    color: #374151;
+    font-family: 'SF Mono', monospace;
+    border-bottom: 1px solid #f9fafb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bottom-item:last-child { border-bottom: none; }
+  .bottom-vol { font-size: 10px; color: #9ca3af; }
+
+  /* FLOW ARROWS */
+  .flow-section { margin-bottom: 32px; }
+  .flow-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #9ca3af; margin-bottom: 12px; }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+  .flow-step {
+    flex: 1;
+    padding: 14px 18px;
+    text-align: center;
+  }
+  .flow-step-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; margin-bottom: 4px; }
+  .flow-step-val { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+  .flow-arrow {
+    color: #d1d5db;
+    font-size: 18px;
+    flex-shrink: 0;
+    padding: 0 4px;
+  }
+  .flow-step.highlight { background: #f0fdf4; }
+  .flow-step.highlight .flow-step-val { color: #16a34a; }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6b7280; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+  .standalone {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .standalone-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9ca3af;
+    margin-bottom: 12px;
+  }
+  .standalone-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .standalone-pill {
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'SF Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pill-quick { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+  .pill-vol { font-size: 10px; font-weight: 400; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<h1>MHCB — Site Architecture</h1>
+<p class="subtitle">myhealthcarebroker.com · Private Health Insurance Germany · April 2026</p>
+
+<!-- NAV -->
+<div class="nav-section">
+  <div class="nav-label">Navigation (visible in header)</div>
+  <div class="navbar">
+    <div class="nav-logo">MHCB</div>
+    <div class="nav-item active">Insurance <span class="nav-chevron">▾</span></div>
+    <div class="nav-item ghost">Compare <span class="nav-chevron">▾</span></div>
+    <div class="nav-item ghost">Tools <span class="nav-chevron">▾</span></div>
+    <div class="nav-item ghost">Guides <span class="nav-chevron">▾</span></div>
+    <div class="nav-cta">Get Advice →</div>
+  </div>
+</div>
+
+<!-- FUNNEL FLOW -->
+<div class="flow-section">
+  <div class="flow-title">User Funnel</div>
+  <div class="flow-row">
+    <div class="flow-step">
+      <div class="flow-step-label">Awareness</div>
+      <div class="flow-step-val">Google Search</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-label">Landing</div>
+      <div class="flow-step-val">Pillar Page</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-label">Consideration</div>
+      <div class="flow-step-val">Compare / Guides</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-step-label">Decision</div>
+      <div class="flow-step-val">Top Insurers</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step highlight">
+      <div class="flow-step-label">Conversion</div>
+      <div class="flow-step-val">Get Advice ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3 MAIN PILLARS -->
+<div class="grid">
+
+  <!-- PRIVATE INSURANCE -->
+  <div class="col-private">
+    <div class="col-header">
+      <span class="icon">🔒</span>
+      Private Insurance
+    </div>
+    <div class="col-body">
+      <div class="section-divider">Hub Page (Nav Dropdown)</div>
+      <div class="page-item">
+        <span class="page-tag tag-hub">HUB</span>
+        <div class="page-info">
+          <div class="page-url">/private-health-insurance-germany</div>
+          <div class="page-desc">PKV overview — who qualifies, how it works</div>
+          <div class="page-vol">~2.500/mo</div>
+        </div>
+      </div>
+      <div class="section-divider">Sub-Pages (linked from Hub)</div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/best-private-health-insurance-germany</div>
+          <div class="page-vol">~2.100/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/cheapest-health-insurance-germany</div>
+          <div class="page-vol">~700/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/health-insurance-cost-germany</div>
+          <div class="page-vol">~1.800/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/switch-public-to-private-health-insurance</div>
+          <div class="page-vol">~300/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/health-insurance-freelancer-germany</div>
+          <div class="page-vol">~130/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/public-vs-private-health-insurance-germany</div>
+          <div class="page-vol">~300/mo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PUBLIC INSURANCE -->
+  <div class="col-public">
+    <div class="col-header">
+      <span class="icon">🏛️</span>
+      Public Insurance
+    </div>
+    <div class="col-body">
+      <div class="section-divider">Hub Page (Nav Dropdown)</div>
+      <div class="page-item">
+        <span class="page-tag tag-hub">HUB</span>
+        <div class="page-info">
+          <div class="page-url">/best-public-health-insurance-germany</div>
+          <div class="page-desc">GKV overview — AOK, TK, Barmer comparison</div>
+          <div class="page-vol">~400/mo</div>
+        </div>
+      </div>
+      <div class="section-divider">Sub-Pages (linked from Hub)</div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/aok-health-insurance-germany</div>
+          <div class="page-vol">~590/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/tk-techniker-krankenkasse-germany</div>
+          <div class="page-vol">~200/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/aok-vs-tk-health-insurance-germany</div>
+          <div class="page-vol">~390/mo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPAT INSURANCE -->
+  <div class="col-expat">
+    <div class="col-header">
+      <span class="icon">✈️</span>
+      Expat Insurance
+    </div>
+    <div class="col-body">
+      <div class="section-divider">Hub Page (Nav Dropdown) — GRÖSSTE LÜCKE</div>
+      <div class="page-item">
+        <span class="page-tag tag-hub">HUB</span>
+        <div class="page-info">
+          <div class="page-url">/health-insurance-expats-germany</div>
+          <div class="page-desc">For foreigners moving to / living in Germany</div>
+          <div class="page-vol">~4.200/mo ⚡</div>
+        </div>
+      </div>
+      <div class="section-divider">Sub-Pages (linked from Hub)</div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/health-insurance-foreigners-germany</div>
+          <div class="page-vol">~800/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/health-insurance-german-visa</div>
+          <div class="page-vol">~50/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/temporary-health-insurance-germany</div>
+          <div class="page-vol">~30/mo</div>
+        </div>
+      </div>
+      <div class="page-item">
+        <span class="page-tag tag-sub">SUB</span>
+        <div class="page-info">
+          <div class="page-url">/travel-insurance-germany</div>
+          <div class="page-vol">~90/mo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- STANDALONE QUICK WIN -->
+<div class="standalone">
+  <div class="standalone-title">⚡ Standalone Quick Wins — nicht in Kategorie, direkt von Homepage verlinkt</div>
+  <div class="standalone-items">
+    <div class="standalone-pill pill-quick">
+      /social-insurance-number-germany
+      <span class="pill-vol">~2.500/mo · Feather #1 · MHCB #34</span>
+    </div>
+    <div class="standalone-pill pill-quick">
+      /private-health-insurance-companies-germany
+      <span class="pill-vol">~2.900/mo · Liste aller Anbieter</span>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM ROW -->
+<div class="bottom-grid">
+
+  <!-- COMPARE -->
+  <div class="bottom-card">
+    <div class="bottom-card-header bg-blue">⚖️ Compare (Nav)</div>
+    <div class="bottom-card-body">
+      <div class="bottom-item">
+        /top-insurers/
+        <span class="bottom-vol">Hub</span>
+      </div>
+      <div class="bottom-item">
+        /top-insurers/debeka
+        <span class="bottom-vol">Review</span>
+      </div>
+      <div class="bottom-item">
+        /top-insurers/allianz
+        <span class="bottom-vol">Review</span>
+      </div>
+      <div class="bottom-item">
+        /top-insurers/dkv
+        <span class="bottom-vol">Review</span>
+      </div>
+      <div class="bottom-item">
+        /top-insurers/axa
+        <span class="bottom-vol">Review</span>
+      </div>
+      <div class="bottom-item">
+        /top-insurers/barmenia
+        <span class="bottom-vol">Review</span>
+      </div>
+      <div class="bottom-item">
+        + 5 weitere...
+        <span class="bottom-vol"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="bottom-card">
+    <div class="bottom-card-header bg-orange">🛠 Tools (Nav)</div>
+    <div class="bottom-card-body">
+      <div class="bottom-item">
+        /calculator
+        <span class="bottom-vol">Beitragsrechner</span>
+      </div>
+      <div class="bottom-item">
+        /quiz
+        <span class="bottom-vol">PKV-Eignung</span>
+      </div>
+      <div class="bottom-item">
+        /compare
+        <span class="bottom-vol">Plan Vergleich</span>
+      </div>
+      <div class="bottom-item">
+        /checklist
+        <span class="bottom-vol">Switch-Checkliste</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDES -->
+  <div class="bottom-card">
+    <div class="bottom-card-header bg-gray">📖 Guides (Nav)</div>
+    <div class="bottom-card-body">
+      <div class="bottom-item">
+        /guide/
+        <span class="bottom-vol">Hub</span>
+      </div>
+      <div class="bottom-item">
+        /guide/who-qualifies
+        <span class="bottom-vol">Guide</span>
+      </div>
+      <div class="bottom-item">
+        /guide/how-to-switch
+        <span class="bottom-vol">Guide</span>
+      </div>
+      <div class="bottom-item">
+        /guide/for-freelancers
+        <span class="bottom-vol">Guide</span>
+      </div>
+      <div class="bottom-item">
+        /guide/for-foreigners
+        <span class="bottom-vol">Guide</span>
+      </div>
+      <div class="bottom-item">
+        /guide/costs-and-contributions
+        <span class="bottom-vol">Guide</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- UTILITY -->
+  <div class="bottom-card">
+    <div class="bottom-card-header bg-green">✅ Utility (Footer)</div>
+    <div class="bottom-card-body">
+      <div class="bottom-item">
+        /contact
+        <span class="bottom-vol">CTA</span>
+      </div>
+      <div class="bottom-item">
+        /about
+        <span class="bottom-vol">Trust</span>
+      </div>
+      <div class="bottom-item">
+        /privacy
+        <span class="bottom-vol">Legal</span>
+      </div>
+      <div class="bottom-item">
+        /imprint
+        <span class="bottom-vol">Legal</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#1a1a2e"></div> Private Insurance</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#0f766e"></div> Public Insurance</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div> Expat Insurance</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #fcd34d"></div> HUB Page (Nav-visible)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f3f4f6;border:1px solid #e5e7eb"></div> Sub-Page (intern verlinkt)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fef3c7;border:1px solid #fcd34d"></div> Quick Win (Standalone)</div>
+</div>
+
+</body>
+</html>

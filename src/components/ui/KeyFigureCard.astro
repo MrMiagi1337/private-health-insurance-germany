@@ -1,0 +1,77 @@
+---
+// S7 bento card. Use *text* in title/text for the highlight span.
+interface Props {
+  variant?: 'white' | 'light' | 'navy' | 'blue';
+  icon?: 'check' | 'thumb' | 'globe' | 'none';
+  title: string; text?: string; image?: string; alt?: string; badge?: boolean; class?: string;
+}
+const { variant = 'white', icon = 'none', title, text, image, alt = '', badge = false, class: cls = '' } = Astro.props;
+const fmt = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<span class="hl">$1</span>');
+---
+<div class={`kf kf-${variant} ${image ? 'kf-has-img' : ''} ${cls}`}>
+  <div class="kf-body">
+    {icon !== 'none' && (
+      <svg class="kf-icon" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        {icon === 'check' && <><path d="M24 5l5.5 3.4 6.4-.4 2.3 6 5 4-1.7 6.2 1.7 6.2-5 4-2.3 6-6.4-.4L24 43l-5.5-3.4-6.4.4-2.3-6-5-4 1.7-6.2L4.8 17.6l5-4 2.3-6 6.4.4z" /><path d="M16 24.5l5.5 5.5L32.5 18.5" /></>}
+        {icon === 'thumb' && <><path d="M10 22h7v18h-7z" /><path d="M17 23l7-15c3 0 5 2 4.5 5L27 20h10a3.5 3.5 0 013.4 4.3l-2.6 12A4 4 0 0133.9 39H17" /></>}
+        {icon === 'globe' && <><circle cx="24" cy="24" r="18" /><path d="M6 24h36M24 6c5 5 7.5 11 7.5 18S29 37 24 42c-5-5-7.5-11-7.5-18S19 11 24 6z" /></>}
+      </svg>
+    )}
+    <h3 class="kf-title" set:html={fmt(title)} />
+    {badge && (
+      <div class="kf-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></svg>
+        <b>Independent</b><span>No insurer ties</span>
+      </div>
+    )}
+    {text && <p class="kf-text" set:html={fmt(text)} />}
+  </div>
+  {image && <img class="kf-img" src={image} alt={alt} width="260" height="300" loading="lazy" />}
+</div>
+
+<style>
+  .kf { position: relative; overflow: hidden; border-radius: var(--radius-card-sm); padding: 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 260px; border: var(--border-w) solid transparent; }
+  .kf-body { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+  .kf-icon { margin-bottom: 20px; }
+  .kf-title { margin: 0; font-size: var(--fs-h4); line-height: 37px; font-weight: 700; color: var(--navy); }
+  .kf-text { margin: 12px 0 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+  .kf :global(.hl) { display: inline; padding: 2px 8px; border-radius: 12px; font-weight: 700; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+  .kf-white { background: var(--surface); border-color: var(--border); }
+  .kf-white .kf-icon { color: var(--green); }
+  .kf-white :global(.hl) { background: color-mix(in srgb, var(--green) 28%, var(--surface)); }
+
+  .kf-light { background: var(--blue-light); align-items: flex-start; text-align: left; }
+  .kf-light .kf-body { align-items: flex-start; max-width: 52%; }
+  .kf-light .kf-icon { color: var(--blue); }
+  .kf-light .kf-title { line-height: 28px; }
+  .kf-light.kf-has-img .kf-img { position: absolute; right: 0; bottom: 0; width: 46%; height: 82%; object-fit: cover; object-position: center top; border-radius: var(--radius-card) 0 0 0; box-shadow: var(--sh-3); }
+
+  .kf-navy { background: var(--navy); }
+  .kf-navy .kf-title { color: var(--surface); font-size: var(--fs-h3); line-height: 36px; font-weight: 400; }
+  .kf-navy .kf-title::after { content: ""; display: block; height: 4px; margin: 14px auto 0; width: 260px; max-width: 100%; border-radius: 4px; background: var(--surface); transform: rotate(-1deg); }
+  .kf-navy :global(.hl) { display: block; padding: 0; font-weight: 700; }
+  .kf-navy .kf-text { color: var(--surface); font-size: var(--fs-h4); line-height: 30px; font-weight: 400; margin-top: 32px; }
+  .kf-badge { width: 186px; margin-top: 28px; padding: 20px 16px; display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--surface); color: var(--blue); border: 2px solid var(--blue-light); border-radius: var(--radius-tile); box-shadow: var(--sh-3); }
+  .kf-badge b { color: var(--navy); font-size: var(--fs-body); line-height: 22px; font-weight: 800; }
+  .kf-badge span { color: var(--text-muted); font-size: var(--fs-small); line-height: var(--lh-small); }
+
+  .kf-blue { background: var(--blue); align-items: flex-start; text-align: left; justify-content: flex-start; }
+  .kf-blue .kf-body { align-items: flex-start; }
+  .kf-blue .kf-title { color: var(--surface); font-size: 32px; line-height: 37px; font-weight: var(--fw-heading); }
+  .kf-blue .kf-text { color: var(--surface); }
+  .kf-blue :global(.hl) { background: var(--navy); color: var(--surface); padding: 0 10px; border-radius: 16px; }
+
+  @media (max-width: 959px) {
+    .kf { min-height: 0; padding: 28px 24px; }
+    .kf-light.kf-has-img { min-height: 260px; }
+    .kf-light .kf-body { max-width: 56%; }
+    .kf-navy { padding-top: 40px; padding-bottom: 40px; }
+  }
+  @media (max-width: 479px) {
+    .kf-light .kf-body { max-width: 100%; }
+    .kf-light.kf-has-img { padding-bottom: 0; }
+    .kf-light .kf-img { position: static !important; width: calc(100% + 48px) !important; height: 180px !important; margin: 20px -24px 0; border-radius: 0 !important; box-shadow: none !important; }
+    .kf-blue .kf-title { font-size: 26px; line-height: 32px; }
+  }
+</style>

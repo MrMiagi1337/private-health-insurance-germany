@@ -1,0 +1,22 @@
+---
+interface Props { name: string; value: string; label: string; checked?: boolean; }
+const { name, value, label, checked = false } = Astro.props;
+---
+<label class="tile">
+  <input type="radio" name={name} value={value} checked={checked} />
+  <span class="tile-ic"><slot /></span>
+  <span class="tile-lb">{label}</span>
+</label>
+<style>
+  .tile { position: relative; display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px 12px; cursor: pointer;
+    background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-input);
+    transition: border-color var(--ease), background var(--ease), box-shadow var(--ease); }
+  .tile:hover { border-color: var(--text-faint); }
+  .tile input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .tile-ic { flex: none; width: 32px; height: 32px; border-radius: var(--radius-tile); background: var(--blue-tint); color: var(--blue); display: grid; place-items: center; }
+  .tile-ic :global(svg) { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+  .tile-lb { font-size: var(--fs-small); font-weight: var(--fw-h3); color: var(--navy); line-height: 18px; hyphens: none; white-space: nowrap; }
+  @media (max-width: 480px) { .tile-ic { display: none; } .tile { justify-content: center; } }
+  .tile:has(input:checked) { border-color: var(--blue); background: var(--blue-tint); box-shadow: 0 0 0 1px var(--blue); }
+  .tile:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+</style>

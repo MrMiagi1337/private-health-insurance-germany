@@ -1,92 +1,131 @@
 ---
-const year = new Date().getFullYear();
+const trust = [
+  { title: 'Independent consultants', sub: 'Not tied to one insurer', icon: 'shield' },
+  { title: 'Licensed advisors', sub: 'Registered under §34d GewO', icon: 'check' },
+  { title: 'Free of charge', sub: 'No obligation to sign up', icon: 'heart' },
+];
+
+const columns = [
+  {
+    head: 'Private Health Insurance',
+    links: [
+      { label: 'What is private health insurance?', href: '/private-health-insurance' },
+      { label: 'Health insurance for expats', href: '/health-insurance-expats-germany' },
+      { label: 'Who qualifies?', href: '/guide/who-qualifies' },
+      { label: 'For freelancers', href: '/guide/for-freelancers' },
+      { label: 'For students', href: '/guide/for-students' },
+      { label: 'For foreigners', href: '/guide/for-foreigners' },
+    ],
+  },
+  {
+    head: 'Compare & Tools',
+    links: [
+      { label: 'Public vs private', href: '/compare' },
+      { label: 'Cost calculator', href: '/calculator' },
+      { label: 'Eligibility Check', href: '/eligibility-check' },
+      { label: 'Document checklist', href: '/checklist' },
+      { label: 'Top insurers', href: '/top-insurers' },
+    ],
+  },
+  {
+    head: 'Guides',
+    links: [
+      { label: 'All guides', href: '/guide' },
+      { label: 'Costs and contributions', href: '/guide/costs-and-contributions' },
+      { label: 'How to switch', href: '/guide/how-to-switch' },
+      { label: 'Opening a bank account', href: '/guide/bank-account' },
+    ],
+  },
+  {
+    head: 'Company & Legal',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Get free advice', href: '/contact' },
+      { label: 'Imprint', href: '/imprint' },
+      { label: 'Privacy', href: '/privacy' },
+    ],
+  },
+];
 ---
 
-<footer role="contentinfo">
-  <div class="foot-inner">
-    <div class="foot-brand">
-      <span class="foot-logo">PKV Germany</span>
-      <p>Plain-English guide to private health insurance in Germany for expats and foreign nationals.</p>
-      <p class="foot-disclaimer">We are not a licensed insurance broker. We connect you with registered Versicherungsmakler under §34d GewO. Free of charge.</p>
-    </div>
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <ul class="foot-trust">
+      {trust.map((t) => (
+        <li class="foot-chip">
+          <span class="foot-chip-icon" aria-hidden="true">
+            {t.icon === 'shield' && (
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+            )}
+            {t.icon === 'check' && (
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg>
+            )}
+            {t.icon === 'heart' && (
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>
+            )}
+          </span>
+          <span class="foot-chip-text">
+            <strong>{t.title}</strong>
+            <span>{t.sub}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
 
-    <nav class="foot-nav" aria-label="Footer navigation">
-      <div class="foot-col">
-        <h3>PKV Guide</h3>
-        <ul>
-          <li><a href="/private-health-insurance">What is PKV?</a></li>
-          <li><a href="/guide/who-qualifies">Who qualifies?</a></li>
-          <li><a href="/guide/costs-and-contributions">PKV costs</a></li>
-          <li><a href="/guide/how-to-switch">How to switch</a></li>
-          <li><a href="/guide/for-freelancers">For freelancers</a></li>
-          <li><a href="/guide/for-foreigners">For foreigners</a></li>
-          <li><a href="/guide/for-students">For students</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h3>Tools</h3>
-        <ul>
-          <li><a href="/compare">GKV vs PKV</a></li>
-          <li><a href="/calculator">Cost calculator</a></li>
-          <li><a href="/quiz">Eligibility quiz</a></li>
-          <li><a href="/checklist">Document checklist</a></li>
-          <li><a href="/top-insurers">Top insurers</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h3>Company</h3>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Get free advice</a></li>
-          <li><a href="/case-studies">Case studies</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/imprint">Imprint</a></li>
-          <li><a href="/privacy">Privacy</a></li>
-        </ul>
-      </div>
+    <nav class="foot-cols" aria-label="Footer navigation">
+      {columns.map((c) => (
+        <div class="foot-col">
+          <p class="foot-head">{c.head}</p>
+          <ul>
+            {c.links.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </nav>
-  </div>
 
-  <div class="foot-bottom">
-    <span>© {year} PKV Germany. Informational guide for expats.</span>
-    <div class="foot-links">
-      <a href="/imprint">Imprint</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/contact">Contact</a>
+    <div class="foot-bottom">
+      <div class="foot-brand">
+        <a href="/" class="foot-logo">Private Health Insurance Germany</a>
+        <p>A service of My Healthcare Broker, independent consultants</p>
+      </div>
+      <div class="foot-legal">
+        <a href="/imprint">Imprint</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/contact">Contact</a>
+        <span>&copy; 2026 My Healthcare Broker</span>
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
-  footer { background: var(--card); border-top: 1px solid var(--border); margin-top: auto; }
-  .foot-inner {
-    max-width: var(--max-w); margin: 0 auto;
-    padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem);
-    display: grid; grid-template-columns: 1fr 2fr; gap: 3rem;
+  /* Footer: trust row, hairline, 4 columns (16/700 heads, 16/400 muted links, 40px pitch), hairline, bottom row */
+  .site-footer { background: var(--surface); border-top: var(--border-w) solid var(--border); margin-top: auto; }
+  .foot-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 20px 48px; padding: 32px 0 24px; border-bottom: var(--border-w) solid var(--border); }
+  .foot-chip { display: flex; align-items: center; gap: 12px; }
+  .foot-chip-icon { display: inline-flex; flex: none; color: var(--blue); }
+  .foot-chip-text { display: flex; flex-direction: column; font-size: var(--fs-small); line-height: 23px; color: var(--text-muted); }
+  .foot-chip-text strong { font-size: var(--fs-body); line-height: 23px; font-weight: var(--fw-h3); color: var(--navy); }
+
+  .foot-cols { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+  .foot-head { margin: 0 0 4px; font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-h3); color: var(--navy); }
+  .foot-col ul { list-style: none; }
+  .foot-col a { display: flex; align-items: center; min-height: 44px; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text-muted); transition: color var(--ease); }
+  .foot-col a:hover { color: var(--blue-dk); }
+
+  .foot-bottom { display: flex; flex-direction: column; gap: 16px; padding: 28px 0 32px; border-top: var(--border-w) solid var(--border); }
+  .foot-logo { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-heading); color: var(--navy); }
+  .foot-brand p { margin-top: 2px; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); }
+  .foot-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 0 24px; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); }
+  .foot-legal a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-muted); transition: color var(--ease); }
+  .foot-legal a:hover { color: var(--blue-dk); }
+
+  @media (min-width: 480px) { .foot-cols { grid-template-columns: 1fr 1fr; gap: 32px 24px; } }
+  @media (min-width: 960px) {
+    .foot-trust { padding: 32px 0 25px; }
+    .foot-cols { grid-template-columns: repeat(3, 280px) 1fr; gap: 0 10px; padding: 40px 0 40px; }
+    .foot-bottom { flex-direction: row; align-items: center; justify-content: space-between; }
   }
-  .foot-logo { font-size: 1.05rem; font-weight: 800; letter-spacing: -.02em; color: var(--text); }
-  .foot-brand p { margin-top: .5rem; font-size: .85rem; color: var(--muted); max-width: 220px; line-height: 1.55; }
-  .foot-disclaimer { font-size: .75rem !important; color: #aaa !important; margin-top: .75rem !important; }
-  .foot-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .foot-col h3 { font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: .75rem; }
-  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
-  .foot-col a { font-size: .88rem; color: var(--muted); transition: color var(--ease); }
-  .foot-col a:hover { color: var(--red); }
-  .foot-bottom {
-    border-top: 1px solid var(--border);
-    padding: 1rem clamp(1rem, 4vw, 2rem);
-    max-width: var(--max-w); margin: 0 auto; width: 100%;
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-  }
-  .foot-bottom span { font-size: .82rem; color: var(--muted); }
-  .foot-links { display: flex; gap: 1.25rem; }
-  .foot-links a { font-size: .82rem; color: var(--muted); transition: color var(--ease); }
-  .foot-links a:hover { color: var(--red); }
-  @media (max-width: 700px) {
-    .foot-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .foot-nav { grid-template-columns: 1fr 1fr; }
-    .foot-bottom { flex-direction: column; text-align: center; }
-    .foot-links { justify-content: center; }
-  }
-  @media (max-width: 400px) { .foot-nav { grid-template-columns: 1fr; } }
 </style>

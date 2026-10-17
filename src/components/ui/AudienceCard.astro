@@ -1,0 +1,55 @@
+---
+import IconTile from './IconTile.astro';
+import Icon from './Icon.astro';
+interface Props { title: string; text: string; tags?: string[]; href: string; class?: string; highlight?: boolean; cta?: string }
+const { title, text, tags = [], href, class: cls = '', highlight = false, cta } = Astro.props;
+---
+<article class={`aud-card ${highlight ? 'aud-hi' : ''} ${cls}`}>
+  <IconTile><slot name="icon" /></IconTile>
+  <div class="aud-body">
+    <h3><a href={href} class="aud-link"><span set:html={title} /><Icon name="arrow" size={16} class="aud-arrow" /></a></h3>
+    <p>{text}</p>
+    {tags.length > 0 && (
+      <ul class="aud-tags">{tags.map((t) => <li>{t}</li>)}</ul>
+    )}
+    {cta && <span class="aud-cta">{cta}</span>}
+  </div>
+</article>
+
+<style>
+  .aud-card {
+    position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; height: 100%;
+    background: var(--surface); border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-card); padding: 24px;
+    transition: border-color var(--ease);
+  }
+  .aud-card:hover { border-color: var(--blue); }
+  .aud-hi { background: var(--blue-tint); border-color: var(--blue); }
+  .aud-body { flex: 1; width: 100%; min-width: 0; }
+  .aud-card h3 { margin: 0; font-size: 20px; line-height: 25px; font-weight: var(--fw-h3); color: var(--navy); }
+  .aud-link { color: inherit; text-decoration: none; }
+  .aud-link :global(.aud-arrow) { display: inline-block; vertical-align: -2px; margin-left: 8px; color: var(--blue); transition: transform var(--ease); }
+  .aud-card:hover :global(.aud-arrow) { transform: translateX(3px); }
+  .aud-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius-card); }
+  .aud-link:focus-visible { outline: none; }
+  .aud-link:focus-visible::after { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .aud-card p { margin: 8px 0 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+  .aud-tags { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .aud-tags li { font-size: var(--fs-caption); line-height: 20px; font-weight: 600; padding: 4px 12px; border-radius: var(--radius-chip); background: var(--blue-tint); color: var(--blue-dk); }
+  .aud-hi .aud-tags li { background: var(--surface); }
+  .aud-cta { display: inline-flex; align-items: center; min-height: var(--btn-h); margin-top: 20px; padding: var(--btn-pad); background: var(--blue); color: var(--surface); font-weight: var(--fw-btn); border-radius: var(--radius-btn); box-shadow: var(--sh-1); }
+  @media (min-width: 640px) {
+    .aud-card h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); }
+    .aud-card p { margin-top: 12px; }
+  }
+  @media (max-width: 639px) {
+    .aud-card { padding: 20px; gap: 16px; }
+    .aud-card :global(.icon-tile) { width: 56px; height: 56px; }
+  }
+  :global(.grid-3), :global(.grid-2) { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) {
+    :global(.grid-3), :global(.grid-2) { gap: var(--grid-gap); }
+    :global(.grid-3), :global(.grid-2) { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 960px) { :global(.grid-3) { grid-template-columns: repeat(3, 1fr); } }
+</style>

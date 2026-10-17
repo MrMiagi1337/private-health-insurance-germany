@@ -1,0 +1,68 @@
+---
+interface Props {
+  title: string;
+  intro?: string;
+  readTime?: string;
+  reviewedBy?: string;
+  image?: string;
+  alt?: string;
+}
+const { title, intro, readTime, reviewedBy, image = '/images/photos/article-berlin-dusk.jpg', alt = '' } = Astro.props;
+const webp = /\.jpe?g$/.test(image) ? image.replace(/\.jpe?g$/, '.webp') : undefined;
+---
+<section class="ha">
+  <picture>{webp && <source srcset={webp} type="image/webp" />}<img class="ha-bg" src={image} alt={alt} width="1600" height="900" decoding="async" /></picture>
+  <div class="ha-overlay" aria-hidden="true"></div>
+  <div class="container ha-inner"><div class="ha-col">
+    <slot name="crumbs" />
+    <h1>{title}</h1>
+    {intro && <p class="ha-intro">{intro}</p>}
+    {(readTime || reviewedBy) && (
+      <div class="ha-meta">
+        {readTime && (
+          <span class="ha-time">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9.5 3h5"/></svg>
+            {readTime}
+          </span>
+        )}
+        {reviewedBy && (
+          <span class="ha-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M8.5 12l2.5 2.5L15.5 10"/></svg>
+            Reviewed by {reviewedBy}
+          </span>
+        )}
+      </div>
+    )}
+  </div></div>
+</section>
+
+<style>
+  .ha { position: relative; isolation: isolate; background: var(--navy); color: var(--surface); overflow: hidden; }
+  .ha-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: .2; }
+  .ha-overlay {
+    position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, var(--overlay-navy) 0%, var(--overlay-navy-strong) 100%);
+  }
+  .ha-col { max-width: 800px; position: relative; }
+  .ha::after { content: ""; position: absolute; z-index: -1; right: -120px; top: 50%; width: 520px; height: 520px; transform: translateY(-50%); border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--blue) 0%, transparent 68%); opacity: .35; pointer-events: none; display: none; }
+  @media (min-width: 960px) { .ha::after { display: block; } }
+  .ha-inner { padding-top: 56px; padding-bottom: 56px; }
+  h1 { color: var(--surface); font-size: var(--fs-h1-mobile); line-height: var(--lh-h1-mobile); }
+  .ha-intro { margin-top: 24px; font-size: var(--fs-lead-sm); line-height: var(--lh-lead-sm); color: var(--surface); }
+  .ha-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 32px; }
+  .ha-time, .ha-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-btn);
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .ha-badge {
+    padding: 6px 12px; border-radius: 999px; text-transform: none; letter-spacing: 0;
+    background: var(--on-dark-chip); border: var(--border-w) solid var(--on-dark-chip-border);
+  }
+  .ha-badge svg { color: var(--blue-tint); }
+  @media (min-width: 960px) {
+    .ha-inner { padding-top: 96px; padding-bottom: 96px; }
+    h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); }
+    .ha-intro { font-size: var(--fs-article); line-height: var(--lh-article); }
+  }
+</style>

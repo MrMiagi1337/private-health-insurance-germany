@@ -1,265 +1,333 @@
 ---
-import GuideLayout from '../layouts/GuideLayout.astro';
+import PillarLayout from '../layouts/PillarLayout.astro';
+import Section from '../components/sections/Section.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import FaqAccordion from '../components/sections/FaqAccordion.astro';
+import SectionIntro from '../components/sections/SectionIntro.astro';
+import AudienceCard from '../components/ui/AudienceCard.astro';
+const sections = [
+  {
+    "id": "what-is-private-insurance",
+    "label": "What it is"
+  },
+  {
+    "id": "public-vs-private",
+    "label": "Public vs private"
+  },
+  {
+    "id": "who-qualifies",
+    "label": "Who qualifies"
+  },
+  {
+    "id": "how-it-works",
+    "label": "How it works"
+  },
+  {
+    "id": "costs",
+    "label": "Costs"
+  },
+  {
+    "id": "top-providers",
+    "label": "Top providers"
+  },
+  {
+    "id": "how-to-apply",
+    "label": "How to apply"
+  }
+];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Article",
-      "headline": "Private Health Insurance in Germany (PKV) — Complete Expat Guide 2026",
-      "description": "Everything expats need to know about private health insurance (PKV) in Germany: who qualifies, how it works, what it costs, and the top insurers.",
-      "author": {
-        "@type": "Person",
-        "name": "Marco Maurelli",
-        "url": "https://private-health-insurance-germany.com/about"
-      },
-      "dateModified": "2026-04-01",
-      "inLanguage": "en"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Private Health Insurance in Germany", "item": "https://private-health-insurance-germany.com/private-health-insurance" }
-      ]
-    }
-  ]
-};
+const faqs = [
+  { q: 'Can I choose private health insurance as an employee?', a: 'Yes, if your gross annual income is above the 2026 threshold of 77,400 euros. Self-employed people and civil servants can choose private cover regardless of income.' },
+  { q: 'Does the premium rise with my salary?', a: 'No. Your premium depends on your age at entry, your health and the cover you choose, not on your income.' },
+  { q: 'Can I go back to public health insurance?', a: 'Only in limited cases, for example if your income stays below the threshold for an extended period. Talk to an independent consultant before you switch.' },
+  { q: 'What does the advice cost?', a: 'Nothing. The consultation and the market comparison are free of charge and without obligation.' },
+];
+
+const related = [
+  { title: 'Who qualifies for private health insurance?', excerpt: 'Income, job status and residence decide whether private cover is open to you.', href: '/guide/who-qualifies', eyebrow: 'Guide', readTime: '6 min read' },
+  { title: 'Private health insurance costs in 2026', excerpt: 'What drives your premium and what you can expect to pay each month.', href: '/guide/costs-and-contributions', eyebrow: 'Costs', readTime: '8 min read' },
+  { title: 'How to switch from public health insurance', excerpt: 'The steps, the deadlines and the questions to ask before you switch.', href: '/guide/how-to-switch', eyebrow: 'Guide', readTime: '6 min read' },
+];
 ---
 
-<GuideLayout
-  title="Private Health Insurance in Germany (PKV) — Complete Expat Guide 2026"
-  description="Everything expats need to know about private health insurance (PKV) in Germany: who qualifies, how it works, what it costs, and the top insurers. Updated 2026."
-  readTime="12 min read"
-  updatedDate="April 2026"
-  category="PKV Guide"
+<PillarLayout
+  title="Private Health Insurance in Germany — Complete Expat Guide 2026"
+  heroTitle="Private health insurance in Germany"
+  eyebrow="Complete expat guide"
+  lead="Everything expats need to know about private health insurance in Germany: who qualifies, how it works, what it costs, and the top insurers. Updated April 2026."
+  description="Everything expats need to know about private health insurance in Germany: who qualifies, how it works, what it costs, and the top insurers. Updated 2026."
+  primary={{ label: 'Start the Eligibility Check', href: '/eligibility-check' }}
+  secondary={{ label: 'Talk to a consultant', href: '#contact' }}
+  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Private Health Insurance in Germany' }]}
+  sections={sections}
+  related={related}
+  ctaHref="/eligibility-check"
+  leadSource="phig-pillar"
+  datePublished="2026-01-15"
+  dateModified="2026-04-01"
 >
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <Section width="narrow" id="intro">
+    <div class="prose">
+      <p>Germany has two parallel health insurance systems: <strong>public health insurance</strong> (gesetzliche Krankenversicherung, public insurance) and <strong>private health insurance</strong> (private Krankenversicherung, private insurance). Most people default into public health insurance automatically. But if you earn above a certain threshold or are self-employed, private insurance can offer better coverage at a significantly lower cost.</p>
 
-  <fragment slot="toc">
-    <ul>
-      <li><a href="#what-is-pkv">What is PKV?</a></li>
-      <li><a href="#gkv-vs-pkv">GKV vs PKV: Quick comparison</a></li>
-      <li><a href="#who-qualifies">Who qualifies</a></li>
-      <li><a href="#how-pkv-works">How PKV works</a></li>
-      <li><a href="#costs">What PKV costs</a></li>
-      <li><a href="#top-providers">Top providers</a></li>
-      <li><a href="#how-to-apply">How to apply</a></li>
-    </ul>
-  </fragment>
+        <p>This guide covers everything an expat needs to know about private health insurance in 2026: the eligibility rules, how premiums work, what you actually get for your money, and how to find the right plan.</p>
+    </div>
+    <figure class="intro-fig"><picture><source srcset="/images/photos/pillar-expats-street.webp" type="image/webp" /><img src="/images/photos/pillar-expats-street.jpg" alt="Expats walking through a Berlin street on their way to work" width="900" height="600" loading="lazy" decoding="async" /></picture></figure>
+  </Section>
 
-  <fragment slot="related">
-    <ul>
-      <li><a href="/guide/who-qualifies">Who qualifies for PKV?</a></li>
-      <li><a href="/guide/costs-and-contributions">PKV costs in 2026</a></li>
-      <li><a href="/guide/how-to-switch">How to switch from GKV</a></li>
-      <li><a href="/guide/for-freelancers">PKV for freelancers</a></li>
-      <li><a href="/compare">GKV vs PKV comparison</a></li>
-    </ul>
-  </fragment>
+  <Section width="narrow" id="what-is-private-insurance">
+    <div class="prose">
+      <h2>What is Private Health Insurance?</h2>
 
-  <p>Germany has two parallel health insurance systems: <strong>GKV</strong> (gesetzliche Krankenversicherung, public insurance) and <strong>PKV</strong> (private Krankenversicherung, private insurance). Most people default into GKV automatically. But if you earn above a certain threshold or are self-employed, private insurance can offer better coverage at a significantly lower cost.</p>
+        <p>Private health insurance stands for <em>private Krankenversicherung</em>, Germany's private health insurance system. Unlike public health insurance, which is a statutory scheme administered by non-profit funds (Krankenkassen), private health insurance is provided by private insurance companies that compete on price, coverage, and service.</p>
 
-  <p>This guide covers everything an expat needs to know about PKV in 2026: the eligibility rules, how premiums work, what you actually get for your money, and how to find the right plan.</p>
+        <p>In private health insurance, your premium is calculated based on your age at entry, your health status, and the level of coverage you choose. It does not scale with your income. This is the fundamental difference from public health insurance, where contributions are a fixed percentage of your salary.</p>
 
-  <h2 id="what-is-pkv">What is PKV (Private Health Insurance)?</h2>
+        <p>Private health insurance typically offers: access to senior doctors (Chefarzt) rather than general ward doctors, private or semi-private hospital rooms, shorter waiting times for specialist appointments, broader dental coverage, and alternative medicine options. In exchange, you pay a predictable monthly premium that stays roughly fixed (with annual adjustments for medical cost inflation).</p>
+    </div>
+  </Section>
 
-  <p>PKV stands for <em>private Krankenversicherung</em>, Germany's private health insurance system. Unlike GKV, which is a statutory scheme administered by non-profit funds (Krankenkassen), PKV is provided by private insurance companies that compete on price, coverage, and service.</p>
+  <Section width="narrow" id="public-vs-private">
+    <div class="prose">
+      <h2>Public vs Private Health Insurance: Quick Comparison</h2>
 
-  <p>In PKV, your premium is calculated based on your age at entry, your health status, and the level of coverage you choose. It does not scale with your income. This is the fundamental difference from GKV, where contributions are a fixed percentage of your salary.</p>
+        <div class="table-card"><table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Public health insurance</th>
+              <th>Private health insurance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Premium basis</td>
+              <td>% of gross income (14.6% + supplement)</td>
+              <td>Fixed by age and health at entry</td>
+            </tr>
+            <tr>
+              <td>Family coverage</td>
+              <td>Free for non-earning spouse and children</td>
+              <td>Separate premium per person</td>
+            </tr>
+            <tr>
+              <td>Hospital</td>
+              <td>Shared ward, general doctor</td>
+              <td>Private room, senior consultant</td>
+            </tr>
+            <tr>
+              <td>Dental</td>
+              <td>Basic only</td>
+              <td>Comprehensive (plan dependent)</td>
+            </tr>
+            <tr>
+              <td>Waiting times</td>
+              <td>Longer for specialists</td>
+              <td>Generally faster</td>
+            </tr>
+            <tr>
+              <td>Employer contribution</td>
+              <td>~50% of premium</td>
+              <td>Up to half of public-system-equivalent (~€421/month)</td>
+            </tr>
+            <tr>
+              <td>Who can join</td>
+              <td>Everyone (mandatory below threshold)</td>
+              <td>Employees above €77,400, self-employed, civil servants</td>
+            </tr>
+          </tbody>
+        </table></div>
+    </div>
+  </Section>
 
-  <p>PKV typically offers: access to senior doctors (Chefarzt) rather than general ward doctors, private or semi-private hospital rooms, shorter waiting times for specialist appointments, broader dental coverage, and alternative medicine options. In exchange, you pay a predictable monthly premium that stays roughly fixed (with annual adjustments for medical cost inflation).</p>
+  <Section>
+    <CtaBand title="Find out which private health insurance fits you" buttonText="Start the Eligibility Check" href="/eligibility-check" />
+  </Section>
 
-  <h2 id="gkv-vs-pkv">GKV vs PKV: Quick Comparison</h2>
+  <Section width="narrow" id="who-qualifies">
+    <div class="prose">
+      <h2>Who Qualifies for private health insurance?</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th>GKV (Public)</th>
-        <th>PKV (Private)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Premium basis</td>
-        <td>% of gross income (14.6% + supplement)</td>
-        <td>Fixed by age and health at entry</td>
-      </tr>
-      <tr>
-        <td>Family coverage</td>
-        <td>Free for non-earning spouse and children</td>
-        <td>Separate premium per person</td>
-      </tr>
-      <tr>
-        <td>Hospital</td>
-        <td>Shared ward, general doctor</td>
-        <td>Private room, senior consultant</td>
-      </tr>
-      <tr>
-        <td>Dental</td>
-        <td>Basic only</td>
-        <td>Comprehensive (plan dependent)</td>
-      </tr>
-      <tr>
-        <td>Waiting times</td>
-        <td>Longer for specialists</td>
-        <td>Generally faster</td>
-      </tr>
-      <tr>
-        <td>Employer contribution</td>
-        <td>~50% of premium</td>
-        <td>Up to half of GKV-equivalent (~€421/month)</td>
-      </tr>
-      <tr>
-        <td>Who can join</td>
-        <td>Everyone (mandatory below threshold)</td>
-        <td>Employees above €77,400, self-employed, civil servants</td>
-      </tr>
-    </tbody>
-  </table>
+        <p>The main eligibility criterion for employees is the <strong>Jahresarbeitsentgeltgrenze (JAEG)</strong>, commonly called the Versicherungspflichtgrenze. For 2026, this threshold is <strong>€77,400 gross annual income</strong>.</p>
 
-  <h2 id="who-qualifies">Who Qualifies for PKV?</h2>
+        <p>Employees who earn above this threshold for the current calendar year can opt out of public health insurance and choose private health insurance. There is an additional rule: you must have exceeded the threshold for the previous year as well (or be starting a new job above the threshold). This prevents people from briefly spiking their income to switch.</p>
 
-  <p>The main eligibility criterion for employees is the <strong>Jahresarbeitsentgeltgrenze (JAEG)</strong>, commonly called the Versicherungspflichtgrenze. For 2026, this threshold is <strong>€77,400 gross annual income</strong>.</p>
+        <p>Three groups can always choose private health insurance regardless of income:</p>
 
-  <p>Employees who earn above this threshold for the current calendar year can opt out of GKV and choose PKV. There is an additional rule: you must have exceeded the threshold for the previous year as well (or be starting a new job above the threshold). This prevents people from briefly spiking their income to switch.</p>
+            </div>
+    <div class="aud-grid">
+      <AudienceCard title="Self-employed &amp; freelancers" text="Genuinely self-employed people can choose private cover from day one, at any income level." href="/guide/for-freelancers">
+        <svg slot="icon" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18" /></svg>
+      </AudienceCard>
+      <AudienceCard title="Civil servants" text="Beihilfe covers 50 to 80 percent of medical costs, so private cover only fills the remainder at a reduced premium." href="/guide/who-qualifies">
+        <svg slot="icon" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" /><path d="M9 12l2 2 4-4" /></svg>
+      </AudienceCard>
+      <AudienceCard title="Students" text="Student tariffs exist, although public rates are often cheaper under age 25." href="/guide/for-students">
+        <svg slot="icon" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5L2 9z" /><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5M22 9v6" /></svg>
+      </AudienceCard>
+    </div>
+    <div class="prose after"><p>Full details: <a href="/guide/who-qualifies">Who qualifies for private health insurance in Germany</a>.</p></div>
+  </Section>
 
-  <p>Three groups can always choose PKV regardless of income:</p>
-  <ul>
-    <li><strong>Self-employed and freelancers:</strong> Anyone who is genuinely self-employed (gewerblich or freiberuflich) can choose PKV from day one, at any income level.</li>
-    <li><strong>Civil servants (Beamte):</strong> Entitled to Beihilfe (government subsidy covering 50-80% of medical costs), meaning PKV covers only the remainder at a reduced premium.</li>
-    <li><strong>Students:</strong> Can choose student PKV tariffs, though GKV student rates are often cheaper under age 25.</li>
-  </ul>
+  <Section width="narrow" id="how-it-works">
+    <div class="prose">
+      <h2>How Private Health Insurance Works</h2>
 
-  <p>Full details: <a href="/guide/who-qualifies">Who qualifies for PKV in Germany</a>.</p>
+        <p>Once insured with a private provider, you receive an insurance card (Versicherungskarte) or carry a paper certificate. When you visit a doctor, you are billed directly as a private patient. You pay the invoice, then submit it to your insurer for reimbursement, typically within two to three weeks. Some insurers offer direct billing with certain hospital groups.</p>
 
-  <h2 id="how-pkv-works">How PKV Works</h2>
+        <p>Most plans include an annual deductible (<em>Selbstbehalt</em>), which you can set voluntarily to reduce your monthly premium. Common options range from €300 to €2,000 per year. If you claim nothing in a given year, many insurers refund one to three months of premiums, creating an incentive to cover minor costs yourself.</p>
 
-  <p>Once insured with a private provider, you receive an insurance card (Versicherungskarte) or carry a paper certificate. When you visit a doctor, you are billed directly as a private patient. You pay the invoice, then submit it to your insurer for reimbursement, typically within two to three weeks. Some insurers offer direct billing with certain hospital groups.</p>
+        <p>Private health insurance plans are modular. You choose:</p>
+        <ul>
+          <li>Outpatient coverage level (e.g. 100% reimbursement vs 80%)</li>
+          <li>Hospital coverage (private room, choice of doctor)</li>
+          <li>Dental (routine vs full prosthetics)</li>
+          <li>Supplementary riders (alternative medicine, glasses, daily sickness allowance)</li>
+        </ul>
+    </div>
+  </Section>
 
-  <p>Most plans include an annual deductible (<em>Selbstbehalt</em>), which you can set voluntarily to reduce your monthly premium. Common options range from €300 to €2,000 per year. If you claim nothing in a given year, many insurers refund one to three months of premiums, creating an incentive to cover minor costs yourself.</p>
+  <Section>
+    <CtaBand title="See what private cover could cost you" text="Estimate your premium in a few clicks, then compare insurers with an independent consultant." buttonText="Open the cost calculator" href="/calculator" />
+  </Section>
 
-  <p>PKV plans are modular. You choose:</p>
-  <ul>
-    <li>Outpatient coverage level (e.g. 100% reimbursement vs 80%)</li>
-    <li>Hospital coverage (private room, choice of doctor)</li>
-    <li>Dental (routine vs full prosthetics)</li>
-    <li>Supplementary riders (alternative medicine, glasses, daily sickness allowance)</li>
-  </ul>
+  <Section width="narrow" id="costs">
+    <div class="prose">
+      <h2>What Private Health Insurance Costs: Example Premiums 2026</h2>
 
-  <h2 id="costs">What PKV Costs: Example Premiums 2026</h2>
+        <p>Private health insurance premiums vary significantly by age, health status, and plan level. The table below shows approximate monthly premiums for a healthy, non-smoking employee with no pre-existing conditions. These are indicative ranges; actual quotes depend on the insurer and your specific health history.</p>
 
-  <p>PKV premiums vary significantly by age, health status, and plan level. The table below shows approximate monthly premiums for a healthy, non-smoking employee with no pre-existing conditions. These are indicative ranges; actual quotes depend on the insurer and your specific health history.</p>
+        <div class="table-card"><table>
+          <thead>
+            <tr>
+              <th>Age at entry</th>
+              <th>Entry-level plan</th>
+              <th>Mid-range plan</th>
+              <th>Premium plan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>25</td>
+              <td>€180-220/month</td>
+              <td>€250-310/month</td>
+              <td>€350-420/month</td>
+            </tr>
+            <tr>
+              <td>30</td>
+              <td>€210-260/month</td>
+              <td>€290-360/month</td>
+              <td>€400-480/month</td>
+            </tr>
+            <tr>
+              <td>35</td>
+              <td>€250-310/month</td>
+              <td>€340-420/month</td>
+              <td>€470-560/month</td>
+            </tr>
+            <tr>
+              <td>40</td>
+              <td>€300-380/month</td>
+              <td>€410-500/month</td>
+              <td>€560-670/month</td>
+            </tr>
+            <tr>
+              <td>45</td>
+              <td>€370-460/month</td>
+              <td>€500-610/month</td>
+              <td>€670-800/month</td>
+            </tr>
+          </tbody>
+        </table></div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Age at entry</th>
-        <th>Entry-level plan</th>
-        <th>Mid-range plan</th>
-        <th>Premium plan</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>25</td>
-        <td>€180-220/month</td>
-        <td>€250-310/month</td>
-        <td>€350-420/month</td>
-      </tr>
-      <tr>
-        <td>30</td>
-        <td>€210-260/month</td>
-        <td>€290-360/month</td>
-        <td>€400-480/month</td>
-      </tr>
-      <tr>
-        <td>35</td>
-        <td>€250-310/month</td>
-        <td>€340-420/month</td>
-        <td>€470-560/month</td>
-      </tr>
-      <tr>
-        <td>40</td>
-        <td>€300-380/month</td>
-        <td>€410-500/month</td>
-        <td>€560-670/month</td>
-      </tr>
-      <tr>
-        <td>45</td>
-        <td>€370-460/month</td>
-        <td>€500-610/month</td>
-        <td>€670-800/month</td>
-      </tr>
-    </tbody>
-  </table>
+        <div class="info-box">
+          <strong>Employer contribution:</strong> If you are employed, your employer contributes roughly half the premium, up to a maximum of approximately €421/month in 2026 (half the average public health insurance contribution at the Beitragsbemessungsgrenze). So a €400/month premium effectively costs you around €200/month out of pocket.
+        </div>
 
-  <div class="info-box">
-    <strong>Employer contribution:</strong> If you are employed, your employer contributes roughly half the premium, up to a maximum of approximately €421/month in 2026 (half the average GKV contribution at the Beitragsbemessungsgrenze). So a €400/month premium effectively costs you around €200/month out of pocket.
-  </div>
+        <p>For self-employed people, there is no employer contribution, so you pay the full premium. However, even at full cost, private health insurance is often cheaper than public health insurance for freelancers, because public health insurance charges 14.6% + a supplementary rate (typically 1.5-2%) on your entire income with no employer sharing it.</p>
 
-  <p>For self-employed people, there is no employer contribution, so you pay the full premium. However, even at full cost, PKV is often cheaper than GKV for freelancers, because GKV charges 14.6% + a supplementary rate (typically 1.5-2%) on your entire income with no employer sharing it.</p>
+        <p>Full breakdown: <a href="/guide/costs-and-contributions">Private health insurance costs and contributions in 2026</a>.</p>
+    </div>
+  </Section>
 
-  <p>Full breakdown: <a href="/guide/costs-and-contributions">PKV costs and contributions in 2026</a>.</p>
+  <Section width="narrow" id="top-providers">
+    <div class="prose">
+      <h2>Top Private Health Insurance Providers for Expats</h2>
 
-  <h2 id="top-providers">Top PKV Providers for Expats</h2>
+        <p>Germany has around 40 private health insurers. For expats, the most important factors are: English-speaking customer service, competitive rates, financial stability, and straightforward claims handling. The following are the most commonly recommended providers.</p>
 
-  <p>Germany has around 40 private health insurers. For expats, the most important factors are: English-speaking customer service, competitive rates, financial stability, and straightforward claims handling. The following are the most commonly recommended providers.</p>
+        <div class="table-card"><table>
+          <thead>
+            <tr>
+              <th>Insurer</th>
+              <th>Known for</th>
+              <th>Best for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/top-insurers/debeka">Debeka</a></td>
+              <td>Largest private health insurer, strong financials</td>
+              <td>Civil servants, families</td>
+            </tr>
+            <tr>
+              <td><a href="/top-insurers/allianz">Allianz</a></td>
+              <td>Premium coverage, wide network</td>
+              <td>High earners, international</td>
+            </tr>
+            <tr>
+              <td><a href="/top-insurers/dkv">DKV</a></td>
+              <td>Largest private insurer by market share</td>
+              <td>Employees, expats</td>
+            </tr>
+            <tr>
+              <td><a href="/top-insurers/hansemerkur">HanseMerkur</a></td>
+              <td>Flexible, expat-friendly tariffs</td>
+              <td>Expats, new arrivals</td>
+            </tr>
+            <tr>
+              <td><a href="/top-insurers/hallesche">Hallesche</a></td>
+              <td>Excellent coverage, strong ratings</td>
+              <td>Freelancers, self-employed</td>
+            </tr>
+          </tbody>
+        </table></div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Insurer</th>
-        <th>Known for</th>
-        <th>Best for</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a href="/top-insurers/debeka">Debeka</a></td>
-        <td>Largest PKV insurer, strong financials</td>
-        <td>Civil servants, families</td>
-      </tr>
-      <tr>
-        <td><a href="/top-insurers/allianz">Allianz</a></td>
-        <td>Premium coverage, wide network</td>
-        <td>High earners, international</td>
-      </tr>
-      <tr>
-        <td><a href="/top-insurers/dkv">DKV</a></td>
-        <td>Largest private insurer by market share</td>
-        <td>Employees, expats</td>
-      </tr>
-      <tr>
-        <td><a href="/top-insurers/hansemerkur">HanseMerkur</a></td>
-        <td>Flexible, expat-friendly tariffs</td>
-        <td>Expats, new arrivals</td>
-      </tr>
-      <tr>
-        <td><a href="/top-insurers/hallesche">Hallesche</a></td>
-        <td>Excellent coverage, strong ratings</td>
-        <td>Freelancers, self-employed</td>
-      </tr>
-    </tbody>
-  </table>
+        <p>See all reviews: <a href="/top-insurers">Top 10 private health insurers for expats</a>.</p>
+    </div>
+  </Section>
 
-  <p>See all reviews: <a href="/top-insurers">Top 10 PKV insurers for expats</a>.</p>
+  <Section width="narrow" id="how-to-apply">
+    <div class="prose">
+      <h2>How to Apply for private health insurance</h2>
 
-  <h2 id="how-to-apply">How to Apply for PKV</h2>
+        <ol>
+          <li><strong>Check your eligibility:</strong> Confirm your income exceeds €77,400 or that you are self-employed. Use our <a href="/eligibility-check">eligibility check</a> for a quick check.</li>
+          <li><strong>Choose a broker:</strong> Working with a licensed §34d broker is strongly recommended. They have access to all insurers, compare quotes for your specific situation, and assist with the health questionnaire. This service is free to you.</li>
+          <li><strong>Complete the health questionnaire:</strong> Every private health insurance application includes questions about pre-existing conditions. Answer honestly: non-disclosure can void your coverage. Minor conditions may lead to exclusions or small surcharges rather than outright rejection.</li>
+          <li><strong>Compare quotes:</strong> Your broker will present options across multiple insurers. Compare not just the monthly premium but the coverage details, the insurer's track record on claims, and historical premium increases.</li>
+          <li><strong>Apply and notify public health insurance:</strong> Once you have signed the private health insurance contract, notify your current public health insurance fund. Employees must give at least two months' notice, effective at end of month. If switching in the new year, notify by October 31.</li>
+          <li><strong>Coverage begins:</strong> Your private health insurance coverage starts on the agreed date, typically January 1 if switching at year-end.</li>
+        </ol>
 
-  <ol>
-    <li><strong>Check your eligibility:</strong> Confirm your income exceeds €77,400 or that you are self-employed. Use our <a href="/quiz">eligibility quiz</a> for a quick check.</li>
-    <li><strong>Choose a broker:</strong> Working with a licensed §34d broker is strongly recommended. They have access to all insurers, compare quotes for your specific situation, and assist with the health questionnaire. This service is free to you.</li>
-    <li><strong>Complete the health questionnaire:</strong> Every PKV application includes questions about pre-existing conditions. Answer honestly: non-disclosure can void your coverage. Minor conditions may lead to exclusions or small surcharges rather than outright rejection.</li>
-    <li><strong>Compare quotes:</strong> Your broker will present options across multiple insurers. Compare not just the monthly premium but the coverage details, the insurer's track record on claims, and historical premium increases.</li>
-    <li><strong>Apply and notify GKV:</strong> Once you have signed the PKV contract, notify your current GKV fund. Employees must give at least two months' notice, effective at end of month. If switching in the new year, notify by October 31.</li>
-    <li><strong>Coverage begins:</strong> Your PKV coverage starts on the agreed date, typically January 1 if switching at year-end.</li>
-  </ol>
+        <div class="info-box">
+          <strong>Important:</strong> Once you switch to private health insurance as an employee, returning to public health insurance later is very difficult. You can only switch back if your income drops below the JAEG threshold for an extended period, or if you become unemployed. Think carefully before switching, especially if you plan to have children (whose premiums would be separate in private health insurance) or if your income may fluctuate.
+        </div>
 
-  <div class="info-box">
-    <strong>Important:</strong> Once you switch to PKV as an employee, returning to GKV later is very difficult. You can only switch back if your income drops below the JAEG threshold for an extended period, or if you become unemployed. Think carefully before switching, especially if you plan to have children (whose premiums would be separate in PKV) or if your income may fluctuate.
-  </div>
+        <p>Ready to find out if private health insurance is right for you? Start with our <a href="/eligibility-check">2-minute eligibility check</a> or <a href="/contact">speak with a licensed broker</a> who can compare your specific options.</p>
+    </div>
+  </Section>
+  <Section width="narrow" id="faq">
+    <SectionIntro title="Frequently asked questions" />
+    <FaqAccordion items={faqs} />
+  </Section>
+</PillarLayout>
 
-  <p>Ready to find out if PKV is right for you? Start with our <a href="/quiz">2-minute eligibility quiz</a> or <a href="/contact">speak with a licensed broker</a> who can compare your specific options.</p>
-</GuideLayout>
+<style>
+  .aud-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 8px 0 24px; }
+  @media (min-width: 640px) { .aud-grid { grid-template-columns: repeat(3, 1fr); gap: 25px; } }
+  .after { margin-top: 0; }
+  .intro-fig { margin: 32px 0 0; border-radius: var(--radius-card); overflow: hidden; background: var(--blue-tint); }
+  .intro-fig picture { display: block; }
+  .intro-fig img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+</style>

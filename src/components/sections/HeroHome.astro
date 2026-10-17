@@ -1,0 +1,115 @@
+---
+import AlertNote from './AlertNote.astro';
+interface Audience { label: string; bullets: string[]; }
+interface Props {
+  title?: string; lead?: string; audiences?: Audience[];
+  cta?: { label: string; href: string };
+  image?: string; imageWebp?: string; imageBg?: string; alt?: string;
+  alert?: { title: string; text?: string; href?: string; linkLabel?: string } | false;
+}
+const {
+  title = 'Private health insurance in Germany, explained',
+  lead = 'Learn how it works, whether you qualify and what it costs, then talk to an independent consultant who works with internationals.',
+  audiences = [
+    { label: 'Employees', bullets: ['Check if your salary is above the threshold', 'Compare 40+ insurers with an independent consultant', 'Keep your employer contribution'] },
+    { label: 'Self-employed', bullets: ['Not bound by an income threshold', 'Tariffs built for freelancers and founders', 'Plan for premiums in lean months'] },
+    { label: 'Students', bullets: ['Student tariffs with low monthly premiums', 'Check the rules for visas and enrolment', 'Know when you can switch later'] },
+    { label: 'Expats', bullets: ['Advice in English from start to finish', 'Insurance that fits your visa and plans', 'Help with registration and paperwork'] },
+  ],
+  cta = { label: 'Check my eligibility', href: '/eligibility-check' },
+  image = '/images/photos/nb-woman-sofa.jpg',
+  imageWebp,
+  imageBg = '#F3F1ED', /* warm neutral close to the photo's wall so the rounded box never shows a hard edge */
+  alt = 'Woman reading about private health insurance on her phone at home',
+  alert = {
+    title: 'JAEG 2027: expected to rise to EUR 84,150',
+    text: 'The 2027 figure is a forecast and not yet final law. The 2026 threshold is EUR 77,400 per year.',
+    href: '/private-health-insurance',
+    linkLabel: 'See how the threshold works',
+  },
+} = Astro.props;
+const webp = imageWebp ?? image.replace(/\.jpe?g$/, '.webp');
+const check = '<path d="M5 12.5l4.5 4.5L19 7.5"/>';
+---
+<section class="hh" data-hero style={`--hh-media-bg:${imageBg}`}>
+  <div class="container hh-grid">
+    <div class="hh-copy">
+      {alert && <div class="hh-alert"><AlertNote title={alert.title} text={alert.text} href={alert.href} linkLabel={alert.linkLabel} /></div>}
+      <div class="hh-media hh-media-m"><picture><source srcset={webp} type="image/webp" /><img src={image} alt="" width="350" height="200" loading="eager" fetchpriority="high" /></picture></div>
+      <h1>{title}</h1>
+      <p class="hh-lead">{lead}</p>
+      <div class="hh-tabs" role="tablist" aria-label="I am">
+        {audiences.map((a, i) => (
+          <button type="button" role="tab" class:list={['hh-tab', { 'is-active': i === 0 }]} aria-selected={i === 0 ? 'true' : 'false'} data-i={i}>{a.label}</button>
+        ))}
+      </div>
+      {audiences.map((a, i) => (
+        <ul class="hh-bullets" role="tabpanel" data-i={i} hidden={i !== 0}>
+          {a.bullets.map((b) => (
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><Fragment set:html={check} /></svg><span>{b}</span></li>
+          ))}
+        </ul>
+      ))}
+      <a class="btn hh-cta" href={cta.href}>{cta.label}</a>
+    </div>
+    <div class="hh-media hh-media-d">
+      <picture><source srcset={webp} type="image/webp" /><img src={image} alt={alt} width="403" height="412" fetchpriority="high" loading="eager" decoding="async" /></picture>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hh { padding-bottom: 24px; border-bottom: var(--border-w) solid var(--border); }
+  .hh-grid { display: grid; grid-template-columns: minmax(0, 1fr); padding-top: 16px; }
+  .hh-alert { margin-bottom: 16px; }
+  .hh-copy { min-width: 0; }
+  .hh-media-d { display: none; }
+  .hh-media-m { margin-bottom: 24px; border-radius: var(--radius-card); background: var(--hh-media-bg, var(--pastel-blue)); overflow: hidden; height: 200px; }
+  .hh-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+  h1 { font-weight: var(--fw-heading); }
+  .hh-lead { margin-top: 16px; color: var(--text-muted); font-size: var(--fs-lead-sm); line-height: var(--lh-lead-sm); }
+  .hh-tabs { display: flex; gap: 4px; margin: 24px calc(-1 * var(--gutter)) 0; padding-inline: var(--gutter); overflow-x: auto; scrollbar-width: none; }
+  .hh-tabs::-webkit-scrollbar { display: none; }
+  .hh-tab {
+    flex: none; min-height: 44px; padding: 0 12px; display: inline-flex; align-items: center; background: none; border: 0; cursor: pointer;
+    font-size: var(--fs-body); line-height: 24px; font-weight: 600; color: var(--text-faint);
+    position: relative; isolation: isolate; transition: color var(--ease);
+  }
+  .hh-tab::before { content: ""; position: absolute; inset: 8px 0; border-radius: var(--radius-pill); background: transparent; z-index: -1; transition: background var(--ease); }
+  .hh-tab:hover { color: var(--text); }
+  .hh-tab.is-active { color: var(--blue); }
+  .hh-tab.is-active::before { background: var(--blue-pill); }
+  .hh-bullets { list-style: none; margin-top: 12px; }
+  .hh-bullets li { display: flex; align-items: flex-start; gap: 11px; min-height: 32px; padding: 4px 0; color: var(--text); font-size: var(--fs-body); line-height: var(--lh-body); }
+  .hh-bullets svg { flex: none; margin-top: 5px; color: var(--text-muted); }
+  .hh-cta { margin-top: 20px; width: 100%; }
+  @media (max-width: 400px) {
+    h1 { font-size: clamp(22px, 7.2vw, 28px); line-height: 1.25; }
+  }
+  @media (min-width: 560px) and (max-width: 959px) {
+    .hh-media-m { height: 380px; }
+    .hh-media-m img { object-fit: cover; object-position: center 25%; }
+  }
+  @media (min-width: 960px) {
+    .hh-grid { grid-template-columns: minmax(0, 605px) minmax(0, 403px); column-gap: 24px; justify-content: space-between; padding-top: 32px; align-items: start; }
+    .hh-alert { margin-bottom: 24px; }
+    .hh-media-m { display: none; }
+    .hh-media-d { display: block; width: 100%; max-width: 403px; aspect-ratio: 403 / 412; height: auto; border-radius: var(--radius-card); background: var(--hh-media-bg, var(--pastel-blue)); overflow: hidden; }
+    .hh-media-d img { object-position: center top; }
+    h1 { font-size: var(--fs-h1-home); line-height: var(--lh-h1-home); }
+    .hh-lead { margin-top: 18px; max-width: 640px; font-size: var(--fs-lead); line-height: var(--lh-lead); }
+    .hh-tabs { margin: 24px 0 0; padding: 0; overflow: visible; }
+    .hh-bullets { margin-top: 24px; }
+    .hh-cta { width: auto; margin-top: 24px; }
+  }
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-hero]').forEach((root) => {
+    const tabs = root.querySelectorAll<HTMLButtonElement>('.hh-tab');
+    const panels = root.querySelectorAll<HTMLElement>('.hh-bullets');
+    tabs.forEach((t, i) => t.addEventListener('click', () => {
+      tabs.forEach((x, j) => { x.classList.toggle('is-active', i === j); x.setAttribute('aria-selected', String(i === j)); });
+      panels.forEach((p, j) => { p.hidden = i !== j; });
+    }));
+  });
+</script>

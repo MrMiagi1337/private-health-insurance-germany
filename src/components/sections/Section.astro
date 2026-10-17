@@ -1,0 +1,29 @@
+---
+interface Props { variant?: 'plain' | 'band' | 'cream' | 'navy' | 'blue' | 'tint'; width?: 'default' | 'narrow' | 'article'; id?: string; class?: string; end?: boolean; }
+const { variant = 'plain', width = 'default', id, class: cls = '', end = false } = Astro.props;
+const wrap = width === 'narrow' ? 'container-narrow' : width === 'article' ? 'container-article' : 'container';
+---
+<section id={id} class:list={['sec', `sec--${variant}`, { 'sec--end': end }, cls]}>
+  <div class={wrap}><slot /></div>
+</section>
+<style>
+  .sec { padding: var(--section-y-mobile) 0 0; }
+  .sec--band, .sec--cream, .sec--tint, .sec--navy, .sec--blue { padding: 40px 0; margin-top: var(--section-y-mobile); }
+  .sec--band { background: var(--band); border-block: var(--border-w) solid var(--border); }
+  .sec--cream { background: var(--cream); }
+  .sec--tint { background: var(--blue-tint); }
+  .sec--navy { background: var(--navy); }
+  .sec--blue { background: var(--blue); }
+  .sec--navy :global(h2), .sec--navy :global(h3), .sec--blue :global(h2), .sec--blue :global(h3) { color: var(--surface); }
+  .sec--navy :global(.lead), .sec--navy :global(p.on-dark), .sec--blue :global(.lead), .sec--blue :global(p.on-dark) { color: var(--surface); opacity: .9; }
+  .sec--navy :global(.pill), .sec--blue :global(.pill) { background: var(--on-dark-chip); color: var(--surface); }
+  .sec { scroll-margin-top: calc(var(--nav-h) + var(--sticky-nav-h)); }
+  .sec--band + .sec, .sec--cream + .sec, .sec--tint + .sec, .sec--navy + .sec, .sec--blue + .sec { padding-top: var(--section-y-mobile); }
+  .sec.sec--end { padding-bottom: var(--section-y-mobile); }
+  @media (min-width: 900px) {
+    .sec { padding: var(--section-y) 0 0; }
+    .sec--band, .sec--cream, .sec--tint, .sec--navy, .sec--blue { padding: var(--section-pad-alt) 0; margin-top: var(--section-y); }
+    .sec--band + .sec, .sec--cream + .sec, .sec--tint + .sec, .sec--navy + .sec, .sec--blue + .sec { padding-top: var(--section-y); }
+    .sec.sec--end { padding-bottom: var(--section-y); }
+  }
+</style>

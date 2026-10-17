@@ -15,7 +15,7 @@ const insurer = {
   cons: ["Digital tools and app behind more modern competitors", "Limited English language support", "Less proactive in product innovation", "Claims processing can be slower than digital-first insurers"],
   tariffs: [{"name": "MED Top", "level": "Premium", "desc": "Single room, free hospital choice, comprehensive outpatient and dental"}, {"name": "MED Comfort", "level": "Mid-range", "desc": "Two-bed room, deductible options, solid outpatient and dental"}, {"name": "MED Start", "level": "Entry", "desc": "Budget entry with deductible, suitable for healthy young applicants"}],
   bestFor: "Applicants who prioritise financial stability and a long track record over digital features. Good for older applicants comparing premium stability.",
-  verdict: "Gothaer's 200-year history is a genuine selling point when considering PKV. A provider that has survived two world wars and multiple healthcare reforms demonstrates real resilience. Coverage is solid and pricing competitive. The weakness is digital experience, which matters less for those who prefer dealing through a broker or by phone.",
+  verdict: "Gothaer's 200-year history is a genuine selling point when considering private health insurance. A provider that has survived two world wars and multiple healthcare reforms demonstrates real resilience. Coverage is solid and pricing competitive. The weakness is digital experience, which matters less for those who prefer dealing through a broker or by phone.",
 };
 
 const schema = {
@@ -23,7 +23,7 @@ const schema = {
   "@graph": [
     {
       "@type": "Article",
-      "headline": "Gothaer PKV Review 2026 - Private Health Insurance Germany",
+      "headline": "Gothaer Private Health Insurance Review 2026 - Private Health Insurance Germany",
       "author": { "@type": "Person", "name": "Marco Maurelli", "url": "https://private-health-insurance-germany.com/about" },
       "dateModified": "2026-04-01"
     },
@@ -40,8 +40,8 @@ const schema = {
 ---
 
 <Layout
-  title="Gothaer PKV Review 2026 - Private Health Insurance Germany"
-  description="Independent review of Gothaer private health insurance in Germany. Pros, cons, tariffs, English support, and who Gothaer PKV is best for in 2026."
+  title="Gothaer Private Health Insurance Review 2026 - Private Health Insurance Germany"
+  description="Independent review of Gothaer private health insurance in Germany. Pros, cons, tariffs, English support, and who Gothaer private health insurance is best for in 2026."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   <main>
@@ -78,7 +78,7 @@ const schema = {
 
           <div class="review-body">
             <h2>Overview</h2>
-            <p>Founded in {insurer.founded} and headquartered in {insurer.hq}, {insurer.name} is a well-established name in the German PKV market. As a {insurer.type}, it brings distinct advantages in terms of how it balances policyholder interests with long-term financial sustainability.</p>
+            <p>Founded in {insurer.founded} and headquartered in {insurer.hq}, {insurer.name} is a well-established name in the German private health insurance market. As a {insurer.type}, it brings distinct advantages in terms of how it balances policyholder interests with long-term financial sustainability.</p>
 
             <h2>Pros</h2>
             <ul>{insurer.pros.map(pro => <li>{pro}</li>)}</ul>

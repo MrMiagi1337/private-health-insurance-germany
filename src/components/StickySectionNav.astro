@@ -1,0 +1,78 @@
+---
+interface Section { id: string; label: string }
+interface Props { sections: Section[] }
+const { sections } = Astro.props;
+---
+
+<div class="ssn" data-ssn>
+  <div class="container">
+    <nav aria-label="On this page">
+      <ul class="ssn-list">
+        {sections.map((s, i) => (
+          <li>
+            <a href={`#${s.id}`} data-ssn-link={s.id} aria-current={i === 0 ? 'true' : undefined} class:list={['ssn-tab', { active: i === 0 }]}>{s.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .ssn {
+    position: sticky; top: var(--nav-h); z-index: 100;
+    height: var(--sticky-nav-h); background: var(--surface);
+    border-bottom: var(--border-w) solid var(--border);
+    display: flex; align-items: center;
+  }
+  .ssn .container { height: 100%; position: relative; }
+  .ssn .container::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, transparent, var(--surface)); pointer-events: none; }
+  @media (min-width: 960px) { .ssn .container::after { display: none; } }
+  nav { height: 100%; }
+  .ssn-list {
+    list-style: none; display: flex; align-items: center; gap: 8px; height: 100%; padding-right: 32px;
+    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .ssn-list::-webkit-scrollbar { display: none; }
+  .ssn-tab {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px;
+    border-radius: 999px; white-space: nowrap;
+    font-size: var(--fs-nav); font-weight: var(--fw-nav); line-height: 21px;
+    color: var(--text-muted); transition: background var(--ease), color var(--ease);
+  }
+  .ssn-tab:hover { color: var(--navy); }
+  .ssn-tab.active { background: var(--blue-tint); color: var(--navy); }
+  .ssn-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ssn]').forEach((root) => {
+    const links = Array.from(root.querySelectorAll<HTMLAnchorElement>('[data-ssn-link]'));
+    const targets = links
+      .map((l) => document.getElementById(l.dataset.ssnLink!))
+      .filter((t): t is HTMLElement => !!t);
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+    const list = root.querySelector<HTMLElement>('.ssn-list')!;
+    const setActive = (id: string) => {
+      links.forEach((l) => {
+        const on = l.dataset.ssnLink === id;
+        l.classList.toggle('active', on);
+        if (on) {
+          l.setAttribute('aria-current', 'true');
+          const left = l.offsetLeft - (list.clientWidth - l.offsetWidth) / 2;
+          if (list.scrollWidth > list.clientWidth) list.scrollTo({ left, behavior: 'smooth' });
+        } else l.removeAttribute('aria-current');
+      });
+    };
+    const visible = new Set<string>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => (e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id)));
+        const first = targets.find((t) => visible.has(t.id));
+        if (first) setActive(first.id);
+      },
+      { rootMargin: '-130px 0px -55% 0px', threshold: 0 }
+    );
+    targets.forEach((t) => io.observe(t));
+  });
+</script>

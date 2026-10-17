@@ -1,0 +1,45 @@
+---
+interface Crumb { label: string; href?: string }
+interface Props { items: Crumb[]; siteUrl?: string }
+const { items, siteUrl = 'https://private-health-insurance-germany.com' } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((it, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: it.label,
+    ...(it.href ? { item: siteUrl + it.href } : {}),
+  })),
+};
+---
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      {items.map((it, i) => (
+        <li>
+          {i > 0 && (
+            <svg class="sep" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          )}
+          {it.href && i < items.length - 1
+            ? <a href={it.href}>{it.label}</a>
+            : <span aria-current="page">{it.label}</span>}
+        </li>
+      ))}
+    </ol>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</nav>
+
+<style>
+  .crumbs { padding: 16px 0; }
+  ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); }
+  li { display: inline-flex; align-items: center; gap: 6px; }
+  a { display: inline-block; padding: 12px 0; margin: -12px 0; color: var(--text-muted); transition: color var(--ease); }
+  a:hover { color: var(--navy); text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 2px; }
+  [aria-current] { color: var(--navy); font-weight: var(--fw-nav); }
+  .sep { color: var(--text-muted); flex: none; }
+</style>

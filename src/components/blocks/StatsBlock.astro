@@ -1,0 +1,37 @@
+---
+interface Stat { value: string; label: string; }
+interface Props { stats?: Stat[]; }
+
+const { stats = [
+  { value: '€77,400', label: '2026 income threshold for private health insurance' },
+  { value: '40+',     label: 'Insurers compared' },
+  { value: 'Day 1',  label: 'Coverage required from arrival' },
+  { value: '100% free', label: 'Broker service, no fees' },
+]} = Astro.props;
+---
+
+<div class="stats-bar">
+  <div class="container-wide stats-inner">
+    {stats.map((s, i) => (
+      <>
+        <div class="stat-item">
+          <span class="stat-val">{s.value}</span>
+          <span class="stat-lbl">{s.label}</span>
+        </div>
+        {i < stats.length - 1 && <div class="stat-div" />}
+      </>
+    ))}
+  </div>
+</div>
+
+<style>
+  .stats-bar { background: var(--ink); padding: 1.25rem 0; }
+  .stats-inner {
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(1rem, 4vw, 3rem); flex-wrap: wrap;
+  }
+  .stat-item { display: flex; flex-direction: column; align-items: center; gap: .1rem; }
+  .stat-val { font-size: 1.1rem; font-weight: 800; color: var(--cream); white-space: nowrap; letter-spacing: -.02em; }
+  .stat-lbl { font-size: .68rem; font-weight: 500; color: rgba(255,255,255,.4); white-space: nowrap; }
+  .stat-div { width: 1px; height: 28px; background: rgba(255,255,255,.1); }
+</style>

@@ -2,8 +2,33 @@
   command = "npm run build"
   publish = "dist"
 
+[functions]
+  directory = "netlify/functions"
+
 [build.environment]
   NODE_VERSION = "22"
+
+# Force a single canonical host: www → apex (no-www). Picks one variant so
+# Google doesn't split signals across two hostnames. `force = true` so it wins
+# even though a matching file exists on the www host.
+[[redirects]]
+  from = "https://www.private-health-insurance-germany.com/*"
+  to = "https://private-health-insurance-germany.com/:splat"
+  status = 301
+  force = true
+
+# Lead form proxy (must come before the catch-all 404)
+[[redirects]]
+  from = "/api/lead"
+  to = "/.netlify/functions/lead"
+  status = 200
+
+# Renamed page
+[[redirects]]
+  from = "/quiz"
+  to = "/eligibility-check"
+  status = 301
+  force = true
 
 # Redirect all 404s to custom page
 [[redirects]]

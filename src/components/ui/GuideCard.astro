@@ -1,0 +1,31 @@
+---
+interface Props { title: string; excerpt: string; href: string; eyebrow?: string; readTime?: string; image?: string; imageWebp?: string; alt?: string }
+const { title, excerpt, href, eyebrow, readTime, image = '/images/placeholder-3x2.svg', imageWebp, alt = '' } = Astro.props;
+const webp = imageWebp ?? (/\.jpe?g$/.test(image) ? image.replace(/\.jpe?g$/, '.webp') : undefined);
+---
+<article class="g-card">
+  <div class:list={['g-img', { ph: image.includes('placeholder') }]}><picture>{webp && <source srcset={webp} type="image/webp" />}<img src={image} alt={image.includes('placeholder') ? '' : alt} loading="lazy" decoding="async" width="900" height="600" /></picture></div>
+  <div class="g-body">
+    {eyebrow && <p class="g-eyebrow">{eyebrow}</p>}
+    <h3><a href={href} class="g-link">{title}</a></h3>
+    <p class="g-excerpt">{excerpt}</p>
+    {readTime && <p class="g-meta">{readTime}</p>}
+  </div>
+</article>
+
+<style>
+  .g-card { position: relative; display: flex; flex-direction: column; height: 100%; }
+  .g-img { position: relative; height: 195px; border-radius: var(--radius-tile); background: var(--blue-tint); overflow: hidden; }
+  .g-img picture { position: absolute; inset: 0; display: block; }
+  .g-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .g-body { display: flex; flex-direction: column; flex: 1; padding-top: 20px; }
+  .g-eyebrow { margin: 0 0 12px; font-size: var(--fs-body); line-height: 24px; font-weight: 500; color: var(--blue-dk); }
+  .g-card h3 { margin: 0; font-size: 20px; line-height: 25px; font-weight: var(--fw-h3); color: var(--navy); }
+  .g-link { color: inherit; text-decoration: none; }
+  .g-link::after { content: ""; position: absolute; inset: 0; }
+  .g-link:hover { color: var(--blue-dk); }
+  .g-link:focus-visible { outline: none; }
+  .g-link:focus-visible::after { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: var(--radius-tile); }
+  .g-excerpt { margin: 12px 0 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text-muted); }
+  .g-meta { margin: auto 0 0; padding-top: 12px; font-size: var(--fs-small); line-height: 21px; color: var(--text-faint); }
+</style>

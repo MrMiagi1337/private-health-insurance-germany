@@ -1,0 +1,304 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroCentered from '../components/sections/HeroCentered.astro';
+import Section from '../components/sections/Section.astro';
+import IconTile from '../components/ui/IconTile.astro';
+---
+
+<Layout
+  title="Do I Qualify for Private Health Insurance in Germany? (Free Eligibility Check)"
+  description="Find out in 2 minutes if you qualify for private health insurance in Germany. Answer 5 quick questions about your employment, income, and age."
+>
+  <main>
+    <HeroCentered
+      eyebrow="2-minute eligibility check"
+      title="Do you qualify for private health insurance?"
+      lead="Answer 5 quick questions to find out if private health insurance in Germany is open to you, and whether it makes financial sense."
+    />
+
+    <Section end class="check-section">
+      <div class="check-container">
+
+        <div class="progress-bar">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-label" id="progressLabel">Question 1 of 5</span>
+        </div>
+
+        <div class="check-card" id="checkCard">
+
+          <!-- Q1 -->
+          <div class="question active" data-step="1">
+            <h2>What is your employment status in Germany?</h2>
+            <div class="options">
+              <button class="option-btn" data-next="2" data-score="1" data-note="employed">
+                <IconTile size={48}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></IconTile>
+                <div>
+                  <strong>Employed (Angestellter)</strong>
+                  <span>Working for a German employer</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="2" data-score="2" data-note="freelancer">
+                <IconTile size={48}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></IconTile>
+                <div>
+                  <strong>Self-employed / Freelancer</strong>
+                  <span>Working independently or running a business</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="2" data-score="2" data-note="civil-servant">
+                <IconTile size={48}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></IconTile>
+                <div>
+                  <strong>Civil servant (Beamter)</strong>
+                  <span>Working for the German public sector</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="result-no" data-score="0" data-note="student">
+                <IconTile size={48}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></IconTile>
+                <div>
+                  <strong>Student</strong>
+                  <span>Enrolled at a German university</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question" data-step="2" hidden>
+            <h2>What is your gross annual income?</h2>
+            <p class="q-hint">The private health insurance income threshold in 2026 is €77,400/year (€6,450/month).</p>
+            <div class="options">
+              <button class="option-btn" data-next="3" data-score="2" data-note="income-high">
+                <IconTile size={48}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></IconTile>
+                <div>
+                  <strong>Over €77,400 / year</strong>
+                  <span>Above the Versicherungspflichtgrenze</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="result-income" data-score="0" data-note="income-low">
+                <IconTile size={48}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></IconTile>
+                <div>
+                  <strong>Under €77,400 / year</strong>
+                  <span>Below the threshold (if employed)</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="3" data-score="2" data-note="freelancer-any">
+                <IconTile size={48}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></IconTile>
+                <div>
+                  <strong>I'm self-employed / freelancer</strong>
+                  <span>No income threshold applies to me</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question" data-step="3" hidden>
+            <h2>How old are you?</h2>
+            <div class="options">
+              <button class="option-btn" data-next="4" data-score="2">
+                <div>
+                  <strong>Under 35</strong>
+                  <span>Best time to switch — lowest entry premium</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="4" data-score="1">
+                <div>
+                  <strong>35 – 45</strong>
+                  <span>Still likely advantageous</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="4" data-score="0">
+                <div>
+                  <strong>46 – 55</strong>
+                  <span>Needs careful comparison</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="4" data-score="0">
+                <div>
+                  <strong>Over 55</strong>
+                  <span>May not be financially advantageous</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="question" data-step="4" hidden>
+            <h2>Do you have dependants covered by your current insurance?</h2>
+            <p class="q-hint">In public health insurance, dependants (spouse, children) can be insured for free. In private health insurance, each person needs their own policy.</p>
+            <div class="options">
+              <button class="option-btn" data-next="5" data-score="2">
+                <div>
+                  <strong>No — just me</strong>
+                  <span>Private health insurance is typically most cost-effective for singles</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="5" data-score="1">
+                <div>
+                  <strong>Spouse or partner (also working)</strong>
+                  <span>They can get their own private health insurance independently</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="5" data-score="0">
+                <div>
+                  <strong>Spouse not working + children</strong>
+                  <span>Private health insurance costs add up — needs careful calculation</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="question" data-step="5" hidden>
+            <h2>How would you describe your current health?</h2>
+            <div class="options">
+              <button class="option-btn" data-next="result" data-score="2">
+                <div>
+                  <strong>Good — no significant conditions</strong>
+                  <span>Standard underwriting, best rates available</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="result" data-score="1">
+                <div>
+                  <strong>Average — minor conditions or medication</strong>
+                  <span>May have loading or exclusions</span>
+                </div>
+              </button>
+              <button class="option-btn" data-next="result" data-score="0">
+                <div>
+                  <strong>Pre-existing chronic conditions</strong>
+                  <span>Significant loading likely — public health insurance may be better</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="question result-screen" data-step="result" hidden>
+            <div class="result-icon good">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2>Private health insurance looks like a strong fit for you</h2>
+            <p>Based on your answers, you appear to meet the eligibility requirements for private health insurance in Germany and could benefit financially from switching.</p>
+            <div class="result-points" id="resultPoints"></div>
+            <a href="/contact" class="result-cta">Get a free personalised quote</a>
+            <a href="/compare" class="result-link">Compare public vs private health insurance in detail</a>
+          </div>
+
+          <div class="question result-screen" data-step="result-income" hidden>
+            <div class="result-icon warning">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+            </div>
+            <h2>You may not be eligible yet</h2>
+            <p>As an employed person, you need to earn above €77,400/year (the Versicherungspflichtgrenze). Your income must also have been above the threshold in the previous calendar year and be expected to stay above it this year.</p>
+            <p>If you expect your income to increase, or if you move into self-employment or a civil servant role, eligibility opens up automatically.</p>
+            <a href="/guide/who-qualifies" class="result-cta">Learn more about private health insurance eligibility</a>
+          </div>
+
+          <div class="question result-screen" data-step="result-no" hidden>
+            <div class="result-icon warning">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+            </div>
+            <h2>Private health insurance isn't the right fit right now</h2>
+            <p>As a student, the standard student public health insurance tariff is usually the better choice. There are special student private health insurance tariffs, but they're rarely more economical.</p>
+            <a href="/guide/who-qualifies" class="result-cta">Read the full eligibility guide</a>
+          </div>
+
+        </div>
+
+      </div>
+    </Section>
+  </main>
+</Layout>
+
+<script>
+  let totalScore = 0;
+  document.querySelectorAll('.question:not(.active)').forEach(q => ((q as HTMLElement).hidden = true));
+  (document.getElementById('progressFill') as HTMLElement).style.setProperty('--p', '20%');
+  const totalQ = 5;
+
+  function goTo(qId: string | number) {
+    document.querySelectorAll('.question').forEach(q => {
+      (q as HTMLElement).hidden = true;
+      q.classList.remove('active');
+    });
+
+    const target = document.querySelector(`[data-step="${qId}"]`) as HTMLElement;
+    if (target) {
+      target.hidden = false;
+      target.classList.add('active');
+    }
+
+    // Update progress
+    const isResult = typeof qId === 'string' && qId.startsWith('result');
+    const qNum = isResult ? totalQ : Math.min(Number(qId), totalQ);
+    const pct = (qNum / totalQ) * 100;
+    (document.getElementById('progressFill') as HTMLElement).style.setProperty('--p', pct + '%');
+    document.getElementById('progressLabel')!.textContent = isResult
+      ? 'Complete!'
+      : `Question ${qNum} of ${totalQ}`;
+
+    if (qId === 'result') {
+      const pts = document.getElementById('resultPoints')!;
+      const labels: Record<number, string> = {
+        10: 'Excellent profile for private health insurance',
+        8: 'Strong candidate for private health insurance',
+        6: 'Good candidate — worth exploring',
+        4: 'Mixed signals — careful comparison needed',
+      };
+      const label = Object.entries(labels).reverse().find(([k]) => totalScore >= Number(k));
+      pts.innerHTML = label ? `<span class="score-badge">${label[1]}</span>` : '';
+    }
+  }
+
+  document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const score = parseInt((btn as HTMLElement).dataset.score ?? '0');
+      const next = (btn as HTMLElement).dataset.next ?? 'result';
+      totalScore += score;
+      goTo(next);
+    });
+  });
+</script>
+
+<style>
+  .check-container { max-width: 680px; margin: 0 auto; padding: 0 var(--gutter); }
+  .progress-bar { margin-bottom: 24px; }
+  .progress-track { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 8px; overflow: hidden; }
+  .progress-fill { height: 100%; width: var(--p, 20%); background: var(--blue); border-radius: 3px; transition: width .4s ease; }
+  .progress-label { font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); font-weight: var(--fw-btn); }
+
+  .check-card { background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-card); padding: 24px 20px; }
+  @media (min-width: 640px) { .check-card { padding: 32px; } }
+
+  .question[hidden] { display: none; }
+  .question h2 { font-size: var(--fs-h2-sm); line-height: var(--lh-h2-sm); margin-bottom: 16px; }
+  .q-hint { font-size: var(--fs-nav); line-height: 20px; color: var(--text); margin-bottom: 20px; background: var(--blue-tint); padding: 12px 16px; border-radius: var(--radius-input); }
+
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .option-btn {
+    display: flex; align-items: center; gap: 16px; min-height: 64px;
+    background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-input);
+    padding: 12px 16px; text-align: left; cursor: pointer; font-family: inherit;
+    transition: border-color var(--ease), background var(--ease);
+  }
+  .option-btn:hover { border-color: var(--blue); background: var(--blue-tint); }
+  .option-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .option-btn strong { display: block; font-size: var(--fs-body); line-height: var(--lh-body); margin-bottom: 2px; color: var(--navy); }
+  .option-btn span:not(.icon-tile) { font-size: var(--fs-nav); line-height: 20px; color: var(--text-muted); }
+
+  .result-screen { text-align: center; padding: 8px 0; }
+  .result-icon { width: 64px; height: 64px; border-radius: var(--radius-tile); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; background: var(--blue-tint); color: var(--blue-dk); }
+  .result-screen p { color: var(--text); margin-bottom: 12px; }
+  .score-badge { display: inline-block; background: var(--blue-tint); color: var(--blue-dk); font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-btn); padding: 6px 14px; border-radius: 999px; margin-bottom: 24px; }
+  .result-points { margin-bottom: 24px; }
+  .result-cta {
+    display: flex; align-items: center; justify-content: center; min-height: var(--btn-h); padding: var(--btn-pad);
+    background: var(--blue); color: var(--surface); border-radius: var(--radius-btn); font-weight: var(--fw-btn);
+    margin-bottom: 12px; transition: background var(--ease);
+  }
+  .result-cta:hover { background: var(--blue-dk); }
+  .result-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--blue-dk); font-weight: var(--fw-btn); }
+  .result-link:hover { color: var(--navy); }
+</style>

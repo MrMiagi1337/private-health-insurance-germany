@@ -1,0 +1,86 @@
+---
+interface Insurer { name: string; tag: string; reason: string; href: string; }
+interface Props {
+  headline?: string;
+  kicker?: string;
+  insurers?: Insurer[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const {
+  headline = 'Best private health insurers for expats',
+  kicker = 'Insurer reviews',
+  insurers = [],
+  ctaLabel = 'See all reviews →',
+  ctaHref = '/top-insurers',
+} = Astro.props;
+---
+
+<section class="ins-section">
+  <div class="container-wide">
+    <div class="ins-header">
+      <div>
+        {kicker && <div class="section-kicker">{kicker}</div>}
+        <h2 class="section-title">{headline}</h2>
+      </div>
+      {ctaLabel && <a href={ctaHref} class="btn-outline">{ctaLabel}</a>}
+    </div>
+
+    <div class="ins-grid">
+      {insurers.map(ins => (
+        <a href={ins.href} class="ins-card">
+          <div class="ins-top">
+            <div class="ins-avatar">{ins.name[0]}</div>
+            <div class="ins-meta">
+              <strong>{ins.name}</strong>
+              <span class="ins-tag">{ins.tag}</span>
+            </div>
+          </div>
+          <p class="ins-reason">{ins.reason}</p>
+          <span class="ins-link">Full review →</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ins-section { background: var(--cream); padding: clamp(3.5rem, 6vw, 5.5rem) 0; }
+  .ins-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;
+  }
+  .ins-header .section-title { margin-bottom: 0; }
+  .btn-outline {
+    display: inline-flex; align-items: center;
+    background: transparent; color: var(--text);
+    font-size: .85rem; font-weight: 600; padding: .55rem 1.1rem;
+    border-radius: 8px; border: 1.5px solid var(--border);
+    transition: border-color .18s, background .18s;
+    font-family: var(--font-sans);
+  }
+  .btn-outline:hover { border-color: var(--ink); background: var(--cream-2); }
+  .ins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .ins-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+    padding: 1.25rem 1.5rem; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: .75rem;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  .ins-card:hover { border-color: var(--ink); box-shadow: var(--sh-sm); }
+  .ins-top { display: flex; align-items: center; gap: .75rem; }
+  .ins-avatar {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: var(--ink); color: var(--cream);
+    border-radius: 10px; font-size: .9rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-sans);
+  }
+  .ins-meta { display: flex; flex-direction: column; gap: 2px; }
+  .ins-meta strong { font-size: .9rem; font-weight: 700; color: var(--text); font-family: var(--font-sans); }
+  .ins-tag { font-size: .7rem; font-weight: 600; color: var(--muted-lt); font-family: var(--font-sans); }
+  .ins-reason { font-size: .78rem; color: var(--muted); line-height: 1.55; flex: 1; font-family: var(--font-sans); }
+  .ins-link { font-size: .78rem; font-weight: 700; color: var(--ink); font-family: var(--font-sans); }
+  @media (max-width: 860px) { .ins-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .ins-grid { grid-template-columns: 1fr; } }
+</style>

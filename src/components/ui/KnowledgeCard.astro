@@ -1,0 +1,18 @@
+---
+import Icon from './Icon.astro';
+interface Props { title: string; label: string; href: string; icon?: 'play' | 'calculator' | 'scale' | 'arrow'; class?: string }
+const { title, label, href, icon = 'arrow', class: cls = '' } = Astro.props;
+---
+<article class={`kn-card ${cls}`}>
+  <h3 set:html={title} />
+  <a class="btn btn-sm kn-btn" href={href}><Icon name={icon} size={14} />{label}</a>
+</article>
+
+<style>
+  .kn-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 24px; min-height: 200px; height: 100%; padding: 32px 24px 24px; text-align: center; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-tile); }
+  .kn-card h3 { margin: 0; font-size: 20px; line-height: 25px; font-weight: var(--fw-h3); color: var(--navy); }
+  .kn-btn { gap: 8px; }
+  .kn-btn :global(svg) { flex: none; }
+  .kn-btn::before { content: ""; position: absolute; inset: 0; }
+  .kn-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+</style>

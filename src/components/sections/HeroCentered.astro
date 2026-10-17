@@ -1,0 +1,43 @@
+---
+interface Cta { label: string; href: string; }
+interface Props { eyebrow?: string; title: string; lead?: string; primary?: Cta; secondary?: Cta; }
+const { eyebrow, title, lead, primary, secondary } = Astro.props;
+---
+<section class="hc">
+  <div class="container-narrow hc-inner">
+    {eyebrow && <p class="hc-eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {lead && <p class="hc-lead">{lead}</p>}
+    <slot />
+    {(primary || secondary) && (
+      <div class="hc-actions">
+        {primary && <a class="btn-primary" href={primary.href}>{primary.label}</a>}
+        {secondary && <a class="btn-secondary" href={secondary.href}>{secondary.label}</a>}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .hc { background: var(--band); padding: 64px 0 48px; }
+  .hc-inner { text-align: center; }
+  .hc-eyebrow {
+    display: inline-block; margin-bottom: 16px; padding: 4px 12px; border-radius: 999px;
+    background: var(--blue-tint); color: var(--blue-dk);
+    font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-btn);
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+  h1 { font-size: var(--fs-h1-mobile); line-height: var(--lh-h1-mobile); }
+  .hc-lead { margin: 24px auto 0; font-size: var(--fs-lead-sm); line-height: var(--lh-lead-sm); color: var(--text-muted); max-width: 700px; }
+  .hc-actions { display: flex; flex-direction: column; gap: 12px; align-items: stretch; margin-top: 32px; }
+  .hc a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  @media (min-width: 640px) {
+    .hc-actions { flex-direction: row; justify-content: center; align-items: center; }
+  }
+  @media (min-width: 960px) {
+    .hc { padding: 80px 0 96px; }
+    h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); }
+    .hc-lead { font-size: 20px; line-height: 30px; }
+    .hc-actions { margin-top: 40px; }
+  }
+</style>

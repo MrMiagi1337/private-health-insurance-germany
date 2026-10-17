@@ -1,0 +1,20 @@
+---
+interface Props { items: { title: string; text: string }[]; image?: string; alt?: string; }
+const { items, image, alt = '' } = Astro.props;
+---
+<div class:list={['tg', { 'tg--img': !!image }]}>
+  <div class="items">
+    {items.map((i) => (<div class="item"><h3>{i.title}</h3><p>{i.text}</p></div>))}
+  </div>
+  {image && <div class="media"><img src={image} alt={alt} width="600" height="800" loading="lazy" /></div>}
+</div>
+<style>
+  .tg { display: grid; gap: 32px; grid-template-columns: 1fr; }
+  .items { display: grid; gap: 28px; grid-template-columns: 1fr; max-width: var(--narrow); }
+  .item h3 { margin-bottom: 8px; }
+  .media img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius-card); background: var(--blue-tint); }
+  @media (min-width: 640px) { .items { grid-template-columns: 1fr 1fr; gap: 40px 32px; } }
+  @media (min-width: 960px) {
+    .tg--img { grid-template-columns: minmax(0, 1fr) 280px; gap: 48px; align-items: start; }
+  }
+</style>

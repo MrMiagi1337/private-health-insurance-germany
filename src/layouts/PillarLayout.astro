@@ -1,0 +1,83 @@
+---
+import Layout from './Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import HeroCentered from '../components/sections/HeroCentered.astro';
+import StickySectionNav from '../components/StickySectionNav.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import LeadForm from '../components/forms/LeadForm.astro';
+import GuideCard from '../components/ui/GuideCard.astro';
+import SectionIntro from '../components/sections/SectionIntro.astro';
+
+interface Cta { label: string; href: string }
+interface Related { title: string; excerpt: string; href: string; eyebrow?: string; readTime?: string; image?: string; alt?: string }
+interface Props {
+  title: string;
+  description: string;
+  heroTitle?: string;
+  eyebrow?: string;
+  lead?: string;
+  primary?: Cta;
+  secondary?: Cta;
+  breadcrumbs?: { label: string; href?: string }[];
+  sections: { id: string; label: string }[];
+  ctaTitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  related?: Related[];
+  leadSource?: string;
+  datePublished?: string;
+  dateModified?: string;
+}
+const {
+  title, description, heroTitle = title, eyebrow, lead = description, primary, secondary,
+  breadcrumbs = [{ label: 'Home', href: '/' }, { label: title }],
+  sections,
+  ctaTitle = 'Find out which private health insurance fits you',
+  ctaText = 'Start the Eligibility Check', ctaHref = '/eligibility-check',
+  related = [], leadSource = 'phig-pillar',
+  datePublished = '2026-01-15', dateModified = '2026-10-01',
+} = Astro.props;
+
+const articleLd = {
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, datePublished, dateModified,
+  author: { '@type': 'Organization', name: 'My Healthcare Broker' },
+  publisher: { '@type': 'Organization', name: 'Private Health Insurance Germany' },
+};
+---
+<Layout title={title} description={description}>
+  <main>
+    <Breadcrumbs items={breadcrumbs} />
+    <HeroCentered eyebrow={eyebrow} title={heroTitle} lead={lead} primary={primary} secondary={secondary} />
+    <StickySectionNav sections={sections} />
+
+    <slot />
+
+    <section class="pl-block"><div class="container"><CtaBand title={ctaTitle} buttonText={ctaText} href={ctaHref} /></div></section>
+    <section class="pl-block" id="contact"><div class="container"><LeadForm source={leadSource} /></div></section>
+
+    {related.length > 0 ? (
+      <section class="pl-block pl-last">
+        <div class="container">
+          <SectionIntro title="Related guides" />
+          <div class="pl-grid">
+            {related.map((r) => <GuideCard {...r} />)}
+          </div>
+        </div>
+      </section>
+    ) : <div class="pl-last" />}
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+</Layout>
+
+<style>
+  .pl-block { padding-top: var(--section-y-mobile); }
+  .pl-last { padding-bottom: var(--section-y-mobile); }
+  .pl-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+  @media (min-width: 640px) { .pl-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) {
+    .pl-block { padding-top: var(--section-y); }
+    .pl-last { padding-bottom: var(--section-y); }
+    .pl-grid { grid-template-columns: repeat(3, 1fr); gap: 25px; }
+  }
+</style>

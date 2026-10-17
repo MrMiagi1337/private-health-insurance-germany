@@ -1,0 +1,197 @@
+---
+import Input from './Input.astro';
+import RadioTile from './RadioTile.astro';
+interface Props { source?: string; title?: string; lead?: string; bullets?: string[]; compact?: boolean; }
+const {
+  source = 'phig-contact',
+  title = 'Personal advice, not a sales pitch.',
+  lead = 'An independent consultant walks you through your options in English, so the policy you sign still fits in ten years.',
+  bullets = ['Independent consultants, not tied to one insurer', 'Free of charge for you', 'A reply within one working day'],
+  compact = false,
+} = Astro.props;
+const uid = source.replace(/[^a-z0-9]+/gi, '-');
+const titleId = `lf-title-${uid}`;
+const PHONE = '+49 711 96 98 17 20';
+---
+<section class="lf-wrap" data-lead-form data-source={source} aria-labelledby={titleId}>
+<div class:list={["lf", { "lf--compact": compact }]}>
+  <div class="lf-card">
+    <div class="lf-adv">
+      <span class="lf-av" aria-hidden="true"><img src="/images/photos/pastel-advisor-avatar.jpg" alt="" width="400" height="400" loading="lazy" decoding="async" /></span>
+      <p class="lf-name">Michael</p>
+      <p class="lf-role">Independent consultant, My Healthcare Broker</p>
+      <a class="lf-tel" href="tel:+4971196981720">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+        <span>{PHONE}</span>
+      </a>
+    </div>
+    <form novalidate data-form>
+      <Input uid={uid} label="Full name" name="name" required autocomplete="name" />
+      <Input uid={uid} label="Email" name="email" type="email" required autocomplete="email" />
+      <Input uid={uid} label="Phone" name="phone" type="tel" optional autocomplete="tel" inputmode="tel" />
+      <fieldset>
+        <legend>Your situation</legend>
+        <div class="tiles">
+          <RadioTile name="status" value="Employee" label="Employee" checked>
+            <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2M3 13h18"/></svg>
+          </RadioTile>
+          <RadioTile name="status" value="Self-employed" label="Self-employed">
+            <svg viewBox="0 0 24 24"><path d="M4 20V10l8-6 8 6v10M9 20v-6h6v6"/></svg>
+          </RadioTile>
+          <RadioTile name="status" value="Student" label="Student">
+            <svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5zM6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/></svg>
+          </RadioTile>
+          <RadioTile name="status" value="Other" label="Other">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9S14.5 18.5 12 21c-2.5-2.5-3.5-5.5-3.5-9S9.5 5.5 12 3z"/></svg>
+          </RadioTile>
+        </div>
+      </fieldset>
+      <div class="hp" aria-hidden="true">
+        <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      <input type="hidden" name="ts" value="" />
+      <div class="consent">
+        <label class="chk">
+          <input type="checkbox" name="consent" aria-describedby={`err-${uid}-consent`} />
+          <span class="box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+          <span>I agree that My Healthcare Broker may contact me about my enquiry. See the <a href="/privacy">privacy policy</a>.</span>
+        </label>
+        <p class="field-err" id={`err-${uid}-consent`} data-err-for="consent" hidden></p>
+      </div>
+      <button type="submit" class="btn btn-primary" data-submit>Request free advice</button>
+      <p class="form-err" data-form-err role="alert" hidden></p>
+    </form>
+    <div class="ok" data-success hidden tabindex="-1" role="status" aria-live="polite" aria-labelledby={`ok-${uid}`}>
+      <span class="ok-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <h3 id={`ok-${uid}`}>Thank you, we have your request</h3>
+      <p>One of our independent consultants will contact you within one working day.</p>
+    </div>
+  </div>
+  {!compact && (
+    <div class="lf-intro">
+      <h2 id={titleId}>{title}</h2>
+      {lead && <p class="lf-lead">{lead}</p>}
+      <ul>
+        {bullets.map((b) => (
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+  {compact && <h2 id={titleId} class="sr">{title}</h2>}
+</div>
+</section>
+
+<style>
+  .lf-wrap { container-type: inline-size; }
+  .lf { display: grid; gap: 32px; }
+  .lf-intro { order: -1; }
+  .lf-intro h2 { margin: 0 0 16px; }
+  .lf-lead { margin: 0 0 32px; font-size: var(--fs-intro); line-height: var(--lh-intro); color: var(--text); }
+  .lf-intro ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .lf-intro li { display: flex; gap: 12px; align-items: flex-start; color: var(--text); font-size: var(--fs-body); line-height: var(--lh-body); }
+  .lf-intro li svg { flex: none; width: 24px; height: 24px; padding: 4px; border-radius: 50%; background: var(--blue); fill: none; stroke: var(--surface); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .lf-card { background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-banner); padding: 32px 20px; width: 100%; max-width: 448px; }
+  .lf--compact .lf-card { max-width: none; }
+  .lf-adv { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 24px; }
+  .lf-av { position: relative; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: var(--blue-tint); margin-bottom: 12px; }
+  .lf-av img { position: absolute; width: 352px; max-width: none; height: auto; left: -74px; top: -49px; }
+  .lf-name { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-h3); color: var(--navy); }
+  .lf-role { margin: 4px 0 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+  .lf-tel { margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: var(--fs-h4); line-height: var(--lh-h4); font-weight: var(--fw-btn); color: var(--blue); }
+  .lf-tel svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .lf-tel:hover { color: var(--blue-dk); }
+  form { display: grid; gap: 20px; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend { padding: 0; margin-bottom: 8px; font-size: var(--fs-small); font-weight: var(--fw-h3); color: var(--navy); }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .consent { background: var(--band-form); border-radius: var(--radius-input); padding: 12px; }
+  .chk { position: relative; display: flex; gap: 12px; align-items: flex-start; min-height: 44px; padding: 4px 0; cursor: pointer; font-size: var(--fs-caption); line-height: var(--lh-caption); color: var(--text); }
+  .chk input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; left: 0; top: 0; }
+  .box { flex: none; width: 24px; height: 24px; border-radius: var(--radius-input); border: var(--border-w) solid var(--border); display: grid; place-items: center; background: var(--surface); transition: background var(--ease), border-color var(--ease); }
+  .box svg { width: 16px; height: 16px; fill: none; stroke: var(--surface); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+  .chk input:checked + .box { background: var(--blue); border-color: var(--blue); }
+  .chk input:checked + .box svg { opacity: 1; }
+  .chk input:focus-visible + .box { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .chk a { color: var(--blue-dk); text-decoration: underline; }
+  .field-err, .form-err { margin: 6px 0 0; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--error); }
+  .form-err { margin: 0; padding: 12px 14px; border: var(--border-w) solid var(--error); border-radius: var(--radius-input); }
+  .btn { width: 100%; }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+  .ok { text-align: center; padding: 24px 0; }
+  .ok:focus { outline: none; }
+  .ok-ic { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: var(--radius-tile); background: var(--blue-tint); color: var(--blue); }
+  .ok-ic svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+  .ok h3 { margin: 16px 0 8px; }
+  .ok p { margin: 0; color: var(--text-muted); }
+  @media (min-width: 481px) { .lf-card { padding: 32px; } }
+  @container (min-width: 800px) {
+    .lf { grid-template-columns: 448px 1fr; gap: 112px; align-items: start; }
+    .lf-intro { order: 0; padding-top: 120px; }
+    .lf--compact { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const P = 'phig_attr';
+  const q = new URLSearchParams(location.search);
+  let attr: Record<string, string> = {};
+  try { attr = JSON.parse(sessionStorage.getItem(P) || '{}'); } catch {}
+  if (!attr.landingPage) {
+    attr = {
+      landingPage: location.href,
+      referrer: document.referrer || '',
+      utmSource: q.get('utm_source') || '',
+      utmMedium: q.get('utm_medium') || '',
+      utmCampaign: q.get('utm_campaign') || '',
+    };
+    try { sessionStorage.setItem(P, JSON.stringify(attr)); } catch {}
+  }
+  document.querySelectorAll<HTMLElement>('[data-lead-form]').forEach((root) => {
+    const form = root.querySelector<HTMLFormElement>('[data-form]')!;
+    const val = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    val('ts').value = String(Date.now());
+    const btn = root.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const formErr = root.querySelector<HTMLElement>('[data-form-err]')!;
+    const setErr = (n: string, msg: string) => {
+      const el = root.querySelector<HTMLElement>(`[data-err-for="${n}"]`);
+      if (el) { el.textContent = msg; el.hidden = !msg; }
+      val(n)?.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formErr.hidden = true;
+      const name = val('name').value.trim(), email = val('email').value.trim();
+      const consent = val('consent').checked;
+      const okName = name.length >= 2, okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      setErr('name', okName ? '' : 'Please enter your full name.');
+      setErr('email', okEmail ? '' : 'Please enter a valid email address.');
+      setErr('consent', consent ? '' : 'Please confirm your consent to continue.');
+      if (!okName || !okEmail || !consent) { form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus(); return; }
+      const status = (form.querySelector('input[name="status"]:checked') as HTMLInputElement | null)?.value || '';
+      const payload = {
+        source: root.dataset.source || 'phig-contact',
+        name, email, phone: val('phone').value.trim(), status, consent,
+        hp: val('company').value, ts: Number(val('ts').value),
+        pageUrl: location.href, landingPage: attr.landingPage, referrer: attr.referrer,
+        utmSource: attr.utmSource, utmMedium: attr.utmMedium, utmCampaign: attr.utmCampaign,
+      };
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        const ok = root.querySelector<HTMLElement>('[data-success]')!;
+        ok.hidden = false; ok.focus();
+      } catch {
+        formErr.textContent = 'Sorry, we could not send your request. Your details are still here, please try again in a moment.';
+        formErr.hidden = false;
+      } finally { btn.disabled = false; }
+    });
+  });
+</script>

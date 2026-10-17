@@ -4,7 +4,6 @@ import Layout from './Layout.astro';
 interface Props {
   title: string;
   description: string;
-  emoji?: string;
   readTime?: string;
   updatedDate?: string;
   showInsuranceCTA?: boolean;
@@ -14,7 +13,6 @@ interface Props {
 const {
   title,
   description,
-  emoji = '📖',
   readTime = '5 min read',
   updatedDate = '2025',
   showInsuranceCTA = true,
@@ -30,7 +28,7 @@ const {
       <ol>
         <li><a href="/">Home</a></li>
         <li aria-hidden="true">›</li>
-        <li><a href="/guides">Guides</a></li>
+        <li><a href="/guide">Guides</a></li>
         <li aria-hidden="true">›</li>
         <li aria-current="page">{title}</li>
       </ol>
@@ -67,8 +65,8 @@ const {
             <div class="cta-inner">
               <p class="cta-eyebrow">Health insurance tip</p>
               <h3>Earning over €77,400/year?</h3>
-              <p>You may be eligible for private health insurance in Germany. See how GKV and PKV compare for your situation.</p>
-              <a href="/guides/german-health-insurance" class="cta-btn">
+              <p>You may be eligible for private health insurance in Germany. See how public and private health insurance compare for your situation.</p>
+              <a href="/compare" class="cta-btn">
                 See how much you'd save
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>

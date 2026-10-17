@@ -1,0 +1,79 @@
+---
+interface Props {
+  headline?: string;
+  subheadline?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaSecondaryLabel?: string;
+  ctaSecondaryHref?: string;
+}
+const {
+  headline = 'Private Health Insurance in Germany',
+  subheadline = 'The independent guide for expats — in plain English.',
+  ctaLabel = 'Get free broker advice →',
+  ctaHref = '/contact',
+  ctaSecondaryLabel = 'Check my eligibility',
+  ctaSecondaryHref = '/eligibility-check',
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="container-wide hero-inner">
+    <div class="hero-content">
+      <h1>{headline}</h1>
+      <p class="hero-sub">{subheadline}</p>
+      <div class="hero-actions">
+        <a href={ctaHref} class="btn-black">{ctaLabel}</a>
+        {ctaSecondaryLabel && (
+          <a href={ctaSecondaryHref} class="btn-ghost">{ctaSecondaryLabel}</a>
+        )}
+      </div>
+      <div class="trust">
+        <span class="trust-dot"></span>
+        §34d licensed brokers &nbsp;·&nbsp; Free &nbsp;·&nbsp; English service
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: var(--cream);
+    padding: clamp(5rem, 10vw, 9rem) 0 clamp(4rem, 8vw, 7rem);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-inner { max-width: 720px; }
+  h1 {
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    font-weight: 700; color: var(--ink);
+    margin-bottom: 1.5rem; line-height: 1.08;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; max-width: 540px;
+  }
+  .hero-actions { display: flex; gap: .85rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .btn-black {
+    display: inline-flex; align-items: center;
+    background: var(--ink); color: var(--surface);
+    font-size: .95rem; font-weight: 600; padding: .9rem 1.75rem;
+    border-radius: 10px; transition: opacity .18s;
+  }
+  .btn-black:hover { opacity: .85; }
+  .btn-ghost {
+    display: inline-flex; align-items: center;
+    background: transparent; color: var(--ink);
+    font-size: .95rem; font-weight: 600; padding: .9rem 1.75rem;
+    border-radius: 10px; border: 1.5px solid var(--border);
+    transition: border-color .18s, background .18s;
+  }
+  .btn-ghost:hover { border-color: var(--ink); background: var(--cream-2); }
+  .trust {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-size: .78rem; color: var(--muted-lt); font-weight: 500;
+  }
+  .trust-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(34,197,94,.5);
+  }
+</style>

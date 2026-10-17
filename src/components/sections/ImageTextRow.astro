@@ -1,0 +1,35 @@
+---
+interface Props { title: string; text: string; image: string; imageWebp?: string; alt: string; reverse?: boolean; level?: 2 | 3; linkText?: string; href?: string; text2?: string; bullets?: string[]; }
+const { title, text, image, imageWebp, alt, reverse = false, level = 2, linkText, href, text2, bullets = [] } = Astro.props;
+const webp = imageWebp ?? (/\.jpe?g$/.test(image) ? image.replace(/\.jpe?g$/, '.webp') : undefined);
+const isPh = image.includes('placeholder');
+const H = `h${level}`;
+---
+<div class:list={['row', { 'row--rev': reverse }]}>
+  <div class:list={['media', { ph: isPh }]}><picture>{webp && <source srcset={webp} type="image/webp" />}<img src={image} alt={isPh ? '' : alt} width="800" height="600" loading="lazy" decoding="async" /></picture></div>
+  <div class="body">
+    <H>{title}</H>
+    <p>{text}</p>
+    {text2 && <p>{text2}</p>}
+    {bullets.length > 0 && (
+      <ul class="bl" role="list">{bullets.map((b) => (
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>{b}</span></li>
+      ))}</ul>
+    )}
+    {linkText && href && <a class="btn-ghost" href={href}>{linkText}</a>}
+  </div>
+</div>
+<style>
+  .row { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
+  .media { border-radius: var(--radius-card); }
+  .bl { list-style: none; display: grid; gap: 10px; margin: 0 0 24px; }
+  .bl li { display: flex; gap: 10px; align-items: flex-start; color: var(--text); }
+  .bl svg { flex: none; margin-top: 3px; color: var(--blue); }
+  .media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-card); background: var(--blue-tint); }
+  .body :global(h2), .body :global(h3) { margin-bottom: 16px; }
+  .body p { color: var(--text); margin-bottom: 20px; }
+  @media (min-width: 900px) {
+    .row { grid-template-columns: 1fr 1fr; gap: 64px; }
+    .row--rev .media { order: 2; }
+  }
+</style>

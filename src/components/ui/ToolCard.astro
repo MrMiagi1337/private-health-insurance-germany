@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+interface Props { title: string; text: string; href: string; icon?: 'checklist' | 'calculator' | 'scale' | 'shield' | 'globe'; tone?: 'blue' | 'green' | 'gold'; class?: string }
+const { title, text, href, icon = 'checklist', tone = 'blue', class: cls = '' } = Astro.props;
+---
+<article class={`tool-card ${cls}`}>
+  <span class={`tool-ico tone-${tone}`} aria-hidden="true"><Icon name={icon} size={28} /></span>
+  <h3><a href={href} class="tool-link">{title}</a></h3>
+  <p>{text}</p>
+</article>
+
+<style>
+  .tool-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; height: 100%; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-card); padding: 24px; transition: border-color var(--ease); }
+  .tool-card:hover { border-color: var(--blue); }
+  .tool-ico { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; margin: 0 0 16px; border-radius: 50%; color: var(--surface); box-shadow: 0 4px 10px rgba(0,16,75,.12), inset 0 -2px 4px rgba(0,16,75,.12); }
+  .tone-blue { background: linear-gradient(150deg, var(--blue-light) -20%, var(--blue) 90%); }
+  .tone-green { background: linear-gradient(150deg, var(--green-lt) -20%, var(--green) 95%); }
+  .tone-gold { background: linear-gradient(150deg, var(--gold-lt) -20%, var(--gold) 95%); }
+  .tool-card h3 { margin: 0; font-size: 20px; line-height: 25px; font-weight: var(--fw-h3); color: var(--navy); }
+  .tool-link { color: inherit; text-decoration: none; }
+  .tool-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius-card); }
+  .tool-link:focus-visible { outline: none; }
+  .tool-link:focus-visible::after { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .tool-card p { margin: 12px 0 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+  @media (min-width: 640px) { .tool-card h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); } }
+</style>

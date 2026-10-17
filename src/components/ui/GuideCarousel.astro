@@ -1,0 +1,77 @@
+---
+// Scroll-snap carousel with arrows + dots, no autoplay. Slot = cards. Title is the optional h2 on the left.
+interface Props { title?: string }
+const { title } = Astro.props;
+---
+<div class="gc" data-gc>
+  <div class="gc-head">
+    {title && <h2 class="gc-title">{title}</h2>}
+    <div class="gc-arrows">
+      <button type="button" class="gc-arrow" data-prev aria-label="Previous"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg></button>
+      <button type="button" class="gc-arrow" data-next aria-label="Next"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg></button>
+    </div>
+  </div>
+  <div class="gc-track" data-track tabindex="0" role="group" aria-label={title ?? 'Guides'}><slot /></div>
+  <div class="gc-dots" data-dots></div>
+</div>
+
+<style>
+  .gc-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
+  .gc-title { margin: 0; }
+  .gc-arrows { display: flex; gap: 16px; margin-left: auto; }
+  .gc-arrow { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: var(--border-w) solid var(--border); background: var(--surface); color: var(--navy); cursor: pointer; box-shadow: 0 1px 3px rgba(0,16,75,.08); position: relative; }
+  .gc-arrow::before { content: ""; position: absolute; inset: -6px; }
+  .gc-arrow:disabled { color: var(--text-faint); opacity: .5; cursor: default; }
+  .gc-arrow:focus-visible, .gc-track:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .gc-track { display: grid; grid-auto-flow: column; grid-auto-columns: 82%; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; padding-bottom: 2px; }
+  .gc-track::-webkit-scrollbar { display: none; }
+  .gc-track > :global(*) { scroll-snap-align: start; min-width: 0; }
+  @media (min-width: 640px) { .gc-track { grid-auto-columns: calc((100% - var(--grid-gap)) / 2); gap: var(--grid-gap); } }
+  @media (min-width: 960px) { .gc-track { gap: 40px; grid-auto-columns: calc((100% - 80px) / 3); } }
+  .gc-dots { display: flex; gap: 12px; align-items: center; margin-top: 32px; min-height: 10px; }
+  .gc-dots :global(button) { position: relative; width: 10px; height: 10px; padding: 0; border: 0; border-radius: 5px; background: var(--text-faint); cursor: pointer; transition: width var(--ease), background var(--ease); }
+  .gc-dots :global(button)::before { content: ""; position: absolute; inset: -17px -6px; }
+  .gc-dots :global(button[aria-current="true"]) { width: 40px; background: var(--navy); }
+  .gc[data-single] .gc-dots, .gc[data-single] .gc-arrows { display: none; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gc]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]')!;
+    const dotsEl = root.querySelector<HTMLElement>('[data-dots]')!;
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = root.querySelector<HTMLButtonElement>('[data-next]')!;
+    const slides = () => Array.from(track.children) as HTMLElement[];
+    const step = () => { const s = slides(); return s.length > 1 ? s[1].offsetLeft - s[0].offsetLeft : track.clientWidth; };
+    const perView = () => Math.max(1, Math.round(track.clientWidth / step()));
+    const pages = () => Math.max(1, slides().length - perView() + 1);
+    const current = () => Math.min(pages() - 1, Math.round(track.scrollLeft / step()));
+    const update = () => {
+      const c = current();
+      Array.from(dotsEl.children).forEach((d, i) => d.setAttribute('aria-current', String(i === c)));
+      prev.disabled = c <= 0;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+    const build = () => {
+      const n = pages();
+      root.toggleAttribute('data-single', n <= 1);
+      dotsEl.innerHTML = '';
+      for (let i = 0; i < n; i++) {
+        const b = document.createElement('button');
+        b.type = 'button'; b.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        b.addEventListener('click', () => track.scrollTo({ left: i * step(), behavior: 'smooth' }));
+        dotsEl.appendChild(b);
+      }
+      update();
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+    });
+    window.addEventListener('resize', build);
+    build();
+  });
+</script>

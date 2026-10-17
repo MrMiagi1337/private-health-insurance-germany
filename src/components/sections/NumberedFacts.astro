@@ -1,0 +1,18 @@
+---
+interface Props { items: { title: string; text: string }[]; }
+const { items } = Astro.props;
+---
+<ol class="facts">
+  {items.map((i, n) => (
+    <li><span class="num" aria-hidden="true">{n + 1}</span><div><h3>{i.title}</h3><p>{i.text}</p></div></li>
+  ))}
+</ol>
+<style>
+  .facts { list-style: none; margin: 0 auto; display: grid; gap: 32px; grid-template-columns: 1fr; }
+  li { position: relative; display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; }
+  li p { font-size: var(--fs-body); line-height: var(--lh-body); }
+  li:not(:last-child)::before { content: ""; position: absolute; left: 31.5px; top: 72px; bottom: -24px; width: 1px; background: var(--border); }
+  @media (min-width: 900px) { .facts { grid-template-columns: 1fr 1fr; gap: 48px 64px; } li:nth-child(odd)::before, li::before { display: none; } }
+  .num { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-tile); background: var(--blue-tint); color: var(--blue-dk); font-weight: var(--fw-heading); font-size: var(--fs-h3); line-height: 1; }
+  h3 { margin-bottom: 6px; }
+</style>

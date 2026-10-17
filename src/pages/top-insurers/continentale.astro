@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 
 const insurer = {
   name: "Continentale",
-  tagline: "Dortmund-based mutual insurer with some of the most flexible tariff structures in the German PKV market.",
+  tagline: "Dortmund-based mutual insurer with some of the most flexible tariff structures in the German private health insurance market.",
   founded: "1874",
   hq: "Dortmund",
   type: "Mutual insurer",
@@ -23,7 +23,7 @@ const schema = {
   "@graph": [
     {
       "@type": "Article",
-      "headline": "Continentale PKV Review 2026 - Private Health Insurance Germany",
+      "headline": "Continentale Private Health Insurance Review 2026 - Private Health Insurance Germany",
       "author": { "@type": "Person", "name": "Marco Maurelli", "url": "https://private-health-insurance-germany.com/about" },
       "dateModified": "2026-04-01"
     },
@@ -40,8 +40,8 @@ const schema = {
 ---
 
 <Layout
-  title="Continentale PKV Review 2026 - Private Health Insurance Germany"
-  description="Independent review of Continentale private health insurance in Germany. Pros, cons, tariffs, English support, and who Continentale PKV is best for in 2026."
+  title="Continentale Private Health Insurance Review 2026 - Private Health Insurance Germany"
+  description="Independent review of Continentale private health insurance in Germany. Pros, cons, tariffs, English support, and who Continentale private health insurance is best for in 2026."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   <main>
@@ -78,7 +78,7 @@ const schema = {
 
           <div class="review-body">
             <h2>Overview</h2>
-            <p>Founded in {insurer.founded} and headquartered in {insurer.hq}, {insurer.name} is a well-established name in the German PKV market. As a {insurer.type}, it brings distinct advantages in terms of how it balances policyholder interests with long-term financial sustainability.</p>
+            <p>Founded in {insurer.founded} and headquartered in {insurer.hq}, {insurer.name} is a well-established name in the German private health insurance market. As a {insurer.type}, it brings distinct advantages in terms of how it balances policyholder interests with long-term financial sustainability.</p>
 
             <h2>Pros</h2>
             <ul>{insurer.pros.map(pro => <li>{pro}</li>)}</ul>

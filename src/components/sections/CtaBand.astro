@@ -1,0 +1,37 @@
+---
+interface Props { title: string; text?: string; buttonText: string; href: string; secondaryText?: string; secondaryHref?: string; }
+const {
+  title,
+  text = 'Free, independent advice in English. No obligation, no fees.',
+  buttonText, href,
+  secondaryText = 'Talk to a consultant',
+  secondaryHref = '/contact',
+} = Astro.props;
+---
+<div class="cta">
+  <div class="cta-copy">
+    <h3>{title}</h3>
+    {text && <p>{text}</p>}
+  </div>
+  <div class="cta-btns">
+    <a class="cta-btn cta-btn--white" href={href}>{buttonText}</a>
+    {secondaryText && <a class="cta-btn cta-btn--line" href={secondaryHref}>{secondaryText}</a>}
+  </div>
+</div>
+<style>
+  .cta { background: var(--blue); border-radius: var(--radius-card); padding: 32px 24px; display: flex; flex-direction: column; gap: 28px; box-shadow: var(--sh-3); }
+  .cta h3 { margin: 0; color: var(--surface); font-size: 26px; line-height: 32px; font-weight: var(--fw-heading); }
+  .cta p { margin: 12px 0 0; font-size: var(--fs-lead-sm); line-height: var(--lh-lead-sm); color: var(--surface); max-width: 700px; }
+  .cta-btns { display: flex; flex-direction: column; gap: 12px; flex: none; }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 16px; border-radius: var(--radius-btn); font-size: var(--fs-btn); line-height: 24px; font-weight: var(--fw-btn); text-align: center; border: var(--border-w-btn) solid var(--surface); transition: background var(--ease), color var(--ease); }
+  .cta-btn--white { background: var(--surface); color: var(--blue); }
+  .cta-btn--white:hover { background: var(--blue-tint); }
+  .cta-btn--line { background: transparent; color: var(--surface); }
+  .cta-btn--line:hover { background: var(--on-dark-chip); }
+  .cta-btn:focus-visible { outline: 2px solid var(--surface); outline-offset: 3px; }
+  @media (min-width: 900px) {
+    .cta { flex-direction: row; align-items: flex-start; justify-content: space-between; padding: 48px; gap: 48px; }
+    .cta h3 { font-size: 32px; line-height: 40px; max-width: 700px; }
+    .cta-btns { width: 240px; margin-top: -4px; }
+  }
+</style>

@@ -4,14 +4,14 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="Private Health Insurance Cost Calculator Germany"
-  description="Estimate your private health insurance (PKV) costs in Germany 2026. Enter your age, income and health status to get a realistic monthly premium range based on real tariff data."
+  description="Estimate your private health insurance costs in Germany: enter your age, income and health status for a realistic monthly premium range."
 >
   <main>
     <section class="hero-section">
       <div class="container">
         <div class="hero-badge">Free Tool</div>
         <h1>Private Health Insurance Cost Calculator — Germany 2026</h1>
-        <p class="hero-sub">Get a realistic estimate of your private health insurance (PKV) premium in Germany. Based on real 2026 tariff data from Debeka, Allianz, DKV, and other leading insurers.</p>
+        <p class="hero-sub">Get a realistic estimate of your private health insurance premium in Germany. Based on real 2026 tariff data from Debeka, Allianz, DKV, and other leading insurers.</p>
       </div>
     </section>
 
@@ -84,11 +84,11 @@ import Layout from '../layouts/Layout.astro';
 
               <div class="result-compare">
                 <div class="compare-row">
-                  <span>Your GKV equivalent (est.)</span>
+                  <span>Your public health insurance equivalent (est.)</span>
                   <span class="gkv-cost" id="gkvCost">–</span>
                 </div>
                 <div class="compare-row highlight">
-                  <span>PKV estimate (mid-range)</span>
+                  <span>Private health insurance estimate (mid-range)</span>
                   <span class="pkv-cost" id="pkvMid">–</span>
                 </div>
                 <div class="compare-row savings">
@@ -107,7 +107,7 @@ import Layout from '../layouts/Layout.astro';
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <div>
                 <strong>Why does age matter so much?</strong>
-                <p>PKV premiums are calculated based on your age at entry. The younger you switch, the lower your base premium — and it stays lower for life.</p>
+                <p>Private health insurance premiums are calculated based on your age at entry. The younger you switch, the lower your base premium — and it stays lower for life.</p>
               </div>
             </div>
             <div class="info-card">
@@ -170,7 +170,7 @@ import Layout from '../layouts/Layout.astro';
     const high = Math.round(base * 1.18 / 5) * 5;
     const mid = Math.round(base / 5) * 5;
 
-    // GKV comparison
+    // public health insurance comparison
     const gkvRate = employment === 'freelancer' ? 0.148 : 0.074;
     const gkv = Math.round(Math.min(income, 5512) * gkvRate / 5) * 5;
     const saving = gkv - mid;

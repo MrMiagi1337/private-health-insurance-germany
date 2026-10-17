@@ -3,28 +3,34 @@ import Layout from '../../layouts/Layout.astro';
 
 const spokes = [
   {
-    title: 'Who Qualifies for PKV?',
+    title: 'Who Qualifies for private health insurance?',
     href: '/guide/who-qualifies',
     desc: 'The €77,400 income threshold, employment types, age considerations, and pre-existing conditions explained.',
     time: '8 min read',
   },
   {
-    title: 'PKV Costs and Contributions',
+    title: 'Private Health Insurance Costs and Contributions',
     href: '/guide/costs-and-contributions',
     desc: 'Real monthly premiums by age and plan level, employer contributions, and what happens at retirement.',
     time: '9 min read',
   },
   {
-    title: 'How to Switch from GKV to PKV',
+    title: 'How to Switch from public to private health insurance',
     href: '/guide/how-to-switch',
     desc: 'Step-by-step: notice periods, health questionnaire, timing, and the most common mistakes to avoid.',
     time: '10 min read',
   },
   {
-    title: 'PKV for Freelancers',
+    title: 'private health insurance for Freelancers',
     href: '/guide/for-freelancers',
-    desc: 'Why self-employed people often save hundreds per month with PKV, even without employer contribution.',
+    desc: 'Why self-employed people often save hundreds per month with private health insurance, even without employer contribution.',
     time: '9 min read',
+  },
+  {
+    title: 'Best Bank Account in Germany for Expats',
+    href: '/guide/bank-account',
+    desc: 'DKB, N26, ING, Revolut, Wise and more — ranked by fees, ease of opening, and English support.',
+    time: '7 min read',
   },
 ];
 
@@ -35,7 +41,7 @@ const schema = {
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
-        { "@type": "ListItem", "position": 2, "name": "PKV Guide", "item": "https://private-health-insurance-germany.com/guide" }
+        { "@type": "ListItem", "position": 2, "name": "Private Health Insurance Guide", "item": "https://private-health-insurance-germany.com/guide" }
       ]
     }
   ]
@@ -43,8 +49,8 @@ const schema = {
 ---
 
 <Layout
-  title="PKV Guide: Step-by-Step for Expats in Germany"
-  description="The complete step-by-step guide to private health insurance (PKV) in Germany for expats. Covers eligibility, costs, switching, and more. Updated 2026."
+  title="Private Health Insurance Guide: Step-by-Step for Expats in Germany"
+  description="The complete step-by-step guide to private health insurance in Germany for expats. Covers eligibility, costs, switching, and more. Updated 2026."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
 
@@ -55,26 +61,26 @@ const schema = {
         <ol>
           <li><a href="/">Home</a></li>
           <li aria-hidden="true">›</li>
-          <li aria-current="page">PKV Guide</li>
+          <li aria-current="page">Private Health Insurance Guide</li>
         </ol>
       </nav>
 
       <header class="page-header">
         <span class="page-tag">Complete Guide</span>
-        <h1>PKV Guide: Step-by-Step for Expats</h1>
+        <h1>Private Health Insurance Guide: Step-by-Step for Expats</h1>
         <p class="page-lead">Everything you need to understand private health insurance in Germany, broken down into four focused guides. Start with the overview or jump straight to the topic you need.</p>
       </header>
 
       <div class="hub-intro">
-        <p>Germany's private health insurance system (PKV) can save eligible expats €200-500 per month compared to public GKV. But it is a major, hard-to-reverse decision. This guide hub covers the four questions every expat should answer before switching.</p>
+        <p>Germany's private health insurance system can save eligible expats €200-500 per month compared to public public health insurance. But it is a major, hard-to-reverse decision. This guide hub covers the four questions every expat should answer before switching.</p>
         <div class="hub-ctas">
-          <a href="/private-health-insurance" class="btn-primary">Read the full PKV overview</a>
-          <a href="/quiz" class="btn-outline">Check my eligibility first</a>
+          <a href="/private-health-insurance" class="btn-primary">Read the full private health insurance overview</a>
+          <a href="/eligibility-check" class="btn-outline">Check my eligibility first</a>
         </div>
       </div>
 
       <section class="spokes-section">
-        <div class="sec-head"><h2>The four PKV guides</h2></div>
+        <div class="sec-head"><h2>The four private health insurance guides</h2></div>
         <div class="spokes-grid">
           {spokes.map((s, i) => (
             <a href={s.href} class="spoke-card">
@@ -92,12 +98,12 @@ const schema = {
       <section class="tools-section">
         <div class="sec-head"><h2>Quick tools</h2></div>
         <div class="tools-row">
-          <a href="/quiz" class="tool-item">
+          <a href="/eligibility-check" class="tool-item">
             <div class="ti-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div class="ti-text">
-              <div class="ti-title">Eligibility Quiz</div>
+              <div class="ti-title">Eligibility Check</div>
               <div class="ti-sub">2-minute check</div>
             </div>
           </a>
@@ -115,7 +121,7 @@ const schema = {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
             </div>
             <div class="ti-text">
-              <div class="ti-title">GKV vs PKV</div>
+              <div class="ti-title">public vs private health insurance</div>
               <div class="ti-sub">Full comparison</div>
             </div>
           </a>
@@ -133,8 +139,8 @@ const schema = {
 
       <div class="cta-block">
         <h2>Not sure where to start?</h2>
-        <p>Take the 2-minute quiz to find out if you qualify for PKV, then connect with a licensed broker who speaks English.</p>
-        <a href="/quiz" class="btn-primary">Take the eligibility quiz →</a>
+        <p>Take the 2-minute eligibility check to find out if you qualify for private health insurance, then connect with a licensed broker who speaks English.</p>
+        <a href="/eligibility-check" class="btn-primary">Take the eligibility check →</a>
       </div>
 
     </div>
@@ -167,6 +173,8 @@ const schema = {
 
   .spokes-section { margin-bottom: 3rem; }
   .spokes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  /* 5th card spans full width on even grid */
+  .spoke-card:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 540px; }
   .spoke-card {
     background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
     padding: 1.5rem 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start;

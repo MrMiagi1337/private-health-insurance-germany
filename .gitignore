@@ -2,3 +2,12 @@ node_modules/
 dist/
 .env
 .DS_Store
+.playwright-mcp/
+.wrangler/
+.astro/
+/*.png
+/*.jpg
+
+# private working material (reference measurements, specs, strategy) lives outside the repo
+design-ref/
+docs/

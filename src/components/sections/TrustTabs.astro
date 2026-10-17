@@ -1,0 +1,145 @@
+---
+interface Badge { kind?: 'independent' | 'insurers' | 'free'; label: string; sub?: string; }
+interface Panel { tab: string; title: string; text: string; badges?: Badge[]; }
+interface Props {
+  panels?: Panel[];
+}
+const defaultBadges: Badge[] = [
+  { kind: 'independent', label: 'Independent', sub: 'consultants' },
+  { kind: 'insurers', label: '40+', sub: 'insurers compared' },
+  { kind: 'free', label: 'Free of', sub: 'charge' },
+];
+const {
+  panels = [
+    { tab: 'Independence', title: 'Independent consultants, not an insurer',
+      text: 'We are independent consultants, so we compare the market for you instead of selling one insurer\'s product. You get a recommendation that fits your situation, not a sales target.', badges: defaultBadges },
+    { tab: 'Advice', title: 'Advice in English from start to finish',
+      text: 'A consultant who works with internationals explains your options, checks your eligibility and handles the application, so you never have to decode German insurance paperwork alone.', badges: defaultBadges },
+    { tab: 'Choice', title: 'Over 40 insurers compared in one place',
+      text: 'Premiums, benefits and conditions differ a lot between insurers. We compare them side by side and show you the trade-offs before you commit to anything.', badges: defaultBadges },
+    { tab: 'Cost', title: 'Free for you, with no obligation',
+      text: 'Our advice does not cost you anything and does not oblige you to sign. You decide when you are ready, and we stay available for questions afterwards.', badges: defaultBadges },
+  ],
+} = Astro.props;
+const uid = 'tt' + Math.random().toString(36).slice(2, 7);
+---
+<section class="tt" data-tt>
+  <div class="container">
+    <div class="tt-bar">
+      <div class="tt-tabs" role="tablist" aria-label="Why trust us">
+        {panels.map((p, i) => (
+          <button type="button" role="tab" id={`${uid}-t${i}`} aria-controls={`${uid}-p${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class:list={['tt-tab', { 'is-active': i === 0 }]}>{p.tab}</button>
+        ))}
+      </div>
+      <div class="tt-nav">
+        <button type="button" class="tt-arrow" data-dir="-1" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5L5.5 8l4.5 4.5"/></svg></button>
+        <button type="button" class="tt-arrow" data-dir="1" aria-label="Next"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg></button>
+      </div>
+    </div>
+
+    {panels.map((p, i) => (
+      <div class="tt-panel" role="tabpanel" id={`${uid}-p${i}`} aria-labelledby={`${uid}-t${i}`} hidden={i !== 0}>
+        <div class="tt-text">
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+        </div>
+        <ul class="tt-badges" role="list">
+          {(p.badges ?? defaultBadges).map((b) => (
+            <li class="tt-tile">
+              <div class="tt-frame">
+                {b.kind === 'independent' && <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="48" cy="34" r="12"/><path d="M26 74c0-12 10-20 22-20s22 8 22 20"/><path d="M60 22l5 5 9-10" stroke="var(--green)"/></svg>}
+                {b.kind === 'insurers' && <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="22" y="40" width="14" height="30" rx="2"/><rect x="41" y="26" width="14" height="44" rx="2"/><rect x="60" y="48" width="14" height="22" rx="2"/><path d="M18 76h60"/></svg>}
+                {b.kind === 'free' && <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="48" cy="46" r="22"/><path d="M56 38c-2-3-5-4-8-4-5 0-8 3-8 6 0 8 16 3 16 12 0 3-3 6-8 6-3 0-6-1-8-4"/><path d="M48 28v6M48 58v6"/></svg>}
+                <span class="tt-big">{b.label}</span>
+                {b.sub && <span class="tt-sub">{b.sub}</span>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <div class="tt-dots" aria-hidden="true">
+      {panels.map((_, i) => <span class:list={['tt-dot', { 'is-active': i === 0 }]}></span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tt { margin-top: 32px; padding-top: 32px; }
+  .tt-bar { min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .tt-tabs { min-width: 0; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--gutter)); padding-right: var(--gutter); }
+  .tt-tabs::-webkit-scrollbar { display: none; }
+  .tt-tab {
+    flex: none; min-height: 44px; padding: 0 12px; background: none; border: 0; cursor: pointer;
+    font-size: var(--fs-small); line-height: 21px; font-weight: 600; color: var(--navy);
+    position: relative; isolation: isolate; transition: color var(--ease);
+  }
+  .tt-tab::before { content: ""; position: absolute; inset: 7px 0; border-radius: var(--radius-chip); background: transparent; z-index: -1; transition: background var(--ease); }
+  .tt-tab:hover { color: var(--blue-dk); }
+  .tt-tab.is-active { color: var(--blue-dk); }
+  .tt-tab.is-active::before { background: var(--blue-tint); }
+  .tt-nav { display: none; gap: 16px; }
+  .tt-arrow {
+    width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    background: var(--surface); border: var(--border-w) solid var(--border); color: var(--text); cursor: pointer;
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--navy) 12%, transparent); transition: border-color var(--ease), color var(--ease);
+  }
+  .tt-arrow:hover { color: var(--blue); border-color: var(--blue); }
+
+  .tt-panel { margin-top: 24px; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .tt-panel[hidden] { display: none; }
+  .tt-text { min-width: 0; }
+  .tt-text h3 { font-size: 20px; line-height: 30px; font-weight: 700; color: var(--text); }
+  .tt-text p { margin-top: 16px; font-size: var(--fs-intro); line-height: var(--lh-intro); color: var(--text); }
+  .tt-badges { list-style: none; display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--gutter)); padding-right: var(--gutter); }
+  .tt-badges::-webkit-scrollbar { display: none; }
+  .tt-tile { flex: none; width: 168px; padding: 12px; background: var(--surface); border: 2px solid var(--border); border-radius: 2px; box-shadow: inset 0 0 6px color-mix(in srgb, var(--navy) 10%, transparent); }
+  .tt-frame { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14px 8px 12px; color: var(--blue); background: var(--band); }
+  .tt-frame svg { width: 72px; height: 72px; }
+  .tt-big { margin-top: 6px; font-size: var(--fs-intro); line-height: 24px; font-weight: var(--fw-heading); color: var(--navy); }
+  .tt-sub { font-size: var(--fs-caption); line-height: 18px; font-weight: 600; color: var(--text-muted); }
+
+  .tt-dots { display: flex; gap: 12px; margin-top: 24px; align-items: center; }
+  .tt-dot { width: 10px; height: 10px; border-radius: 5px; background: var(--text-faint); transition: width var(--ease), background var(--ease); }
+  .tt-dot.is-active { width: 40px; background: var(--navy); }
+  .tt-dot { opacity: .7; } .tt-dot.is-active { opacity: 1; }
+
+  @media (min-width: 960px) {
+    .tt { margin-top: 54px; padding-top: 0; }
+    .tt-nav { display: flex; }
+    .tt-tabs { margin-right: 0; padding-right: 0; }
+    .tt-panel { margin-top: 38px; grid-template-columns: 1fr auto; gap: 0 24px; align-items: end; min-height: 190px; }
+    .tt-text h3 { font-size: var(--fs-h4); line-height: 36px; }
+    .tt-text p { margin-top: 24px; font-size: var(--fs-lead); line-height: var(--lh-lead); }
+    .tt-badges { justify-content: flex-end; overflow: visible; margin-right: 0; padding-right: 0; gap: 12px; }
+    .tt-tile { width: 112px; padding: 8px; }
+    .tt-frame { padding: 10px 4px 10px; }
+    .tt-frame svg { width: 56px; height: 56px; }
+    .tt-big { font-size: 17px; line-height: 22px; }
+    .tt-dots { margin-top: 40px; }
+  }
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tt]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('.tt-tab')];
+    const panels = [...root.querySelectorAll<HTMLElement>('.tt-panel')];
+    const dots = [...root.querySelectorAll<HTMLElement>('.tt-dot')];
+    let cur = 0;
+    const show = (n: number, focus = false) => {
+      cur = (n + tabs.length) % tabs.length;
+      tabs.forEach((t, i) => { t.classList.toggle('is-active', i === cur); t.setAttribute('aria-selected', String(i === cur)); t.tabIndex = i === cur ? 0 : -1; });
+      panels.forEach((p, i) => { p.hidden = i !== cur; });
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === cur));
+      if (focus) tabs[cur].focus();
+      tabs[cur].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    };
+    tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
+    root.querySelector('.tt-tabs')!.addEventListener('keydown', (e) => {
+      const k = (e as KeyboardEvent).key;
+      if (k === 'ArrowRight') { e.preventDefault(); show(cur + 1, true); }
+      if (k === 'ArrowLeft') { e.preventDefault(); show(cur - 1, true); }
+    });
+    root.querySelectorAll<HTMLButtonElement>('.tt-arrow').forEach((b) => b.addEventListener('click', () => show(cur + Number(b.dataset.dir))));
+  });
+</script>

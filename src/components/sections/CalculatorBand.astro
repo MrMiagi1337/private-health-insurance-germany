@@ -1,0 +1,33 @@
+---
+interface Props { pill?: string; title: string; text?: string; buttonText?: string; href?: string; image: string; imageAlt?: string; }
+const {
+  pill = 'Free cost calculator',
+  title, text,
+  buttonText = 'Open the cost calculator', href = '/calculator',
+  image, imageAlt = '',
+} = Astro.props;
+---
+<section class="calc">
+  <div class="container calc-in">
+    <div class="calc-copy">
+      <span class="pill-solid">{pill}</span>
+      <h2>{title}</h2>
+      {text && <p>{text}</p>}
+      <a class="btn btn-primary" href={href}>{buttonText}</a>
+    </div>
+    <div class="calc-media"><img src={image} alt={imageAlt} width="640" height="420" loading="lazy" decoding="async" /></div>
+  </div>
+</section>
+<style>
+  .calc { background: var(--band); padding: var(--section-pad-alt-mobile) 0; border-block: var(--border-w) solid var(--border); overflow: hidden; }
+  .calc-in { display: grid; gap: 32px; align-items: center; }
+  .calc-copy { display: flex; flex-direction: column; align-items: flex-start; }
+  .calc-copy h2 { margin: 16px 0 16px; }
+  .calc-copy p { margin: 0 0 24px; max-width: 520px; }
+  .calc-media img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius-tile); box-shadow: var(--sh-3); }
+  @media (min-width: 900px) {
+    .calc { padding: var(--section-pad-alt) 0; }
+    .calc-in { grid-template-columns: 1fr 1fr; gap: 64px; }
+    .calc-copy h2 { max-width: 520px; }
+  }
+</style>

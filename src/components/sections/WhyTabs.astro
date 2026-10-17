@@ -1,0 +1,82 @@
+---
+// S5: segmented control + image/text panel. Copy via props; defaults are PHIG facts.
+interface Tab { label: string; title: string; paragraphs: string[]; image: string; alt: string; bg?: 'pink' | 'mint' | 'blue' }
+interface Props { tabs?: Tab[]; id?: string }
+const {
+  id = 'why',
+  tabs = [
+    { label: 'Independent advice', title: 'Independent advice', bg: 'pink', image: '/images/photos/nb-man-sofa.jpg', alt: 'Man reading a consultant recommendation on his phone',
+      paragraphs: [
+        'We are independent consultants. We compare 40+ insurers for your case and tell you which cover fits, instead of selling you one insurer.',
+        'You get a clear recommendation with the trade-offs explained, and you decide. The consultation is free of charge and without obligation.',
+      ] },
+    { label: 'Real human advisors', title: 'Real human advisors', bg: 'blue', image: '/images/photos/gpt-woman-kitchen.jpg', alt: 'Woman messaging her consultant from her kitchen',
+      paragraphs: [
+        'Private health insurance can get complicated fast. Who explains the contract? Who helps when a claim is rejected?',
+        'You talk to a named consultant by phone or video call. The same person helps with the application and stays your contact after you sign.',
+      ] },
+    { label: 'In English', title: 'In English', bg: 'mint', image: '/images/photos/flux-woman-street.jpg', alt: 'Woman walking through a Berlin street with a coffee',
+      paragraphs: [
+        'Moving to Germany is enough paperwork already. Our consultants work in English from the first call to the signed policy.',
+        'We explain German insurance terms in plain language and guide you through the forms, so nothing gets lost in translation.',
+      ] },
+  ],
+} = Astro.props;
+---
+<div class="why" data-why id={id}>
+  <div class="why-tabs" role="tablist" aria-label="Why people choose us">
+    {tabs.map((t, i) => (
+      <button type="button" role="tab" id={`${id}-tab-${i}`} aria-controls={`${id}-panel-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class="why-tab">{t.label}</button>
+    ))}
+  </div>
+  {tabs.map((t, i) => (
+    <div class="why-panel" role="tabpanel" id={`${id}-panel-${i}`} aria-labelledby={`${id}-tab-${i}`} hidden={i !== 0}>
+      <div class={`why-img why-img--${t.bg ?? 'blue'}`}><img src={t.image} alt={t.alt} width="240" height="264" loading="lazy" /></div>
+      <div class="why-copy">
+        <h3>{t.title}</h3>
+        {t.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .why { max-width: 920px; margin: 0 auto; }
+  .why-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; background: var(--band-form); border-radius: var(--radius-tile); }
+  .why-tab { min-height: 48px; padding: 8px 12px; border: 0; border-radius: var(--radius-btn); background: transparent; color: var(--navy); font-size: var(--fs-btn); line-height: 24px; font-weight: 600; cursor: pointer; transition: background var(--ease), box-shadow var(--ease); }
+  .why-tab:hover { background: color-mix(in srgb, var(--surface) 55%, transparent); }
+  .why-tab[aria-selected="true"] { background: var(--surface); box-shadow: var(--sh-1); }
+  .why-panel { display: grid; grid-template-columns: 240px 1fr; gap: 36px; margin-top: 60px; align-items: start; }
+  .why-panel[hidden] { display: none; }
+  .why-img { width: 240px; height: 264px; border-radius: var(--radius-card); overflow: hidden; background: var(--pastel-blue); }
+  .why-img--pink { background: var(--pastel-pink); }
+  .why-img--mint { background: var(--pastel-mint); }
+  .why-img img { width: 100%; height: 100%; object-fit: cover; }
+  .why-copy h3 { margin: 0 0 12px; }
+  .why-copy p { margin: 0 0 12px; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+  @media (max-width: 759px) {
+    .why-tabs { grid-template-columns: 1fr; }
+    .why-tab { min-height: 44px; }
+    .why-panel { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+    .why-img { width: 100%; height: 200px; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-why]').forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+    const select = (i: number, focus = false) => {
+      tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(i === j)); t.tabIndex = i === j ? 0 : -1; });
+      panels.forEach((p, j) => { p.hidden = i !== j; });
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i));
+      t.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); select((i + 1) % tabs.length, true); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); select((i - 1 + tabs.length) % tabs.length, true); }
+      });
+    });
+  });
+</script>

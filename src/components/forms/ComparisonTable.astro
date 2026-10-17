@@ -1,0 +1,34 @@
+---
+interface Row { label: string; private: string; public: string; }
+interface Props { rows: Row[]; privateLabel?: string; publicLabel?: string; }
+const { rows, privateLabel = 'Private health insurance', publicLabel = 'Public health insurance' } = Astro.props;
+---
+<div class="cmp" role="table" aria-label="Private versus public health insurance">
+  <div class="cmp-head" role="row">
+    <span role="columnheader" class="sr">Feature</span>
+    <span role="columnheader" class="col-lb">{privateLabel}</span>
+    <span role="columnheader" class="col-lb">{publicLabel}</span>
+  </div>
+  {rows.map((r) => (
+    <div class="cmp-row" role="row">
+      <span role="rowheader" class="feat">{r.label}</span>
+      <span role="cell" class="val" data-col={privateLabel}>{r.private}</span>
+      <span role="cell" class="val" data-col={publicLabel}>{r.public}</span>
+    </div>
+  ))}
+</div>
+<style>
+  .cmp { border-top: var(--border-w) solid var(--border); }
+  .sr { display: block; height: 1px; overflow: hidden; color: transparent; }
+  .cmp-head { display: none; }
+  .col-lb { font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-h3); letter-spacing: .08em; text-transform: uppercase; color: var(--blue-dk); }
+  .cmp-row { display: grid; gap: 8px; padding: 20px 0; border-bottom: var(--border-w) solid var(--border); }
+  .feat { font-weight: var(--fw-h3); color: var(--navy); font-size: var(--fs-body); line-height: var(--lh-body); }
+  .val { color: var(--text); font-size: var(--fs-body); line-height: var(--lh-body); }
+  .val::before { content: attr(data-col); display: block; font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-h3); letter-spacing: .08em; text-transform: uppercase; color: var(--blue-dk); }
+  @media (min-width: 640px) {
+    .cmp-head, .cmp-row { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 32px; align-items: start; }
+    .cmp-head { padding: 16px 0; border-bottom: var(--border-w) solid var(--border); }
+    .val::before { display: none; }
+  }
+</style>

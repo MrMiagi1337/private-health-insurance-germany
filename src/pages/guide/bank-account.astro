@@ -1,0 +1,712 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const banks = [
+  {
+    rank: 1,
+    name: 'DKB',
+    fullName: 'Deutsche Kreditbank',
+    slug: 'dkb',
+    logo: '/logos/dkb.svg',
+    tagline: 'Best overall for everyday banking',
+    highlight: 'DKB is widely considered the best free account in Germany for expats. A proper German bank with a full suite of services — completely free. Requires Anmeldung and Steuer-ID.',
+    badge: 'Top Pick',
+    badgeColor: 'green',
+    color: '#006AB3',
+    bgColor: '#e8f4fd',
+    features: [
+      'No monthly fee',
+      'Visa debit card included',
+      'Free cash withdrawals worldwide',
+      'Widely accepted across Germany',
+      'Account opening via video ident (≈20 min)',
+      'Good online banking app',
+    ],
+    cons: [
+      'Customer service only in German',
+      'Requires Schufa — hard for new arrivals',
+    ],
+    requires: 'Anmeldung + Steuer-ID required',
+    openUrl: '#',
+  },
+  {
+    rank: 2,
+    name: 'N26',
+    fullName: 'N26 Bank',
+    slug: 'n26',
+    logo: '/logos/n26.svg',
+    tagline: 'Best for digital-first banking',
+    highlight: 'Fully digital bank, popular with expats for its slick app and instant account opening — no Anmeldung needed on day one. Free tier available, premium plans from €4.90/mo.',
+    badge: 'No Anmeldung',
+    badgeColor: 'teal',
+    color: '#00C6A0',
+    bgColor: '#e6faf6',
+    features: [
+      'Open account without Anmeldung',
+      'English app and support',
+      'Free Mastercard debit card',
+      'Instant push notifications',
+      'Spaces sub-accounts for budgeting',
+      'Free tier available',
+    ],
+    cons: [
+      'Accounts can be frozen without warning',
+      'Fraud checks block legitimate payments',
+    ],
+    requires: 'Passport only to open',
+    openUrl: '#',
+  },
+  {
+    rank: 3,
+    name: 'ING',
+    fullName: 'ING Germany',
+    slug: 'ing',
+    logo: '/logos/ing.svg',
+    tagline: 'Best for savings & cashback',
+    highlight: 'ING offers a completely free current account with one of the best savings rates in Germany. Ideal once you have your Anmeldung. Known for reliability and great interest rates.',
+    badge: 'Best Savings',
+    badgeColor: 'orange',
+    color: '#FF6200',
+    bgColor: '#fff4ee',
+    features: [
+      'No monthly fee',
+      'Free Visa debit card',
+      'High-yield savings account (Tagesgeld)',
+      '1% cashback on card payments (first year)',
+      'Solid German banking app',
+      'Free ATM withdrawals in Eurozone',
+    ],
+    cons: [
+      'Customer support wait times over 1 hour',
+      'No physical branches anywhere',
+    ],
+    requires: 'Anmeldung required',
+    openUrl: '#',
+  },
+  {
+    rank: 4,
+    name: 'Commerzbank',
+    fullName: 'Commerzbank AG',
+    slug: 'commerzbank',
+    logo: '/logos/commerzbank.svg',
+    tagline: 'Best traditional full-service bank',
+    highlight: "Germany's second-largest bank. Excellent for those who want physical branches, a full banking suite, and face-to-face service in English (major cities). Girokonto from free (with conditions).",
+    badge: 'Branch Network',
+    badgeColor: 'yellow',
+    color: '#C4960A',
+    bgColor: '#fffce8',
+    features: [
+      '1,000+ branches across Germany',
+      'Free account with €700/mo income',
+      'Visa debit card included',
+      'English-speaking staff in major cities',
+      'Full investment & mortgage services',
+      'Comdirect online platform included',
+    ],
+    cons: [
+      'Monthly fee if income below €700',
+      'App less polished than digital banks',
+    ],
+    requires: 'Anmeldung + in-person or video ID',
+    openUrl: '#',
+  },
+  {
+    rank: 5,
+    name: 'Deutsche Bank',
+    fullName: 'Deutsche Bank AG',
+    slug: 'deutsche-bank',
+    logo: '/logos/deutsche-bank.svg',
+    tagline: 'Best premium account for professionals',
+    highlight: "Germany's largest bank. Premium accounts with strong international services, English support, and extensive branch network. Best for high earners and those needing private banking.",
+    badge: 'Premium',
+    badgeColor: 'blue',
+    color: '#0018A8',
+    bgColor: '#eef0ff',
+    features: [
+      'Premium banking with personal advisor',
+      'English language support available',
+      '1,400+ branches across Germany',
+      'Strong international wire transfers',
+      'Investment and wealth management',
+      'Mobile banking app (George)',
+    ],
+    cons: [
+      'Monthly fees from €6.90 — not free',
+      'Heavy reliance on paperwork, slow processes',
+    ],
+    requires: 'Anmeldung + in-person visit',
+    openUrl: '#',
+  },
+  {
+    rank: 6,
+    name: 'Revolut',
+    fullName: 'Revolut Bank',
+    slug: 'revolut',
+    logo: '/logos/revolut.svg',
+    tagline: 'Best for international transfers',
+    highlight: 'Revolut is the go-to for expats who send money internationally. Interbank exchange rates, multi-currency wallets, and instant transfers. Not a full German bank — use alongside a primary account.',
+    badge: 'FX Transfers',
+    badgeColor: 'blue',
+    color: '#0075EB',
+    bgColor: '#e8f3ff',
+    features: [
+      'Interbank exchange rates',
+      '25+ currencies in one account',
+      'Instant international transfers',
+      'Free plan available',
+      'Virtual + physical card',
+      'Excellent travel perks (premium)',
+    ],
+    cons: [
+      'No Girocard — some German shops only accept it',
+      'Support only via in-app chat',
+    ],
+    requires: 'Passport only, no Anmeldung needed',
+    openUrl: '#',
+  },
+  {
+    rank: 7,
+    name: 'Wise',
+    fullName: 'Wise (TransferWise)',
+    slug: 'wise',
+    logo: '/logos/wise.svg',
+    tagline: 'Best for currency exchange & transfers',
+    highlight: 'Wise offers real mid-market exchange rates with low, transparent fees. Ideal for receiving salary in multiple currencies or sending money home. Comes with a German IBAN.',
+    badge: 'Low FX Fees',
+    badgeColor: 'green',
+    color: '#163300',
+    bgColor: '#f0fde8',
+    features: [
+      'Real mid-market exchange rate',
+      'German IBAN (€ account)',
+      '40+ currencies supported',
+      'Transparent, low conversion fees',
+      'Wise debit card included',
+      'Receive salary in multiple currencies',
+    ],
+    cons: [
+      'Not a full bank — no overdraft or credit',
+      'Transfers occasionally frozen for verification',
+    ],
+    requires: 'Passport + selfie verification',
+    openUrl: '#',
+  },
+  {
+    rank: 8,
+    name: 'Sparkasse',
+    fullName: 'Sparkasse',
+    slug: 'sparkasse',
+    logo: '/logos/sparkasse.svg',
+    tagline: 'Best for regional coverage & trust',
+    highlight: 'The Sparkasse network covers every corner of Germany with thousands of ATMs and branches. Regional institutions — fees and services vary by state. Best as a supplementary account.',
+    badge: 'Nationwide ATMs',
+    badgeColor: 'red',
+    color: '#E5001A',
+    bgColor: '#fff0f2',
+    features: [
+      'Largest ATM network in Germany',
+      'Physical branches everywhere',
+      'Trusted German institution',
+      'Girocard accepted at all shops',
+      'Regional business banking',
+      'Free ATM withdrawals at own machines',
+    ],
+    cons: [
+      'No English support — German only',
+      'Fees and services vary by region',
+    ],
+    requires: 'Anmeldung + in-person visit required',
+    openUrl: '#',
+  },
+  {
+    rank: 9,
+    name: 'bunq',
+    fullName: 'bunq N.V.',
+    slug: 'bunq',
+    logo: '/logos/bunq.svg',
+    tagline: 'Best for eco-conscious digital banking',
+    highlight: 'bunq is the "bank of the free" — fully digital, multi-currency, and carbon-offset. Great for freelancers and digital nomads. Every plan plants trees. From €3.99/mo.',
+    badge: 'Eco-Friendly',
+    badgeColor: 'teal',
+    color: '#1DC57B',
+    bgColor: '#e8fdf3',
+    features: [
+      'Multi-currency account (Dutch IBAN)',
+      'Accepts non-residents easily',
+      'Up to 25 sub-accounts (Pockets)',
+      'Tree planting per €100 spent',
+      'Joint accounts and business plans',
+      'Instant transfers between bunq users',
+    ],
+    cons: [
+      'No free plan — starts at €3.99/mo',
+      'Dutch IBAN can cause issues with some German services',
+    ],
+    requires: 'Passport + selfie, no Anmeldung needed',
+    openUrl: '#',
+  },
+];
+
+const badgeStyles: Record<string, { bg: string; color: string }> = {
+  green:  { bg: '#dcfce7', color: '#15803d' },
+  blue:   { bg: '#dbeafe', color: '#1d4ed8' },
+  orange: { bg: '#ffedd5', color: '#c2410c' },
+  yellow: { bg: '#fef9c3', color: '#854d0e' },
+  teal:   { bg: 'var(--blue-tint)', color: 'var(--blue-dk)' },
+  red:    { bg: '#fee2e2', color: '#b91c1c' },
+  dark:   { bg: '#e5e7eb', color: '#1f2937' },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://private-health-insurance-germany.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Guide", "item": "https://private-health-insurance-germany.com/guide" },
+        { "@type": "ListItem", "position": 3, "name": "Bank Account in Germany", "item": "https://private-health-insurance-germany.com/guide/bank-account" }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Best Bank Account in Germany for Expats 2026 — Free Guide"
+  description="The best bank accounts in Germany for expats: DKB, N26, ING, Commerzbank, Revolut, Wise and more, compared on fees, requirements and English support."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+
+  <main>
+    <div class="page-wrap">
+
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li aria-hidden="true">›</li>
+            <li><a href="/guide">Guide</a></li>
+            <li aria-hidden="true">›</li>
+            <li aria-current="page">Bank Account</li>
+          </ol>
+        </nav>
+      </div>
+
+      <!-- Hero -->
+      <div class="page-hero">
+        <div class="container">
+          <span class="page-kicker">Expat Guide · 2026</span>
+          <h1>Best Bank Account in Germany for Expats</h1>
+          <p class="page-lead">Ranked by ease of opening, fees, English support, and real-world usability. From free accounts you can open on day one to full-service German banks.</p>
+          <div class="meta-row">
+            <span class="meta-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              By Marco Maurelli
+            </span>
+            <span class="meta-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Updated April 2026
+            </span>
+            <span class="meta-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              9 banks compared
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intro box -->
+      <div class="container">
+        <div class="intro-box">
+          <div class="intro-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div>
+            <strong>New to Germany?</strong> Most full German bank accounts (DKB, ING, Commerzbank) require an Anmeldung (residence registration). If you just arrived, open an N26, Revolut, or bunq account on day one — then switch or add DKB once you're registered.
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank cards grid -->
+      <div class="container-wide grid-section">
+        <div class="banks-grid">
+          {banks.map(bank => {
+            const bs = bank.badgeColor ? badgeStyles[bank.badgeColor] : null;
+            return (
+              <div class="bank-card" style={`--brand:${bank.color};--brand-bg:${bank.bgColor}`}>
+
+                <!-- Rank -->
+                <div class="card-rank">#{bank.rank}</div>
+
+                <!-- Logo -->
+                <div class="card-logo-wrap">
+                  <img src={bank.logo} alt={`${bank.name} logo`} class="card-logo" width="120" height="40" loading="lazy" />
+                  <div class="logo-glow" aria-hidden="true"></div>
+                </div>
+
+                <!-- Name + badge -->
+                <div class="card-head">
+                  <div>
+                    <h2 class="card-name">{bank.name}</h2>
+                    <p class="card-fullname">{bank.fullName}</p>
+                  </div>
+                  {bs && (
+                    <span class="card-badge" style={`background:${bs.bg};color:${bs.color}`}>{bank.badge}</span>
+                  )}
+                </div>
+
+                <!-- Tagline -->
+                <p class="card-tagline">{bank.tagline}</p>
+
+                <!-- Highlight -->
+                <p class="card-highlight">{bank.highlight}</p>
+
+                <!-- Features -->
+                <ul class="card-features">
+                  {bank.features.map(f => (
+                    <li>
+                      <svg class="icon-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <!-- Cons -->
+                <ul class="card-cons">
+                  {bank.cons.map(c => (
+                    <li>
+                      <svg class="icon-x" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+
+                <!-- Requires note -->
+                <div class="card-requires">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  {bank.requires}
+                </div>
+
+                <!-- CTA -->
+                <a href={bank.openUrl} class="card-cta" rel="noopener noreferrer">
+                  <span>Open account</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="cta-arrow" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <!-- Decorative top edge -->
+                <div class="card-edge" aria-hidden="true"></div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Tips section -->
+      <div class="container">
+        <div class="tips-section">
+          <h2>How to choose the right bank</h2>
+          <p class="tips-lead">The best account depends on when you arrived, your income, and what you need it for.</p>
+          <div class="tips-grid">
+            <div class="tip-card">
+              <div class="tip-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h3>Just arrived (no Anmeldung yet)</h3>
+              <p>Open N26, Revolut, or bunq immediately with just your passport. You'll have a working debit card within days while you sort out your registration.</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <h3>Settled (have Anmeldung + Steuer-ID)</h3>
+              <p>DKB is the top pick — fully free, Girocard + Visa, and widely accepted. ING is great if you also want a high-yield savings account.</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <h3>Sending money internationally</h3>
+              <p>Use Wise or Revolut alongside your main account. Both offer real exchange rates, far cheaper than traditional banks for international transfers.</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <h3>Freelancers and self-employed</h3>
+              <p>bunq is excellent for freelancers with multiple pockets and easy invoicing. Deutsche Bank and Commerzbank offer dedicated business accounts.</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3>Need face-to-face service</h3>
+              <p>Commerzbank, Deutsche Bank, and Sparkasse have the densest branch networks. Commerzbank is usually the most expat-friendly of the three.</p>
+            </div>
+            <div class="tip-card tip-card-cta">
+              <p>Opening a bank account is one of the first steps when moving to Germany. Next, make sure you understand your health insurance options.</p>
+              <a href="/private-health-insurance" class="btn-primary">Explore health insurance →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .page-wrap { padding-bottom: 5rem; }
+
+  /* Breadcrumb */
+  .breadcrumb ol { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; padding-top: 1.5rem; margin-bottom: 1.5rem; }
+  .breadcrumb li { font-size: .8rem; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); transition: color var(--ease); }
+  .breadcrumb a:hover { color: var(--text); }
+
+  /* Hero */
+  .page-hero {
+    background: linear-gradient(135deg, #0d2137 0%, #0a3040 50%, #0d3535 100%);
+    padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2rem, 5vw, 3rem);
+    margin-bottom: 2.5rem;
+  }
+  .page-kicker {
+    display: inline-block;
+    font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--primary); background: rgba(0,201,167,.12);
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 1rem;
+    border: 1px solid rgba(0,201,167,.2);
+  }
+  .page-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1;
+    color: #fff; margin-bottom: .85rem;
+  }
+  .page-lead { font-size: 1.05rem; color: rgba(255,255,255,.65); line-height: 1.65; max-width: 600px; margin-bottom: 1.25rem; }
+  .meta-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .meta-item {
+    display: flex; align-items: center; gap: .4rem;
+    font-size: .8rem; color: rgba(255,255,255,.45); font-weight: 500;
+  }
+
+  /* Intro box */
+  .intro-box {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: #fff; border: 1.5px solid #e2e8f0; border-radius: 14px;
+    padding: 1.25rem 1.5rem; margin-bottom: 2.5rem;
+    font-size: .9rem; color: var(--text); line-height: 1.65;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .intro-icon {
+    flex-shrink: 0;
+    width: 40px; height: 40px; border-radius: 10px;
+    background: #f0fdf4; color: #16a34a;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+
+  /* Grid */
+  .grid-section { margin-bottom: 4rem; }
+  .banks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Card */
+  .bank-card {
+    position: relative;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem 1.5rem 1.5rem;
+    display: flex; flex-direction: column; gap: .65rem;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition:
+      transform .25s cubic-bezier(.2,.8,.4,1),
+      box-shadow .25s cubic-bezier(.2,.8,.4,1),
+      border-color .2s ease,
+      background .2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+    cursor: default;
+  }
+  .bank-card:hover {
+    transform: perspective(800px) rotateX(-3deg) rotateY(1deg) translateY(-8px);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,.04),
+      0 8px 24px rgba(0,0,0,.12),
+      0 20px 40px rgba(0,0,0,.08);
+    border-color: var(--brand);
+    background: var(--brand-bg);
+  }
+
+  /* Decorative top edge */
+  .card-edge {
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--brand);
+    opacity: 0;
+    transition: opacity .2s ease;
+    border-radius: 20px 20px 0 0;
+  }
+  .bank-card:hover .card-edge { opacity: 1; }
+
+  /* Rank chip */
+  .card-rank {
+    position: absolute; top: 1rem; right: 1rem;
+    font-size: .68rem; font-weight: 800; letter-spacing: .04em;
+    color: var(--muted); background: var(--surface);
+    padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+
+  /* Logo */
+  .card-logo-wrap {
+    position: relative;
+    width: 140px; height: 52px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1.5px solid color-mix(in srgb, var(--brand) 20%, #e2e8f0);
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px 12px;
+    flex-shrink: 0;
+    margin-bottom: .1rem;
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .bank-card:hover .card-logo-wrap {
+    transform: scale(1.03);
+    background: color-mix(in srgb, var(--brand) 8%, white);
+    border-color: color-mix(in srgb, var(--brand) 40%, transparent);
+  }
+  .logo-glow {
+    position: absolute; inset: -8px; border-radius: 22px;
+    background: var(--brand); opacity: 0;
+    filter: blur(16px);
+    transition: opacity .25s ease;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .bank-card:hover .logo-glow { opacity: .18; }
+  .card-logo {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Head */
+  .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; flex-wrap: wrap; }
+  .card-name { font-size: 1.2rem; font-weight: 800; letter-spacing: -.03em; color: var(--text); line-height: 1.2; }
+  .card-fullname { font-size: .72rem; color: var(--muted); font-weight: 500; margin-top: 1px; }
+  .card-badge {
+    font-size: .6rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* Text */
+  .card-tagline {
+    font-size: .85rem; font-weight: 700; color: var(--brand);
+    line-height: 1.35;
+    transition: color .2s ease;
+  }
+  .card-highlight { font-size: .82rem; color: var(--muted); line-height: 1.65; }
+
+  /* Features list */
+  .card-features {
+    list-style: none; display: flex; flex-direction: column; gap: .3rem;
+    margin: .1rem 0;
+  }
+  .card-features li {
+    display: flex; align-items: flex-start; gap: .45rem;
+    font-size: .8rem; color: var(--text); line-height: 1.4;
+  }
+  .card-features li .icon-check {
+    flex-shrink: 0; margin-top: 2px;
+    color: var(--brand);
+    transition: color .2s ease;
+  }
+
+  /* Cons list */
+  .card-cons {
+    list-style: none; display: flex; flex-direction: column; gap: .3rem;
+    margin: 0;
+  }
+  .card-cons li {
+    display: flex; align-items: flex-start; gap: .45rem;
+    font-size: .78rem; color: #6b7280; line-height: 1.4;
+  }
+  .card-cons li .icon-x {
+    flex-shrink: 0; margin-top: 2px;
+    color: #ef4444;
+  }
+
+  /* Requires note */
+  .card-requires {
+    display: flex; align-items: flex-start; gap: .4rem;
+    font-size: .74rem; color: var(--muted); line-height: 1.4;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: .5rem .7rem;
+    margin-top: .1rem;
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .card-requires svg { flex-shrink: 0; margin-top: 1px; }
+  .bank-card:hover .card-requires {
+    background: color-mix(in srgb, var(--brand) 8%, white);
+    border-color: color-mix(in srgb, var(--brand) 25%, transparent);
+  }
+
+  /* CTA button */
+  .card-cta {
+    display: inline-flex; align-items: center; gap: .4rem;
+    margin-top: auto;
+    font-size: .82rem; font-weight: 700;
+    color: #fff;
+    background: var(--brand);
+    padding: .55rem 1.1rem; border-radius: 10px;
+    text-decoration: none;
+    width: fit-content;
+    transition: opacity .2s ease, transform .2s ease;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--brand) 35%, transparent);
+  }
+  .card-cta:hover { opacity: .88; transform: translateX(2px); }
+  .cta-arrow { transition: transform .2s ease; }
+  .card-cta:hover .cta-arrow { transform: translateX(3px); }
+
+  /* Tips section */
+  .tips-section { padding-top: 1rem; }
+  .tips-section h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: .5rem; }
+  .tips-lead { font-size: .97rem; color: var(--muted); margin-bottom: 2rem; }
+
+  .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .tip-card {
+    background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 1.5rem; box-shadow: var(--sh-sm);
+  }
+  .tip-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--surface); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--primary); margin-bottom: .85rem;
+  }
+  .tip-card h3 { font-size: .95rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: .4rem; }
+  .tip-card p { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+  .tip-card-cta {
+    background: linear-gradient(135deg, #0d2137, #0a3040);
+    border-color: transparent;
+    display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;
+  }
+  .tip-card-cta p { color: rgba(255,255,255,.65); }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .banks-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 960px) {
+    .tips-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .banks-grid { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .bank-card:hover { transform: translateY(-4px); }
+  }
+</style>

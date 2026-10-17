@@ -1,0 +1,18 @@
+---
+interface Props { eyebrow?: string; title: string; lead?: string; align?: 'center' | 'left'; }
+const { eyebrow, title, lead, align = 'center' } = Astro.props;
+---
+<div class:list={['intro', `intro--${align}`]}>
+  {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+  <h2>{title}</h2>
+  {lead && <p class="lead">{lead}</p>}
+</div>
+<style>
+  .intro { max-width: var(--narrow); margin: 0 auto 32px; }
+  .intro--center { text-align: center; }
+  .intro--left { margin-left: 0; }
+  .eyebrow { margin-bottom: 16px; }
+  .lead { margin-top: 16px; font-size: var(--fs-intro); line-height: var(--lh-intro); }
+  @media (max-width: 899px) { .lead { font-size: var(--fs-lead-sm); line-height: var(--lh-lead-sm); } }
+  @media (min-width: 900px) { .intro { margin-bottom: 56px; } }
+</style>

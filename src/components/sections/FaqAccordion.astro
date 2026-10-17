@@ -1,0 +1,33 @@
+---
+interface Props { items: { q: string; a: string }[]; schema?: boolean; }
+const { items, schema = true } = Astro.props;
+const plain = (t: string) => t.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+const ld = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: items.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: plain(i.a) } })),
+};
+---
+<div class="faq">
+  {items.map((i) => (
+    <details>
+      <summary><span>{i.q}</span>
+        <svg class="plus" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><path class="pv" d="M12 7.5v9"/><path d="M7.5 12h9"/></svg>
+      </summary>
+      <p>{i.a}</p>
+    </details>
+  ))}
+</div>
+{schema && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
+<style>
+  .faq { width: 100%; max-width: calc(var(--container) - 2 * var(--gutter)); margin: 0 auto; }
+  details + details { border-top: var(--border-w) solid var(--border); }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding: 30px 0; font-size: var(--fs-intro); line-height: var(--lh-body); font-weight: var(--fw-body); color: var(--text); }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--navy); }
+  summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: var(--radius-input); }
+  .plus { flex: none; color: var(--text-faint); transition: color var(--ease); }
+  summary:hover .plus { color: var(--text-muted); }
+  details[open] .pv { display: none; }
+  details p { padding: 0 48px 30px 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+  @media (max-width: 599px) { summary { font-size: 18px; line-height: 24px; padding: 20px 0; } details p { padding-right: 0; padding-bottom: 20px; } }
+</style>

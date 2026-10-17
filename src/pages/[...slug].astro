@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getPageBySlug, getAllPageSlugs } from '../lib/queries';
+
+import HeroBlock from '../components/blocks/HeroBlock.astro';
+import StatsBlock from '../components/blocks/StatsBlock.astro';
+import FaqBlock from '../components/blocks/FaqBlock.astro';
+import InsurersBlock from '../components/blocks/InsurersBlock.astro';
+import TestimonialsBlock from '../components/blocks/TestimonialsBlock.astro';
+import CtaBlock from '../components/blocks/CtaBlock.astro';
+
+export async function getStaticPaths() {
+  const slugs = await getAllPageSlugs();
+  return slugs.map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const page = await getPageBySlug(slug as string);
+
+if (!page) return Astro.redirect('/404');
+
+const seoTitle = page.seoTitle ?? page.title;
+const seoDesc  = page.seoDescription ?? '';
+
+// Map _type → component
+const BLOCK_MAP: Record<string, any> = {
+  heroBlock:        HeroBlock,
+  statsBlock:       StatsBlock,
+  faqBlock:         FaqBlock,
+  insurersBlock:    InsurersBlock,
+  testimonialsBlock: TestimonialsBlock,
+  ctaBlock:         CtaBlock,
+};
+---
+
+<Layout title={seoTitle} description={seoDesc}>
+  {page.sections?.map((section: any) => {
+    const Component = BLOCK_MAP[section._type];
+    if (!Component) return null;
+    return <Component {...section} />;
+  })}
+</Layout>

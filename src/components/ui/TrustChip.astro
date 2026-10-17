@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+interface Props { title: string; sub?: string; icon?: 'lock' | 'shield' | 'award' | 'globe' | 'checklist'; class?: string }
+const { title, sub, icon = 'shield', class: cls = '' } = Astro.props;
+---
+<div class={`trust-chip ${cls}`}>
+  <span class="tc-icon" aria-hidden="true"><slot name="icon"><Icon name={icon} size={24} /></slot></span>
+  <span class="tc-text"><strong>{title}</strong>{sub && <span>{sub}</span>}</span>
+</div>
+
+<style>
+  .trust-chip { display: inline-flex; align-items: center; gap: 12px; padding: 12px 24px 12px 16px; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-tile); }
+  .tc-icon { display: inline-flex; flex: none; color: var(--blue); }
+  .tc-text { display: flex; flex-direction: column; text-align: left; }
+  .tc-text strong { font-size: var(--fs-body); line-height: 22px; font-weight: 700; color: var(--navy); }
+  .tc-text span { font-size: var(--fs-small); line-height: 21px; color: var(--text-muted); }
+</style>

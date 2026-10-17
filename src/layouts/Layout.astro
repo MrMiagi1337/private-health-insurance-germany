@@ -2,7 +2,6 @@
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import '@fontsource-variable/inter';
 
 interface Props {
   title: string;
@@ -14,15 +13,16 @@ interface Props {
 
 const {
   title,
-  description = 'Plain-English guide to private health insurance (PKV) in Germany for expats. Compare GKV vs PKV, check eligibility, calculate costs, and find the right insurer.',
+  description = 'Plain-English guide to private health insurance in Germany for expats. Compare public vs private health insurance, check eligibility, calculate costs, and find the right insurer.',
   canonicalUrl = Astro.url.href,
   ogImage = 'https://private-health-insurance-germany.com/og-default.png',
   noindex = false,
 } = Astro.props;
 
-const fullTitle = title === 'PKV Germany'
-  ? 'Private Health Insurance Germany — Expat Guide to PKV 2026'
-  : `${title} | PKV Germany`;
+// Each page supplies its own complete, self-contained <title> (they already
+// include "private health insurance" + "Germany"), so we don't append a brand
+// suffix — that only duplicated the keyword and pushed titles past ~60 chars.
+const fullTitle = title;
 ---
 
 <!doctype html>
@@ -41,13 +41,17 @@ const fullTitle = title === 'PKV Germany'
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content="website" />
   <meta property="og:image" content={ogImage} />
-  <meta property="og:site_name" content="PKV Germany" />
+  <meta property="og:site_name" content="Private Health Insurance Germany" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300..800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300..800&display=swap" rel="stylesheet" /></noscript>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
   <script type="application/ld+json" is:inline>
@@ -56,17 +60,17 @@ const fullTitle = title === 'PKV Germany'
       "@graph": [
         {
           "@type": "WebSite",
-          "name": "PKV Germany",
+          "name": "Private Health Insurance Germany",
           "url": "https://private-health-insurance-germany.com",
           "description": "Plain-English guide to private health insurance in Germany for expats and foreign nationals.",
           "inLanguage": "en"
         },
         {
           "@type": "Organization",
-          "name": "PKV Germany",
+          "name": "Private Health Insurance Germany",
           "url": "https://private-health-insurance-germany.com",
           "email": "contact@private-health-insurance-germany.com",
-          "description": "Independent guide to PKV private health insurance in Germany. We connect expats with licensed §34d insurance brokers.",
+          "description": "Independent guide to private health insurance in Germany. We connect expats with licensed §34d insurance brokers.",
           "sameAs": ["https://myhealthcarebroker.com"]
         }
       ]
