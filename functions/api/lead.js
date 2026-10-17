@@ -30,7 +30,7 @@ export async function onRequest({ request, env }) {
   // Honeypot: pretend success, do not forward.
   if (clean.hp) return json(200, { ok: true });
 
-  const endpoint = (env && env.MHCB_LEAD_ENDPOINT) || 'https://www.myhealthcarebroker.com/api/funnel-lead';
+  const endpoint = (env && env.MHCB_LEAD_ENDPOINT) || 'https://myhealthcarebroker.com/api/funnel-lead' /* apex: www 301s and would turn the POST into a GET */;
   const headers = { 'content-type': 'application/json' };
   const ip = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for');
   if (ip) headers['x-forwarded-for'] = ip;
