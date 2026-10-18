@@ -1,13 +1,11 @@
 ---
-import IconTile from './IconTile.astro';
 import Icon from './Icon.astro';
 interface Props { title: string; text: string; tags?: string[]; href: string; class?: string; highlight?: boolean; cta?: string }
 const { title, text, tags = [], href, class: cls = '', highlight = false, cta } = Astro.props;
 ---
 <article class={`aud-card ${highlight ? 'aud-hi' : ''} ${cls}`}>
-  <IconTile><slot name="icon" /></IconTile>
   <div class="aud-body">
-    <h3><a href={href} class="aud-link"><span set:html={title} /><Icon name="arrow" size={16} class="aud-arrow" /></a></h3>
+    <h3><span class="aud-ic" aria-hidden="true"><slot name="icon" /></span><a href={href} class="aud-link"><span set:html={title} /><Icon name="arrow" size={16} class="aud-arrow" /></a></h3>
     <p>{text}</p>
     {tags.length > 0 && (
       <ul class="aud-tags">{tags.map((t) => <li>{t}</li>)}</ul>
@@ -27,7 +25,9 @@ const { title, text, tags = [], href, class: cls = '', highlight = false, cta } 
   .aud-card:active { transform: scale(.985); transition-duration: var(--dur-press); }
   .aud-hi { background: var(--blue-tint); border-color: var(--blue); }
   .aud-body { flex: 1; width: 100%; min-width: 0; }
-  .aud-card h3 { margin: 0; font-size: 20px; line-height: 25px; font-weight: var(--fw-h3); color: var(--navy); }
+  .aud-card h3 { margin: 0; display: flex; align-items: flex-start; gap: 12px; font-size: 20px; line-height: 25px; font-weight: var(--fw-h3); color: var(--navy); }
+  .aud-ic { flex: none; display: inline-flex; color: var(--blue); }
+  .aud-ic :global(svg) { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
   .aud-link { color: inherit; text-decoration: none; }
   .aud-link :global(.aud-arrow) { display: inline-block; vertical-align: -2px; margin-left: 8px; color: var(--blue); transition: transform var(--dur-spring) var(--spring); }
   .aud-card:hover :global(.aud-arrow) { transform: translateX(3px); }
@@ -45,7 +45,6 @@ const { title, text, tags = [], href, class: cls = '', highlight = false, cta } 
   }
   @media (max-width: 639px) {
     .aud-card { padding: 20px; gap: 16px; }
-    .aud-card :global(.icon-tile) { width: 56px; height: 56px; }
   }
   :global(.grid-3), :global(.grid-2) { display: grid; grid-template-columns: 1fr; gap: 16px; }
   @media (min-width: 640px) {

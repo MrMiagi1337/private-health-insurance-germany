@@ -97,7 +97,7 @@ const uid = 'tt' + Math.random().toString(36).slice(2, 7);
   .tt-text { min-width: 0; }
   .tt-text h2 { font-size: 20px; line-height: 30px; font-weight: 700; letter-spacing: var(--track-h4); color: var(--text); }
   .tt-text p { margin-top: 16px; font-size: var(--fs-intro); line-height: var(--lh-intro); color: var(--text); }
-  .tt-badges { list-style: none; display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--gutter)); padding-right: var(--gutter); }
+  .tt-badges { list-style: none; display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
   .tt-badges::-webkit-scrollbar { display: none; }
   .tt-tile { flex: none; width: 168px; padding: 12px; background: var(--surface); border: 2px solid var(--border); border-radius: 2px; box-shadow: inset 0 0 6px color-mix(in srgb, var(--navy) 10%, transparent); }
   .tt-frame { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14px 8px 12px; color: var(--blue); background: var(--band); }
@@ -117,7 +117,7 @@ const uid = 'tt' + Math.random().toString(36).slice(2, 7);
     .tt-panel { margin-top: 38px; grid-template-columns: 1fr auto; gap: 0 24px; align-items: end; min-height: 190px; }
     .tt-text h2 { font-size: var(--fs-h4); line-height: 36px; }
     .tt-text p { margin-top: 24px; font-size: var(--fs-lead); line-height: var(--lh-lead); }
-    .tt-badges { justify-content: flex-end; overflow: visible; margin-right: 0; padding-right: 0; gap: 12px; }
+    .tt-badges { justify-content: flex-end; overflow: visible; margin-inline: 0; padding-inline: 0; gap: 12px; }
     .tt-tile { width: 112px; padding: 8px; }
     .tt-frame { padding: 10px 4px 10px; }
     .tt-frame svg { width: 56px; height: 56px; }

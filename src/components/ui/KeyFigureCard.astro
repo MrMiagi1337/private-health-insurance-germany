@@ -21,7 +21,7 @@ const fmt = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(
     {badge && (
       <div class="kf-badge" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></svg>
-        <b>Independent</b><span>No insurer ties</span>
+        <span class="kf-badge-txt"><b>Independent</b><span>No insurer ties</span></span>
       </div>
     )}
     {text && <p class="kf-text" set:html={fmt(text)} />}
@@ -52,7 +52,11 @@ const fmt = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(
   .kf-navy .kf-title::after { content: ""; display: block; height: 4px; margin: 14px auto 0; width: 260px; max-width: 100%; border-radius: 4px; background: var(--surface); transform: rotate(-1deg); }
   .kf-navy :global(.hl) { display: block; padding: 0; font-weight: 700; }
   .kf-navy .kf-text { color: var(--surface); font-size: var(--fs-h4); line-height: 30px; font-weight: 400; margin-top: 32px; }
-  .kf-badge { width: 186px; margin-top: 28px; padding: 20px 16px; display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--surface); color: var(--blue); border: 2px solid var(--blue-light); border-radius: var(--radius-tile); box-shadow: var(--sh-3); }
+  .kf-badge { margin-top: 24px; display: flex; align-items: center; gap: 12px; color: var(--blue); text-align: left; }
+  .kf-badge-txt { display: flex; flex-direction: column; }
+  .kf-navy .kf-badge { color: var(--surface); }
+  .kf-navy .kf-badge b { color: var(--surface); }
+  .kf-navy .kf-badge span { color: color-mix(in srgb, var(--surface) 78%, var(--navy)); }
   .kf-badge b { color: var(--navy); font-size: var(--fs-body); line-height: 22px; font-weight: 800; }
   .kf-badge span { color: var(--text-muted); font-size: var(--fs-small); line-height: var(--lh-small); }
 

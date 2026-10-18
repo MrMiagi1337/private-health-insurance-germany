@@ -16,8 +16,8 @@ const id = 'an-' + Math.random().toString(36).slice(2, 8);
 </div>
 
 <style>
-  /* Own look: white note with a blue edge and an info mark. Not the reference's pink banner. */
-  .an { background: var(--surface); border: var(--border-w) solid var(--border); border-left: 4px solid var(--blue); border-radius: var(--radius-banner); color: var(--navy); }
+  /* Own look: white note with an info mark; even hairline border (impeccable: no side-tab). */
+  .an { background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-banner); color: var(--navy); }
   .an-head {
     display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; width: 100%; min-height: 48px; padding: 10px 12px 10px 14px;
     background: none; border: 0; cursor: pointer; text-align: left; color: inherit; font: inherit;
