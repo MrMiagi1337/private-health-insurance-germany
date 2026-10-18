@@ -9,7 +9,9 @@ const { title, label, href, icon = 'arrow', class: cls = '' } = Astro.props;
 </article>
 
 <style>
-  .kn-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 24px; min-height: 200px; height: 100%; padding: 32px 24px 24px; text-align: center; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-tile); }
+  .kn-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 24px; min-height: 200px; height: 100%; padding: 32px 24px 24px; text-align: center; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-tile); transition: border-color var(--ease), transform var(--dur-spring) var(--spring); }
+  .kn-card:hover { border-color: var(--blue); }
+  .kn-card:active { transform: scale(.985); transition-duration: var(--dur-press); }
   .kn-card h3 { margin: 0; font-size: 20px; line-height: 25px; font-weight: var(--fw-h3); color: var(--navy); }
   .kn-btn { gap: 8px; }
   .kn-btn :global(svg) { flex: none; }

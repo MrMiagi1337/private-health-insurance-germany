@@ -14,10 +14,12 @@ const webp = imageWebp ?? (/\.jpe?g$/.test(image) ? image.replace(/\.jpe?g$/, '.
 </article>
 
 <style>
-  .g-card { position: relative; display: flex; flex-direction: column; height: 100%; }
+  .g-card { position: relative; display: flex; flex-direction: column; height: 100%; transition: transform var(--dur-spring) var(--spring); }
+  .g-card:active { transform: scale(.985); transition-duration: var(--dur-press); }
   .g-img { position: relative; height: 195px; border-radius: var(--radius-tile); background: var(--blue-tint); overflow: hidden; }
   .g-img picture { position: absolute; inset: 0; display: block; }
-  .g-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .g-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 900ms var(--ease-out); }
+  .g-card:hover .g-img img { transform: scale(1.03); }
   .g-body { display: flex; flex-direction: column; flex: 1; padding-top: 20px; }
   .g-eyebrow { margin: 0 0 12px; font-size: var(--fs-body); line-height: 24px; font-weight: 500; color: var(--blue-dk); }
   .g-card h3 { margin: 0; font-size: 20px; line-height: 25px; font-weight: var(--fw-h3); color: var(--navy); }
@@ -27,5 +29,5 @@ const webp = imageWebp ?? (/\.jpe?g$/.test(image) ? image.replace(/\.jpe?g$/, '.
   .g-link:focus-visible { outline: none; }
   .g-link:focus-visible::after { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: var(--radius-tile); }
   .g-excerpt { margin: 12px 0 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text-muted); }
-  .g-meta { margin: auto 0 0; padding-top: 12px; font-size: var(--fs-small); line-height: 21px; color: var(--text-faint); }
+  .g-meta { margin: auto 0 0; padding-top: 12px; font-size: var(--fs-small); line-height: 21px; color: var(--text-muted); }
 </style>

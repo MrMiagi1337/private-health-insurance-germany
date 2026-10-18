@@ -19,7 +19,9 @@ const { title } = Astro.props;
   .gc-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
   .gc-title { margin: 0; }
   .gc-arrows { display: flex; gap: 16px; margin-left: auto; }
-  .gc-arrow { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: var(--border-w) solid var(--border); background: var(--surface); color: var(--navy); cursor: pointer; box-shadow: 0 1px 3px rgba(0,16,75,.08); position: relative; }
+  .gc-arrow { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: var(--border-w) solid var(--border); background: var(--surface); color: var(--navy); cursor: pointer; box-shadow: 0 1px 3px rgba(0,16,75,.08); position: relative; transition: background var(--ease), transform var(--dur-spring) var(--spring); }
+  .gc-arrow:hover:not(:disabled) { background: var(--blue-tint); }
+  .gc-arrow:active:not(:disabled) { transform: scale(.92); transition-duration: var(--dur-press); }
   .gc-arrow::before { content: ""; position: absolute; inset: -6px; }
   .gc-arrow:disabled { color: var(--text-faint); opacity: .5; cursor: default; }
   .gc-arrow:focus-visible, .gc-track:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }

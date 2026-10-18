@@ -1,4 +1,5 @@
 ---
+import LogoMark from './ui/LogoMark.astro';
 const trust = [
   { title: 'Independent consultants', sub: 'Not tied to one insurer', icon: 'shield' },
   { title: 'Licensed advisors', sub: 'Registered under §34d GewO', icon: 'check' },
@@ -87,7 +88,7 @@ const columns = [
 
     <div class="foot-bottom">
       <div class="foot-brand">
-        <a href="/" class="foot-logo">Private Health Insurance Germany</a>
+        <a href="/" class="foot-logo"><LogoMark size={28} />Private Health Insurance Germany</a>
         <p>A service of My Healthcare Broker, independent consultants</p>
       </div>
       <div class="foot-legal">
@@ -116,7 +117,7 @@ const columns = [
   .foot-col a:hover { color: var(--blue-dk); }
 
   .foot-bottom { display: flex; flex-direction: column; gap: 16px; padding: 28px 0 32px; border-top: var(--border-w) solid var(--border); }
-  .foot-logo { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-heading); color: var(--navy); }
+  .foot-logo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-heading); color: var(--navy); }
   .foot-brand p { margin-top: 2px; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); }
   .foot-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 0 24px; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); }
   .foot-legal a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-muted); transition: color var(--ease); }

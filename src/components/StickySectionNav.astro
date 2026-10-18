@@ -19,14 +19,19 @@ const { sections } = Astro.props;
 </div>
 
 <style>
+  /* Secondary floating bar: same translucent material as the header, lighter blur because it is smaller. */
   .ssn {
     position: sticky; top: var(--nav-h); z-index: 100;
-    height: var(--sticky-nav-h); background: var(--surface);
-    border-bottom: var(--border-w) solid var(--border);
+    height: var(--sticky-nav-h);
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    border-bottom: var(--border-w) solid color-mix(in srgb, var(--border) 75%, transparent);
     display: flex; align-items: center;
   }
+  @supports not (backdrop-filter: blur(1px)) { .ssn { background: var(--surface); } }
+  @media (prefers-reduced-transparency: reduce) { .ssn { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; } }
   .ssn .container { height: 100%; position: relative; }
-  .ssn .container::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, transparent, var(--surface)); pointer-events: none; }
+  .ssn .container::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--surface) 85%, transparent)); pointer-events: none; }
   @media (min-width: 960px) { .ssn .container::after { display: none; } }
   nav { height: 100%; }
   .ssn-list {
@@ -38,21 +43,28 @@ const { sections } = Astro.props;
     display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px;
     border-radius: 999px; white-space: nowrap;
     font-size: var(--fs-nav); font-weight: var(--fw-nav); line-height: 21px;
-    color: var(--text-muted); transition: background var(--ease), color var(--ease);
+    color: var(--text-muted); transition: background var(--ease), color var(--ease), transform var(--dur-spring) var(--spring);
   }
   .ssn-tab:hover { color: var(--navy); }
-  .ssn-tab.active { background: var(--blue-tint); color: var(--navy); }
+  .ssn-tab:active { transform: scale(.97); transition-duration: var(--dur-press); }
+  .ssn-tab.active { color: var(--navy); }
+  .ssn-list:not(.has-ind) .ssn-tab.active { background: var(--blue-tint); }
+  /* the active pill glides to the section you scrolled into (indicator.ts) */
+  .ssn-list { --ind-inset: 0px; --ind-radius: 999px; }
+  .ssn-list :global(.ind) { background: var(--blue-tint); }
   .ssn-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 </style>
 
 <script>
+  import { attachIndicator } from '../lib/indicator';
   document.querySelectorAll<HTMLElement>('[data-ssn]').forEach((root) => {
     const links = Array.from(root.querySelectorAll<HTMLAnchorElement>('[data-ssn-link]'));
+    const list = root.querySelector<HTMLElement>('.ssn-list')!;
+    const place = attachIndicator(list, () => list.querySelector<HTMLElement>('.ssn-tab.active'));
     const targets = links
       .map((l) => document.getElementById(l.dataset.ssnLink!))
       .filter((t): t is HTMLElement => !!t);
     if (!targets.length || !('IntersectionObserver' in window)) return;
-    const list = root.querySelector<HTMLElement>('.ssn-list')!;
     const setActive = (id: string) => {
       links.forEach((l) => {
         const on = l.dataset.ssnLink === id;
@@ -63,6 +75,7 @@ const { sections } = Astro.props;
           if (list.scrollWidth > list.clientWidth) list.scrollTo({ left, behavior: 'smooth' });
         } else l.removeAttribute('aria-current');
       });
+      place();
     };
     const visible = new Set<string>();
     const io = new IntersectionObserver(

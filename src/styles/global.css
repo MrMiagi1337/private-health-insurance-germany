@@ -1,11 +1,20 @@
 /* ── Design tokens (redesign v2, Marco 2026-10-16). Tokens live ONLY here. ── */
 :root {
-  /* brand */
-  --blue:         #0070F0;
-  --blue-dk:      #0065D8;
-  --blue-tint:    #F2F8FF;
-  --blue-pill:    #E5F1FF;
-  --blue-light:   #CCE4FF;
+  /* brand: own CI (Marco 2026-10-17): navy base + coral. Replaces the reference blue.
+     --brand-coral is for the logo and decorative fills only: white text on it fails WCAG (2.9:1).
+     --accent is the interactive colour (buttons, links): white text 5.2:1, on white 5.2:1. */
+  --brand-coral:  #FF6B4A;
+  --accent:       #C2410C;
+  --accent-dk:    #A3360A;
+  --accent-tint:  #FFF4EF;
+  --accent-pill:  #FFE8DE;
+  --accent-light: #FFD3C2;
+  /* legacy names: ~160 call sites use --blue*, so they alias the accent instead of a rename */
+  --blue:         var(--accent);
+  --blue-dk:      var(--accent-dk);
+  --blue-tint:    var(--accent-tint);
+  --blue-pill:    var(--accent-pill);
+  --blue-light:   var(--accent-light);
   --navy:         #00104B;
   --pink:         #E80D5F;
   --pink-dk:      #D10C55;
@@ -26,7 +35,7 @@
   --border:     #E5E7ED;
 
   /* type */
-  --font-sans:  'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans:  'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
   --font-serif: 'Merriweather', Georgia, serif; /* review quotes only, italic 400 */
   --fs-body: 16px;    --lh-body: 24px;
   --fs-h1: 50px;      --lh-h1: 62.5px;   /* pillar; home hero uses --fs-h1-home */
@@ -91,6 +100,25 @@
   --btn-pad: 11px 24px;
   --ease: .18s ease;
 
+  /* motion (Apple pass, 2026-10-17): springs as linear() curves.
+     --spring = critically damped (damping 1.0, response .35s): no overshoot, default for UI.
+     --spring-bounce = damping .8: only for momentum-driven moves (indicator slides, dots). */
+  --spring: linear(0, 0.0547 4.2%, 0.1726 8.3%, 0.309 12.5%, 0.4408 16.7%, 0.5577 20.8%, 0.656 25%, 0.7361 29.2%, 0.7997 33.3%, 0.8493 37.5%, 0.8874 41.7%, 0.9164 45.8%, 0.9383 50%, 0.9547 54.2%, 0.9668 58.3%, 0.9758 62.5%, 0.9824 66.7%, 0.9872 70.8%, 0.9908 75%, 0.9934 79.2%, 0.9952 83.3%, 0.9966 87.5%, 0.9975 91.7%, 0.9982 95.8%, 1);
+  --spring-bounce: var(--spring); /* overshoot removed 2026-10-18 (impeccable: bounce-easing) */
+  --ease-out: cubic-bezier(.2, 0, 0, 1);    /* decelerate: things arriving */
+  --ease-in: cubic-bezier(1, 0, .8, 1);     /* mirror of --ease-out: things leaving along the same path */
+  --dur-press: 90ms;   /* pointer-down feedback */
+  --dur-spring: 500ms; /* settle time of --spring */
+  --dur-bounce: 600ms;
+  --dur-fade: 220ms;
+
+  /* type tracking is size-specific: tighten as it grows, open up when small */
+  --track-display: -0.022em;  /* 40-50px */
+  --track-h2: -0.018em;
+  --track-h3: -0.01em;        /* 24px */
+  --track-h4: -0.005em;       /* 20px */
+  --track-small: 0.005em;     /* 13-14px */
+
   /* ── legacy aliases (existing components, now rendering in blue) ── */
   --coral:      var(--pink);
   --cream:      var(--band);
@@ -124,7 +152,7 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; interpolate-size: allow-keywords; }
 
 body {
   font-family: var(--font-sans);
@@ -136,6 +164,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-optical-sizing: auto;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
 }
 
 main { flex: 1; }
@@ -162,19 +193,20 @@ img, svg { display: block; }
 button, input, select, textarea { font-family: inherit; }
 
 /* ── Typography ── */
-h1, h2, h3 { font-family: var(--font-sans); color: var(--navy); }
-h1 { font-size: var(--fs-h1-mobile); line-height: var(--lh-h1-mobile); font-weight: var(--fw-heading); }
-h2 { font-size: var(--fs-h2-sm); line-height: var(--lh-h2-sm); font-weight: var(--fw-heading); }
-h3 { font-size: 20px; line-height: 1.25; font-weight: var(--fw-h3); }
-h4 { font-family: var(--font-sans); color: var(--navy); font-size: var(--fs-h4); line-height: var(--lh-h4); font-weight: var(--fw-h3); }
+h1, h2, h3 { font-family: var(--font-sans); color: var(--navy); text-wrap: balance; }
+h1 { font-size: var(--fs-h1-mobile); line-height: var(--lh-h1-mobile); font-weight: var(--fw-heading); letter-spacing: var(--track-h2); }
+h2 { font-size: var(--fs-h2-sm); line-height: var(--lh-h2-sm); font-weight: var(--fw-heading); letter-spacing: var(--track-h3); }
+h3 { font-size: 20px; line-height: 1.25; font-weight: var(--fw-h3); letter-spacing: var(--track-h4); }
+h4 { font-family: var(--font-sans); color: var(--navy); font-size: var(--fs-h4); line-height: var(--lh-h4); font-weight: var(--fw-h3); letter-spacing: var(--track-h4); }
+p { text-wrap: pretty; }
 .lead { font-size: var(--fs-lead-sm); line-height: var(--lh-lead-sm); color: var(--text); }
-.small { font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); }
-.caption { font-size: var(--fs-caption); line-height: var(--lh-caption); color: var(--text-muted); }
+.small { font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); letter-spacing: var(--track-small); }
+.caption { font-size: var(--fs-caption); line-height: var(--lh-caption); color: var(--text-muted); letter-spacing: var(--track-small); }
 @media (min-width: 900px) {
-  h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); }
-  h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); }
-  h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); }
-  .lead { font-size: var(--fs-lead); line-height: var(--lh-lead); }
+  h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); letter-spacing: var(--track-display); }
+  h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); letter-spacing: var(--track-h2); }
+  h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); letter-spacing: var(--track-h3); }
+  .lead { font-size: var(--fs-lead); line-height: var(--lh-lead); letter-spacing: -0.004em; }
 }
 
 /* ── Containers ── */
@@ -206,10 +238,17 @@ h4 { font-family: var(--font-sans); color: var(--navy); font-size: var(--fs-h4);
   min-height: var(--btn-h); padding: var(--btn-pad);
   font-size: var(--fs-btn); font-weight: var(--fw-btn); line-height: 24px;
   border-radius: var(--radius-btn); border: var(--border-w-btn) solid transparent;
-  transition: background var(--ease), color var(--ease), border-color var(--ease), box-shadow var(--ease);
+  transition: background var(--ease), color var(--ease), border-color var(--ease), box-shadow var(--ease),
+              transform var(--dur-spring) var(--spring);
 }
 .btn, .btn-primary { background: var(--blue); color: var(--surface); box-shadow: var(--sh-1); }
 .btn:hover, .btn-primary:hover { background: var(--blue-dk); }
+/* Feedback on pointer-down, not on release: the press is instant, the release springs back. */
+.btn:active, .btn-primary:active, .btn-secondary:active, .btn-outline:active, .btn-ghost:active {
+  transform: scale(.97); transition-duration: var(--dur-press); transition-timing-function: ease-out;
+}
+.btn:not(.btn-noarrow)::after, .btn-primary:not(.btn-noarrow)::after, .btn-secondary:not(.btn-noarrow)::after, .btn-outline:not(.btn-noarrow)::after { transition: transform var(--dur-spring) var(--spring); }
+.btn:hover:not(.btn-noarrow)::after, .btn-primary:hover:not(.btn-noarrow)::after, .btn-secondary:hover:not(.btn-noarrow)::after, .btn-outline:hover:not(.btn-noarrow)::after { transform: translateX(2px); }
 /* trailing 16px arrow; opt out with .btn-noarrow */
 .btn:not(.btn-noarrow)::after, .btn-primary:not(.btn-noarrow)::after, .btn-secondary:not(.btn-noarrow)::after, .btn-outline:not(.btn-noarrow)::after {
   content: ""; flex: none; width: 16px; height: 16px; background: currentColor;
@@ -221,14 +260,49 @@ h4 { font-family: var(--font-sans); color: var(--navy); font-size: var(--fs-h4);
 .btn-sm { min-height: 36px; padding: 6px 16px; font-size: var(--fs-btn-sm); line-height: 21px; border-radius: var(--radius-btn-sm); }
 .btn-sm::after { display: none !important; }
 .btn-ghost { gap: 6px; font-size: var(--fs-btn); font-weight: var(--fw-btn); color: var(--blue-dk); background: none; border: 0; }
-.btn-ghost::after { content: "→"; transition: transform var(--ease); }
+.btn-ghost::after { content: "→"; transition: transform var(--dur-spring) var(--spring); }
 .btn-ghost:hover::after { transform: translateX(3px); }
+
+/* ── Shared interaction primitives (Apple pass) ── */
+/* Pressable surfaces (cards, tiles, chips): press on pointer-down, spring back on release. */
+.pressable { transition: transform var(--dur-spring) var(--spring), border-color var(--ease), background var(--ease), box-shadow var(--ease); }
+.pressable:active { transform: scale(.985); transition-duration: var(--dur-press); transition-timing-function: ease-out; }
+
+/* Sliding selection indicator shared by segmented controls / tab pills (see src/lib/indicator.ts).
+   The list is the positioning context; JS writes --ind-x / --ind-w / --ind-h from the active tab. */
+.has-ind { position: relative; isolation: isolate; }
+.ind {
+  position: absolute; left: 0; top: var(--ind-inset, 0); z-index: -1; pointer-events: none;
+  width: var(--ind-w, 0px); height: calc(var(--ind-h, 0px) - 2 * var(--ind-inset, 0px));
+  transform: translateX(var(--ind-x, 0px)); border-radius: var(--ind-radius, var(--radius-pill));
+  opacity: var(--ind-ready, 0);
+  transition: transform var(--dur-bounce) var(--spring-bounce), width var(--dur-bounce) var(--spring-bounce), opacity var(--dur-fade) ease;
+}
+
+/* Tab panels cross-fade in from where they sit; the animation restarts whenever [hidden] is removed. */
+@keyframes panel-in { from { opacity: 0; transform: translateY(6px); } }
+[role="tabpanel"]:not([hidden]) { animation: panel-in var(--dur-fade) var(--ease-out) both; }
+
+/* Carousel dots stretch into the active pill with momentum. */
+.hc-dot, .tt-dot, .gc-dots button { transition-timing-function: var(--spring-bounce) !important; transition-duration: var(--dur-bounce) !important; }
+
+/* ── Reduced motion: keep the non-vestibular feedback (opacity, colour), drop movement. ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-property: opacity, color, background-color, border-color, box-shadow, outline-color !important;
+    transition-duration: var(--dur-fade) !important; transition-timing-function: ease !important;
+  }
+  [role="tabpanel"]:not([hidden]) { animation: none; }
+  .hc-track, .gc-track, .ssn-list { scroll-behavior: auto !important; }
+}
 
 /* Shared pills: eyebrow (13/700 sentence case, blue-dk on blue-tint), solid CTA pill, price pill, tab pill */
 .eyebrow, .pill-eyebrow {
   display: inline-block; padding: 4px 12px; border-radius: var(--radius-chip);
   background: var(--blue-tint); color: var(--blue-dk);
-  font-size: var(--fs-caption); line-height: 20px; font-weight: 700;
+  font-size: var(--fs-caption); line-height: 20px; font-weight: 700; letter-spacing: var(--track-small);
 }
 .pill-solid {
   display: inline-block; padding: 4px 16px; border-radius: var(--radius-chip);

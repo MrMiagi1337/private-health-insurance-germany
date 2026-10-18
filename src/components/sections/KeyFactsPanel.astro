@@ -17,7 +17,7 @@ const {
   ],
   cta = 'Check my eligibility', href = '/eligibility-check',
   image = '/images/photos/gpt-woman-desk.jpg', alt = 'Woman checking the income threshold on her laptop',
-  badgeTop = 'Threshold', badgeMain = 'EUR 77,400', badgeBottom = 'in 2026',
+  badgeTop = 'From 2027', badgeMain = 'EUR 84,150', badgeBottom = 'expected', /* 2027 forecast, not final law (Marco 2026-10-17); the 2026 figure stays in the rows */
 } = Astro.props;
 ---
 <div class="kfp">
@@ -46,8 +46,8 @@ const {
   .kfp-rows .pill-price { flex: none; text-align: center; }
   .kfp-media { position: relative; margin: -40px 0; background: var(--blue-light); }
   .kfp-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
-  .kfp-badge { position: absolute; z-index: 2; top: 24px; right: 40px; width: 150px; height: 150px; border-radius: 50%; background: var(--navy); color: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; transform: rotate(-10deg); line-height: 1.1; box-shadow: var(--sh-1); }
-  .kfp-badge span { font-size: 18px; font-weight: 500; }
+  .kfp-badge { position: absolute; z-index: 2; bottom: 28px; right: 28px; width: 150px; /* bottom corner keeps the face clear (Marco 2026-10-17) */ height: 150px; border-radius: 50%; background: var(--navy); color: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; transform: rotate(-10deg); line-height: 1.1; box-shadow: var(--sh-1); }
+  .kfp-badge span { font-size: 17px; font-weight: 500; }
   .kfp-badge b { font-size: 24px; font-weight: 800; padding: 2px 0; }
   @media (max-width: 899px) {
     .kfp { grid-template-columns: 1fr; gap: 0; padding: 24px 20px 0; }

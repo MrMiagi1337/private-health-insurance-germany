@@ -23,7 +23,8 @@ const {
   .cta h3 { margin: 0; color: var(--surface); font-size: 26px; line-height: 32px; font-weight: var(--fw-heading); }
   .cta p { margin: 12px 0 0; font-size: var(--fs-lead-sm); line-height: var(--lh-lead-sm); color: var(--surface); max-width: 700px; }
   .cta-btns { display: flex; flex-direction: column; gap: 12px; flex: none; }
-  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 16px; border-radius: var(--radius-btn); font-size: var(--fs-btn); line-height: 24px; font-weight: var(--fw-btn); text-align: center; border: var(--border-w-btn) solid var(--surface); transition: background var(--ease), color var(--ease); }
+  .cta-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 16px; border-radius: var(--radius-btn); font-size: var(--fs-btn); line-height: 24px; font-weight: var(--fw-btn); text-align: center; border: var(--border-w-btn) solid var(--surface); transition: background var(--ease), color var(--ease), transform var(--dur-spring) var(--spring); }
+  .cta-btn:active { transform: scale(.97); transition-duration: var(--dur-press); }
   .cta-btn--white { background: var(--surface); color: var(--blue); }
   .cta-btn--white:hover { background: var(--blue-tint); }
   .cta-btn--line { background: transparent; color: var(--surface); }

@@ -10,8 +10,9 @@ const { title, text, href, icon = 'checklist', tone = 'blue', class: cls = '' } 
 </article>
 
 <style>
-  .tool-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; height: 100%; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-card); padding: 24px; transition: border-color var(--ease); }
+  .tool-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; height: 100%; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius-card); padding: 24px; transition: border-color var(--ease), transform var(--dur-spring) var(--spring); }
   .tool-card:hover { border-color: var(--blue); }
+  .tool-card:active { transform: scale(.985); transition-duration: var(--dur-press); }
   .tool-ico { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; margin: 0 0 16px; border-radius: 50%; color: var(--surface); box-shadow: 0 4px 10px rgba(0,16,75,.12), inset 0 -2px 4px rgba(0,16,75,.12); }
   .tone-blue { background: linear-gradient(150deg, var(--blue-light) -20%, var(--blue) 90%); }
   .tone-green { background: linear-gradient(150deg, var(--green-lt) -20%, var(--green) 95%); }

@@ -72,13 +72,17 @@ const check = '<path d="M5 12.5l4.5 4.5L19 7.5"/>';
   .hh-tabs::-webkit-scrollbar { display: none; }
   .hh-tab {
     flex: none; min-height: 44px; padding: 0 12px; display: inline-flex; align-items: center; background: none; border: 0; cursor: pointer;
-    font-size: var(--fs-body); line-height: 24px; font-weight: 600; color: var(--text-faint);
+    font-size: var(--fs-body); line-height: 24px; font-weight: 600; color: var(--text-muted);
     position: relative; isolation: isolate; transition: color var(--ease);
   }
   .hh-tab::before { content: ""; position: absolute; inset: 8px 0; border-radius: var(--radius-pill); background: transparent; z-index: -1; transition: background var(--ease); }
   .hh-tab:hover { color: var(--text); }
+  .hh-tab:active { transform: scale(.96); transition: transform var(--dur-press) ease-out; }
   .hh-tab.is-active { color: var(--blue); }
-  .hh-tab.is-active::before { background: var(--blue-pill); }
+  /* static active pill until the sliding indicator takes over */
+  .hh-tabs:not(.has-ind) .hh-tab.is-active::before { background: var(--blue-pill); }
+  .hh-tabs { --ind-inset: 8px; --ind-radius: var(--radius-pill); }
+  .hh-tabs :global(.ind) { background: var(--blue-pill); }
   .hh-bullets { list-style: none; margin-top: 12px; }
   .hh-bullets li { display: flex; align-items: flex-start; gap: 11px; min-height: 32px; padding: 4px 0; color: var(--text); font-size: var(--fs-body); line-height: var(--lh-body); }
   .hh-bullets svg { flex: none; margin-top: 5px; color: var(--text-muted); }
@@ -91,11 +95,13 @@ const check = '<path d="M5 12.5l4.5 4.5L19 7.5"/>';
     .hh-media-m img { object-fit: cover; object-position: center 25%; }
   }
   @media (min-width: 960px) {
-    .hh-grid { grid-template-columns: minmax(0, 605px) minmax(0, 403px); column-gap: 24px; justify-content: space-between; padding-top: 32px; align-items: start; }
+    .hh-grid { grid-template-columns: minmax(0, 605px) minmax(0, 403px); column-gap: 24px; justify-content: space-between; padding-top: 32px; align-items: stretch; }
     .hh-alert { margin-bottom: 24px; }
     .hh-media-m { display: none; }
-    .hh-media-d { display: block; width: 100%; max-width: 403px; aspect-ratio: 403 / 412; height: auto; border-radius: var(--radius-card); background: var(--hh-media-bg, var(--pastel-blue)); overflow: hidden; }
-    .hh-media-d img { object-position: center top; }
+    /* The photo fills the copy column's full height so nothing is left hanging under it (Marco, 2026-10-17). */
+    .hh-media-d { display: block; width: 100%; max-width: 403px; min-height: 412px; height: 100%; border-radius: var(--radius-card); background: var(--hh-media-bg, var(--pastel-blue)); overflow: hidden; }
+    .hh-media-d picture { display: block; height: 100%; }
+    .hh-media-d img { object-position: center 30%; }
     h1 { font-size: var(--fs-h1-home); line-height: var(--lh-h1-home); }
     .hh-lead { margin-top: 18px; max-width: 640px; font-size: var(--fs-lead); line-height: var(--lh-lead); }
     .hh-tabs { margin: 24px 0 0; padding: 0; overflow: visible; }
@@ -104,12 +110,16 @@ const check = '<path d="M5 12.5l4.5 4.5L19 7.5"/>';
   }
 </style>
 <script>
+  import { attachIndicator } from '../../lib/indicator';
   document.querySelectorAll<HTMLElement>('[data-hero]').forEach((root) => {
     const tabs = root.querySelectorAll<HTMLButtonElement>('.hh-tab');
     const panels = root.querySelectorAll<HTMLElement>('.hh-bullets');
+    const list = root.querySelector<HTMLElement>('.hh-tabs')!;
+    const place = attachIndicator(list, () => list.querySelector<HTMLElement>('.hh-tab.is-active'));
     tabs.forEach((t, i) => t.addEventListener('click', () => {
       tabs.forEach((x, j) => { x.classList.toggle('is-active', i === j); x.setAttribute('aria-selected', String(i === j)); });
       panels.forEach((p, j) => { p.hidden = i !== j; });
+      place();
     }));
   });
 </script>

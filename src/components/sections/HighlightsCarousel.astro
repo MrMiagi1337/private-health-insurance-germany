@@ -1,7 +1,7 @@
 ---
 // S9: pastel slides with a peeking next slide, arrows, dots, scroll-snap. No autoplay.
 interface Item { title: string; text: string }
-interface Slide { bg: 'pink' | 'mint' | 'blue'; title: string; items: Item[]; cta: string; href: string; image: string; alt: string }
+interface Slide { bg: 'pink' | 'mint' | 'blue'; title: string; items: Item[]; cta: string; href: string; image: string; alt: string; pos?: string }
 interface Props { eyebrow?: string; title?: string; slides?: Slide[]; id?: string }
 const {
   id = 'highlights',
@@ -23,7 +23,7 @@ const {
         { title: 'Free of charge', text: 'The consultation and the comparison cost you nothing.' },
       ] },
     { bg: 'blue', title: 'We stay with you after you sign.', cta: 'Free consultation', href: '/contact',
-      image: '/images/photos/flux-woman-videocall.jpg', alt: 'Woman on a video call with her consultant',
+      image: '/images/photos/row-man-homeoffice.jpg', alt: 'Man on the phone with his consultant in his home office', pos: '30% center',
       items: [
         { title: 'Help with the application', text: 'Your consultant handles the paperwork with you.' },
         { title: 'English-speaking support', text: 'Questions about claims or changes get an answer in English.' },
@@ -47,7 +47,7 @@ const {
     <div class="hc-track" data-track tabindex="0" role="group" aria-roledescription="carousel" aria-label="Highlights">
       {slides.map((s, i) => (
         <article class={`hc-slide hc-slide--${s.bg}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
-          <div class="hc-media"><img src={s.image} alt={s.alt} width="280" height="480" loading="lazy" /></div>
+          <div class="hc-media"><img src={s.image} alt={s.alt} width="280" height="480" loading="lazy" style={s.pos ? `object-position:${s.pos}` : undefined} /></div>
           <div class="hc-copy">
             <h3>{s.title}</h3>
             <ul>
@@ -73,8 +73,9 @@ const {
   .hc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 32px; }
   .hc-head h2 { margin-top: 12px; max-width: 780px; }
   .hc-arrows { display: flex; gap: 16px; flex: none; margin-top: 12px; }
-  .hc-arrow { width: 32px; height: 32px; border-radius: 50%; border: var(--border-w) solid var(--border); background: var(--surface); color: var(--navy); display: grid; place-items: center; cursor: pointer; box-shadow: 0 1px 2px color-mix(in srgb, var(--navy) 12%, transparent); transition: background var(--ease); }
+  .hc-arrow { width: 32px; height: 32px; border-radius: 50%; border: var(--border-w) solid var(--border); background: var(--surface); color: var(--navy); display: grid; place-items: center; cursor: pointer; box-shadow: 0 1px 2px color-mix(in srgb, var(--navy) 12%, transparent); transition: background var(--ease), transform var(--dur-spring) var(--spring); }
   .hc-arrow:hover { background: var(--blue-tint); }
+  .hc-arrow:active:not([disabled]) { transform: scale(.92); transition-duration: var(--dur-press); }
   .hc-arrow[disabled] { color: var(--text-faint); cursor: default; background: var(--surface); }
   .hc-viewport { position: relative; }
   .hc-track { display: flex; gap: 32px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; -webkit-mask-image: linear-gradient(to right, #000 0, #000 84%, transparent 100%); mask-image: linear-gradient(to right, #000 0, #000 84%, transparent 100%); }

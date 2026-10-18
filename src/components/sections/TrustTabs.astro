@@ -40,7 +40,7 @@ const uid = 'tt' + Math.random().toString(36).slice(2, 7);
     {panels.map((p, i) => (
       <div class="tt-panel" role="tabpanel" id={`${uid}-p${i}`} aria-labelledby={`${uid}-t${i}`} hidden={i !== 0}>
         <div class="tt-text">
-          <h3>{p.title}</h3>
+          <h2>{p.title}</h2>
           <p>{p.text}</p>
         </div>
         <ul class="tt-badges" role="list">
@@ -77,20 +77,25 @@ const uid = 'tt' + Math.random().toString(36).slice(2, 7);
   }
   .tt-tab::before { content: ""; position: absolute; inset: 7px 0; border-radius: var(--radius-chip); background: transparent; z-index: -1; transition: background var(--ease); }
   .tt-tab:hover { color: var(--blue-dk); }
+  .tt-tab:active { transform: scale(.96); transition: transform var(--dur-press) ease-out; }
   .tt-tab.is-active { color: var(--blue-dk); }
-  .tt-tab.is-active::before { background: var(--blue-tint); }
+  .tt-tabs:not(.has-ind) .tt-tab.is-active::before { background: var(--blue-tint); }
+  .tt-tabs { --ind-inset: 7px; --ind-radius: var(--radius-chip); }
+  .tt-tabs :global(.ind) { background: var(--blue-tint); }
+  .tt-arrow:active, .hc-arrow:active { transform: scale(.92); }
   .tt-nav { display: none; gap: 16px; }
   .tt-arrow {
     width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
     background: var(--surface); border: var(--border-w) solid var(--border); color: var(--text); cursor: pointer;
-    box-shadow: 0 1px 2px color-mix(in srgb, var(--navy) 12%, transparent); transition: border-color var(--ease), color var(--ease);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--navy) 12%, transparent); transition: border-color var(--ease), color var(--ease), transform var(--dur-spring) var(--spring);
   }
+  .tt-arrow:active { transition-duration: var(--dur-press); }
   .tt-arrow:hover { color: var(--blue); border-color: var(--blue); }
 
   .tt-panel { margin-top: 24px; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .tt-panel[hidden] { display: none; }
   .tt-text { min-width: 0; }
-  .tt-text h3 { font-size: 20px; line-height: 30px; font-weight: 700; color: var(--text); }
+  .tt-text h2 { font-size: 20px; line-height: 30px; font-weight: 700; letter-spacing: var(--track-h4); color: var(--text); }
   .tt-text p { margin-top: 16px; font-size: var(--fs-intro); line-height: var(--lh-intro); color: var(--text); }
   .tt-badges { list-style: none; display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--gutter)); padding-right: var(--gutter); }
   .tt-badges::-webkit-scrollbar { display: none; }
@@ -110,7 +115,7 @@ const uid = 'tt' + Math.random().toString(36).slice(2, 7);
     .tt-nav { display: flex; }
     .tt-tabs { margin-right: 0; padding-right: 0; }
     .tt-panel { margin-top: 38px; grid-template-columns: 1fr auto; gap: 0 24px; align-items: end; min-height: 190px; }
-    .tt-text h3 { font-size: var(--fs-h4); line-height: 36px; }
+    .tt-text h2 { font-size: var(--fs-h4); line-height: 36px; }
     .tt-text p { margin-top: 24px; font-size: var(--fs-lead); line-height: var(--lh-lead); }
     .tt-badges { justify-content: flex-end; overflow: visible; margin-right: 0; padding-right: 0; gap: 12px; }
     .tt-tile { width: 112px; padding: 8px; }
@@ -121,16 +126,20 @@ const uid = 'tt' + Math.random().toString(36).slice(2, 7);
   }
 </style>
 <script>
+  import { attachIndicator } from '../../lib/indicator';
   document.querySelectorAll<HTMLElement>('[data-tt]').forEach((root) => {
     const tabs = [...root.querySelectorAll<HTMLButtonElement>('.tt-tab')];
     const panels = [...root.querySelectorAll<HTMLElement>('.tt-panel')];
     const dots = [...root.querySelectorAll<HTMLElement>('.tt-dot')];
+    const list = root.querySelector<HTMLElement>('.tt-tabs')!;
+    const place = attachIndicator(list, () => tabs.find((t) => t.classList.contains('is-active')));
     let cur = 0;
     const show = (n: number, focus = false) => {
       cur = (n + tabs.length) % tabs.length;
       tabs.forEach((t, i) => { t.classList.toggle('is-active', i === cur); t.setAttribute('aria-selected', String(i === cur)); t.tabIndex = i === cur ? 0 : -1; });
       panels.forEach((p, i) => { p.hidden = i !== cur; });
       dots.forEach((d, i) => d.classList.toggle('is-active', i === cur));
+      place();
       if (focus) tabs[cur].focus();
       tabs[cur].scrollIntoView({ block: 'nearest', inline: 'nearest' });
     };

@@ -25,9 +25,19 @@ const ld = {
   summary::-webkit-details-marker { display: none; }
   summary:hover { color: var(--navy); }
   summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: var(--radius-input); }
-  .plus { flex: none; color: var(--text-faint); transition: color var(--ease); }
+  .plus { flex: none; color: var(--text-muted); transition: color var(--ease), transform var(--dur-spring) var(--spring); }
   summary:hover .plus { color: var(--text-muted); }
-  details[open] .pv { display: none; }
+  summary:active .plus { transform: scale(.9); transition-duration: var(--dur-press); }
+  /* plus turns into minus: the vertical bar rotates onto the horizontal one and fades out */
+  .pv { transform-box: fill-box; transform-origin: center; transition: transform var(--dur-spring) var(--spring), opacity var(--dur-fade) ease; }
+  details[open] .pv { transform: rotate(90deg); opacity: 0; }
+  details[open] .plus { color: var(--navy); }
+  /* answer unfolds from the question instead of popping in (Chrome 131+; others open instantly) */
+  details::details-content {
+    height: 0; overflow: clip; opacity: 0;
+    transition: height var(--dur-spring) var(--spring), opacity var(--dur-fade) ease, content-visibility var(--dur-spring) allow-discrete;
+  }
+  details[open]::details-content { height: auto; opacity: 1; }
   details p { padding: 0 48px 30px 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
   @media (max-width: 599px) { summary { font-size: 18px; line-height: 24px; padding: 20px 0; } details p { padding-right: 0; padding-bottom: 20px; } }
 </style>
