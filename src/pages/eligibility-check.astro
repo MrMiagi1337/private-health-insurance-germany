@@ -9,7 +9,7 @@ import IconTile from '../components/ui/IconTile.astro';
   title="Do I Qualify for Private Health Insurance in Germany? (Free Eligibility Check)"
   description="Find out in 2 minutes if you qualify for private health insurance in Germany. Answer 5 quick questions about your employment, income, and age."
 >
-  <main>
+  <main id="main">
     <HeroCentered
       eyebrow="2-minute eligibility check"
       title="Do you qualify for private health insurance?"
@@ -182,7 +182,7 @@ import IconTile from '../components/ui/IconTile.astro';
             <h2>Private health insurance looks like a strong fit for you</h2>
             <p>Based on your answers, you appear to meet the eligibility requirements for private health insurance in Germany and could benefit financially from switching.</p>
             <div class="result-points" id="resultPoints"></div>
-            <a href="/contact" class="result-cta">Get a free personalised quote</a>
+            <a href="/free-consultation" class="result-cta">Get a free personalised quote</a>
             <a href="/compare" class="result-link">Compare public vs private health insurance in detail</a>
           </div>
 
@@ -291,7 +291,7 @@ import IconTile from '../components/ui/IconTile.astro';
   .result-screen { text-align: center; padding: 8px 0; }
   .result-icon { width: 64px; height: 64px; border-radius: var(--radius-tile); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; background: var(--blue-tint); color: var(--blue-dk); }
   .result-screen p { color: var(--text); margin-bottom: 12px; }
-  .score-badge { display: inline-block; background: var(--blue-tint); color: var(--blue-dk); font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-btn); padding: 6px 14px; border-radius: 999px; margin-bottom: 24px; }
+  .score-badge { display: inline-block; background: var(--blue-tint); color: var(--blue-dk); font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-btn); padding: 6px 14px; border-radius: 2px; margin-bottom: 24px; }
   .result-points { margin-bottom: 24px; }
   .result-cta {
     display: flex; align-items: center; justify-content: center; min-height: var(--btn-h); padding: var(--btn-pad);

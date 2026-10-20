@@ -6,7 +6,7 @@ import Layout from '../layouts/Layout.astro';
   title="Private Health Insurance Cost Calculator Germany"
   description="Estimate your private health insurance costs in Germany: enter your age, income and health status for a realistic monthly premium range."
 >
-  <main>
+  <main id="main">
     <section class="hero-section">
       <div class="container">
         <div class="hero-badge">Free Tool</div>
@@ -97,7 +97,7 @@ import Layout from '../layouts/Layout.astro';
                 </div>
               </div>
 
-              <a href="/contact" class="result-cta">Get exact quotes from a broker</a>
+              <a href="/free-consultation" class="result-cta">Get exact quotes from a broker</a>
               <p class="result-disclaimer">Estimates are indicative only. Actual premiums depend on your full health declaration and the specific tariff chosen.</p>
             </div>
           </div>
@@ -207,7 +207,7 @@ import Layout from '../layouts/Layout.astro';
     display: inline-block;
     background: #eff6ff; color: #2563eb;
     font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    padding: .3rem .8rem; border-radius: 20px; margin-bottom: 1rem;
+    padding: .3rem .8rem; border-radius: 2px; margin-bottom: 1rem;
   }
   .hero-section h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: .75rem; }
   .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 1.65; }
@@ -218,7 +218,7 @@ import Layout from '../layouts/Layout.astro';
   .calc-card {
     background: #fff;
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 4px;
     padding: clamp(1.5rem, 3vw, 2rem);
     display: flex; flex-direction: column; gap: 1.5rem;
   }
@@ -228,7 +228,7 @@ import Layout from '../layouts/Layout.astro';
   .input-group label { font-size: .85rem; font-weight: 600; }
   .input-group input {
     border: 1.5px solid var(--border);
-    border-radius: 10px;
+    border-radius: 4px;
     padding: .7rem 1rem;
     font-size: 1rem; font-family: inherit;
     outline: none; transition: border-color var(--ease);
@@ -239,7 +239,7 @@ import Layout from '../layouts/Layout.astro';
   .toggle-btn {
     padding: .45rem .9rem;
     border: 1.5px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-btn);
     background: #fff; font-size: .82rem; font-weight: 500; font-family: inherit;
     cursor: pointer; transition: all var(--ease);
     color: var(--muted);
@@ -249,7 +249,7 @@ import Layout from '../layouts/Layout.astro';
 
   .calc-btn {
     background: var(--red); color: #fff;
-    border: none; border-radius: 10px;
+    border: none; border-radius: var(--radius-btn);
     padding: .85rem 1.5rem;
     font-size: 1rem; font-weight: 700; font-family: inherit;
     cursor: pointer; transition: background var(--ease);
@@ -261,7 +261,7 @@ import Layout from '../layouts/Layout.astro';
   .result-card {
     background: #fff;
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 4px;
     padding: clamp(1.5rem, 3vw, 2rem);
     min-height: 320px;
   }
@@ -284,7 +284,7 @@ import Layout from '../layouts/Layout.astro';
 
   .result-compare {
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 4px;
     overflow: hidden;
     margin-bottom: 1.5rem;
   }
@@ -304,7 +304,7 @@ import Layout from '../layouts/Layout.astro';
   .result-cta {
     display: block; text-align: center;
     background: var(--red); color: #fff;
-    border-radius: 10px; padding: .85rem;
+    border-radius: var(--radius-btn); padding: .85rem;
     font-weight: 700; font-size: .95rem;
     text-decoration: none; margin-bottom: .75rem;
     transition: background var(--ease);
@@ -316,7 +316,7 @@ import Layout from '../layouts/Layout.astro';
   .info-card {
     background: #fff;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 4px;
     padding: 1rem 1.25rem;
     display: flex; gap: .75rem; align-items: flex-start;
   }

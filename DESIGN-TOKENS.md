@@ -1,3 +1,5 @@
+> SUPERSEDED by /DESIGN.md (2026-10-19). This file documents a third-party reference site and is kept only for history.
+
 # DESIGN-TOKENS: the reference site reference (measured 2026-10-16, getComputedStyle, 1440 viewport)
 
 Reference: the reference site/en (home), /en/v/private-health-insurance (product), /en/expat-guide/opportunity-card (article), home at 390 wide.

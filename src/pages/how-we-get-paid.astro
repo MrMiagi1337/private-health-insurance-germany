@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ConsultationCTA from '../components/ConsultationCTA.astro';
+---
+<Layout title="How We Get Paid" description="How Private Health Insurance Germany earns money: placeholder, to be completed." noindex>
+  <main id="main">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'How we get paid' }]} />
+    <div class="container-narrow pg">
+      <p class="eyebrow">Placeholder page</p>
+      <h1>How we get paid</h1>
+      <p class="note">[Placeholder text. Not final and not for publication. Content to be written and approved before launch.]</p>
+      <h2>Our advice is free for you</h2>
+      <p>[Placeholder: explain that the broker is paid a commission by the insurer when a policy is concluded, that this does not change your premium, and how conflicts of interest are handled.]</p>
+      <h2>What we do not do</h2>
+      <p>[Placeholder: independence statement, no paid rankings, scope of insurers compared.]</p>
+    </div>
+    <ConsultationCTA />
+  </main>
+</Layout>
+<style>
+  .pg { padding-top: 8px; padding-bottom: 48px; }
+  .pg h1 { margin-bottom: 20px; }
+  .pg h2 { font-size: 24px; line-height: 30px; margin: 36px 0 10px; }
+  .pg p, .pg li { margin-bottom: 12px; }
+  .pg ul { padding-left: 22px; }
+  .note { padding: 14px 18px; border: 1px dashed var(--border-strong); background: var(--band); color: var(--navy); border-radius: var(--radius-card); }
+</style>

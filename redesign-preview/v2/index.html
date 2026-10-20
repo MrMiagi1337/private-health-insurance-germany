@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private Health Insurance Germany - V2 Formular</title>
+<!--
+DIRECTION V2 "German bureaucracy, translated"
+Aesthetic: Swiss-German document grammar - cool grey-white paper, black-navy ink, coral as the official-stamp accent, strict grid with numbered sections styled as legal paragraphs (§ 1, § 2 ...), mono labels and field captions like a German form (Formular), German terms in small caps with plain-English glosses beside them, ruled boxes, square corners, stamp/checkbox motif for "you qualify".
+Reference: the feel of an official German form redesigned by a great Swiss typographer - match feel, not content.
+Intent: expats fear German paperwork; the page should feel like the one document that finally makes sense - precise, a little witty, trustworthy. One action: Check my eligibility.
+Guardrails: Always keep the paper-plane logo and navy/coral as the only colours besides ink and paper. Never: Inter/Roboto/Poppins/Montserrat/Lato/Space Grotesk/Fraunces/Schibsted as sole font, cream backgrounds, purple gradients, three-icon feature cards, side-tab borders, uniform radius, glass/blobs, buzzword headlines.
+Energy curve: calm -> ONE loud moment (the income-line instrument in § 1) -> calm to the action.
+-->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F0F2F5; --sheet:#F8F9FB; --ink:#0A1422; --navy:#0F2A44; --coral:#E07A4F; --coral-ink:#B5502A;
+  --rule:#0A1422; --hair:rgba(10,20,34,.22); --muted:#44505F;
+  --logo-a:var(--navy); --logo-b:var(--coral);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Archivo',sans-serif;font-stretch:112%;letter-spacing:-.02em;line-height:1.02;margin:0;color:var(--navy);font-weight:700}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.de{font-variant:small-caps;letter-spacing:.06em;font-weight:600;color:var(--navy)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+.fb{fill:var(--logo-b)} .fa{fill:var(--logo-a)}
+a{color:inherit}
+header{border-bottom:2px solid var(--rule);background:var(--sheet)}
+.hdr{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand b{font-family:'Archivo';font-stretch:115%;font-weight:800;font-size:19px;color:var(--navy);letter-spacing:-.01em;display:block}
+.hdr nav{display:flex;align-items:center;gap:22px}
+.hdr nav a.sm{font-size:14px;text-decoration:none;border:1px solid var(--rule);padding:6px 12px}
+.hdr nav a.sm:hover{background:var(--navy);color:#fff}
+.hdr nav a.tel{font-family:'IBM Plex Mono';font-size:13px;text-decoration:none}
+.par{display:grid;grid-template-columns:150px 1fr;gap:0 40px;padding:72px 0;border-bottom:1px solid var(--hair)}
+.par>.num{font-family:'Archivo';font-stretch:115%;font-weight:800;font-size:44px;color:var(--navy);line-height:1;border-top:4px solid var(--ink);padding-top:12px;align-self:start}
+.par>.num small{display:block;font-family:'IBM Plex Mono';font-weight:400;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.par h2{font-size:clamp(30px,3.6vw,48px);max-width:18ch;margin-bottom:20px}
+.lead{max-width:56ch;color:var(--muted);font-size:18px}
+.hero{display:grid;grid-template-columns:1fr 600px;gap:56px;padding:56px 0 64px;align-items:start;border-bottom:2px solid var(--rule)}
+.hero h1{font-size:clamp(34px,3.5vw,50px);margin:14px 0 20px}
+.hero h1 em{font-style:normal;color:var(--coral-ink)}
+.cta{display:inline-flex;align-items:center;gap:12px;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;padding:16px 26px;border:2px solid var(--navy);box-shadow:5px 5px 0 var(--coral);transition:transform .18s,box-shadow .18s}
+.cta:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--coral)}
+.cta svg{width:18px;height:18px}
+.tellink{font-family:'IBM Plex Mono';font-size:14px;margin-left:20px;white-space:nowrap}
+.cta-row{display:flex;align-items:center;flex-wrap:wrap;gap:14px 0;margin-top:30px}
+.form{background:var(--sheet);border:2px solid var(--rule);position:relative}
+.form .cap{display:flex;justify-content:space-between;padding:8px 14px;border-bottom:2px solid var(--rule);background:var(--navy);color:#fff}
+.form .body{padding:20px 22px 22px}
+.field{border:1px solid var(--rule);background:#fff;display:flex;align-items:stretch}
+.field label span{display:block}.field label{padding:6px 12px;border-right:1px solid var(--rule);width:150px;font-size:11px;line-height:1.3;display:flex;align-items:center;flex:none}
+.field .val{flex:1;display:flex;align-items:center;padding:0 14px;font-family:'IBM Plex Mono';font-size:28px;font-weight:500;min-width:0}
+.field .val span{color:var(--muted);margin-right:8px;font-size:20px}
+.field input[type=text]{border:0;outline:0;background:transparent;font:inherit;width:100%;padding:10px 0;color:var(--ink);min-width:0}
+.field:focus-within{outline:3px solid var(--coral);outline-offset:2px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;margin:16px 0 0;cursor:pointer;position:relative;z-index:2}
+input[type=range]::-webkit-slider-runnable-track{height:6px;background:var(--ink)}
+input[type=range]::-moz-range-track{height:6px;background:var(--ink)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:34px;background:var(--coral);border:2px solid var(--ink);margin-top:-14px;border-radius:0}
+input[type=range]::-moz-range-thumb{width:18px;height:30px;background:var(--coral);border:2px solid var(--ink);border-radius:0}
+input[type=range]:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.scale{position:relative;height:84px;margin-top:-2px}
+.scale .tick{position:absolute;top:0;width:0;border-left:2px dashed var(--coral-ink);height:56px}
+.scale .tick>span{position:absolute;top:22px;left:8px;white-space:nowrap;font-size:11px;line-height:1.3}
+.scale .ends{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;color:var(--muted);font-size:10px}
+.meter{height:10px;display:flex;border:1px solid var(--rule)}
+.meter i{display:block;height:100%;transition:width .25s}
+.result{margin-top:10px;border-top:1px solid var(--rule);padding-top:20px;display:grid;grid-template-columns:132px 1fr;gap:18px;align-items:center;min-height:150px}
+.stamp{width:128px;height:128px;border:3px solid var(--coral-ink);color:var(--coral-ink);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:'Archivo';font-stretch:115%;font-weight:800;font-size:17px;line-height:1.05;text-transform:uppercase;transform:rotate(-6deg);position:relative;outline:1px solid var(--coral-ink);outline-offset:-8px}
+.stamp svg{width:34px;height:34px;margin-bottom:4px}
+.stamp.below{color:var(--navy);border-color:var(--navy);outline-color:var(--navy);transform:rotate(3deg)}
+.stamp.pop{animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{scale:1.18;opacity:.5}100%{scale:1;opacity:1}}
+.result p{margin:0;font-size:15.5px;line-height:1.45}
+.result p b{font-weight:600}
+.result .delta{font-family:'IBM Plex Mono';font-size:12.5px;margin-bottom:6px;display:block;color:var(--muted)}
+.fnote{margin:14px 0 0;font-size:12.5px;color:var(--muted);line-height:1.4}
+.rows{border-top:2px solid var(--rule);margin-top:34px}
+.row{display:grid;grid-template-columns:44px 260px 1fr 40px;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--hair);text-decoration:none;transition:background .15s,padding .15s}
+.row:hover{background:var(--sheet);padding-left:12px;padding-right:12px}
+.box{width:24px;height:24px;border:2px solid var(--ink);display:grid;place-items:center;background:#fff}
+.box svg{width:16px;height:16px;stroke:var(--coral-ink);stroke-width:3.5;fill:none;opacity:0;transition:opacity .15s}
+.row:hover .box svg{opacity:1}
+.row h3{font-size:22px;letter-spacing:-.01em}
+.row p{margin:0;color:var(--muted);font-size:15.5px}
+.row .go{font-family:'IBM Plex Mono';text-align:right}
+.gloss{display:grid;grid-template-columns:repeat(3,1fr);margin-top:34px;border:2px solid var(--rule);background:var(--sheet)}
+.gloss>div{padding:22px 22px 24px;border-right:1px solid var(--rule)}
+.gloss>div:last-child{border-right:0}
+.gloss .de{font-size:19px;display:block;line-height:1.2;min-height:46px}
+.gloss .arrow{font-family:'IBM Plex Mono';font-size:12px;color:var(--coral-ink);margin:10px 0 2px;display:block}
+.gloss .plain{font-family:'Archivo';font-stretch:112%;font-weight:700;font-size:26px;color:var(--ink);line-height:1.1;letter-spacing:-.01em;display:block}
+.gloss .fig{font-family:'IBM Plex Mono';font-size:28px;font-weight:500;margin-top:18px;border-top:1px solid var(--rule);padding-top:12px}
+.gloss .fig small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.split{display:grid;grid-template-columns:1fr 340px;gap:48px;margin-top:34px}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;border-top:2px solid var(--rule)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:80px 1fr;gap:12px;padding:20px 0;border-bottom:1px solid var(--hair)}
+.steps li::before{content:"Feld " counter(s);font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--coral-ink);padding-top:4px}
+.steps h3{font-size:22px;margin-bottom:4px;letter-spacing:-.01em}
+.steps p{margin:0;color:var(--muted);font-size:15.5px}
+.promise{margin-top:34px;border:2px solid var(--rule);padding:22px 26px;background:var(--navy);color:#fff;display:flex;gap:22px;align-items:center}
+.promise svg{flex:none;width:54px;height:44px}
+.promise .big{font-family:'Archivo';font-stretch:112%;font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.12;letter-spacing:-.01em}
+.promise .big em{font-style:normal;color:var(--coral)}
+.ph{position:relative;width:340px;height:425px;border:1px dashed var(--ink);background:repeating-linear-gradient(135deg,transparent 0 12px,rgba(10,20,34,.06) 12px 13px);display:flex;align-items:flex-end;padding:14px;color:var(--muted)}
+.ph::before{content:"";position:absolute;inset:8px;border:1px solid var(--hair)}
+.ph span{position:relative;font-size:11px;line-height:1.4}
+.tools{margin-top:34px;border-top:2px solid var(--rule)}
+.tool{display:grid;grid-template-columns:90px 1fr 1fr 90px;gap:24px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--hair);text-decoration:none}
+.tool:hover h3{text-decoration:underline;text-decoration-color:var(--coral);text-decoration-thickness:3px;text-underline-offset:5px}
+.tool h3{font-size:24px}
+.tool p{margin:0;color:var(--muted);font-size:15.5px}
+.tool .go{text-align:right;font-family:'IBM Plex Mono';font-size:13px}
+details{border-bottom:1px solid var(--hair)}
+.faq{border-top:2px solid var(--rule);margin-top:56px;max-width:860px}
+summary{list-style:none;cursor:pointer;padding:18px 0;display:flex;gap:16px;justify-content:space-between;font-weight:600;font-size:18px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:'IBM Plex Mono';font-size:22px;line-height:1;color:var(--coral-ink)}
+details[open] summary::after{content:"\2013"}
+details p{margin:0 0 20px;color:var(--muted);max-width:62ch}
+.final{padding:72px 0 80px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.final h2{font-size:clamp(34px,4.6vw,62px);max-width:16ch}
+.sig{display:flex;gap:30px;font-size:12px}
+.sig div{border-top:1px solid var(--rule);padding-top:6px;width:200px;color:var(--muted)}
+footer{border-top:2px solid var(--rule);padding:20px 0 30px;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.rv{opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.stamp.pop{animation:none}.cta,.row,.meter i{transition:none}html{scroll-behavior:auto}}
+@media (max-width:1100px){
+  .hero{grid-template-columns:1fr}
+  .form{max-width:640px}
+  .split{grid-template-columns:1fr}
+  .ph{width:100%;max-width:340px}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  .hdr{height:58px}
+  .brand b{font-size:16px}
+  .hdr nav .tel,.hdr nav .nl{display:none}
+  .hdr nav a.sm{font-size:12.5px;padding:5px 9px;white-space:nowrap}
+  .brand .mono{display:none}
+  .cta{width:calc(100% - 6px)}
+  .hero{padding:30px 0 40px;gap:30px}
+  .cta{width:100%;justify-content:space-between}
+  .tellink{margin-left:0}
+  .form .body{padding:14px 14px 18px}
+  .field label{width:92px;font-size:10px;padding:6px 8px}
+  .field .val{font-size:21px;padding:0 10px}.field .val span{font-size:16px}
+  .result{grid-template-columns:96px 1fr;gap:14px}
+  .stamp{width:96px;height:96px;font-size:13px;outline-offset:-6px}.stamp svg{width:24px;height:24px}
+  .scale .tick>span{font-size:10px;left:5px;white-space:normal;max-width:120px}
+  .par{grid-template-columns:1fr;padding:44px 0;gap:14px}
+  .par>.num{font-size:34px;display:flex;align-items:baseline;gap:14px;padding-top:8px}
+  .par>.num small{margin:0}
+  .row{grid-template-columns:30px 1fr 24px;gap:6px 12px;padding:16px 0}
+  .row p{grid-column:2/3;grid-row:2}
+  .row h3{font-size:19px}
+  .row .go{grid-row:1;grid-column:3}
+  .gloss{grid-template-columns:1fr}
+  .gloss>div{border-right:0;border-bottom:1px solid var(--rule)}
+  .gloss>div:last-child{border-bottom:0}
+  .gloss .de{min-height:0}
+  .steps li{grid-template-columns:1fr;gap:2px}
+  .promise{flex-direction:column;align-items:flex-start;padding:20px}
+  .tool{grid-template-columns:1fr;gap:6px}
+  .tool .go{text-align:left}
+  .final{grid-template-columns:1fr;padding:48px 0 56px}
+  .sig{display:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="plane" viewBox="340 480 1370 1090">
+    <path class="fb" d="M 1010.9 499.5 C 1012.1 502.8 1008.8 589.6 1008.7 602.8 L 1007.9 1253.8 C 927.4 1304.1 844.6 1351.5 764.0 1401.6 C 747.6 1411.8 730.3 1421.4 714.3 1432.3 L 704.9 1424.7 L 698.0 1419.8 L 698.1 1236.8 C 698.1 1225.6 697.0 1170.3 698.9 1162.4 C 700.8 1154.2 725.0 1106.7 730.2 1096.0 L 808.7 936.2 L 921.6 705.3 C 938.5 670.4 955.8 635.4 972.6 600.4 C 976.8 591.7 983.5 571.4 987.0 561.6 C 994.5 540.7 1002.5 520.0 1010.9 499.5 z"/>
+    <path class="fa" d="M 1036.6 505.9 L 1040.4 506.5 C 1055.9 548.6 1070.4 590.9 1090.6 630.9 C 1092.7 635.0 1094.7 639.3 1096.7 643.5 L 1140.2 734.0 L 1270.9 1000.4 L 1323.5 1107.2 C 1327.2 1114.5 1349.2 1156.8 1349.6 1161.5 C 1352.1 1195.2 1349.6 1232.3 1350.5 1266.4 C 1350.9 1317.3 1350.1 1368.2 1350.7 1419.1 C 1345.0 1423.5 1339.4 1427.7 1333.9 1432.3 L 1041.0 1254.8 L 1040.9 856.4 C 1041.0 791.9 1040.8 727.4 1040.1 662.9 C 1039.8 616.5 1041.0 570.2 1037.5 523.9 C 1037.1 517.9 1036.8 511.9 1036.6 505.9 z"/>
+    <path class="fa" d="M 1004.6 500.8 L 1006.1 505.4 C 989.1 540.6 972.5 576.1 954.3 610.7 C 863.2 783.8 764.7 953.5 673.3 1126.3 C 606.4 1131.4 538.5 1134.4 471.6 1139.3 C 441.5 1141.5 409.7 1142.3 379.8 1145.4 C 373.4 1138.9 364.0 1127.5 357.8 1120.4 C 386.5 1092.0 416.6 1064.3 445.7 1036.1 L 729.6 763.4 L 892.3 607.5 C 928.5 572.8 967.6 534.1 1004.6 500.8 z"/>
+    <path class="fb" d="M 1037.5 498.3 L 1037.1 496.2 C 1040.5 496.0 1081.7 536.8 1087.4 542.2 L 1212.2 661.6 L 1510.1 947.9 C 1569.5 1005.4 1629.8 1064.1 1690.1 1120.7 L 1680.4 1132.0 L 1668.5 1146.1 L 1490.5 1134.3 C 1452.7 1131.8 1412.8 1128.2 1375.3 1126.5 C 1283.2 959.6 1192.1 792.2 1101.7 624.3 C 1087.1 597.2 1074.0 571.5 1060.6 543.6 C 1057.1 536.2 1041.4 502.9 1037.5 498.3 z"/>
+    <path class="fb" d="M 1005.8 1289.8 L 1006.6 1289.9 C 1008.3 1291.6 1008.0 1293.2 1008.0 1296.2 C 1007.9 1325.3 1007.8 1354.6 1008.1 1383.8 L 1010.0 1555.6 C 997.0 1532.3 983.1 1508.6 969.8 1485.5 L 895.6 1356.2 C 930.3 1337.0 971.2 1310.7 1005.8 1289.8 z"/>
+    <path class="fa" d="M 1040.8 1288.9 C 1078.3 1311.0 1115.5 1333.5 1152.5 1356.2 C 1130.0 1397.7 1102.6 1443.3 1078.9 1484.5 C 1066.4 1506.3 1051.4 1534.5 1038.1 1555.2 C 1040.0 1466.4 1040.9 1377.7 1040.8 1288.9 z"/>
+  </symbol>
+</svg>
+
+<header>
+  <div class="wrap hdr">
+    <a class="brand" href="#" aria-label="PKV Germany home">
+      <svg width="42" height="34" aria-hidden="true"><use href="#plane"/></svg>
+      <span><b>PKV Germany</b><span class="mono" style="font-size:10px;color:var(--muted);letter-spacing:.14em">Private health insurance</span></span>
+    </a>
+    <nav>
+      <a class="nl" href="https://private-health-insurance-germany.com/guide" style="font-size:14px;text-decoration:none">Guides</a>
+      <a class="tel" href="tel:+4971196981720">+49 711 96 98 17 20</a>
+      <a class="sm" href="https://private-health-insurance-germany.com/eligibility-check">Free consultation</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero" aria-labelledby="h1">
+  <div>
+    <span class="mono" style="color:var(--coral-ink)">Formular PKV-2026 &middot; plain English</span>
+    <h1 id="h1">Do you qualify for private health insurance in Germany? <em>Find out in ten seconds.</em></h1>
+    <p class="lead">Set the slider to your yearly gross salary. The form tells you which side of the line you are on. Then talk to an independent consultant who works with internationals.</p>
+    <div class="cta-row">
+      <a class="cta" href="https://private-health-insurance-germany.com/eligibility-check">Check my eligibility
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      <a class="tellink" href="tel:+4971196981720">or call +49 711 96 98 17 20</a>
+    </div>
+  </div>
+
+  <div class="form" id="form">
+    <div class="cap mono"><span>Formular &middot; Einkommenspr&uuml;fung</span><span>Seite 1/1</span></div>
+    <div class="body">
+      <div class="field">
+        <label class="mono" for="gross"><span>Jahresbrutto<br><span style="text-transform:none;letter-spacing:0;color:var(--muted)">yearly gross salary</span></span></label>
+        <div class="val"><span>EUR</span><input id="gross" type="text" inputmode="numeric" value="92,000" autocomplete="off" aria-describedby="res"></div>
+      </div>
+      <input id="range" type="range" min="20000" max="200000" step="500" value="92000" aria-label="Yearly gross salary in euro">
+      <div class="scale" aria-hidden="true">
+        <div class="meter"><i id="m1" style="background:var(--navy)"></i><i id="m2" style="background:var(--coral)"></i></div>
+        <div class="tick" id="tick"><span class="mono"><span class="de" style="font-size:13px;text-transform:none">Versicherungspflichtgrenze</span><br>EUR 77,400</span></div>
+        <div class="ends mono"><span>20k</span><span>200k</span></div>
+      </div>
+      <div class="result" id="res" aria-live="polite">
+        <div class="stamp" id="stamp"></div>
+        <div id="txt"></div>
+      </div>
+      <p class="fnote">2026 limit: EUR 77,400 per year, EUR 6,450 per month. This applies to employees. Self-employed people, freelancers, civil servants and students follow other rules, so the Eligibility Check asks about your job as well.</p>
+    </div>
+  </div>
+</section>
+
+<section class="par" aria-labelledby="h2a">
+  <div class="num">&sect; 2<small>Who you are</small></div>
+  <div class="rv">
+    <h2 id="h2a">Tick the box that sounds like you.</h2>
+    <p class="lead">Different rules apply depending on your employment status, so start with the group that fits you best.</p>
+    <div class="rows">
+      <a class="row" href="https://private-health-insurance-germany.com/guide/who-qualifies"><span class="box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><h3>Employees</h3><p>Compare cover and contributions if you earn above the income threshold and work for a German employer.</p><span class="go">&rarr;</span></a>
+      <a class="row" href="https://private-health-insurance-germany.com/guide/for-freelancers"><span class="box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><h3>Self-employed &amp; freelancers</h3><p>Freelancers and founders can choose freely. See how to protect your income and your health.</p><span class="go">&rarr;</span></a>
+      <a class="row" href="https://private-health-insurance-germany.com/guide/for-students"><span class="box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><h3>Students</h3><p>Study-specific options built for your time at a German university.</p><span class="go">&rarr;</span></a>
+      <a class="row" href="https://private-health-insurance-germany.com/private-health-insurance"><span class="box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><h3>Civil servants</h3><p>Cover that works alongside the state allowance for public-sector employees.</p><span class="go">&rarr;</span></a>
+      <a class="row" href="https://private-health-insurance-germany.com/guide/costs-and-contributions"><span class="box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><h3>Families</h3><p>What changes for partners and children, and what each choice costs.</p><span class="go">&rarr;</span></a>
+      <a class="row" href="https://private-health-insurance-germany.com/guide/for-foreigners"><span class="box"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><h3>New arrivals</h3><p>Clear cover and full support in English, without the paperwork.</p><span class="go">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="par" aria-labelledby="h2b">
+  <div class="num">&sect; 3<small>Glossar</small></div>
+  <div class="rv">
+    <h2 id="h2b">Three German words, translated.</h2>
+    <p class="lead">Every number that decides your options hides behind a long German noun. Here are the 2026 figures in plain English.</p>
+    <div class="gloss">
+      <div><span class="de">Versicherungspflichtgrenze</span><span class="arrow">&darr; in English</span><span class="plain">The income line</span><div class="fig">EUR 77,400<small>per year &middot; EUR 6,450 per month</small></div></div>
+      <div><span class="de">Beitragsbemessungsgrenze</span><span class="arrow">&darr; in English</span><span class="plain">The contribution cap</span><div class="fig">EUR 5,812.50<small>per month (2026)</small></div></div>
+      <div><span class="de">Arbeitgeberzuschuss</span><span class="arrow">&darr; in English</span><span class="plain">Your employer's share</span><div class="fig">~EUR 509<small>maximum per month</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="par" aria-labelledby="h2c">
+  <div class="num">&sect; 4<small>Ablauf</small></div>
+  <div class="rv">
+    <h2 id="h2c">From first question to signed policy.</h2>
+    <div class="split">
+      <div>
+        <ol class="steps">
+          <li><div><h3>Check your eligibility</h3><p>Two minutes. You see whether private health insurance is open to you.</p></div></li>
+          <li><div><h3>Talk to a consultant</h3><p>By phone or video call. The same person stays your contact.</p></div></li>
+          <li><div><h3>Compare 40+ insurers</h3><p>Premiums, benefits and conditions side by side, with the trade-offs explained.</p></div></li>
+          <li><div><h3>Apply and get covered</h3><p>Policies typically start within 2 to 4 weeks. Your consultant handles the paperwork with you.</p></div></li>
+        </ol>
+        <div class="promise">
+          <svg width="54" height="44" aria-hidden="true" style="--logo-a:#fff"><use href="#plane"/></svg>
+          <div class="big">Independent, not tied to one insurer. In English. <em>Free of charge for you.</em></div>
+        </div>
+      </div>
+      <div class="ph" role="img" aria-label="Image placeholder"><span class="mono">Platzhalter 340 x 425 (4:5)<br>Later: consultant on a video call with a client, daylight, desk with documents</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="par" aria-labelledby="h2d">
+  <div class="num">&sect; 5<small>Anlagen</small></div>
+  <div class="rv">
+    <h2 id="h2d">Three tools that do the maths.</h2>
+    <div class="tools">
+      <a class="tool" href="https://private-health-insurance-germany.com/eligibility-check"><span class="mono">Anlage A</span><h3>Eligibility Check</h3><p>Find out in two minutes whether private health insurance is open to you.</p><span class="go">Open &rarr;</span></a>
+      <a class="tool" href="https://private-health-insurance-germany.com/calculator"><span class="mono">Anlage B</span><h3>Cost calculator</h3><p>Estimate your monthly contribution based on age, income and cover.</p><span class="go">Open &rarr;</span></a>
+      <a class="tool" href="https://private-health-insurance-germany.com/compare"><span class="mono">Anlage C</span><h3>Public vs private</h3><p>Benefits, costs and flexibility side by side, with no sales pitch.</p><span class="go">Open &rarr;</span></a>
+    </div>
+    <div class="faq">
+      <details><summary>How are private health insurance premiums calculated?</summary><p>Your premium is set by your age at entry, your health and the level of cover you choose. It does not rise with your salary, which is the main difference from public health insurance.</p></details>
+      <details><summary>Do I need to speak German?</summary><p>No. Our consultants work in English, and several insurers offer full English-language service.</p></details>
+      <details><summary>How long does it take to get covered?</summary><p>Policies typically start within 2 to 4 weeks of the application. Your consultant handles the paperwork with you.</p></details>
+      <details><summary>Can I go back to public health insurance later?</summary><p>Only in limited cases, for example if your income drops below the threshold for an extended period. Think carefully before you switch and talk to an independent consultant first.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final" aria-labelledby="h2e">
+  <div>
+    <span class="mono" style="color:var(--coral-ink)">&sect; 6 &middot; Unterschrift</span>
+    <h2 id="h2e" style="margin:14px 0 30px">Find out which private health insurance fits you.</h2>
+    <div class="cta-row" style="margin-top:0">
+      <a class="cta" href="https://private-health-insurance-germany.com/eligibility-check">Check my eligibility
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      <a class="tellink" href="tel:+4971196981720">or call +49 711 96 98 17 20</a>
+    </div>
+  </div>
+  <div class="sig mono"><div>Ort, Datum</div><div>Ihre Entscheidung</div></div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>&copy; 2026 PKV Germany &middot; Independent PKV guidance for expats</span><span class="mono" style="font-size:11px">Figures: 2026 values</span></div></footer>
+
+<script>
+(function(){
+  var LINE=77400,MIN=20000,MAX=200000;
+  var g=document.getElementById('gross'),r=document.getElementById('range'),stamp=document.getElementById('stamp'),txt=document.getElementById('txt'),
+      tick=document.getElementById('tick'),m1=document.getElementById('m1'),m2=document.getElementById('m2');
+  var fmt=function(n){return n.toLocaleString('en-US')};
+  var last=null;
+  var lp=(LINE-MIN)/(MAX-MIN)*100;
+  tick.style.left='calc(11px + (100% - 22px) * '+(lp/100)+')';
+  var check='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="square"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+  var dash='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="square"><path d="M5 12h14"/></svg>';
+  function render(v){
+    v=Math.max(0,Math.min(1000000,Math.round(v)));
+    var pct=Math.max(0,Math.min(100,(v-MIN)/(MAX-MIN)*100));
+    m1.style.width=Math.min(pct,lp)+'%';m2.style.width=Math.max(0,pct-lp)+'%';
+    var above=v>=LINE,d=Math.abs(v-LINE),mo=Math.round(v/12);
+    if(last!==above){
+      stamp.className='stamp'+(above?'':' below');
+      stamp.innerHTML=above?check+'Above<br>the line':dash+'Below<br>the line';
+      void stamp.offsetWidth;stamp.classList.add('pop');last=above;
+    }
+    txt.innerHTML='<span class="delta">EUR '+fmt(v)+' / yr = EUR '+fmt(mo)+' / month &middot; '+(above?'+':'-')+' EUR '+fmt(d)+' vs. the line</span>'+
+      (above?'<p><b>You are over the income line.</b> As an employee you can usually choose private cover. Next step: the Eligibility Check confirms which route applies to you.</p>'
+            :'<p><b>You are under the income line.</b> As an employee you would usually stay in public insurance. Self-employed people, freelancers, civil servants and students can still choose private cover.</p>');
+  }
+  r.addEventListener('input',function(){g.value=fmt(+r.value);render(+r.value)});
+  g.addEventListener('input',function(){var n=parseInt(g.value.replace(/\D/g,''),10)||0;if(n>=MIN&&n<=MAX)r.value=n;render(n)});
+  g.addEventListener('blur',function(){var n=parseInt(g.value.replace(/\D/g,''),10)||0;g.value=fmt(n)});
+  render(92000);
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.05}):null;
+  document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in')});
+})();
+</script>
+</body>
+</html>

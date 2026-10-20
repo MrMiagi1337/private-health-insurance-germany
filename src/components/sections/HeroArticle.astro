@@ -44,7 +44,7 @@ const webp = /\.jpe?g$/.test(image) ? image.replace(/\.jpe?g$/, '.webp') : undef
     background: linear-gradient(180deg, var(--overlay-navy) 0%, var(--overlay-navy-strong) 100%);
   }
   .ha-col { max-width: 800px; position: relative; }
-  .ha::after { content: ""; position: absolute; z-index: -1; right: -120px; top: 50%; width: 520px; height: 520px; transform: translateY(-50%); border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--blue) 0%, transparent 68%); opacity: .35; pointer-events: none; display: none; }
+  .ha::after { content: ""; position: absolute; z-index: -1; right: -120px; top: 50%; width: 520px; height: 520px; transform: translateY(-50%); border-radius: 50%; background: none; opacity: .35; pointer-events: none; display: none; }
   @media (min-width: 960px) { .ha::after { display: block; } }
   .ha-inner { padding-top: 56px; padding-bottom: 56px; }
   h1 { color: var(--surface); font-size: var(--fs-h1-mobile); line-height: var(--lh-h1-mobile); }

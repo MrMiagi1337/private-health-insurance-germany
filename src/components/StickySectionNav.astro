@@ -23,15 +23,13 @@ const { sections } = Astro.props;
   .ssn {
     position: sticky; top: var(--nav-h); z-index: 100;
     height: var(--sticky-nav-h);
-    background: color-mix(in srgb, var(--surface) 82%, transparent);
-    -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
+    background: var(--surface);
     border-bottom: var(--border-w) solid color-mix(in srgb, var(--border) 75%, transparent);
     display: flex; align-items: center;
   }
-  @supports not (backdrop-filter: blur(1px)) { .ssn { background: var(--surface); } }
-  @media (prefers-reduced-transparency: reduce) { .ssn { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+  @media (prefers-reduced-transparency: reduce) { .ssn { background: var(--surface); } }
   .ssn .container { height: 100%; position: relative; }
-  .ssn .container::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--surface) 85%, transparent)); pointer-events: none; }
+  .ssn .container::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: none; pointer-events: none; }
   @media (min-width: 960px) { .ssn .container::after { display: none; } }
   nav { height: 100%; }
   .ssn-list {

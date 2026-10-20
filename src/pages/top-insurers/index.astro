@@ -171,7 +171,7 @@ const schema = {
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
 
-  <main>
+  <main id="main">
     <div class="page-wrap">
 
       <div class="container">
@@ -316,7 +316,7 @@ const schema = {
             </div>
             <div class="guide-card guide-card-cta">
               <p>The most reliable way to find your best match is through a licensed independent broker who can compare exact quotes for your profile.</p>
-              <a href="/contact" class="btn-primary">Get matched with a broker →</a>
+              <a href="/free-consultation" class="btn-primary">Get matched with a broker →</a>
             </div>
           </div>
         </div>
@@ -337,16 +337,16 @@ const schema = {
 
   /* Hero header */
   .page-hero {
-    background: linear-gradient(135deg, #0d2137 0%, #0a3040 50%, #0d3535 100%);
+    background: var(--navy);
     padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2rem, 5vw, 3rem);
     margin-bottom: 3rem;
   }
   .page-kicker {
     display: inline-block;
     font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--primary); background: rgba(0,201,167,.12);
+    color: var(--primary); background: rgba(255,107,74,.12);
     padding: 4px 12px; border-radius: 999px; margin-bottom: 1rem;
-    border: 1px solid rgba(0,201,167,.2);
+    border: 1px solid rgba(255,107,74,.2);
   }
   .page-hero h1 {
     font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1;
@@ -372,7 +372,7 @@ const schema = {
     position: relative;
     background: #fff;
     border: 1.5px solid var(--border);
-    border-radius: 20px;
+    border-radius: 4px;
     padding: 1.75rem 1.5rem 1.5rem;
     display: flex; flex-direction: column; gap: .6rem;
     text-decoration: none;
@@ -401,7 +401,7 @@ const schema = {
   /* Top light edge for 3D effect */
   .card-edge {
     position: absolute; top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.6) 50%, transparent);
+    background: none;
     pointer-events: none;
   }
 
@@ -410,7 +410,7 @@ const schema = {
     position: absolute; top: 1rem; right: 1rem;
     font-size: .68rem; font-weight: 800; letter-spacing: .04em;
     color: var(--muted); background: var(--surface);
-    padding: 3px 9px; border-radius: 999px;
+    padding: 3px 9px; border-radius: 2px;
     border: 1px solid var(--border);
   }
 
@@ -420,7 +420,7 @@ const schema = {
     width: 120px; height: 48px;
     background: var(--brand-bg, #f0f4ff);
     border: 1.5px solid color-mix(in srgb, var(--brand, #0055a4) 18%, transparent);
-    border-radius: 12px;
+    border-radius: 4px;
     display: flex; align-items: center; justify-content: center;
     padding: 6px 10px;
     margin-bottom: .25rem;
@@ -432,7 +432,7 @@ const schema = {
     display: block;
   }
   .avatar-glow {
-    position: absolute; inset: -4px; border-radius: 22px;
+    position: absolute; inset: -4px; border-radius: 4px;
     background: var(--brand, #0055a4); opacity: 0;
     filter: blur(12px);
     transition: opacity .25s ease;
@@ -445,7 +445,7 @@ const schema = {
   .card-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -.03em; color: var(--text); }
   .card-badge {
     font-size: .62rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
-    padding: 2px 8px; border-radius: 999px;
+    padding: 2px 8px; border-radius: 2px;
   }
 
   /* Score */
@@ -464,7 +464,7 @@ const schema = {
     font-size: .68rem; font-weight: 600; letter-spacing: .03em;
     color: var(--brand, var(--primary));
     background: var(--brand-bg, #f0f4ff);
-    padding: 3px 9px; border-radius: 999px;
+    padding: 3px 9px; border-radius: 2px;
     border: 1px solid color-mix(in srgb, var(--brand, #0055a4) 15%, transparent);
   }
 
@@ -490,7 +490,7 @@ const schema = {
     padding: 1.5rem; box-shadow: var(--sh-sm);
   }
   .guide-icon {
-    width: 40px; height: 40px; border-radius: 10px;
+    width: 40px; height: 40px; border-radius: 4px;
     background: var(--surface); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     color: var(--primary); margin-bottom: .85rem;
@@ -498,7 +498,7 @@ const schema = {
   .guide-card h3 { font-size: .95rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: .4rem; }
   .guide-card p { font-size: .85rem; color: var(--muted); line-height: 1.65; }
   .guide-card-cta {
-    background: linear-gradient(135deg, #0d2137, #0a3040);
+    background: var(--navy);
     border-color: transparent;
     display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;
   }

@@ -1,152 +1,201 @@
 ---
+// ArticleLayout: guides and long-form pages.
+// Breadcrumbs, H1, TL;DR, meta line, TOC (generated from the H2s at build time), inline CTA after every 2nd H2,
+// FAQ (FAQPage JSON-LD), sources, advisors, related links, Article JSON-LD with dateModified.
 import Layout from './Layout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import HeroArticle from '../components/sections/HeroArticle.astro';
+import TldrBox from '../components/TldrBox.astro';
 import FaqAccordion from '../components/sections/FaqAccordion.astro';
-import LeadForm from '../components/forms/LeadForm.astro';
-import GuideCard from '../components/ui/GuideCard.astro';
-import SectionIntro from '../components/sections/SectionIntro.astro';
+import ConsultationCTA from '../components/ConsultationCTA.astro';
+import Advisor from '../components/Advisor.astro';
+import LinkedInTrust from '../components/LinkedInTrust.astro';
 
-interface Related { title: string; excerpt: string; href: string; eyebrow?: string; readTime?: string; image?: string; alt?: string }
+interface Related { title: string; excerpt?: string; href: string }
 interface Props {
   title: string;
   description: string;
-  intro?: string;
+  category?: string;
   readTime?: string;
+  updatedDate?: string;          // human text, e.g. "April 2026"
+  datePublished?: string;        // ISO
+  dateModified?: string;         // ISO
+  author?: string;
   reviewedBy?: string;
-  image?: string;
-  alt?: string;
-  breadcrumbs?: { label: string; href?: string }[];
-  toc: { id: string; label: string }[];
-  summary?: string[];
+  tldr?: string[];
   faqs?: { q: string; a: string }[];
   references?: { label: string; href?: string }[];
-  author?: { name: string; role: string };
   related?: Related[];
-  leadSource?: string;
-  datePublished?: string;
-  dateModified?: string;
+  breadcrumbs?: { label: string; href?: string }[];
+  articleSchema?: boolean;       // false when the page ships its own Article JSON-LD
+  breadcrumbSchema?: boolean;
+  showAdvisors?: boolean;
 }
 const {
-  title, description, intro = description, readTime, reviewedBy, image, alt = '',
-  breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Guides', href: '/guide' }, { label: title }],
-  toc, summary = [], faqs = [], references = [],
-  author = { name: 'My Healthcare Broker team', role: 'Independent consultants for private health insurance in Germany' },
-  related = [], leadSource = 'phig-article',
+  title, description, category = 'Guide', readTime, updatedDate,
   datePublished = '2026-01-15', dateModified = '2026-10-01',
+  author = '[Author name]', reviewedBy = '[Licensed broker]',
+  tldr = [], faqs = [], references = [], related = [],
+  breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Guides', href: '/guide' }, { label: title }],
+  articleSchema = true, breadcrumbSchema = true, showAdvisors = true,
 } = Astro.props;
 
+const slugify = (t: string) => t.replace(/<[^>]*>/g, '').toLowerCase().replace(/&amp;/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const strip = (t: string) => t.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&#39;|&rsquo;/g, '’').replace(/\s+/g, ' ').trim();
+
+const raw = await Astro.slots.render('default');
+const toc: { id: string; label: string }[] = [];
+const ctaHtml = `<aside class="inline-cta" aria-label="Free consultation"><p><strong>Not sure which option fits you?</strong> A licensed broker can go through it with you, in English, free of charge.</p><a class="btn btn-sm" href="/free-consultation">Get a free consultation</a></aside>`;
+let n = 0;
+const body = raw.replace(/<h2\b([^>]*)>([\s\S]*?)<\/h2>/g, (_m, attrs: string, inner: string) => {
+  n += 1;
+  let id = /\bid="([^"]+)"/.exec(attrs)?.[1];
+  let a = attrs;
+  if (!id) { id = slugify(inner) || `section-${n}`; a = `${attrs} id="${id}"`; }
+  toc.push({ id, label: strip(inner) });
+  const pre = n >= 3 && n % 2 === 1 ? ctaHtml : '';
+  return `${pre}<h2${a}>${inner}</h2>`;
+});
+const relatedHtml = Astro.slots.has('related') ? (await Astro.slots.render('related')).trim() : '';
+const tocAll = [
+  ...toc,
+  ...(faqs.length ? [{ id: 'faq', label: 'Frequently asked questions' }] : []),
+  ...(references.length ? [{ id: 'sources', label: 'Sources' }] : []),
+];
 const articleLd = {
   '@context': 'https://schema.org', '@type': 'Article',
-  headline: title, description, datePublished, dateModified,
-  author: { '@type': 'Organization', name: author.name },
+  headline: title, description, datePublished, dateModified, inLanguage: 'en',
+  author: { '@type': 'Organization', name: 'Private Health Insurance Germany' },
   publisher: { '@type': 'Organization', name: 'Private Health Insurance Germany' },
 };
-const initials = author.name.split(' ').map((w) => w[0]).slice(0, 2).join('');
 ---
 <Layout title={title} description={description}>
-  <main>
-    <Breadcrumbs items={breadcrumbs} />
-    <HeroArticle title={title} intro={intro} readTime={readTime} reviewedBy={reviewedBy} image={image} alt={alt} />
+  <main id="main">
+    <Breadcrumbs items={breadcrumbs} schema={breadcrumbSchema} />
+    <header class="ah container">
+      <p class="eyebrow">{category}</p>
+      <h1>{title}</h1>
+      <p class="lead ah-lead">{description}</p>
+      <p class="ah-meta">
+        <span>Written by {author}</span><span>Reviewed by {reviewedBy}</span>
+        <span>Last updated <time datetime={dateModified}>{updatedDate ?? dateModified}</time></span>
+        {readTime && <span>{readTime}</span>}
+      </p>
+    </header>
 
-    <div class="container-article art">
-      <nav class="toc" aria-labelledby="toc-h">
-        <p id="toc-h" class="toc-title">In this article</p>
-        <ul>
-          {toc.map((t) => (
-            <li>
-              <a href={`#${t.id}`}>
-                <span>{t.label}</span>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <div class="art container">
+      <aside class="toc-col">
+        <nav class="toc" aria-label="Table of contents">
+          <p class="toc-h">On this page</p>
+          <ol>{tocAll.map((t) => <li><a href={`#${t.id}`}>{t.label}</a></li>)}</ol>
+          <a class="btn btn-sm toc-cta" href="/free-consultation">Free consultation</a>
+        </nav>
+        <details class="toc-m">
+          <summary>On this page</summary>
+          <ol>{tocAll.map((t) => <li><a href={`#${t.id}`}>{t.label}</a></li>)}</ol>
+        </details>
+      </aside>
 
-      {summary.length > 0 && (
-        <aside class="summary" aria-labelledby="sum-h">
-          <h2 id="sum-h">Summary</h2>
-          <ul>{summary.map((s) => <li>{s}</li>)}</ul>
-        </aside>
-      )}
+      <article class="art-main">
+        <TldrBox items={tldr} />
+        <div class="prose" set:html={body} />
 
-      <div class="prose"><slot /></div>
+        {faqs.length > 0 && (
+          <section id="faq" class="blk" aria-labelledby="faq-h">
+            <h2 id="faq-h">Frequently asked questions</h2>
+            <FaqAccordion items={faqs} />
+          </section>
+        )}
 
-      {faqs.length > 0 && (
-        <section id="faq" class="art-block" aria-labelledby="faq-h">
-          <h2 id="faq-h">Frequently asked questions</h2>
-          <FaqAccordion items={faqs} />
-        </section>
-      )}
+        {references.length > 0 && (
+          <section id="sources" class="blk" aria-labelledby="src-h">
+            <h2 id="src-h">Sources</h2>
+            <ol class="src">{references.map((r) => <li>{r.href ? <a href={r.href} rel="noopener">{r.label}</a> : r.label}</li>)}</ol>
+          </section>
+        )}
 
-      {references.length > 0 && (
-        <aside class="refs art-block" aria-labelledby="ref-h">
-          <h2 id="ref-h">Sources and references</h2>
-          <ul>
-            {references.map((r) => <li>{r.href ? <a href={r.href}>{r.label}</a> : r.label}</li>)}
-          </ul>
-        </aside>
-      )}
+        {showAdvisors && (
+          <section class="blk author" aria-labelledby="au-h">
+            <h2 id="au-h">Talk to a licensed broker</h2>
+            <Advisor layout="row" size="sm" />
+            <div class="au-lt"><LinkedInTrust /></div>
+            <p class="au-note">How we work: <a href="/how-we-get-paid">how we get paid</a> and our <a href="/editorial-standards">editorial standards</a>.</p>
+          </section>
+        )}
 
-      <div class="author art-block">
-        <span class="avatar" aria-hidden="true">{initials}</span>
-        <div>
-          <p class="a-name">{author.name}</p>
-          <p class="a-role">{author.role}</p>
-        </div>
-      </div>
+        {(related.length > 0 || relatedHtml) && (
+          <section class="blk rel" aria-labelledby="rel-h">
+            <h2 id="rel-h">Related guides</h2>
+            {related.length > 0 && (
+              <ul class="rel-list">{related.map((r) => <li><a href={r.href}><strong>{r.title}</strong>{r.excerpt && <span>{r.excerpt}</span>}</a></li>)}</ul>
+            )}
+            {relatedHtml && <div class="rel-legacy" set:html={relatedHtml} />}
+          </section>
+        )}
+      </article>
     </div>
 
-    {related.length > 0 && (
-      <section class="art-wide">
-        <div class="container">
-          <SectionIntro title="Related articles" />
-          <div class="rel-grid">{related.map((r) => <GuideCard {...r} />)}</div>
-        </div>
-      </section>
-    )}
-
-    <section class="art-wide art-end">
-      <div class="container-narrow"><LeadForm source={leadSource} title="Talk to an independent consultant about your situation" /></div>
-    </section>
+    <ConsultationCTA />
   </main>
-  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+  {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />}
 </Layout>
 
 <style>
-  .art { padding-top: 24px; }
-  .toc { border: var(--border-w) solid var(--border); border-radius: var(--radius-card); padding: 24px; background: var(--surface); }
-  .toc-title { font-weight: var(--fw-heading); color: var(--navy); font-size: 20px; line-height: 28px; margin-bottom: 8px; }
-  .toc ul { list-style: none; }
-  .toc li + li { border-top: var(--border-w) solid var(--border); }
-  .toc a { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding: 10px 0; color: var(--text); font-size: 15px; line-height: 22px; }
-  .toc a svg { color: var(--blue); flex: none; transition: transform var(--ease); }
-  .toc a:hover { color: var(--navy); }
-  .toc a:hover svg { transform: translateX(3px); }
-  .toc a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
-  .summary { margin-top: 32px; background: var(--blue-tint); border-radius: var(--radius-card); padding: 24px; }
-  .summary h2 { font-size: 20px; line-height: 28px; margin-bottom: 12px; }
-  .summary ul { padding-left: 20px; display: grid; gap: 8px; }
-  .prose { margin-top: 48px; }
-  .art-block { margin-top: 56px; }
-  .art-block h2 { font-size: var(--fs-h2-sm); line-height: var(--lh-h2-sm); margin-bottom: 16px; scroll-margin-top: calc(var(--nav-h) + 24px); }
-  .refs { background: var(--cream); border-radius: var(--radius-card); padding: 24px; }
-  .refs h2 { font-size: 20px; line-height: 28px; margin-bottom: 12px; }
-  .refs ul { padding-left: 20px; display: grid; gap: 6px; font-size: 15px; }
-  .refs a { color: var(--blue-dk); font-weight: var(--fw-btn); }
-  .author { display: flex; gap: 16px; align-items: center; padding-top: 32px; border-top: var(--border-w) solid var(--border); }
-  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--blue-tint); color: var(--navy); display: grid; place-items: center; font-weight: var(--fw-heading); flex: none; }
-  .a-name { font-weight: var(--fw-heading); color: var(--navy); }
-  .a-role { color: var(--text-muted); font-size: 15px; }
-  .art-wide { margin-top: var(--section-y-mobile); }
-  .art-end { padding-bottom: var(--section-y-mobile); }
-  .rel-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
-  @media (min-width: 640px) { .rel-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 960px) {
-    .art { padding-top: 32px; }
-    .art-wide { margin-top: var(--section-y); }
-    .art-end { padding-bottom: var(--section-y); }
-    .rel-grid { grid-template-columns: repeat(3, 1fr); gap: 25px; }
+  .ah { padding-top: 8px; padding-bottom: 32px; }
+  .ah > * { max-width: 800px; }
+  @media (min-width: 1000px) { .ah { padding-left: calc((100% - 1024px) / 2 + var(--gutter)); } }
+  .ah h1 { margin-bottom: 18px; }
+  .ah-lead { color: var(--text); max-width: 720px; }
+  .ah-meta { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 4px 20px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .02em; color: var(--text-muted); }
+  .art { display: grid; gap: 24px; padding-bottom: 48px; }
+  .toc-col { min-width: 0; }
+  .toc { display: none; }
+  .toc-m { border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--band); }
+  .toc-m summary { padding: 14px 16px; font-weight: 700; color: var(--navy); cursor: pointer; min-height: 44px; }
+  .toc-m ol { list-style: none; padding: 0 16px 12px; display: grid; gap: 2px; }
+  .toc-m a { display: block; padding: 9px 0; font-size: 15px; color: var(--text); border-top: 1px solid var(--border); }
+  .art-main { min-width: 0; max-width: 720px; }
+  .prose { font-size: 17.5px; line-height: 29px; }
+  .prose :global(h2) { font-size: 28px; line-height: 34px; margin: 52px 0 16px; scroll-margin-top: calc(var(--nav-h) + 20px); }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .prose :global(h3) { font-size: 20px; line-height: 27px; margin: 30px 0 10px; }
+  .prose :global(p), .prose :global(ul), .prose :global(ol) { margin: 0 0 18px; }
+  .prose :global(ul), .prose :global(ol) { padding-left: 22px; }
+  .prose :global(li) { margin-bottom: 8px; padding-left: 2px; }
+  .prose :global(a) { color: var(--accent-dk); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+  .prose :global(a:hover) { text-decoration-color: currentColor; }
+  .prose :global(strong) { color: var(--navy); }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin: 24px 0 28px; font-size: 15px; line-height: 22px; display: block; overflow-x: auto; }
+  .prose :global(th) { text-align: left; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); padding: 10px 14px; border-bottom: 2px solid var(--navy); }
+  .prose :global(td) { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .prose :global(td:first-child) { font-weight: 600; color: var(--navy); }
+  .prose :global(.inline-cta) { margin: 44px 0; padding: 18px 20px; border: 1px solid var(--border-strong); border-radius: var(--radius-card); background: var(--band); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; }
+  .prose :global(.inline-cta p) { margin: 0; flex: 1 1 280px; font-size: 16px; line-height: 24px; color: var(--navy); }
+  .prose :global(.inline-cta .btn) { color: #fff; text-decoration: none; }
+  .blk { margin-top: 56px; }
+  .blk h2 { font-size: 26px; line-height: 32px; margin-bottom: 18px; scroll-margin-top: calc(var(--nav-h) + 20px); }
+  .src { padding-left: 22px; display: grid; gap: 8px; font-size: 15px; }
+  .src a { color: var(--accent-dk); text-decoration: underline; text-underline-offset: 3px; }
+  .author { padding-top: 32px; border-top: 1px solid var(--border); }
+  .au-lt { margin-top: 24px; }
+  .au-note { margin-top: 20px; font-size: 14px; color: var(--text-muted); }
+  .au-note a { text-decoration: underline; }
+  .rel-list { list-style: none; display: grid; border-top: 1px solid var(--border); }
+  .rel-list a { display: grid; gap: 2px; padding: 14px 0; border-bottom: 1px solid var(--border); color: var(--navy); }
+  .rel-list a:hover strong { color: var(--accent); }
+  .rel-list span { font-size: 15px; color: var(--text-muted); }
+  .rel-legacy :global(ul) { list-style: none; border-top: 1px solid var(--border); }
+  .rel-legacy :global(li) { border-bottom: 1px solid var(--border); }
+  .rel-legacy :global(a) { display: block; padding: 13px 0; font-weight: 600; color: var(--navy); }
+  .rel-legacy :global(a:hover) { color: var(--accent); }
+  @media (min-width: 1000px) {
+    .art { grid-template-columns: 240px minmax(0, 720px); gap: 64px; justify-content: center; }
+    .toc-m { display: none; }
+    .toc { display: block; position: sticky; top: calc(var(--nav-h) + 24px); max-height: calc(100vh - var(--nav-h) - 48px); overflow-y: auto; }
+    .toc-h { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .toc ol { list-style: none; border-left: 1px solid var(--border-strong); }
+    .toc a { display: block; padding: 7px 0 7px 14px; margin-left: -1px; border-left: 2px solid transparent; font-size: 14.5px; line-height: 20px; color: var(--text); }
+    .toc a:hover { color: var(--navy); border-left-color: var(--brand-coral); }
+    .toc a.toc-cta { margin: 20px 0 0; padding: 6px 16px; width: 100%; color: #fff; border-left: 0; font-size: 14px; }
+    .toc a.toc-cta:hover { color: #fff; }
   }
 </style>

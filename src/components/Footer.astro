@@ -1,132 +1,81 @@
 ---
 import LogoMark from './ui/LogoMark.astro';
-const trust = [
-  { title: 'Independent consultants', sub: 'Not tied to one insurer', icon: 'shield' },
-  { title: 'Licensed advisors', sub: 'Registered under §34d GewO', icon: 'check' },
-  { title: 'Free of charge', sub: 'No obligation to sign up', icon: 'heart' },
-];
-
 const columns = [
-  {
-    head: 'Private Health Insurance',
-    links: [
-      { label: 'What is private health insurance?', href: '/private-health-insurance' },
-      { label: 'Health insurance for expats', href: '/health-insurance-expats-germany' },
-      { label: 'Who qualifies?', href: '/guide/who-qualifies' },
-      { label: 'For freelancers', href: '/guide/for-freelancers' },
-      { label: 'For students', href: '/guide/for-students' },
-      { label: 'For foreigners', href: '/guide/for-foreigners' },
-    ],
-  },
-  {
-    head: 'Compare & Tools',
-    links: [
-      { label: 'Public vs private', href: '/compare' },
-      { label: 'Cost calculator', href: '/calculator' },
-      { label: 'Eligibility Check', href: '/eligibility-check' },
-      { label: 'Document checklist', href: '/checklist' },
-      { label: 'Top insurers', href: '/top-insurers' },
-    ],
-  },
-  {
-    head: 'Guides',
-    links: [
-      { label: 'All guides', href: '/guide' },
-      { label: 'Costs and contributions', href: '/guide/costs-and-contributions' },
-      { label: 'How to switch', href: '/guide/how-to-switch' },
-      { label: 'Opening a bank account', href: '/guide/bank-account' },
-    ],
-  },
-  {
-    head: 'Company & Legal',
-    links: [
-      { label: 'About', href: '/about' },
-      { label: 'Get free advice', href: '/contact' },
-      { label: 'Imprint', href: '/imprint' },
-      { label: 'Privacy', href: '/privacy' },
-    ],
-  },
+  { head: 'Private health insurance', links: [
+    { label: 'What is private health insurance?', href: '/private-health-insurance' },
+    { label: 'Health insurance for expats', href: '/health-insurance-expats-germany' },
+    { label: 'Who qualifies?', href: '/guide/who-qualifies' },
+    { label: 'For freelancers', href: '/guide/for-freelancers' },
+    { label: 'For students', href: '/guide/for-students' },
+    { label: 'For foreigners', href: '/guide/for-foreigners' },
+  ]},
+  { head: 'Compare and tools', links: [
+    { label: 'Public vs private', href: '/compare' },
+    { label: 'Cost calculator', href: '/calculator' },
+    { label: 'Eligibility Check', href: '/eligibility-check' },
+    { label: 'Document checklist', href: '/checklist' },
+    { label: 'Top insurers', href: '/top-insurers' },
+  ]},
+  { head: 'Guides', links: [
+    { label: 'All guides', href: '/guide' },
+    { label: 'Costs and contributions', href: '/guide/costs-and-contributions' },
+    { label: 'How to switch', href: '/guide/how-to-switch' },
+    { label: 'Opening a bank account', href: '/guide/bank-account' },
+  ]},
+  { head: 'About', links: [
+    { label: 'Free consultation', href: '/free-consultation' },
+    { label: 'About us', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'How we get paid', href: '/how-we-get-paid' },
+    { label: 'Editorial standards', href: '/editorial-standards' },
+  ]},
 ];
 ---
-
 <footer class="site-footer" role="contentinfo">
   <div class="container">
-    <ul class="foot-trust">
-      {trust.map((t) => (
-        <li class="foot-chip">
-          <span class="foot-chip-icon" aria-hidden="true">
-            {t.icon === 'shield' && (
-              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
-            )}
-            {t.icon === 'check' && (
-              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg>
-            )}
-            {t.icon === 'heart' && (
-              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>
-            )}
-          </span>
-          <span class="foot-chip-text">
-            <strong>{t.title}</strong>
-            <span>{t.sub}</span>
-          </span>
-        </li>
-      ))}
-    </ul>
-
-    <nav class="foot-cols" aria-label="Footer navigation">
-      {columns.map((c) => (
-        <div class="foot-col">
-          <p class="foot-head">{c.head}</p>
-          <ul>
-            {c.links.map((l) => (
-              <li><a href={l.href}>{l.label}</a></li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </nav>
-
-    <div class="foot-bottom">
+    <div class="foot-top">
       <div class="foot-brand">
-        <a href="/" class="foot-logo"><LogoMark size={28} />Private Health Insurance Germany</a>
-        <p>A service of My Healthcare Broker, independent consultants</p>
+        <a href="/" class="foot-logo"><LogoMark size={34} /><span>Private Health<br />Insurance Germany</span></a>
+        <p>Plain-English guidance on private health insurance in Germany, for expats.</p>
+        <a class="btn foot-cta" href="/free-consultation">Free consultation</a>
       </div>
-      <div class="foot-legal">
-        <a href="/imprint">Imprint</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/contact">Contact</a>
-        <span>&copy; 2026 My Healthcare Broker</span>
-      </div>
+      <nav class="foot-cols" aria-label="Footer navigation">
+        {columns.map((c) => (
+          <div class="foot-col">
+            <p class="foot-head">{c.head}</p>
+            <ul>{c.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+          </div>
+        ))}
+      </nav>
+    </div>
+    <div class="broker">
+      <p class="foot-head">Insurance broker</p>
+      <p>[Placeholder: legal name, address, register number and supervisory authority of the insurance broker, licence under &sect; 34d GewO. To be completed before launch.] Our advice is free for you; see <a href="/how-we-get-paid">how we get paid</a>.</p>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Private Health Insurance Germany</span>
+      <span class="foot-legal"><a href="/imprint">Imprint</a><a href="/privacy">Privacy</a><a href="/editorial-standards">Editorial standards</a></span>
     </div>
   </div>
 </footer>
-
 <style>
-  /* Footer: trust row, hairline, 4 columns (16/700 heads, 16/400 muted links, 40px pitch), hairline, bottom row */
-  .site-footer { background: var(--surface); border-top: var(--border-w) solid var(--border); margin-top: auto; }
-  .foot-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 20px 48px; padding: 32px 0 24px; border-bottom: var(--border-w) solid var(--border); }
-  .foot-chip { display: flex; align-items: center; gap: 12px; }
-  .foot-chip-icon { display: inline-flex; flex: none; color: var(--blue); }
-  .foot-chip-text { display: flex; flex-direction: column; font-size: var(--fs-small); line-height: 23px; color: var(--text-muted); }
-  .foot-chip-text strong { font-size: var(--fs-body); line-height: 23px; font-weight: var(--fw-h3); color: var(--navy); }
-
-  .foot-cols { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
-  .foot-head { margin: 0 0 4px; font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-h3); color: var(--navy); }
-  .foot-col ul { list-style: none; }
-  .foot-col a { display: flex; align-items: center; min-height: 44px; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text-muted); transition: color var(--ease); }
-  .foot-col a:hover { color: var(--blue-dk); }
-
-  .foot-bottom { display: flex; flex-direction: column; gap: 16px; padding: 28px 0 32px; border-top: var(--border-w) solid var(--border); }
-  .foot-logo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-heading); color: var(--navy); }
-  .foot-brand p { margin-top: 2px; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); }
-  .foot-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 0 24px; font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-muted); }
-  .foot-legal a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-muted); transition: color var(--ease); }
-  .foot-legal a:hover { color: var(--blue-dk); }
-
-  @media (min-width: 480px) { .foot-cols { grid-template-columns: 1fr 1fr; gap: 32px 24px; } }
+  .site-footer { background: var(--navy); color: #C9D1EA; padding: 64px 0 28px; }
+  .site-footer a { color: #E4E9F7; }
+  .site-footer a:hover { color: #fff; text-decoration: underline; }
+  .foot-top { display: grid; gap: 40px; }
+  .foot-logo { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-display); font-stretch: 112%; font-weight: 800; font-size: 14px; line-height: 16px; text-transform: uppercase; color: #fff !important; --logo-a: #fff; --logo-b: var(--brand-coral); }
+  .foot-brand p { margin: 16px 0 20px; max-width: 320px; font-size: 15px; }
+  .foot-cta { background: var(--accent); color: #fff !important; }
+  .foot-cta:hover { text-decoration: none !important; background: var(--accent-dk); }
+  .foot-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+  .foot-head { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #8F9CCB; margin-bottom: 14px; }
+  .foot-col ul { list-style: none; display: grid; gap: 10px; font-size: 15px; }
+  .broker { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.16); font-size: 14px; line-height: 22px; max-width: 760px; }
+  .broker .foot-head { margin-bottom: 8px; }
+  .foot-bottom { margin-top: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: #8F9CCB; }
+  .foot-legal { display: flex; gap: 20px; }
   @media (min-width: 960px) {
-    .foot-trust { padding: 32px 0 25px; }
-    .foot-cols { grid-template-columns: repeat(3, 280px) 1fr; gap: 0 10px; padding: 40px 0 40px; }
-    .foot-bottom { flex-direction: row; align-items: center; justify-content: space-between; }
+    .foot-top { grid-template-columns: 300px 1fr; gap: 64px; }
+    .foot-cols { grid-template-columns: repeat(4, 1fr); }
   }
 </style>

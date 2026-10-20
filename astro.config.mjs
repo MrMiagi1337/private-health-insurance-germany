@@ -19,7 +19,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Exclude any pages you don't want indexed
-      filter: (page) => !page.includes('/404'),
+      filter: (page) => !page.includes('/404') && !page.includes('/how-we-get-paid') && !page.includes('/editorial-standards'),
     }),
   ],
   // Generate static HTML for every page — best for SEO + Netlify

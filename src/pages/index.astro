@@ -1,25 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import HeroHome from '../components/sections/HeroHome.astro';
-import TrustTabs from '../components/sections/TrustTabs.astro';
-import Section from '../components/sections/Section.astro';
-import SectionIntro from '../components/sections/SectionIntro.astro';
-import WhyTabs from '../components/sections/WhyTabs.astro';
-import KeyFactsPanel from '../components/sections/KeyFactsPanel.astro';
-import HighlightsCarousel from '../components/sections/HighlightsCarousel.astro';
-import ReliabilityRow from '../components/sections/ReliabilityRow.astro';
-import CalculatorBand from '../components/sections/CalculatorBand.astro';
-import CtaBand from '../components/sections/CtaBand.astro';
+import Advisor from '../components/Advisor.astro';
+import LinkedInTrust from '../components/LinkedInTrust.astro';
+import Testimonials from '../components/Testimonials.astro';
+import ConsultationCTA from '../components/ConsultationCTA.astro';
 import FaqAccordion from '../components/sections/FaqAccordion.astro';
-import AudienceCard from '../components/ui/AudienceCard.astro';
-import ToolCard from '../components/ui/ToolCard.astro';
-import KnowledgeCard from '../components/ui/KnowledgeCard.astro';
-import TrustChip from '../components/ui/TrustChip.astro';
-import GuideCard from '../components/ui/GuideCard.astro';
-import GuideCarousel from '../components/ui/GuideCarousel.astro';
-import KeyFigures from '../components/ui/KeyFigures.astro';
-import Icon from '../components/ui/Icon.astro';
-import LeadForm from '../components/forms/LeadForm.astro';
 
 const faqs = [
   { q: 'Who can choose private health insurance in Germany?', a: 'Employees who earn above the income threshold, self-employed people and freelancers, and civil servants can usually choose private cover. Students can choose a student tariff. The Eligibility Check shows which route applies to you.' },
@@ -31,163 +16,188 @@ const faqs = [
 ];
 
 const audiences = [
-  { title: 'Employees', icon: 'briefcase', text: 'Compare cover and contributions if you earn above the income threshold and work for a German employer.', href: '/guide/who-qualifies' },
-  { title: 'Self-employed &amp; freelancers', icon: 'laptop', text: 'Freelancers and founders can choose freely. See how to protect your income and your health.', href: '/guide/for-freelancers' },
-  { title: 'Students', icon: 'cap', text: 'Study-specific options built for your time at a German university.', href: '/guide/for-students' },
-  { title: 'Civil servants', icon: 'building', text: 'Cover that works alongside the state allowance for public-sector employees.', href: '/private-health-insurance' },
-  { title: 'Families', icon: 'family', text: 'What changes for partners and children, and what each choice costs.', href: '/guide/costs-and-contributions' },
-  { title: 'New arrivals', icon: 'globe', text: 'Clear cover and full support in English, without the paperwork.', href: '/guide/for-foreigners' },
-] as const;
----
+  { title: 'Expats', text: 'New to Germany or settled here: what private cover means for you.', href: '/health-insurance-expats-germany' },
+  { title: 'Employees', text: 'Whether your salary lets you leave the public system.', href: '/guide/who-qualifies' },
+  { title: 'Freelancers and self-employed', text: 'You can choose freely from day one. Know the income risk.', href: '/guide/for-freelancers' },
+  { title: 'Students', text: 'Student options for your time at a German university.', href: '/guide/for-students' },
+  { title: 'Families', text: 'What changes for partners and children, and what it costs.', href: '/guide/costs-and-contributions' },
+];
 
+const steps = [
+  { t: 'Tell us your situation', d: 'Five short questions: job status, income band, household, time in Germany, contact details.' },
+  { t: 'A broker calls you back', d: 'In English, at the time you chose. You get an honest view on whether private cover fits you at all.' },
+  { t: 'Compare and decide', d: 'The broker compares insurers for your profile. You decide, with no obligation.' },
+  { t: 'Cover starts', d: 'Policies typically start within 2 to 4 weeks of the application. Your broker handles the paperwork.' },
+];
+
+const rows = [
+  { income: '€30,000', pub: '€408', priv: '€310' },
+  { income: '€50,000', pub: '€679', priv: '€310' },
+  { income: '€70,000', pub: '€899', priv: '€310' },
+  { income: '€90,000', pub: '€899 (capped)', priv: '€310' },
+];
+---
 <Layout
   title="Private Health Insurance in Germany 2026 — Costs & Expat Guide"
   description="Private health insurance in Germany for expats, in plain English: compare public vs private health insurance, check eligibility, estimate costs, and get matched with a broker."
 >
-  <main>
-    <!-- S1 -->
-    <HeroHome />
-
-    <!-- S2 -->
-    <div class="s2"><TrustTabs /></div>
-
-    <!-- S3 -->
-    <Section variant="band">
-      <h2>Cover options for your situation</h2>
-      <p class="intro-p">Different rules apply depending on your employment status, so start with the group that fits you best.</p>
-      <div class="grid-3 mt">
-        {audiences.map((a) => (
-          <AudienceCard title={a.title} text={a.text} href={a.href}><Icon slot="icon" name={a.icon} /></AudienceCard>
-        ))}
-      </div>
-
-      <!-- S4 (same band as S3, as in the reference) -->
-      <div class="s4">
-      <h2>Tools that do the maths</h2>
-      <p class="intro-p">Three free tools to get you from question to answer.</p>
-      <div class="grid-3 mt">
-        <ToolCard icon="checklist" tone="blue" title="Eligibility Check" text="Find out in two minutes whether private health insurance is open to you." href="/eligibility-check" />
-        <ToolCard icon="calculator" tone="green" title="Cost calculator" text="Estimate your monthly contribution based on age, income and cover." href="/calculator" />
-        <ToolCard icon="scale" tone="gold" title="Public vs private comparison" text="Benefits, costs and flexibility side by side, with no sales pitch." href="/compare" />
-      </div>
-      </div>
-    </Section>
-
-    <!-- S5 -->
-    <Section>
-      <SectionIntro eyebrow="Why us" title="Why people choose us" />
-      <div class="mt"><WhyTabs /></div>
-    </Section>
-
-    <!-- S6 -->
-    <Section>
-      <KeyFactsPanel />
-    </Section>
-
-    <!-- S7 -->
-    <Section variant="band">
-      <SectionIntro eyebrow="Why independent advice" title="What you can count on." />
-      <div class="mt"><KeyFigures /></div>
-    </Section>
-
-    <!-- S8 -->
-    <Section>
-      <SectionIntro eyebrow="Security" title="How we handle your data." />
-      <div class="chips">
-        <TrustChip icon="lock" title="Encrypted" sub="in transit and at rest" />
-        <TrustChip icon="globe" title="Servers in Germany" sub="GDPR compliant" />
-        <TrustChip icon="award" title="Registered" sub="under §34d GewO" />
-      </div>
-      <div class="s8b">
-        <SectionIntro eyebrow="Our promise" title="Independent consultants on your side." lead="We compare the market for you instead of selling one insurer's product, and we explain every step in plain English." />
-        <div class="cols3">
-          <div class="col"><h3><Icon name="scale" size={24} />Independent</h3><p>No insurer ties. The comparison starts from your needs, not from a sales target.</p></div>
-          <div class="col"><h3><Icon name="globe" size={24} />In English</h3><p>From the first call to the signed policy, we work in English and translate the German terms.</p></div>
-          <div class="col"><h3><Icon name="shield" size={24} />Free of charge</h3><p>The consultation and the comparison cost you nothing and come without obligation.</p></div>
+  <main id="main">
+    <!-- 1. Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Independent advice, in English</p>
+          <h1>Private health insurance in Germany, arranged for expats</h1>
+          <p class="lead">A licensed broker compares insurers for your situation and explains every step in plain English. You pay nothing for the advice.</p>
+          <div class="hero-actions">
+            <a class="btn" href="/free-consultation">Get a free consultation</a>
+            <a class="hero-phone" href="tel:+4971196981720">or call +49 711 96 98 17 20</a>
+          </div>
+          <ul class="hero-facts">
+            <li>Licensed broker, &sect; 34d GewO</li>
+            <li>Reply within one working day</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+        <div class="hero-side">
+          <div class="photo" role="img" aria-label="Advisor photo placeholder"><span class="mono">[Advisor photo]</span></div>
+          <Advisor layout="stack" size="sm" schema />
         </div>
       </div>
-    </Section>
+    </section>
 
-    <!-- S9 -->
-    <Section>
-      <HighlightsCarousel />
-    </Section>
-
-    <!-- S10 -->
-    <Section>
-      <ReliabilityRow />
-    </Section>
-
-    <!-- S11 -->
-    <div class="s11">
-      <CalculatorBand
-        title="What will private cover cost you?"
-        text="Premiums depend on your age at entry, your health and your plan level. Try the calculator for a realistic range based on your own situation."
-        image="/images/photos/row-woman-coworking.jpg"
-        imageAlt="Expat professional working on a laptop in a coworking space"
-      />
-    </div>
-
-    <!-- S12 -->
-    <Section>
-      <LeadForm source="phig-home" />
-    </Section>
-
-    <!-- S13 -->
-    <Section>
-      <GuideCarousel title="Understand your options before you commit">
-        <GuideCard title="Who qualifies for private health insurance?" excerpt="Income, job status and residence decide whether private cover is open to you." href="/guide/who-qualifies" eyebrow="Guide" readTime="6 min read" image="/images/photos/pillar-selfemployed-studio.jpg" alt="Self-employed creative working in a bright studio" />
-        <GuideCard title="Costs and contributions explained" excerpt="What drives your premium and what you can expect to pay each month." href="/guide/costs-and-contributions" eyebrow="Costs" readTime="8 min read" image="/images/photos/pillar-family-park.jpg" alt="Family spending time together in a park" />
-        <GuideCard title="Health insurance for freelancers" excerpt="How to stay covered and protect your income when you work for yourself." href="/guide/for-freelancers" eyebrow="Freelancers" readTime="7 min read" image="/images/photos/pillar-student-campus.jpg" alt="People walking across a university campus" />
-        <GuideCard title="How to switch your health insurance" excerpt="Notice periods, timing and the steps to change cover without gaps." href="/guide/how-to-switch" eyebrow="Switching" readTime="6 min read" image="/images/photos/pillar-expats-street.jpg" alt="Expats walking along a city street" />
-        <GuideCard title="Health insurance for foreigners" excerpt="What newcomers need to know about cover, visas and registration." href="/guide/for-foreigners" eyebrow="Newcomers" readTime="7 min read" image="/images/photos/article-berlin-dusk.jpg" alt="Berlin skyline at dusk" />
-        <GuideCard title="Opening a bank account in Germany" excerpt="The documents you need and how the account connects to your insurance." href="/guide/bank-account" eyebrow="Getting started" readTime="5 min read" image="/images/photos/not-sure-man-kitchen.jpg" alt="Man reviewing documents in his kitchen" />
-      </GuideCarousel>
-    </Section>
-
-    <!-- S14 -->
-    <Section>
-      <SectionIntro title="Learn before you decide." lead="A switch should be well thought through. We help you decide with the facts that matter most." />
-      <div class="grid-3 mt">
-        <KnowledgeCard title="The essentials,<br />short and clear." label="Read the guides" icon="arrow" href="/guide" />
-        <KnowledgeCard title="Public vs private<br />Which fits you?" label="Open the comparison" icon="scale" href="/compare" />
-        <KnowledgeCard title="Is it worth it?<br />Find out." label="Cost calculator" icon="calculator" href="/calculator" />
+    <!-- 2. Who it's for -->
+    <section class="sec" id="who">
+      <div class="container two">
+        <div>
+          <p class="eyebrow">Who it&rsquo;s for</p>
+          <h2>The rules depend on your job. Start with yours.</h2>
+        </div>
+        <ul class="rowlist">
+          {audiences.map((a) => (
+            <li><a href={a.href}><span class="rl-t">{a.title}</span><span class="rl-d">{a.text}</span><span class="rl-a" aria-hidden="true">&rarr;</span></a></li>
+          ))}
+        </ul>
       </div>
-    </Section>
+    </section>
 
-    <!-- S15 -->
-    <Section>
-      <SectionIntro title="Frequently asked questions" />
-      <div class="mt"><FaqAccordion items={faqs} /></div>
-    </Section>
+    <!-- 3. Costs -->
+    <section class="sec sec-band" id="costs">
+      <div class="container two">
+        <div>
+          <p class="eyebrow">What it costs</p>
+          <h2>Private premiums follow age and health, not salary.</h2>
+          <p class="body">The table compares a self-employed 32-year-old on a mid-range private plan with public contributions at different incomes. Employees above the 2026 threshold of &euro;77,400 per year can choose private cover.</p>
+          <p class="links"><a href="/guide/costs-and-contributions">Costs and contributions explained</a><a href="/calculator">Cost calculator</a><a href="/eligibility-check">Eligibility Check</a></p>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <caption>Approximate monthly cost, healthy single adult, freelancer paying the full premium</caption>
+            <thead><tr><th scope="col">Annual income</th><th scope="col">Public</th><th scope="col">Private (age 32, mid plan)</th></tr></thead>
+            <tbody>{rows.map((r) => <tr><th scope="row">{r.income}</th><td>{r.pub}</td><td>{r.priv}</td></tr>)}</tbody>
+          </table>
+          <p class="src">Source: <a href="/guide/for-freelancers">our freelancer guide</a>, 2026 figures. Your own premium depends on age, health and plan.</p>
+        </div>
+      </div>
+    </section>
 
-    <!-- S16 -->
-    <Section end>
-      <CtaBand title="Find out which private health insurance fits you" buttonText="Check my eligibility" href="/eligibility-check" />
-    </Section>
+    <!-- 4. How it works -->
+    <section class="sec" id="how">
+      <div class="container">
+        <p class="eyebrow">How it works</p>
+        <h2>From first question to signed policy</h2>
+        <ol class="steps">
+          {steps.map((s, i) => (
+            <li><span class="n mono">0{i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>
+          ))}
+        </ol>
+        <p class="steps-cta"><a class="btn" href="/free-consultation">Start with step 1</a></p>
+      </div>
+    </section>
+
+    <!-- 5. Trust -->
+    <Testimonials />
+    <section class="sec sec-band" id="trust">
+      <div class="container two">
+        <div>
+          <p class="eyebrow">Who you talk to</p>
+          <h2>Two named, licensed advisors.</h2>
+          <p class="body">Read what clients wrote about them, and how we are paid.</p>
+        </div>
+        <div class="trust-col">
+          <Advisor layout="stack" size="lg" />
+          <LinkedInTrust />
+          <div class="paid">
+            <p class="paid-h">How we get paid</p>
+            <p>[Placeholder: short statement on commission, independence and why the advice is free for you.] <a href="/how-we-get-paid">Read more</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FAQ + CTA -->
+    <section class="sec" id="faq">
+      <div class="container two">
+        <div>
+          <p class="eyebrow">FAQ</p>
+          <h2>Frequently asked questions</h2>
+        </div>
+        <FaqAccordion items={faqs} />
+      </div>
+    </section>
+
+    <ConsultationCTA />
   </main>
 </Layout>
 
 <style>
-  .s2 { margin-top: 32px; }
-  .s4 { margin-top: var(--section-pad-alt-mobile); }
-  .s11 { margin-top: var(--section-y-mobile); }
-  .intro-p { margin-top: 16px; max-width: 1120px; font-size: var(--fs-intro); line-height: var(--lh-intro); color: var(--text); }
-  .mt { margin-top: 32px; }
-  .chips { display: grid; gap: 16px; margin-top: 40px; }
-  .s8b { margin-top: 64px; }
-  .cols3 { display: grid; gap: 32px; margin-top: 40px; text-align: center; }
-  .col { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 20px; border-top: 1px solid var(--border); text-align: left; }
-  .col h3 { margin: 0; display: flex; align-items: center; gap: 10px; }
-  .col h3 :global(svg) { flex: none; color: var(--blue); }
-  .col p { margin: 0; max-width: 340px; }
-  @media (min-width: 900px) {
-    .s2 { margin-top: 54px; }
-    .s4 { margin-top: var(--section-pad-alt); }
-    .s11 { margin-top: var(--section-y); }
-    .mt { margin-top: 48px; }
-    .chips { display: flex; flex-wrap: wrap; justify-content: center; }
-    .s8b { margin-top: 100px; }
-    .cols3 { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .hero { padding: 24px 0 56px; border-bottom: 1px solid var(--border); background: var(--band); }
+  .hero-grid { display: grid; gap: 36px; }
+  .hero h1 { font-size: 36px; line-height: 40px; margin-bottom: 18px; }
+  .hero .lead { max-width: 560px; }
+  .hero-actions { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+  .hero-phone { font-weight: 600; color: var(--navy); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center; }
+  .hero-facts { list-style: none; margin-top: 26px; display: flex; flex-wrap: wrap; gap: 6px 22px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .02em; color: var(--text-muted); }
+  .hero-facts li::before { content: ""; display: inline-block; width: 7px; height: 7px; background: var(--brand-coral); margin-right: 8px; }
+  .hero-side { display: grid; gap: 16px; }
+  .photo { aspect-ratio: 16 / 10; background: #DCE1EC; border-radius: var(--radius-card); display: grid; place-items: center; color: #7F8AA8; }
+  .sec { padding: var(--section-y-mobile) 0; }
+  .sec-band { background: var(--band); border-block: 1px solid var(--border); }
+  .sec h2 { max-width: 620px; }
+  .two { display: grid; gap: 32px; }
+  .rowlist { list-style: none; border-top: 2px solid var(--navy); }
+  .rowlist a { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 18px 0; border-bottom: 1px solid var(--border); color: var(--navy); align-items: center; }
+  .rl-t { font-family: var(--font-display); font-stretch: 108%; font-weight: 700; font-size: 19px; }
+  .rl-d { grid-column: 1; font-size: 15px; color: var(--text-muted); }
+  .rl-a { grid-row: 1 / span 2; grid-column: 2; font-size: 22px; color: var(--accent); transition: transform var(--dur-spring) var(--spring); }
+  .rowlist a:hover .rl-t { color: var(--accent); }
+  .rowlist a:hover .rl-a { transform: translateX(4px); }
+  .body { margin-top: 16px; max-width: 520px; font-size: 17px; line-height: 27px; }
+  .links { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .links a, .src a, .paid a { font-weight: 600; color: var(--accent-dk); text-decoration: underline; text-underline-offset: 3px; }
+  .tbl-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border-strong); font-size: 15px; }
+  caption { text-align: left; padding: 0 0 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .02em; color: var(--text-muted); caption-side: top; }
+  th, td { padding: 13px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  thead th { font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); border-bottom: 2px solid var(--navy); }
+  tbody th { font-weight: 700; color: var(--navy); }
+  .src { margin-top: 12px; font-size: 13.5px; color: var(--text-muted); }
+  .steps { list-style: none; margin-top: 36px; display: grid; gap: 28px; }
+  .steps li { border-top: 2px solid var(--navy); padding-top: 14px; }
+  .n { color: var(--accent); font-size: 13px; }
+  .steps h3 { margin: 8px 0 6px; font-size: 21px; line-height: 26px; }
+  .steps p { font-size: 15.5px; line-height: 24px; }
+  .steps-cta { margin-top: 36px; }
+  .trust-col { display: grid; gap: 28px; }
+  .paid { border-top: 1px solid var(--border); padding-top: 20px; }
+  .paid-h { font-family: var(--font-display); font-stretch: 108%; font-weight: 700; font-size: 19px; color: var(--navy); margin-bottom: 8px; }
+  @media (min-width: 960px) {
+    .hero { padding: 40px 0 88px; }
+    .hero-grid { grid-template-columns: 1.15fr 1fr; gap: 72px; align-items: center; }
+    .hero h1 { font-size: 52px; line-height: 56px; }
+    .photo { aspect-ratio: 4 / 3; }
+    .sec { padding: var(--section-y) 0; }
+    .two { grid-template-columns: 5fr 7fr; gap: 80px; align-items: start; }
+    .steps { grid-template-columns: repeat(4, 1fr); gap: 28px; }
   }
 </style>

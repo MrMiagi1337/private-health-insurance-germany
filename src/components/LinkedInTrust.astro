@@ -1,0 +1,22 @@
+---
+// Plain trust block: links to the advisors' LinkedIn recommendations. No quotes, stars or numbers.
+import data from '../data/advisors.json';
+const advisors = data.advisors;
+const first = advisors.map((a) => a.name.split(' ')[0]);
+---
+<div class="lt">
+  <p class="lt-h">Read what clients wrote about {first[0]} and {first[1]} on LinkedIn</p>
+  <ul>
+    {advisors.map((a) => (
+      <li><a href={a.recommendations} target="_blank" rel="noopener">Recommendations for {a.name} <span aria-hidden="true">&#8599;</span><span class="sr"> (opens LinkedIn in a new tab)</span></a></li>
+    ))}
+  </ul>
+</div>
+<style>
+  .lt { border-top: 1px solid var(--border); padding-top: 20px; }
+  .lt-h { font-family: var(--font-display); font-stretch: 108%; font-weight: 700; font-size: 19px; line-height: 26px; color: var(--navy); margin-bottom: 12px; }
+  .lt ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+  .lt a { font-weight: 600; color: var(--accent-dk); text-decoration: underline; text-underline-offset: 3px; }
+  .lt a:hover { color: var(--navy); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+</style>

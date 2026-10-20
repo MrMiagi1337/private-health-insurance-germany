@@ -1,0 +1,20 @@
+---
+// TL;DR: 3-5 bullets via `items`, or free content via the default slot. Renders nothing if both are empty.
+interface Props { items?: string[]; title?: string }
+const { items = [], title = 'TL;DR' } = Astro.props;
+const hasSlot = Astro.slots.has('default');
+---
+{(items.length > 0 || hasSlot) && (
+  <aside class="tldr" aria-labelledby="tldr-h">
+    <p class="tldr-h" id="tldr-h">{title}</p>
+    {items.length > 0 && <ul>{items.map((i) => <li>{i}</li>)}</ul>}
+    <slot />
+  </aside>
+)}
+<style>
+  .tldr { background: var(--band); border: 1px solid var(--border); border-top: 3px solid var(--navy); border-radius: var(--radius-card); padding: 20px 22px 18px; margin: 0 0 32px; }
+  .tldr-h { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); font-weight: 500; margin-bottom: 10px; }
+  .tldr ul { list-style: none; display: grid; gap: 10px; }
+  .tldr li { position: relative; padding-left: 20px; font-size: 16.5px; line-height: 25px; color: var(--navy); }
+  .tldr li::before { content: ""; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; background: var(--brand-coral); }
+</style>

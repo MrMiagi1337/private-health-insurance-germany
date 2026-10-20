@@ -4,7 +4,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import HeroCentered from '../components/sections/HeroCentered.astro';
 import StickySectionNav from '../components/StickySectionNav.astro';
 import CtaBand from '../components/sections/CtaBand.astro';
-import LeadForm from '../components/forms/LeadForm.astro';
+import ConsultationCTA from '../components/ConsultationCTA.astro';
 import GuideCard from '../components/ui/GuideCard.astro';
 import SectionIntro from '../components/sections/SectionIntro.astro';
 
@@ -46,7 +46,7 @@ const articleLd = {
 };
 ---
 <Layout title={title} description={description}>
-  <main>
+  <main id="main">
     <Breadcrumbs items={breadcrumbs} />
     <HeroCentered eyebrow={eyebrow} title={heroTitle} lead={lead} primary={primary} secondary={secondary} />
     <StickySectionNav sections={sections} />
@@ -54,7 +54,6 @@ const articleLd = {
     <slot />
 
     <section class="pl-block"><div class="container"><CtaBand title={ctaTitle} buttonText={ctaText} href={ctaHref} /></div></section>
-    <section class="pl-block" id="contact"><div class="container"><LeadForm source={leadSource} /></div></section>
 
     {related.length > 0 ? (
       <section class="pl-block pl-last">
@@ -66,6 +65,8 @@ const articleLd = {
         </div>
       </section>
     ) : <div class="pl-last" />}
+
+    <ConsultationCTA />
   </main>
   <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
 </Layout>

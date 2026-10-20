@@ -6,7 +6,7 @@ import Layout from '../layouts/Layout.astro';
   title="About Private Health Insurance Germany"
   description="Private Health Insurance Germany is an independent English-language guide to private health insurance in Germany for expats and foreign nationals. Meet the team."
 >
-  <main>
+  <main id="main">
     <section class="hero-section">
       <div class="container">
         <div class="breadcrumb">
@@ -57,7 +57,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="broker-block">
             <h2>Our broker partner</h2>
             <p>We work with <strong>MyHealthcareBroker</strong>, a licensed German insurance brokerage under §34d GewO specializing in expats and international professionals. All their advisors speak English and are registered with the relevant supervisory authorities.</p>
-            <a href="/contact" class="cta-link">
+            <a href="/free-consultation" class="cta-link">
               Book a free consultation
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -149,7 +149,7 @@ import Layout from '../layouts/Layout.astro';
   .mission-block, .about-block, .model-block, .broker-block {
     background: #fff;
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 4px;
     padding: clamp(1.5rem, 3vw, 2rem);
   }
   .mission-block h2, .about-block h2, .model-block h2, .broker-block h2 {
@@ -171,7 +171,7 @@ import Layout from '../layouts/Layout.astro';
   .author-block {
     background: #fff;
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 4px;
     padding: clamp(1.5rem, 3vw, 2rem);
   }
   .author-card { display: flex; gap: 1.25rem; align-items: flex-start; }
@@ -193,7 +193,7 @@ import Layout from '../layouts/Layout.astro';
   .quick-facts, .contact-card, .disclaimer-card {
     background: #fff;
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 4px;
     padding: 1.5rem;
   }
   .quick-facts h3, .contact-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 1rem; }

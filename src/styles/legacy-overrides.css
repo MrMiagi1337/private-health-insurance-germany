@@ -1,0 +1,7 @@
+/* Neutralises per-page decoration left over from earlier designs (pastel chips, brand-coloured cards, glows). */
+.insurer-card { --brand: var(--navy) !important; --brand-bg: var(--band) !important; }
+.card-badge { background: var(--band) !important; color: var(--navy) !important; border: 1px solid var(--border); border-radius: 2px !important; }
+.avatar-glow { display: none !important; }
+.card-tag { background: var(--band) !important; color: var(--text) !important; border-color: var(--border) !important; }
+.score-stars { color: var(--navy) !important; }
+.bank-card { --brand: var(--navy) !important; --brand-bg: var(--band) !important; }

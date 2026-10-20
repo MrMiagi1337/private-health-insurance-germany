@@ -1,0 +1,46 @@
+---
+// Large end-of-page CTA (navy panel) with advisor block. Primary action: /free-consultation.
+import Advisor from './Advisor.astro';
+interface Props { title?: string; text?: string; button?: string; href?: string; phone?: boolean; inset?: boolean }
+const {
+  title = 'Get a free consultation on private health insurance',
+  text = 'Tell us your situation in five short steps. An independent, licensed broker calls you back, in English, at the time you choose. The advice is free for you.',
+  button = 'Get a free consultation', href = '/free-consultation', phone = true, inset = true,
+} = Astro.props;
+---
+<section class:list={['cc', { 'cc--inset': inset }]} aria-labelledby="cc-h">
+  <div class="container">
+    <div class="cc-box">
+      <div class="cc-copy">
+        <h2 id="cc-h">{title}</h2>
+        <p>{text}</p>
+        <div class="cc-actions">
+          <a class="btn cc-btn" href={href}>{button}</a>
+          {phone && <a class="cc-phone" href="tel:+4971196981720">or call +49 711 96 98 17 20</a>}
+        </div>
+      </div>
+      <div class="cc-adv"><Advisor layout="stack" size="sm" label="Your advisors" /></div>
+    </div>
+  </div>
+</section>
+<style>
+  .cc { padding: var(--section-y-mobile) 0; }
+  .cc-box { background: var(--navy); color: #D5DBF0; padding: 32px 24px; border-radius: var(--radius-card); display: grid; gap: 32px; }
+  .cc h2 { color: #fff; font-size: 28px; line-height: 33px; }
+  .cc-copy p { margin-top: 14px; font-size: 18px; line-height: 28px; max-width: 560px; }
+  .cc-actions { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+  .cc-btn { background: var(--accent); }
+  .cc-btn:hover { background: #fff; color: var(--navy); }
+  .cc-phone { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center; }
+  .cc-adv { border-top: 1px solid rgba(255,255,255,.18); padding-top: 24px; --adv-n: #fff; }
+  .cc-adv :global(.adv-label) { color: #8F9CCB; }
+  .cc-adv :global(.adv-name) { color: #fff; }
+  .cc-adv :global(.adv-role) { color: #B7C0E0; }
+  .cc-adv :global(.adv-photo) { background: #2A3A7A; color: #7C8BC4; }
+  @media (min-width: 900px) {
+    .cc { padding: var(--section-y) 0; }
+    .cc-box { grid-template-columns: 1.4fr 1fr; padding: 56px; gap: 56px; align-items: center; }
+    .cc h2 { font-size: 38px; line-height: 44px; }
+    .cc-adv { border-top: 0; border-left: 1px solid rgba(255,255,255,.18); padding: 0 0 0 40px; }
+  }
+</style>

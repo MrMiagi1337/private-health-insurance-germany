@@ -1,0 +1,473 @@
+<!doctype html>
+<!--
+  V3 "Route map" - Startseite private-health-insurance-germany.com (Design-Vorschau, statisch)
+
+  Aesthetic:  transit wayfinding - the journey from "Am I eligible?" to "signed policy" drawn as one transit line with
+              stations (Berlin U-Bahn/S-Bahn diagram logic); navy line, coral "you are here" marker that moves with the
+              scroll; bold condensed signage type (Barlow Condensed) for headings, calm humanist sans (Source Sans 3) for
+              body; circular numbered station nodes; lots of white space; line segments as section dividers.
+  Reference:  the feel of a modern metro network map and station signage system - match feel, not content.
+  Intent:     an overwhelmed expat should feel "there is a clear route and someone guides me stop by stop";
+              orientation and calm, one decisive moment at the salary-check station (stop 1). Single action: "Check my eligibility".
+  Guardrails: Always keep the paper-plane logo and navy/coral CI as the line/marker colours.
+              Never Inter/Roboto/Poppins/Montserrat/Lato/Space Grotesk/Fraunces/Schibsted, cream backgrounds, purple gradients,
+              three-icon feature cards, side-tab borders, uniform radii, glass/blobs, buzzword headlines.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private Health Insurance in Germany 2026 - Route map (V3)</title>
+<meta name="description" content="Private health insurance in Germany for expats, in plain English: check eligibility, estimate costs, and get matched with a consultant.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #00104B;
+    --coral: #FF6B4A;
+    --accent: #C2410C;      /* interactive (white text 5.2:1) */
+    --accent-dk: #A3360A;
+    --ink: #00104B;
+    --muted: #4A5578;
+    --line-off: #C9D0E2;
+    --tint: #F1F4FA;
+    --white: #fff;
+    --font-h: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --font-b: "Source Sans 3", system-ui, sans-serif;
+    --P: 52px;  /* route left padding */
+    --L: 20px;  /* line centre x */
+    --N: 30px;  /* node diameter */
+    --gap: 72px;
+  }
+  @media (min-width: 900px) { :root { --P: 96px; --L: 36px; --N: 42px; --gap: 120px; } }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--white); color: var(--ink); font-family: var(--font-b); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  h1, h2, h3, .cond { font-family: var(--font-h); font-weight: 700; line-height: 1.02; letter-spacing: -0.005em; margin: 0; }
+  p { margin: 0; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 3px; }
+
+  /* ---------- header ---------- */
+  .top { max-width: 1320px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand svg { width: 38px; height: 30px; }
+  .brand span { font-family: var(--font-h); font-weight: 800; font-size: 25px; letter-spacing: .01em; line-height: 1; }
+  .brand small { display: block; font-family: var(--font-b); font-weight: 600; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+  .top-r { display: flex; align-items: center; gap: 18px; }
+  .top-tel { display: none; font-weight: 600; font-size: 15px; text-decoration: none; }
+  .top-tel:hover { text-decoration: underline; }
+  .top-free { font-size: 13.5px; font-weight: 600; text-decoration: none; padding: 7px 14px; border: 1.5px solid var(--navy); border-radius: 100px; white-space: nowrap; }
+  .top-free:hover { background: var(--navy); color: #fff; }
+  @media (min-width: 900px) { .top { padding: 18px 40px; } .top-tel { display: inline; } }
+  .fl { fill: var(--navy); } .fc { fill: var(--coral); }
+
+  /* ---------- route frame ---------- */
+  .route { position: relative; max-width: 1320px; margin: 0 auto; padding: 8px 20px 0 var(--P); }
+  @media (min-width: 900px) { .route { padding-right: 40px; padding-left: calc(var(--P) + 40px); } }
+  .rail, .rail-fill { position: absolute; left: calc(var(--L) - 2px); width: 4px; border-radius: 2px; }
+  .rail { top: 40px; bottom: 0; background: repeating-linear-gradient(to bottom, var(--line-off) 0 10px, transparent 10px 18px); }
+  .rail-fill { top: 40px; height: 0; background: var(--navy); }
+  @media (min-width: 900px) { .rail, .rail-fill { left: calc(var(--L) + 40px - 2.5px); width: 5px; } }
+  .marker { position: absolute; left: calc(var(--L) - 11px); top: 40px; width: 22px; height: 22px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--navy); z-index: 5; will-change: transform; }
+  .marker::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; border: 2px solid var(--coral); opacity: 0; animation: ping 2.6s ease-out infinite; }
+  .marker-tag { position: absolute; right: 36px; top: 50%; transform: translateY(-50%); background: var(--coral); color: var(--navy); font-family: var(--font-h); font-weight: 700; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 3px; white-space: nowrap; display: none; }
+  @media (min-width: 900px) { .marker { left: calc(var(--L) + 40px - 12px); width: 24px; height: 24px; } }
+  @media (min-width: 1280px) { .marker-tag { display: block; } }
+  @keyframes ping { 0% { transform: scale(.7); opacity: .7; } 80%, 100% { transform: scale(1.5); opacity: 0; } }
+
+  .stop { position: relative; padding-bottom: var(--gap); }
+  .stop-head { position: relative; display: flex; align-items: center; height: var(--N); margin-bottom: 28px; }
+  .node { position: absolute; left: calc(var(--L) - var(--P) - var(--N) / 2); top: 0; width: var(--N); height: var(--N); border-radius: 50%; background: #fff; border: 4px solid var(--navy); display: grid; place-items: center; font-family: var(--font-h); font-weight: 800; font-size: 19px; color: var(--navy); z-index: 3; transition: background .35s, color .35s; }
+  @media (min-width: 900px) { .node { font-size: 23px; } }
+  .node.passed { background: var(--navy); color: #fff; }
+  .stop-head::before { content: ""; position: absolute; left: calc(var(--L) - var(--P) + var(--N) / 2 - 2px); width: calc(var(--P) - var(--L) - var(--N) / 2 + 2px); height: 4px; background: var(--navy); top: calc(50% - 2px); z-index: 1; }
+  .plate { background: var(--navy); color: #fff; font-family: var(--font-h); font-weight: 600; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; padding: 5px 12px 4px; border-radius: 3px; line-height: 1.2; }
+  .plate b { color: var(--coral); font-weight: 700; margin-right: 8px; }
+  .t-end .node { background: var(--navy); color: #fff; box-shadow: 0 0 0 5px #fff, 0 0 0 8px var(--navy); }
+  h2 { font-size: clamp(36px, 4.6vw, 58px); max-width: 16ch; }
+  .lead { margin-top: 14px; max-width: 54ch; color: var(--muted); font-size: 19px; }
+  .stop-body { margin-top: 36px; }
+  @media (min-width: 900px) { .stop-body { margin-top: 48px; } }
+
+  /* ---------- stop 1: hero + salary check ---------- */
+  .hero { padding-bottom: 72px; }
+  .hero-grid { display: grid; gap: 28px; }
+  @media (min-width: 1020px) { .hero-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 56px; align-items: start; } }
+  h1 { font-size: clamp(44px, 12.4vw, 62px); font-weight: 800; letter-spacing: -0.012em; }
+  @media (min-width: 1020px) { h1 { font-size: clamp(60px, 5.6vw, 86px); } }
+  h1 em { font-style: normal; color: var(--accent); }
+  .hero .lead { font-size: 20px; color: var(--ink); max-width: 36ch; margin-top: 18px; }
+  .hero .tel { margin-top: 20px; font-size: 16px; color: var(--muted); }
+  .hero .tel a { color: var(--ink); font-weight: 700; text-underline-offset: 3px; }
+
+  .check { background: #fff; border: 2px solid var(--navy); border-radius: 14px; padding: 22px 18px 18px; box-shadow: 8px 8px 0 var(--tint); }
+  @media (min-width: 600px) { .check { padding: 30px 32px 26px; } }
+  .check h2 { font-size: 34px; max-width: none; }
+  @media (min-width: 600px) { .check h2 { font-size: 40px; } }
+  .field { margin-top: 20px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .field label { font-weight: 600; font-size: 15px; color: var(--muted); }
+  .money { display: flex; align-items: baseline; gap: 10px; border-bottom: 3px solid var(--navy); padding-bottom: 4px; }
+  .money span { font-family: var(--font-h); font-weight: 700; font-size: 28px; color: var(--muted); }
+  .money input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: var(--font-h); font-weight: 800; font-size: clamp(46px, 9vw, 64px); line-height: 1.05; color: var(--navy); letter-spacing: -.01em; padding: 0; }
+  .money:focus-within { border-color: var(--coral); }
+  .money input::placeholder { color: var(--line-off); }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; min-width: 0; display: block; height: 36px; background: transparent; margin: 0; cursor: pointer; }
+  input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--navy); }
+  input[type=range]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--navy); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; margin-top: -11px; border-radius: 50%; background: var(--coral); border: 4px solid #fff; box-shadow: 0 0 0 3px var(--navy); }
+  input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--coral); border: 4px solid #fff; box-shadow: 0 0 0 3px var(--navy); }
+
+  /* the diagram */
+  .dia { position: relative; height: 112px; margin: 14px 4px 0; }
+  .dia-line { position: absolute; left: 0; right: 0; top: 50px; height: 8px; }
+  .dia-off { position: absolute; left: 0; top: 2px; height: 4px; border-radius: 2px; background: repeating-linear-gradient(to right, var(--line-off) 0 9px, transparent 9px 16px); }
+  .dia-on { position: absolute; top: 0; right: 0; height: 8px; border-radius: 4px; background: var(--navy); }
+  .dia-thr { position: absolute; top: 54px; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: #fff; border: 5px solid var(--navy); z-index: 2; }
+  .dia-thr-l { position: absolute; top: 0; transform: translateX(-50%); text-align: center; line-height: 1.05; white-space: nowrap; }
+  .dia-thr-l b { font-family: var(--font-h); font-size: 21px; font-weight: 700; display: block; }
+  .dia-thr-l small { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+  .dia-me { position: absolute; top: 54px; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--navy); z-index: 3; transition: left .45s cubic-bezier(.3,.8,.3,1); }
+  .dia-me-l { position: absolute; top: 80px; transform: translateX(-50%); background: var(--coral); color: var(--navy); font-family: var(--font-h); font-weight: 700; font-size: 17px; padding: 2px 9px; border-radius: 3px; white-space: nowrap; transition: left .45s cubic-bezier(.3,.8,.3,1); }
+  .dia-ends { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); font-weight: 600; margin: 0 4px; }
+
+  .result { margin-top: 18px; border-radius: 6px; padding: 18px 18px 16px; transition: background .35s, color .35s; }
+  .result.above { background: var(--navy); color: #fff; }
+  .result.below { background: var(--tint); color: var(--navy); }
+  .result.idle { background: var(--tint); color: var(--muted); }
+  .res-h { font-family: var(--font-h); font-weight: 800; font-size: clamp(32px, 7.5vw, 44px); text-transform: uppercase; letter-spacing: .02em; line-height: 1; }
+  .res-h i { font-style: normal; display: inline-block; width: .62em; height: .62em; border-radius: 50%; background: var(--coral); margin-right: 10px; vertical-align: .02em; }
+  .res-p { margin-top: 8px; font-size: 17px; }
+  .res-m { margin-top: 6px; font-size: 14.5px; opacity: .8; }
+  .btn { display: inline-block; margin-top: 16px; background: var(--accent); color: #fff; font-weight: 700; font-size: 18px; text-decoration: none; padding: 14px 24px; border-radius: 8px; transition: background .2s, transform .15s; text-align: center; }
+  .btn:hover { background: var(--accent-dk); }
+  .btn:active { transform: scale(.98); }
+  .btn.coral { background: var(--coral); color: var(--navy); }
+  .btn.coral:hover { background: #ff8267; }
+  .btn.block { display: block; }
+  @media (min-width: 600px) { .btn.block { display: inline-block; } }
+  .fine { margin-top: 14px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+
+  /* ---------- stop 2: tracks ---------- */
+  .tracks { display: grid; gap: 0 56px; }
+  @media (min-width: 760px) { .tracks { grid-template-columns: 1fr 1fr; } }
+  .track { display: grid; grid-template-columns: 22px 1fr auto; gap: 0 14px; align-items: start; text-decoration: none; padding: 22px 0 22px; border-top: 2px solid var(--navy); position: relative; }
+  .track .dot { width: 18px; height: 18px; border-radius: 50%; border: 4px solid var(--navy); background: #fff; margin-top: 9px; transition: background .2s; }
+  .track h3 { font-size: 30px; font-weight: 700; }
+  .track p { margin-top: 6px; color: var(--muted); font-size: 16.5px; max-width: 40ch; }
+  .track .go { font-family: var(--font-h); font-weight: 700; font-size: 26px; transition: transform .2s; margin-top: 2px; }
+  .track:hover .dot { background: var(--coral); }
+  .track:hover .go { transform: translateX(5px); }
+
+  /* ---------- stop 3: departure board ---------- */
+  .board { background: var(--navy); color: #fff; border-radius: 6px; padding: 6px 18px; }
+  @media (min-width: 760px) { .board { padding: 10px 36px; } }
+  .brow { display: grid; grid-template-columns: 42px 1fr auto; gap: 4px 16px; align-items: center; padding: 22px 0; text-decoration: none; border-top: 1px solid rgba(255,255,255,.22); }
+  .brow:first-child { border-top: 0; }
+  .brow .pf { width: 42px; height: 42px; border-radius: 50%; border: 3px solid var(--coral); display: grid; place-items: center; font-family: var(--font-h); font-weight: 800; font-size: 22px; color: var(--coral); }
+  .brow h3 { font-size: 28px; font-weight: 700; letter-spacing: .01em; }
+  @media (min-width: 760px) { .brow h3 { font-size: 34px; } .brow { grid-template-columns: 54px 1.1fr 1.5fr auto; } .brow .pf { width: 48px; height: 48px; } }
+  .brow p { grid-column: 2 / -1; color: #C8D0EA; font-size: 16px; }
+  @media (min-width: 760px) { .brow p { grid-column: auto; } }
+  .brow .open { font-family: var(--font-h); font-weight: 700; font-size: 17px; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); display: none; }
+  @media (min-width: 760px) { .brow .open { display: block; } }
+  .brow:hover h3 { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--coral); text-underline-offset: 5px; }
+
+  /* ---------- stop 4: consultant ---------- */
+  .cons { display: grid; gap: 36px; }
+  @media (min-width: 960px) { .cons { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 64px; align-items: start; } }
+  .cons h2 { font-size: clamp(40px, 5.6vw, 72px); max-width: 12ch; font-weight: 800; }
+  .cons .lead { color: var(--ink); max-width: 44ch; margin-top: 20px; font-size: 20px; }
+  .ph { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 28px 6px 28px 6px; background: repeating-linear-gradient(135deg, #E6EBF5 0 14px, #EEF1F8 14px 28px); border: 2px dashed #9AA6C8; display: flex; align-items: flex-end; padding: 16px; }
+  .ph span { font-size: 13px; line-height: 1.35; color: var(--muted); font-weight: 600; background: #fff; padding: 6px 10px; border-radius: 4px; }
+  .next { margin-top: 56px; }
+  .next-h { font-family: var(--font-h); font-weight: 700; font-size: 18px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .steps { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 0; }
+  .step { position: relative; display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding-bottom: 26px; }
+  .step::before { content: ""; position: absolute; left: 13px; top: 28px; bottom: -2px; width: 4px; background: var(--navy); border-radius: 2px; }
+  .step:last-child::before { display: none; }
+  .step i { width: 30px; height: 30px; border-radius: 50%; border: 4px solid var(--navy); background: #fff; display: grid; place-items: center; font-style: normal; font-family: var(--font-h); font-weight: 800; font-size: 15px; z-index: 1; }
+  .step:last-child i { background: var(--navy); color: #fff; }
+  .step h3 { font-size: 24px; }
+  .step p { color: var(--muted); font-size: 16px; margin-top: 3px; }
+  @media (min-width: 960px) {
+    .steps { grid-template-columns: repeat(5, 1fr); gap: 20px; }
+    .step { grid-template-columns: 1fr; gap: 12px; padding-bottom: 0; }
+    .step::before { left: 34px; right: -20px; top: 13px; bottom: auto; width: auto; height: 4px; }
+    .step h3 { font-size: 25px; }
+  }
+
+  /* ---------- stop 5: FAQ ---------- */
+  .faq { max-width: 860px; }
+  details { border-top: 2px solid var(--navy); }
+  details:last-child { border-bottom: 2px solid var(--navy); }
+  summary { list-style: none; cursor: pointer; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: var(--font-h); font-weight: 700; font-size: clamp(23px, 3.6vw, 30px); line-height: 1.1; }
+  summary::-webkit-details-marker { display: none; }
+  summary .pm { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 3px solid var(--navy); position: relative; transition: background .2s; }
+  summary .pm::before, summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 3px; background: var(--navy); transform: translate(-50%, -50%); transition: transform .25s, background .2s; }
+  summary .pm::after { transform: translate(-50%, -50%) rotate(90deg); }
+  details[open] summary .pm { background: var(--navy); }
+  details[open] summary .pm::before, details[open] summary .pm::after { background: #fff; }
+  details[open] summary .pm::after { transform: translate(-50%, -50%) rotate(0); }
+  details p { padding: 0 50px 22px 0; color: var(--muted); max-width: 62ch; }
+
+  /* ---------- terminus ---------- */
+  .terminus { padding-bottom: 72px; }
+  .term-box { background: var(--navy); color: #fff; border-radius: 30px 6px 30px 6px; padding: 36px 22px 34px; }
+  @media (min-width: 760px) { .term-box { padding: 56px 56px 52px; } }
+  .term-box h2 { color: #fff; font-size: clamp(40px, 6vw, 76px); max-width: 15ch; font-weight: 800; }
+  .term-act { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+  .term-act .btn { margin: 0; font-size: 20px; padding: 16px 30px; }
+  .term-act a.tel { color: #fff; font-weight: 600; font-size: 17px; text-underline-offset: 3px; }
+  .term-box .fine { color: #B9C3E4; margin-top: 26px; }
+  footer { max-width: 1320px; margin: 0 auto; padding: 0 20px 40px calc(var(--P)); display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 14px; color: var(--muted); }
+  @media (min-width: 900px) { footer { padding-left: calc(var(--P) + 40px); padding-right: 40px; } }
+  footer a { text-decoration: none; } footer a:hover { text-decoration: underline; }
+
+  /* reveal */
+  .rv { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rv { opacity: 1; transform: none; transition: none; }
+    .marker::after { animation: none; }
+    .dia-me, .dia-me-l, .node, .result { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="/" aria-label="PKV Germany home">
+    <svg viewBox="340 480 1370 1090" aria-hidden="true" focusable="false">
+      <path class="fc" d="M 1010.9 499.5 C 1012.1 502.8 1008.8 589.6 1008.7 602.8 L 1007.9 1253.8 C 927.4 1304.1 844.6 1351.5 764.0 1401.6 C 747.6 1411.8 730.3 1421.4 714.3 1432.3 L 704.9 1424.7 L 698.0 1419.8 L 698.1 1236.8 C 698.1 1225.6 697.0 1170.3 698.9 1162.4 C 700.8 1154.2 725.0 1106.7 730.2 1096.0 L 808.7 936.2 L 921.6 705.3 C 938.5 670.4 955.8 635.4 972.6 600.4 C 976.8 591.7 983.5 571.4 987.0 561.6 C 994.5 540.7 1002.5 520.0 1010.9 499.5 z"/>
+      <path class="fl" d="M 1036.6 505.9 L 1040.4 506.5 C 1055.9 548.6 1070.4 590.9 1090.6 630.9 C 1092.7 635.0 1094.7 639.3 1096.7 643.5 L 1140.2 734.0 L 1270.9 1000.4 L 1323.5 1107.2 C 1327.2 1114.5 1349.2 1156.8 1349.6 1161.5 C 1352.1 1195.2 1349.6 1232.3 1350.5 1266.4 C 1350.9 1317.3 1350.1 1368.2 1350.7 1419.1 C 1345.0 1423.5 1339.4 1427.7 1333.9 1432.3 L 1041.0 1254.8 L 1040.9 856.4 C 1041.0 791.9 1040.8 727.4 1040.1 662.9 C 1039.8 616.5 1041.0 570.2 1037.5 523.9 C 1037.1 517.9 1036.8 511.9 1036.6 505.9 z"/>
+      <path class="fl" d="M 1004.6 500.8 L 1006.1 505.4 C 989.1 540.6 972.5 576.1 954.3 610.7 C 863.2 783.8 764.7 953.5 673.3 1126.3 C 606.4 1131.4 538.5 1134.4 471.6 1139.3 C 441.5 1141.5 409.7 1142.3 379.8 1145.4 C 373.4 1138.9 364.0 1127.5 357.8 1120.4 C 386.5 1092.0 416.6 1064.3 445.7 1036.1 L 729.6 763.4 L 892.3 607.5 C 928.5 572.8 967.6 534.1 1004.6 500.8 z"/>
+      <path class="fc" d="M 1037.5 498.3 L 1037.1 496.2 C 1040.5 496.0 1081.7 536.8 1087.4 542.2 L 1212.2 661.6 L 1510.1 947.9 C 1569.5 1005.4 1629.8 1064.1 1690.1 1120.7 L 1680.4 1132.0 L 1668.5 1146.1 L 1490.5 1134.3 C 1452.7 1131.8 1412.8 1128.2 1375.3 1126.5 C 1283.2 959.6 1192.1 792.2 1101.7 624.3 C 1087.1 597.2 1074.0 571.5 1060.6 543.6 C 1057.1 536.2 1041.4 502.9 1037.5 498.3 z"/>
+      <path class="fc" d="M 1005.8 1289.8 L 1006.6 1289.9 C 1008.3 1291.6 1008.0 1293.2 1008.0 1296.2 C 1007.9 1325.3 1007.8 1354.6 1008.1 1383.8 L 1010.0 1555.6 C 997.0 1532.3 983.1 1508.6 969.8 1485.5 L 895.6 1356.2 C 930.3 1337.0 971.2 1310.7 1005.8 1289.8 z"/>
+      <path class="fl" d="M 1040.8 1288.9 C 1078.3 1311.0 1115.5 1333.5 1152.5 1356.2 C 1130.0 1397.7 1102.6 1443.3 1078.9 1484.5 C 1066.4 1506.3 1051.4 1534.5 1038.1 1555.2 C 1040.0 1466.4 1040.9 1377.7 1040.8 1288.9 z"/>
+    </svg>
+    <div><span>PKV Germany</span><small>Private health insurance</small></div>
+  </a>
+  <div class="top-r">
+    <a class="top-tel" href="tel:+4971196981720">+49 711 96 98 17 20</a>
+    <a class="top-free" href="/contact">Free consultation</a>
+  </div>
+</header>
+
+<main class="route" id="route">
+  <div class="rail" id="rail"></div>
+  <div class="rail-fill" id="fill"></div>
+  <div class="marker" id="marker" aria-hidden="true"><span class="marker-tag">You are here</span></div>
+
+  <!-- STOP 1 : the salary check (signature move) -->
+  <section class="stop hero" id="s1" aria-labelledby="h-s1">
+    <div class="stop-head"><div class="node" data-node>1</div><div class="plate"><b>Stop 1</b>Salary check</div></div>
+    <div class="hero-grid">
+      <div class="hero-copy rv">
+        <h1 id="h-s1">Your route to private health insurance in Germany<em>.</em></h1>
+        <p class="lead">Check in two minutes whether you qualify. Then follow the route, stop by stop, to a policy that fits.</p>
+        <p class="tel">Rather talk it through? <a href="tel:+4971196981720">+49 711 96 98 17 20</a></p>
+      </div>
+
+      <div class="check rv" id="check">
+        <h2>Where does your salary sit on the line?</h2>
+        <div class="field">
+          <label for="sal">Your yearly gross salary</label>
+          <div class="money"><span>EUR</span><input id="sal" type="text" inputmode="numeric" autocomplete="off" value="85,000" aria-describedby="res"></div>
+          <input id="rng" type="range" min="20000" max="150000" step="500" value="85000" aria-label="Yearly gross salary slider">
+        </div>
+
+        <div class="dia" id="dia" aria-hidden="true">
+          <div class="dia-thr-l" id="thrL"><b>EUR 77,400</b><small>2026 threshold</small></div>
+          <div class="dia-line"><div class="dia-off" id="off"></div><div class="dia-on" id="on"></div></div>
+          <div class="dia-thr" id="thr"></div>
+          <div class="dia-me" id="me"></div>
+          <div class="dia-me-l" id="meL">EUR 85,000</div>
+        </div>
+        <div class="dia-ends" aria-hidden="true"><span>EUR 20,000</span><span>EUR 150,000+</span></div>
+
+        <div class="result above" id="res" role="status" aria-live="polite"></div>
+        <a class="btn block" id="cta" href="/eligibility-check">Check my eligibility</a>
+        <p class="fine">2026 threshold: EUR 77,400 per year, EUR 6,450 per month. Contribution ceiling EUR 5,812.50 per month, employer subsidy up to about EUR 509. Indicative for employees; self-employed people, freelancers, students and civil servants follow other rules.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STOP 2 : tracks -->
+  <section class="stop" id="s2" aria-labelledby="h-s2">
+    <div class="stop-head"><div class="node" data-node>2</div><div class="plate"><b>Stop 2</b>Your track</div></div>
+    <h2 id="h-s2" class="rv">Cover options for your situation</h2>
+    <p class="lead rv">Different rules apply depending on your employment status, so start with the group that fits you best.</p>
+    <div class="tracks stop-body rv">
+      <a class="track" href="/guide/who-qualifies"><span class="dot"></span><div><h3>Employees</h3><p>Compare cover and contributions if you earn above the income threshold and work for a German employer.</p></div><span class="go">&rarr;</span></a>
+      <a class="track" href="/guide/for-freelancers"><span class="dot"></span><div><h3>Self-employed &amp; freelancers</h3><p>Freelancers and founders can choose freely. See how to protect your income and your health.</p></div><span class="go">&rarr;</span></a>
+      <a class="track" href="/guide/for-students"><span class="dot"></span><div><h3>Students</h3><p>Study-specific options built for your time at a German university.</p></div><span class="go">&rarr;</span></a>
+      <a class="track" href="/private-health-insurance"><span class="dot"></span><div><h3>Civil servants</h3><p>Cover that works alongside the state allowance for public-sector employees.</p></div><span class="go">&rarr;</span></a>
+      <a class="track" href="/guide/costs-and-contributions"><span class="dot"></span><div><h3>Families</h3><p>What changes for partners and children, and what each choice costs.</p></div><span class="go">&rarr;</span></a>
+      <a class="track" href="/guide/for-foreigners"><span class="dot"></span><div><h3>New arrivals</h3><p>Clear cover and full support in English, without the paperwork.</p></div><span class="go">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- STOP 3 : tools -->
+  <section class="stop" id="s3" aria-labelledby="h-s3">
+    <div class="stop-head"><div class="node" data-node>3</div><div class="plate"><b>Stop 3</b>Run the numbers</div></div>
+    <h2 id="h-s3" class="rv">Tools that do the maths</h2>
+    <p class="lead rv">Three free tools to get you from question to answer.</p>
+    <div class="board stop-body rv">
+      <a class="brow" href="/eligibility-check"><span class="pf">A</span><h3>Eligibility Check</h3><p>Find out in two minutes whether private health insurance is open to you.</p><span class="open">Open &rarr;</span></a>
+      <a class="brow" href="/calculator"><span class="pf">B</span><h3>Cost calculator</h3><p>Estimate your monthly contribution based on age, income and cover.</p><span class="open">Open &rarr;</span></a>
+      <a class="brow" href="/compare"><span class="pf">C</span><h3>Public vs private</h3><p>Benefits, costs and flexibility side by side, with no sales pitch.</p><span class="open">Open &rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- STOP 4 : consultant + next stops -->
+  <section class="stop" id="s4" aria-labelledby="h-s4">
+    <div class="stop-head"><div class="node" data-node>4</div><div class="plate"><b>Stop 4</b>Your consultant</div></div>
+    <div class="cons">
+      <div class="rv">
+        <h2 id="h-s4">Independent. In English. Free.</h2>
+        <p class="lead">We compare 40+ insurers for your case instead of selling one insurer's product. From the first call to the signed policy we work in English and translate the German terms. The consultation costs you nothing and comes without obligation.</p>
+      </div>
+      <!-- IMAGE PLACEHOLDER: later a real photo of a consultant on a video call with a client, warm natural light, 4:3 (renders ~560 x 420) -->
+      <div class="ph rv" role="img" aria-label="Image placeholder"><span>Image later: consultant on a video call with a client, warm daylight, 4:3, 1120 x 840 px</span></div>
+    </div>
+    <div class="next rv">
+      <p class="next-h">Your next stops</p>
+      <ol class="steps">
+        <li class="step"><i>1</i><div><h3>Check</h3><p>Two minutes with the Eligibility Check.</p></div></li>
+        <li class="step"><i>2</i><div><h3>Talk</h3><p>A reply within one working day.</p></div></li>
+        <li class="step"><i>3</i><div><h3>Compare</h3><p>40+ insurers, matched to your case.</p></div></li>
+        <li class="step"><i>4</i><div><h3>Apply</h3><p>Cover typically starts within 2 to 4 weeks.</p></div></li>
+        <li class="step"><i>5</i><div><h3>Stay covered</h3><p>Your consultant stays your contact for questions, claims and changes.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- STOP 5 : FAQ -->
+  <section class="stop" id="s5" aria-labelledby="h-s5">
+    <div class="stop-head"><div class="node" data-node>5</div><div class="plate"><b>Stop 5</b>Questions</div></div>
+    <h2 id="h-s5" class="rv">Frequently asked questions</h2>
+    <div class="faq stop-body rv">
+      <details><summary>Who can choose private health insurance in Germany?<span class="pm"></span></summary><p>Employees who earn above the income threshold, self-employed people and freelancers, and civil servants can usually choose private cover. Students can choose a student tariff. The Eligibility Check shows which route applies to you.</p></details>
+      <details><summary>How are private health insurance premiums calculated?<span class="pm"></span></summary><p>Your premium is set by your age at entry, your health and the level of cover you choose. It does not rise with your salary, which is the main difference from public health insurance.</p></details>
+      <details><summary>Do I need to speak German?<span class="pm"></span></summary><p>No. Your consultant works in English, and several insurers offer full English-language service.</p></details>
+      <details><summary>How long does it take to get covered?<span class="pm"></span></summary><p>Policies typically start within 2 to 4 weeks of the application. Your consultant handles the paperwork with you.</p></details>
+      <details><summary>What does the advice cost?<span class="pm"></span></summary><p>Nothing. The consultation and the comparison are free of charge and without obligation.</p></details>
+      <details><summary>Can I go back to public health insurance later?<span class="pm"></span></summary><p>Only in limited cases, for example if your income drops below the threshold for an extended period. Think carefully before you switch and talk to an independent consultant first.</p></details>
+    </div>
+  </section>
+
+  <!-- TERMINUS -->
+  <section class="stop terminus t-end" id="s6" aria-labelledby="h-s6">
+    <div class="stop-head"><div class="node" data-node>&#9873;</div><div class="plate"><b>Terminus</b>Signed policy</div></div>
+    <div class="term-box rv">
+      <h2 id="h-s6">Find out which private health insurance fits you</h2>
+      <div class="term-act">
+        <a class="btn coral" href="/eligibility-check">Check my eligibility</a>
+        <a class="tel" href="tel:+4971196981720">or call +49 711 96 98 17 20</a>
+      </div>
+      <p class="fine">Data encrypted in transit and at rest, servers in Germany, GDPR compliant. Registered under &sect;34d GewO.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>&copy; PKV Germany</span>
+  <a href="/imprint">Imprint</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+(function () {
+  var THR = 77400, MIN = 20000, MAX = 150000;
+  var $ = function (id) { return document.getElementById(id); };
+  var sal = $('sal'), rng = $('rng'), res = $('res'), me = $('me'), meL = $('meL');
+  var fmt = function (n) { return Math.round(n).toLocaleString('en-US'); };
+  var pct = function (v) { return Math.max(0, Math.min(100, (v - MIN) / (MAX - MIN) * 100)); };
+
+  var tp = pct(THR);
+  $('thr').style.left = tp + '%';
+  $('thrL').style.left = Math.min(Math.max(tp, 16), 84) + '%';
+  $('off').style.width = tp + '%';
+  $('on').style.left = tp + '%';
+
+  function render(v) {
+    var p = pct(v);
+    if (!(v > 0)) {
+      res.className = 'result idle';
+      res.innerHTML = '<div class="res-h">Enter your salary</div><p class="res-p">Type your yearly gross salary or move the slider. The coral marker shows where you stand.</p>';
+      me.style.left = '0%'; meL.style.left = '18%'; meL.textContent = 'EUR ?';
+      return;
+    }
+    me.style.left = p + '%';
+    meL.style.left = Math.min(Math.max(p, 18), 82) + '%';
+    meL.textContent = 'EUR ' + fmt(v);
+    var d = v - THR, m = v / 12;
+    var monthly = 'That is about EUR ' + fmt(m) + ' per month against EUR 6,450 per month.';
+    if (d > 0) {
+      res.className = 'result above';
+      res.innerHTML = '<div class="res-h"><i></i>Above the line</div><p class="res-p">You are EUR ' + fmt(d) + ' over the 2026 threshold. As an employee you can usually choose private health insurance.</p><p class="res-m">' + monthly + '</p>';
+    } else if (d === 0) {
+      res.className = 'result below';
+      res.innerHTML = '<div class="res-h">On the line</div><p class="res-p">You are exactly at the threshold. Employees need to earn above EUR 77,400 per year.</p><p class="res-m">' + monthly + '</p>';
+    } else {
+      res.className = 'result below';
+      res.innerHTML = '<div class="res-h">Below the line</div><p class="res-p">You are EUR ' + fmt(-d) + ' under the 2026 threshold. As an employee you would normally stay in public insurance. Self-employed people, freelancers, students and civil servants follow other rules, and the Eligibility Check covers them.</p><p class="res-m">' + monthly + '</p>';
+    }
+  }
+  function fromText() {
+    var digits = sal.value.replace(/[^\d]/g, '');
+    var v = digits ? parseInt(digits, 10) : 0;
+    if (digits) sal.value = fmt(v);
+    if (v) rng.value = Math.min(MAX, Math.max(MIN, v));
+    render(v);
+    if (typeof measure === 'function') measure();
+  }
+  sal.addEventListener('input', fromText);
+  rng.addEventListener('input', function () { sal.value = fmt(+rng.value); render(+rng.value); if (typeof measure === 'function') measure(); });
+
+  // ---------- route marker ----------
+  var route = $('route'), rail = $('rail'), fill = $('fill'), marker = $('marker');
+  var nodes = [].slice.call(document.querySelectorAll('[data-node]'));
+  var ticking = false, ys = [], top0 = 0, end0 = 0;
+  function measure() {
+    var base = route.getBoundingClientRect().top + window.scrollY;
+    ys = nodes.map(function (n) { var b = n.getBoundingClientRect(); return b.top + window.scrollY - base + b.height / 2; });
+    top0 = ys[0]; end0 = ys[ys.length - 1];
+    rail.style.top = top0 + 'px'; rail.style.height = (end0 - top0) + 'px'; rail.style.bottom = 'auto';
+    fill.style.top = top0 + 'px';
+    marker.style.top = top0 + 'px';
+    update();
+  }
+  function update() {
+    ticking = false;
+    var base = route.getBoundingClientRect().top + window.scrollY;
+    var ref = window.scrollY + window.innerHeight * 0.42 - base;
+    var q = /[?&]stop=(\d)/.exec(location.search);
+    if (q && ys[+q[1] - 1] != null) ref = ys[+q[1] - 1] + 150;
+    var y = Math.min(Math.max(ref, top0), end0);
+    marker.style.transform = 'translateY(' + (y - top0 - marker.offsetHeight / 2) + 'px)';
+    fill.style.height = (y - top0) + 'px';
+    nodes.forEach(function (n, i) { n.classList.toggle('passed', ys[i] <= y + 1); });
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', function () { measure(); document.documentElement.setAttribute('data-h', document.documentElement.scrollHeight); });
+  document.querySelectorAll('details').forEach(function (d) { d.addEventListener('toggle', measure); });
+  fromText();
+  measure();
+
+  // ---------- reveal ----------
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !/[?&]stop=/.test(location.search)) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .08 });
+    rv.forEach(function (el) { io.observe(el); });
+  } else { rv.forEach(function (el) { el.classList.add('in'); }); }
+})();
+</script>
+</body>
+</html>

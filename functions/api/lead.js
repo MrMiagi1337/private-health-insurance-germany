@@ -1,7 +1,7 @@
 // Cloudflare Pages Function: POST /api/lead
 // Proxies the lead form to the MHCB funnel endpoint so the browser never talks to MHCB directly.
 // Env (Pages project settings): MHCB_LEAD_ENDPOINT (optional, defaults to production).
-const ALLOWED = ['source', 'name', 'email', 'phone', 'status', 'consent', 'hp', 'ts', 'pageUrl', 'landingPage', 'referrer',
+const ALLOWED = ['source', 'name', 'email', 'phone', 'status', 'family', 'timing', 'recommendedPath', 'consent', 'hp', 'ts', 'pageUrl', 'landingPage', 'referrer',
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utmSource', 'utmMedium', 'utmCampaign', 'utmTerm', 'utmContent'];
 const MAX_BODY = 10 * 1024;
 const MAX_FIELD = 500;

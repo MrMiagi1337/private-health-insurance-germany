@@ -1,14 +1,13 @@
-/* ── Design tokens (redesign v2, Marco 2026-10-16). Tokens live ONLY here. ── */
+/* ── Design tokens (redesign phase 1, 2026-10-19). Tokens live ONLY here. See /DESIGN.md. ── */
 :root {
-  /* brand: own CI (Marco 2026-10-17): navy base + coral. Replaces the reference blue.
-     --brand-coral is for the logo and decorative fills only: white text on it fails WCAG (2.9:1).
-     --accent is the interactive colour (buttons, links): white text 5.2:1, on white 5.2:1. */
+  /* brand: navy base + coral. --brand-coral is for logo/markers/decor only (white on it fails WCAG 2.9:1).
+     --accent is the interactive colour (CTA buttons, links): white on it 5.2:1. */
   --brand-coral:  #FF6B4A;
   --accent:       #C2410C;
-  --accent-dk:    #A3360A;
-  --accent-tint:  #FFF4EF;
-  --accent-pill:  #FFE8DE;
-  --accent-light: #FFD3C2;
+  --accent-dk:    #9F3509;
+  --accent-tint:  #EEF2F9;   /* cool neutral tint (no peach) */
+  --accent-pill:  #E3E9F4;
+  --accent-light: #C9D3E6;
   /* legacy names: ~160 call sites use --blue*, so they alias the accent instead of a rename */
   --blue:         var(--accent);
   --blue-dk:      var(--accent-dk);
@@ -16,44 +15,49 @@
   --blue-pill:    var(--accent-pill);
   --blue-light:   var(--accent-light);
   --navy:         #00104B;
-  --pink:         #E80D5F;
-  --pink-dk:      #D10C55;
-  --pink-tint:    #FEF2F7;
-  --pastel-pink:  #FBDADB;
-  --pastel-mint:  #D5F1E6;
-  --pastel-blue:  #E1EEFF;
-  --green:        #1E9E6A;
-  --band:         #FAFAFB;
-  --band-form:    #F2F3F6;
+  --navy-2:       #0A1E63;
+  --pink:         var(--accent);
+  --pink-dk:      var(--accent-dk);
+  --pink-tint:    var(--accent-tint);
+  --pastel-pink:  var(--accent-tint);
+  --pastel-mint:  var(--accent-tint);
+  --pastel-blue:  var(--accent-tint);
+  --green:        #1E7A56;
+  --band:         #F6F8FC;   /* cool white */
+  --band-form:    #EEF2F9;
   --surface:      #FFFFFF;
-  --error:        #B3412A; /* inline form error text/border */
+  --error:        #B3412A;
 
-  /* neutrals */
-  --text:       #33406F;
-  --text-muted: #667093;
-  --text-faint: #999FB7;
-  --border:     #E5E7ED;
+  /* neutrals (ink greys derived from navy) */
+  --text:       #38426A;
+  --text-muted: #5A6483;
+  --text-faint: #8890AB;
+  --border:     #DDE3EF;
+  --border-strong: #C3CCDE;
 
   /* type */
-  --font-sans:  'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Merriweather', Georgia, serif; /* review quotes only, italic 400 */
-  --fs-body: 16px;    --lh-body: 24px;
-  --fs-h1: 50px;      --lh-h1: 62.5px;   /* pillar; home hero uses --fs-h1-home */
-  --fs-h1-home: 40px; --lh-h1-home: 50px;
-  --fs-h2: 40px;      --lh-h2: 50px;
+  --font-display: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --font-serif:   'Hanken Grotesk', Georgia, serif;
+  --stretch-display: 112%;
+  --fs-body: 16px;    --lh-body: 25px;
+  --fs-h1: 52px;      --lh-h1: 56px;
+  --fs-h1-home: 52px; --lh-h1-home: 56px;
+  --fs-h2: 38px;      --lh-h2: 44px;
   --fs-h3: 24px;      --lh-h3: 30px;
-  --fs-h4: 20px;      --lh-h4: 25px;
-  --fs-lead: 24px;    --lh-lead: 36px;
-  --fs-intro: 20px;   --lh-intro: 30px;  /* section intro p */
-  --fs-article: 20px; --lh-article: 32px;
+  --fs-h4: 19px;      --lh-h4: 25px;
+  --fs-lead: 22px;    --lh-lead: 33px;
+  --fs-intro: 19px;   --lh-intro: 29px;
+  --fs-article: 18px; --lh-article: 30px;
   --fs-small: 14px;   --lh-small: 21px;
   --fs-caption: 13px; --lh-caption: 20px;
-  --fs-nav: 16px;
+  --fs-nav: 15px;
   --fs-util: 14px;
   --fs-btn: 16px;     --fs-btn-sm: 14px;
-  --fs-h1-mobile: 28px; --lh-h1-mobile: 35px;
+  --fs-h1-mobile: 32px; --lh-h1-mobile: 36px;
   --fs-h2-sm: 26px;   --lh-h2-sm: 32px;
-  --fs-lead-sm: 20px; --lh-lead-sm: 30px;
+  --fs-lead-sm: 19px; --lh-lead-sm: 29px;
   --fw-heading: 800; --fw-h3: 700; --fw-body: 400; --fw-nav: 500; --fw-btn: 700;
 
   /* overlays */
@@ -62,93 +66,93 @@
   --on-dark-chip: color-mix(in srgb, var(--surface) 12%, transparent);
   --on-dark-chip-border: color-mix(in srgb, var(--surface) 30%, transparent);
 
-  /* shape */
-  --radius-card: 16px;
-  --radius-card-sm: 12px;  /* bento */
-  --radius-tile: 8px;      /* media, dropdowns, icon tiles */
-  --radius-btn: 6px;
-  --radius-btn-sm: 4px;
+  /* shape: buttons 8px, cards/inputs/media 4px (staggered, not everything round) */
+  --radius-btn: 8px;
+  --radius-btn-sm: 8px;
+  --radius-card: 4px;
+  --radius-card-sm: 4px;
+  --radius-tile: 4px;
   --radius-input: 4px;
-  --radius-pill: 50px;
-  --radius-chip: 16px;
-  --radius-banner: 8px;
+  --radius-pill: 8px;
+  --radius-chip: 2px;
+  --radius-banner: 4px;
   --border-w: 1px;
-  --border-w-btn: 0.8px;
+  --border-w-btn: 1px;
 
-  /* shadows: navy-tinted only; cards at rest have border, no shadow */
-  --sh-1: 0 2px 4px rgba(0,16,75,.2);
-  --sh-2: 0 1px 2.5px rgba(0,16,75,.15), 0 2px 5px rgba(0,16,75,.15);
-  --sh-3: 0 4px 12px rgba(0,16,75,.15);
+  /* shadows: nearly none. Cards use borders. */
+  --sh-1: none;
+  --sh-2: 0 1px 2px rgba(0,16,75,.10);
+  --sh-3: 0 6px 18px rgba(0,16,75,.10);
 
   /* layout */
   --container: 1160px;
   --container-header: 1160px;
   --gutter: 20px;
   --narrow: 780px;
-  --article: 640px;
-  --section-y: 140px;
-  --section-pad-alt: 86px;
-  --section-y-mobile: 48px;
+  --article: 680px;
+  --section-y: 112px;
+  --section-pad-alt: 72px;
+  --section-y-mobile: 56px;
   --section-pad-alt-mobile: 40px;
   --grid-gap: 24px;
-  --util-h: 38px;
-  --nav-main-h: 64px;     /* main nav bar */
-  --nav-h: 102px;         /* TOTAL sticky header (util 38 + main 64); 64 below 960px. Legacy consumers use it as sticky offset */
+  --util-h: 0px;
+  --nav-main-h: 68px;
+  --nav-h: 68px;
   --header-h: var(--nav-h);
-  --sticky-nav-h: 65px;   /* StickySectionNav bar height (B4) */
+  --sticky-nav-h: 65px;
   --btn-h: 48px;
   --btn-pad: 11px 24px;
   --ease: .18s ease;
 
-  /* motion (Apple pass, 2026-10-17): springs as linear() curves.
-     --spring = critically damped (damping 1.0, response .35s): no overshoot, default for UI.
-     --spring-bounce = damping .8: only for momentum-driven moves (indicator slides, dots). */
+  /* motion: springs as linear() curves. --spring = critically damped, no overshoot. */
   --spring: linear(0, 0.0547 4.2%, 0.1726 8.3%, 0.309 12.5%, 0.4408 16.7%, 0.5577 20.8%, 0.656 25%, 0.7361 29.2%, 0.7997 33.3%, 0.8493 37.5%, 0.8874 41.7%, 0.9164 45.8%, 0.9383 50%, 0.9547 54.2%, 0.9668 58.3%, 0.9758 62.5%, 0.9824 66.7%, 0.9872 70.8%, 0.9908 75%, 0.9934 79.2%, 0.9952 83.3%, 0.9966 87.5%, 0.9975 91.7%, 0.9982 95.8%, 1);
-  --spring-bounce: var(--spring); /* overshoot removed 2026-10-18 (impeccable: bounce-easing) */
-  --ease-out: cubic-bezier(.2, 0, 0, 1);    /* decelerate: things arriving */
-  --ease-in: cubic-bezier(1, 0, .8, 1);     /* mirror of --ease-out: things leaving along the same path */
-  --dur-press: 90ms;   /* pointer-down feedback */
-  --dur-spring: 500ms; /* settle time of --spring */
+  --spring-bounce: var(--spring);
+  --ease-out: cubic-bezier(.2, 0, 0, 1);
+  --ease-in: cubic-bezier(1, 0, .8, 1);
+  --dur-press: 90ms;
+  --dur-spring: 500ms;
   --dur-bounce: 600ms;
   --dur-fade: 220ms;
 
-  /* type tracking is size-specific: tighten as it grows, open up when small */
-  --track-display: -0.022em;  /* 40-50px */
-  --track-h2: -0.018em;
-  --track-h3: -0.01em;        /* 24px */
-  --track-h4: -0.005em;       /* 20px */
-  --track-small: 0.005em;     /* 13-14px */
+  /* tracking */
+  --track-display: -0.02em;
+  --track-h2: -0.015em;
+  --track-h3: -0.01em;
+  --track-h4: -0.005em;
+  --track-small: 0.005em;
 
-  /* ── legacy aliases (existing components, now rendering in blue) ── */
-  --coral:      var(--pink);
+  /* ── legacy aliases (older pages/components) ── */
+  --red:        var(--accent);
+  --red-dk:     var(--accent-dk);
+  --red-lt:     var(--accent-tint);
+  --coral:      var(--brand-coral);
   --cream:      var(--band);
   --primary:    var(--blue);
   --primary-dk: var(--blue-dk);
   --primary-lt: var(--blue-tint);
-  --sh-card:    var(--sh-1);
+  --sh-card:    none;
   --sh-raised:  var(--sh-3);
-  --sh-btn:     var(--sh-2);
+  --sh-btn:     none;
   --ink:        var(--navy);
   --ink-2:      var(--navy);
   --muted:      var(--text-muted);
   --muted-lt:   var(--text-muted);
-  --bg:         var(--surface);
+  --bg:         var(--band);
   --card:       var(--surface);
   --cream-2:    var(--band);
   --border-lt:  var(--border);
   --radius:     var(--radius-card);
   --sh-sm:      none;
-  --sh-md:      var(--sh-3);
+  --sh-md:      var(--sh-2);
   --sh-lg:      var(--sh-3);
   --max-w:      var(--container);
   --wide-w:     var(--container);
-  /* added by cards */
-  --gold: #D9A441;
-  --gold-lt: #F3DDA6;
-  --green-lt: #7FD3AE;
+  --gold: #8A6A1F;
+  --gold-lt: #EEF2F9;
+  --green-lt: #EEF2F9;
 }
 
-@media (max-width: 959px) { :root { --nav-h: 64px; } }
+@media (max-width: 959px) { :root { --nav-h: 64px; --nav-main-h: 64px; } }
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -193,7 +197,7 @@ img, svg { display: block; }
 button, input, select, textarea { font-family: inherit; }
 
 /* ── Typography ── */
-h1, h2, h3 { font-family: var(--font-sans); color: var(--navy); text-wrap: balance; }
+h1, h2, h3 { font-family: var(--font-display); font-stretch: var(--stretch-display); color: var(--navy); text-wrap: balance; }
 h1 { font-size: var(--fs-h1-mobile); line-height: var(--lh-h1-mobile); font-weight: var(--fw-heading); letter-spacing: var(--track-h2); }
 h2 { font-size: var(--fs-h2-sm); line-height: var(--lh-h2-sm); font-weight: var(--fw-heading); letter-spacing: var(--track-h3); }
 h3 { font-size: 20px; line-height: 1.25; font-weight: var(--fw-h3); letter-spacing: var(--track-h4); }
@@ -241,7 +245,7 @@ p { text-wrap: pretty; }
   transition: background var(--ease), color var(--ease), border-color var(--ease), box-shadow var(--ease),
               transform var(--dur-spring) var(--spring);
 }
-.btn, .btn-primary { background: var(--blue); color: var(--surface); box-shadow: var(--sh-1); }
+.btn, .btn-primary { background: var(--blue); color: var(--surface); }
 .btn:hover, .btn-primary:hover { background: var(--blue-dk); }
 /* Feedback on pointer-down, not on release: the press is instant, the release springs back. */
 .btn:active, .btn-primary:active, .btn-secondary:active, .btn-outline:active, .btn-ghost:active {
@@ -300,14 +304,14 @@ p { text-wrap: pretty; }
 
 /* Shared pills: eyebrow (13/700 sentence case, blue-dk on blue-tint), solid CTA pill, price pill, tab pill */
 .eyebrow, .pill-eyebrow {
-  display: inline-block; padding: 4px 12px; border-radius: var(--radius-chip);
-  background: var(--blue-tint); color: var(--blue-dk);
-  font-size: var(--fs-caption); line-height: 20px; font-weight: 700; letter-spacing: var(--track-small);
+  display: inline-block; padding: 0; margin-bottom: 14px; border-radius: 0;
+  background: none; color: var(--accent);
+  font-family: var(--font-mono); font-size: 12.5px; line-height: 18px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
 }
 .pill-solid {
   display: inline-block; padding: 4px 16px; border-radius: var(--radius-chip);
   background: var(--blue); color: var(--surface);
-  font-size: 12px; line-height: 18px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  font-family: var(--font-mono); font-size: 12px; line-height: 18px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
 }
 .pill-price {
   display: inline-block; padding: 4px 12px; border-radius: var(--radius-chip);
@@ -321,7 +325,7 @@ p { text-wrap: pretty; }
 
 /* Section kicker label */
 .section-kicker {
-  font-size: var(--fs-caption); font-weight: var(--fw-btn); letter-spacing: .08em;
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 500; letter-spacing: .08em;
   text-transform: uppercase; color: var(--text-muted); margin-bottom: .75rem;
 }
 .section-title {
@@ -330,6 +334,11 @@ p { text-wrap: pretty; }
 }
 @media (min-width: 900px) { .section-title { font-size: var(--fs-h2); line-height: var(--lh-h2); } }
 
-/* Placeholder art: shape composition used until real photos arrive (added in review pass) */
-.ph > img { opacity: 0; }
-.ph::after { content: ""; position: absolute; z-index: -1; width: 38%; aspect-ratio: 1; border-radius: 22%; background: var(--navy); left: 10%; bottom: -8%; transform: rotate(14deg); opacity: .9; }
+
+/* ── Redesign additions ── */
+.mono { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .04em; }
+.skip-link { position: absolute; left: -9999px; top: 8px; background: var(--navy); color: #fff; padding: 10px 16px; border-radius: var(--radius-btn); z-index: 200; }
+.skip-link:focus { left: 8px; }
+/* Guide-body helpers used by the older page markup */
+.info-box { background: var(--accent-tint); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px 20px; margin: 28px 0; font-size: 15px; line-height: 23px; color: var(--text); }
+.info-box strong { color: var(--navy); }

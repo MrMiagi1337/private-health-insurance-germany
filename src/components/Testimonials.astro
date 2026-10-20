@@ -1,0 +1,29 @@
+---
+// Reads src/data/recommendations.json. Empty items array => renders nothing. Never invent entries.
+import data from '../data/recommendations.json';
+interface Item { quote: string; name: string; context?: string; source?: string }
+const items = (data.items ?? []) as Item[];
+---
+{items.length > 0 && (
+  <section class="tm" aria-labelledby="tm-h">
+    <div class="container">
+      <h2 id="tm-h">What clients say</h2>
+      <ul>
+        {items.map((i) => (
+          <li>
+            <blockquote><p>{i.quote}</p></blockquote>
+            <p class="who"><strong>{i.name}</strong>{i.context && <span> / {i.context}</span>}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+<style>
+  .tm { padding: var(--section-y-mobile) 0; }
+  .tm ul { list-style: none; display: grid; gap: 24px; margin-top: 24px; }
+  .tm li { border-top: 2px solid var(--navy); padding-top: 16px; }
+  .tm blockquote p { font-size: 19px; line-height: 29px; color: var(--navy); }
+  .who { margin-top: 12px; font-size: 14px; color: var(--text-muted); }
+  @media (min-width: 900px) { .tm { padding: var(--section-y) 0; } .tm ul { grid-template-columns: repeat(3, 1fr); } }
+</style>

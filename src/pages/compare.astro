@@ -28,7 +28,7 @@ const schema = {
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
 
-  <main>
+  <main id="main">
     <div class="page-wrap container">
 
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -251,7 +251,7 @@ const schema = {
           <p>A licensed broker will compare both options for your exact situation, for free.</p>
           <div class="cta-inline-btns">
             <a href="/eligibility-check" class="btn-primary">Take the eligibility check</a>
-            <a href="/contact" class="btn-outline">Speak with a broker</a>
+            <a href="/free-consultation" class="btn-outline">Speak with a broker</a>
           </div>
         </div>
 
@@ -271,7 +271,7 @@ const schema = {
   .compare-header { margin-bottom: 2.5rem; }
   .page-tag {
     display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem;
+    color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 2px; margin-bottom: .75rem;
   }
   h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: .75rem; }
   .page-lead { font-size: 1.05rem; color: var(--muted); line-height: 1.65; max-width: 640px; margin-bottom: .75rem; }
@@ -288,7 +288,7 @@ const schema = {
   .article-body a:hover { color: var(--red); text-decoration-color: var(--red); }
   .article-body strong { font-weight: 700; color: var(--text); }
 
-  .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .9rem; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .9rem; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
   .article-body th { background: var(--bg); padding: .65rem 1rem; text-align: left; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border-bottom: 1px solid var(--border); }
   .article-body td { padding: .65rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
   .article-body tr:last-child td { border-bottom: none; }
@@ -296,7 +296,7 @@ const schema = {
 
   .callout {
     background: #f0f9fa; border: 1px solid #b2dde3; border-left: 3px solid var(--red);
-    border-radius: 8px; padding: .9rem 1.25rem; margin: 1.75rem 0;
+    border-radius: 4px; padding: .9rem 1.25rem; margin: 1.75rem 0;
     font-size: .93rem;
   }
   .callout strong { color: var(--red-dk); }

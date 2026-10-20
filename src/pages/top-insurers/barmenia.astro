@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import '../../styles/review.css';
+import ConsultationCTA from '../../components/ConsultationCTA.astro';
 
 const insurer = {
   name: "Barmenia",
@@ -44,7 +46,7 @@ const schema = {
   description="Independent review of Barmenia private health insurance in Germany. Pros, cons, tariffs, English support, and who Barmenia private health insurance is best for in 2026."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
-  <main>
+  <main id="main">
     <div class="review-wrap container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol>
@@ -100,7 +102,7 @@ const schema = {
 
             <div class="cta-inline">
               <p>Want a personalised {insurer.name} quote alongside other top insurers?</p>
-              <a href="/contact" class="btn-primary">Get free broker comparison &#8594;</a>
+              <a href="/free-consultation" class="btn-primary">Get free broker comparison &#8594;</a>
             </div>
           </div>
         </div>
@@ -115,7 +117,7 @@ const schema = {
                 <dt>HQ</dt><dd>{insurer.hq}</dd>
                 <dt>Type</dt><dd>{insurer.type}</dd>
               </dl>
-              <a href="/contact" class="sc-btn">Get a quote &#8594;</a>
+              <a href="/free-consultation" class="sc-btn">Get a quote &#8594;</a>
             </div>
           </div>
           <div class="sidebar-nav-card">
@@ -131,51 +133,7 @@ const schema = {
         </aside>
       </div>
     </div>
+    <ConsultationCTA />
   </main>
 </Layout>
 
-<style>
-  .review-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
-  .breadcrumb ol { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .breadcrumb li { font-size: .8rem; color: var(--muted); }
-  .breadcrumb a { color: var(--muted); transition: color var(--ease); }
-  .breadcrumb a:hover { color: var(--text); }
-  .review-header { margin-bottom: 2rem; }
-  .page-tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem; }
-  h1 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: .6rem; }
-  .review-tagline { font-size: 1rem; color: var(--muted); line-height: 1.65; max-width: 600px; margin-bottom: .75rem; }
-  .meta-row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-  .meta-item { font-size: .8rem; color: var(--muted); font-weight: 500; }
-  .review-grid { display: grid; grid-template-columns: 1fr 260px; gap: 2.5rem; align-items: start; }
-  .scores-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: .85rem; box-shadow: var(--sh-sm); }
-  .score-item { display: flex; flex-direction: column; gap: .15rem; }
-  .score-label { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
-  .score-stars { font-size: .95rem; color: #f59e0b; }
-  .review-body { font-size: 1rem; line-height: 1.8; color: #3a3a42; }
-  .review-body h2 { font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; color: var(--text); margin: 2rem 0 .6rem; }
-  .review-body p { margin-bottom: 1rem; }
-  .review-body ul { margin: .5rem 0 1.25rem 1.25rem; }
-  .review-body li { margin-bottom: .5rem; padding-left: .25rem; }
-  .review-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-  .review-body th { background: var(--bg); padding: .6rem .9rem; text-align: left; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border-bottom: 1px solid var(--border); }
-  .review-body td { padding: .6rem .9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
-  .review-body tr:last-child td { border-bottom: none; }
-  .cta-inline { background: var(--red-lt); border: 1px solid rgba(30,138,154,.2); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  .cta-inline p { font-size: .93rem; color: var(--text); font-weight: 500; margin: 0; }
-  .sidebar-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--sh-sm); margin-bottom: 1rem; }
-  .sc-top { height: 4px; background: var(--red); }
-  .sc-body { padding: 1.1rem 1.25rem; }
-  .sc-eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--red); margin-bottom: .75rem; }
-  .quick-facts { display: grid; grid-template-columns: auto 1fr; gap: .3rem .75rem; font-size: .83rem; margin-bottom: 1rem; }
-  .quick-facts dt { color: var(--muted); font-weight: 500; }
-  .quick-facts dd { color: var(--text); font-weight: 600; }
-  .sc-btn { display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--red); color: #fff; font-size: .83rem; font-weight: 700; padding: .65rem 1rem; border-radius: 8px; transition: background var(--ease); width: 100%; text-decoration: none; }
-  .sc-btn:hover { background: var(--red-dk); }
-  .sidebar-nav-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; box-shadow: var(--sh-sm); }
-  .sidebar-label { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: .65rem; }
-  .sidebar-nav-card ul { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
-  .sidebar-nav-card a { display: block; font-size: .84rem; color: var(--muted); padding: .25rem 0; padding-left: .6rem; border-left: 2px solid transparent; transition: color var(--ease), border-color var(--ease); }
-  .sidebar-nav-card a:hover { color: var(--red); border-left-color: var(--red); }
-  @media (max-width: 800px) { .review-grid { grid-template-columns: 1fr; } .review-sidebar { order: -1; } .scores-card { grid-template-columns: repeat(4, 1fr); } }
-  @media (max-width: 500px) { .scores-card { grid-template-columns: repeat(2, 1fr); } }
-</style>

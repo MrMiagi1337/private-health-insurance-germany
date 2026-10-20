@@ -19,9 +19,11 @@ const ld = {
 </div>
 {schema && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
 <style>
-  .faq { width: 100%; max-width: calc(var(--container) - 2 * var(--gutter)); margin: 0 auto; }
-  details + details { border-top: var(--border-w) solid var(--border); }
-  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding: 30px 0; font-size: var(--fs-intro); line-height: var(--lh-body); font-weight: var(--fw-body); color: var(--text); }
+  .faq { width: 100%; margin: 0 auto; }
+  details { border-bottom: var(--border-w) solid var(--border); }
+  details:first-child { border-top: var(--border-w) solid var(--border); }
+  details + details { border-top: 0; } details + details.x { border-top: var(--border-w) solid var(--border); }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding: 22px 0; font-size: 18px; line-height: 26px; font-weight: 600; color: var(--navy); }
   summary::-webkit-details-marker { display: none; }
   summary:hover { color: var(--navy); }
   summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: var(--radius-input); }

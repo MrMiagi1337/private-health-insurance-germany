@@ -278,7 +278,7 @@ const schema = {
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
 
-  <main>
+  <main id="main">
     <div class="page-wrap">
 
       <div class="container">
@@ -466,16 +466,16 @@ const schema = {
 
   /* Hero */
   .page-hero {
-    background: linear-gradient(135deg, #0d2137 0%, #0a3040 50%, #0d3535 100%);
+    background: var(--navy);
     padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2rem, 5vw, 3rem);
     margin-bottom: 2.5rem;
   }
   .page-kicker {
     display: inline-block;
     font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--primary); background: rgba(0,201,167,.12);
+    color: var(--primary); background: rgba(255,107,74,.12);
     padding: 4px 12px; border-radius: 999px; margin-bottom: 1rem;
-    border: 1px solid rgba(0,201,167,.2);
+    border: 1px solid rgba(255,107,74,.2);
   }
   .page-hero h1 {
     font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1;
@@ -491,14 +491,14 @@ const schema = {
   /* Intro box */
   .intro-box {
     display: flex; gap: 1rem; align-items: flex-start;
-    background: #fff; border: 1.5px solid #e2e8f0; border-radius: 14px;
+    background: #fff; border: 1.5px solid #e2e8f0; border-radius: 4px;
     padding: 1.25rem 1.5rem; margin-bottom: 2.5rem;
     font-size: .9rem; color: var(--text); line-height: 1.65;
     box-shadow: 0 1px 3px rgba(0,0,0,.06);
   }
   .intro-icon {
     flex-shrink: 0;
-    width: 40px; height: 40px; border-radius: 10px;
+    width: 40px; height: 40px; border-radius: 4px;
     background: #f0fdf4; color: #16a34a;
     display: flex; align-items: center; justify-content: center;
     margin-top: 1px;
@@ -517,7 +517,7 @@ const schema = {
     position: relative;
     background: #fff;
     border: 1.5px solid var(--border);
-    border-radius: 20px;
+    border-radius: 4px;
     padding: 1.75rem 1.5rem 1.5rem;
     display: flex; flex-direction: column; gap: .65rem;
     overflow: hidden;
@@ -546,7 +546,7 @@ const schema = {
     background: var(--brand);
     opacity: 0;
     transition: opacity .2s ease;
-    border-radius: 20px 20px 0 0;
+    border-radius: 4px;
   }
   .bank-card:hover .card-edge { opacity: 1; }
 
@@ -555,7 +555,7 @@ const schema = {
     position: absolute; top: 1rem; right: 1rem;
     font-size: .68rem; font-weight: 800; letter-spacing: .04em;
     color: var(--muted); background: var(--surface);
-    padding: 3px 9px; border-radius: 999px;
+    padding: 3px 9px; border-radius: 2px;
     border: 1px solid var(--border);
   }
 
@@ -563,7 +563,7 @@ const schema = {
   .card-logo-wrap {
     position: relative;
     width: 140px; height: 52px;
-    border-radius: 12px;
+    border-radius: 4px;
     background: #fff;
     border: 1.5px solid color-mix(in srgb, var(--brand) 20%, #e2e8f0);
     display: flex; align-items: center; justify-content: center;
@@ -579,7 +579,7 @@ const schema = {
     border-color: color-mix(in srgb, var(--brand) 40%, transparent);
   }
   .logo-glow {
-    position: absolute; inset: -8px; border-radius: 22px;
+    position: absolute; inset: -8px; border-radius: 4px;
     background: var(--brand); opacity: 0;
     filter: blur(16px);
     transition: opacity .25s ease;
@@ -599,7 +599,7 @@ const schema = {
   .card-fullname { font-size: .72rem; color: var(--muted); font-weight: 500; margin-top: 1px; }
   .card-badge {
     font-size: .6rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
-    padding: 3px 9px; border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+    padding: 3px 9px; border-radius: 2px; white-space: nowrap; flex-shrink: 0;
     margin-top: 3px;
   }
 
@@ -645,7 +645,7 @@ const schema = {
     display: flex; align-items: flex-start; gap: .4rem;
     font-size: .74rem; color: var(--muted); line-height: 1.4;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 8px; padding: .5rem .7rem;
+    border-radius: 4px; padding: .5rem .7rem;
     margin-top: .1rem;
     transition: background .2s ease, border-color .2s ease;
   }
@@ -662,7 +662,7 @@ const schema = {
     font-size: .82rem; font-weight: 700;
     color: #fff;
     background: var(--brand);
-    padding: .55rem 1.1rem; border-radius: 10px;
+    padding: .55rem 1.1rem; border-radius: 4px;
     text-decoration: none;
     width: fit-content;
     transition: opacity .2s ease, transform .2s ease;
@@ -683,7 +683,7 @@ const schema = {
     padding: 1.5rem; box-shadow: var(--sh-sm);
   }
   .tip-icon {
-    width: 40px; height: 40px; border-radius: 10px;
+    width: 40px; height: 40px; border-radius: 4px;
     background: var(--surface); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     color: var(--primary); margin-bottom: .85rem;
@@ -691,7 +691,7 @@ const schema = {
   .tip-card h3 { font-size: .95rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: .4rem; }
   .tip-card p { font-size: .85rem; color: var(--muted); line-height: 1.65; }
   .tip-card-cta {
-    background: linear-gradient(135deg, #0d2137, #0a3040);
+    background: var(--navy);
     border-color: transparent;
     display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;
   }

@@ -1,45 +1,45 @@
-# PKV Germany — private-health-insurance-germany.com
+# Private Health Insurance Germany — private-health-insurance-germany.com
 
-Astro + Sanity site. Independent, plain-English PKV guidance for English-speaking expats in Germany.
+Astro + Sanity site. Honest, English-language advice for expats in Germany on whether private health insurance makes sense for them. The whole service is free; the insurer pays the broker.
 
-## Brand kit (official — source: `Brand Kit PKV Germany.png` on Desktop)
+## 1. Ranking first (applies to every change)
 
-**Positioning:** "Private Health Insurance Made Simple for Expats"
-**Subline:** "Independent, plain-English PKV guidance for expats in Germany"
-**Voice:** Independent, plain-English, research-based, trust-forward — not salesy.
+The site exists to rank and to turn visitors into consultations. Every headline, text, slug, section and design choice is checked against search **before** it is shown to Marco. Design never wins against ranking in the title, H1, slug or headings.
 
-### Logo
-- Mark: teal bridge silhouette with a coral/orange heart above it (expats bridging to German PKV)
-- Wordmark: "PKV" in large serif + "GERMANY" in letter-spaced sans below
-- Use the full lockup (mark + wordmark) on primary surfaces
+**Before writing or designing a page**
+- Fix one primary keyword and 2–5 secondary keywords. If unsure, check real search volume (SE Ranking / GSC) instead of guessing.
+- Use the words people actually search for. Write "private health insurance" and "public health insurance", never "private cover" / "public cover" or other made-up synonyms. "PKV" is allowed at most once, as "(PKV)".
 
-### Colors (approximate hex — replace with exact values if a definitive source file exists)
-| Role | Hex | Use |
-|---|---|---|
-| Navy | `#0F2A44` | Headlines, "PKV" wordmark, primary text |
-| Teal | `#4A9A8E` | Bridge mark, curves, "GERMANY" label, supporting graphics |
-| Coral | `#E07A4F` | Heart, underline accents, checkmarks, CTA highlights |
-| Cream | `#FAF6EF` | Primary background |
-| Warm gray | `#B8B3A8` | Secondary text, dividers, UI neutrals |
+**On every page**
+- `<title>`: primary keyword first, max ~60 characters. Meta description: keyword + benefit + "free", max ~155 characters.
+- Exactly one H1, containing the primary keyword. A kicker line inside the H1 is allowed. Emotional hooks go in the lede, not instead of the keyword.
+- The keyword appears in the first 100 words, in the slug, and in at least one H2. Use keyword variants in other H2s and image alt texts where they fit naturally.
+- Keep headings in order (H1 → H2 → H3). Text must be real HTML text, never baked into images.
+- Content that should rank must be server-rendered, not only revealed by JS. The eligibility check results are fine as JS, but the facts they state must also appear in page text or the FAQ.
+- Internal links to the money pages and guides use descriptive keyword anchors, never "click here".
+- Schema: InsuranceAgency/Organization site-wide, FAQPage where there is a FAQ, BreadcrumbList on subpages.
+- Performance: hero image eager-loaded, WebP with width/height, everything below it lazy. No layout shift from fonts or images.
 
-### Typography
-- Headlines: classical serif, high contrast, in Navy (e.g. Playfair Display, Cormorant, DM Serif)
-- Body / subheads: humanist sans-serif (e.g. Inter, Source Sans, DM Sans)
-- Small caps / labels: letter-spaced sans for meta text like "GERMANY"
+**When presenting a proposal to Marco**, add one line on its SEO effect (e.g. "H1 now contains 'private health insurance', title unchanged").
 
-### Visual style
-- Soft teal "river" curve as recurring motif
-- Berlin / German landmark photography for hero imagery
-- Rounded cards with subtle shadow, generous cream whitespace
-- Trust markers: shields and checkmarks in Coral
+## 2. Copy rules
+- The **whole service** is free (consultation, comparison, application, paperwork), not just "the consultation". The button may stay "Free consultation".
+- Never "Quiz". Say "Eligibility Check".
+- No invented testimonials, ratings, customer counts or savings claims. Never name competitor brokers.
+- Money and legal facts (JAEG €77,400, contribution ceiling €5,812.50/month for 2026, rates) need a source check before going live.
+- Banned words: delve, seamless(ly), unlock, effortless, supercharge, empower, journey, hassle-free, "in today's fast-paced".
+
+## 3. Design (v3 redesign, Oct 2026: supersedes the old brand kit, DESIGN-TOKENS.md and DESIGN.md)
+Reference mockup: `../phig-redesign/design-ref/directions/v3/index.html`.
+- Colours: teal `#0A4D4A`, dark teal `#073937`, sand `#F0E2C8`, light sand `#F8F0E1`, cream `#FCF8EF`, mustard `#F5B700` (accent words, buttons, logo mark), ink `#10201E`. No orange or coral.
+- Fonts: Schibsted Grotesk (headings), Figtree (body and labels).
+- Highlight words by colour only. **No italic serif accent words.**
+- Never use the photo `flux-woman-videocall` or a look-alike (woman in a green sweater at a laptop). It has been deleted.
+- Ask Marco before taking photos from MHCB or generating new images.
 
 ## Stack
-- Astro (`astro.config.mjs`)
-- Sanity CMS (studio at `./src/` — use Sanity MCP for schema/content ops)
-- Tailwind / global CSS in `src/styles/global.css`
-- Hosted via Netlify (`netlify.toml`) + Cloudflare Wrangler (`.wrangler/`)
+- Astro (`astro.config.mjs`), Sanity CMS (use Sanity MCP for schema and content operations), global CSS in `src/styles/global.css`.
+- Hosting: Cloudflare Pages, so deploy = git push. Never push without Marco's go.
 
 ## Separation from related projects
-- **Not** MyHealthcareBroker (MHB) — different brand, different site
-- **Not** living-in-germany.org — different site
-- All three cover PKV/expat topics but are distinct properties with distinct brand kits. Do not mix assets.
+Not MyHealthcareBroker (MHB) and not living-in-germany.org. These are separate brands; don't mix assets.

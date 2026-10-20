@@ -1,0 +1,40 @@
+---
+// Advisor cards. Photos are NOT cleared for use yet: grey placeholder box. Names/roles from src/data/advisors.json.
+import data from '../data/advisors.json';
+interface Props { layout?: 'row' | 'stack'; size?: 'sm' | 'lg'; schema?: boolean; label?: string }
+const { layout = 'row', size = 'lg', schema = false, label } = Astro.props;
+const advisors = data.advisors;
+const ld = schema ? advisors.map((a) => ({
+  '@context': 'https://schema.org', '@type': 'Person', name: a.name, jobTitle: a.role, sameAs: [a.profile],
+  worksFor: { '@type': 'Organization', name: 'Private Health Insurance Germany' },
+})) : [];
+---
+<div class:list={['advisors', `adv--${layout}`, `adv--${size}`]}>
+  {label && <p class="adv-label">{label}</p>}
+  <ul>
+    {advisors.map((a) => (
+      <li class="adv">
+        <span class="adv-photo" role="img" aria-label="Photo placeholder">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="24" cy="18" r="7"/><path d="M9 42c1.2-8 7-12 15-12s13.8 4 15 12"/></svg>
+        </span>
+        <span class="adv-text">
+          <strong class="adv-name">{a.name}</strong>
+          <span class="adv-role">{a.role}</span>
+        </span>
+      </li>
+    ))}
+  </ul>
+</div>
+{ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+<style>
+  .advisors ul { list-style: none; display: grid; gap: 16px; }
+  .adv-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+  .adv { display: flex; align-items: center; gap: 14px; }
+  .adv-photo { flex: none; width: 64px; height: 64px; background: #DCE1EC; color: #8D97B3; display: grid; place-items: center; border-radius: var(--radius-card); }
+  .adv--lg .adv-photo { width: 88px; height: 88px; }
+  .adv-photo svg { width: 70%; height: 70%; }
+  .adv-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .adv-name { font-family: var(--font-display); font-stretch: 108%; font-weight: 700; font-size: 17px; line-height: 22px; color: var(--navy); }
+  .adv-role { font-size: 14px; line-height: 20px; color: var(--text-muted); }
+  @media (min-width: 640px) { .adv--row ul { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+</style>

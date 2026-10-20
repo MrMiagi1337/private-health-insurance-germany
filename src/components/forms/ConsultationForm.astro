@@ -1,0 +1,231 @@
+---
+// Five-step lead form for /free-consultation. Posts to the EXISTING lead path (POST /api/lead -> MHCB funnel-lead),
+// same payload shape as LeadForm.astro, plus optional family / timing / recommendedPath fields.
+interface Props { source?: string }
+const { source = 'phig-free-consultation' } = Astro.props;
+
+const steps = [
+  { key: 'status', title: 'Which describes your situation best?', hint: 'This decides which route into private insurance is open to you.', name: 'status', options: [
+    ['Employee', 'Employee'], ['Self-employed', 'Self-employed or freelancer'], ['Student', 'Student'], ['Other', 'Civil servant'], ['Other', 'Other'],
+  ] },
+  { key: 'income', title: 'What is your approximate gross annual income?', hint: 'A rough band is enough. You can also skip this.', name: 'income', options: [
+    ['Under 30,000 EUR', 'Under €30,000'], ['30,000 to 50,000 EUR', '€30,000 to €50,000'], ['50,000 to 77,400 EUR', '€50,000 to €77,400'],
+    ['77,400 to 100,000 EUR', '€77,400 to €100,000'], ['Over 100,000 EUR', 'Over €100,000'], ['Prefer not to say', 'Prefer not to say'],
+  ] },
+  { key: 'household', title: 'Who needs cover?', hint: 'Partners and children can change the best option.', name: 'household', options: [
+    ['Single', 'Just me'], ['With partner', 'Me and my partner'], ['With children', 'Me and my children'], ['With partner and children', 'Me, my partner and children'],
+  ] },
+];
+const uid = 'cf';
+---
+<section class="cf" data-cf data-source={source} aria-labelledby="cf-title">
+  <div class="cf-top">
+    <p class="cf-step mono" data-step-label aria-live="polite">Step 1 of 5</p>
+    <div class="cf-bar" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" data-bar aria-label="Form progress">
+      {[1,2,3,4,5].map((i) => <span data-seg={i} class:list={{ on: i === 1 }}></span>)}
+    </div>
+  </div>
+
+  <form novalidate data-form>
+    {steps.map((s, i) => (
+      <fieldset class="step" data-step={i + 1}>
+        <legend id={i === 0 ? 'cf-title' : undefined}>{s.title}</legend>
+        <p class="hint">{s.hint}</p>
+        <div class="opts">
+          {s.options.map(([val, label], j) => (
+            <label class="opt">
+              <input type="radio" name={s.name} value={val} data-label={label} />
+              <span>{label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    ))}
+
+    <fieldset class="step" data-step="4">
+      <legend>How long have you been in Germany?</legend>
+      <p class="hint">Some insurers look at how long you have lived here, and how long you plan to stay.</p>
+      <div class="opts">
+        {['Not in Germany yet, arriving soon', 'Less than 1 year', '1 to 5 years', 'More than 5 years'].map((l) => (
+          <label class="opt"><input type="radio" name="since" value={l} data-label={l} /><span>{l}</span></label>
+        ))}
+      </div>
+      <p class="sub">How long do you plan to stay?</p>
+      <div class="opts opts--inline">
+        {['Under 2 years', '2 to 5 years', 'More than 5 years', 'Not sure yet'].map((l) => (
+          <label class="opt"><input type="radio" name="plan" value={l} data-label={l} /><span>{l}</span></label>
+        ))}
+      </div>
+    </fieldset>
+
+    <fieldset class="step" data-step="5">
+      <legend>Where can we reach you?</legend>
+      <p class="hint">A licensed broker calls you back, in English. The advice is free for you.</p>
+      <div class="field"><label for={`${uid}-name`}>Full name</label><input id={`${uid}-name`} name="name" autocomplete="name" required /><p class="err" data-err-for="name" hidden></p></div>
+      <div class="field"><label for={`${uid}-email`}>Email</label><input id={`${uid}-email`} name="email" type="email" autocomplete="email" required /><p class="err" data-err-for="email" hidden></p></div>
+      <div class="field"><label for={`${uid}-phone`}>Phone <span class="opt-tag">(for the callback)</span></label><input id={`${uid}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" /></div>
+      <div class="field"><label for={`${uid}-cb`}>Preferred callback time</label>
+        <select id={`${uid}-cb`} name="callback">
+          <option value="No preference">No preference</option>
+          <option value="Morning (9-12)">Morning (9 to 12)</option>
+          <option value="Afternoon (12-17)">Afternoon (12 to 17)</option>
+          <option value="Early evening (17-19)">Early evening (17 to 19)</option>
+        </select>
+      </div>
+      <div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
+      <input type="hidden" name="ts" value="" />
+      <label class="chk">
+        <input type="checkbox" name="consent" />
+        <span>I agree that My Healthcare Broker may contact me about my enquiry. See the <a href="/privacy">privacy policy</a>.</span>
+      </label>
+      <p class="err" data-err-for="consent" hidden></p>
+    </fieldset>
+
+    <p class="form-err" data-form-err role="alert" hidden></p>
+    <div class="nav">
+      <button type="button" class="back" data-back hidden>Back</button>
+      <button type="button" class="btn" data-next>Continue</button>
+      <button type="submit" class="btn" data-submit hidden>Request my free consultation</button>
+    </div>
+  </form>
+
+  <div class="ok" data-success hidden tabindex="-1" role="status" aria-live="polite">
+    <h2>Thank you, we have your request</h2>
+    <p>One of our licensed brokers will contact you within one working day, at the time you chose.</p>
+  </div>
+</section>
+
+<style>
+  .cf { background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-card); padding: 24px 20px 28px; }
+  .cf-top { margin-bottom: 24px; }
+  .cf-step { color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+  .cf-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .cf-bar span { height: 4px; background: var(--border); border-radius: 0; transition: background var(--dur-fade) ease; }
+  .cf-bar span.on { background: var(--navy); }
+  .cf [hidden] { display: none !important; }
+  fieldset { border: 0; min-width: 0; }
+  :global(.cf.js) .step:not(.cur) { display: none; }
+  .step + .step { margin-top: 32px; }
+  :global(.cf.js) .step + .step { margin-top: 0; }
+  legend { padding: 0; font-family: var(--font-display); font-stretch: 110%; font-weight: 800; font-size: 24px; line-height: 29px; color: var(--navy); margin-bottom: 8px; text-wrap: balance; }
+  .hint { color: var(--text-muted); font-size: 15px; line-height: 22px; margin-bottom: 20px; }
+  .sub { margin: 24px 0 10px; font-weight: 700; color: var(--navy); }
+  .opts { display: grid; gap: 10px; }
+  .opts--inline { grid-template-columns: 1fr 1fr; }
+  .opt { position: relative; display: block; cursor: pointer; }
+  .opt input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .opt span { display: flex; align-items: center; min-height: 52px; padding: 12px 16px 12px 46px; border: 1px solid var(--border-strong); border-radius: var(--radius-card); background: var(--surface); color: var(--navy); font-weight: 600; font-size: 16px; line-height: 22px; position: relative; transition: border-color var(--ease), background var(--ease); }
+  .opt span::before { content: ""; position: absolute; left: 16px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border: 2px solid var(--border-strong); border-radius: 50%; background: var(--surface); }
+  .opt:hover span { border-color: var(--navy); }
+  .opt input:checked + span { border-color: var(--navy); background: var(--band); box-shadow: inset 0 0 0 1px var(--navy); }
+  .opt input:checked + span::before { border-color: var(--navy); background: var(--navy); box-shadow: inset 0 0 0 3px var(--surface); }
+  .opt input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 6px; }
+  .opt-tag { font-weight: 400; color: var(--text-muted); }
+  .field input, .field select { width: 100%; min-height: 48px; padding: 10px 14px; font: 400 16px var(--font-sans); color: var(--navy); background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-input); }
+  .field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--navy); }
+  .field input[aria-invalid="true"] { border-color: var(--error); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .chk { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 21px; color: var(--text); cursor: pointer; }
+  .chk input { flex: none; width: 22px; height: 22px; margin-top: 0; accent-color: var(--navy); }
+  .chk a { color: var(--accent-dk); text-decoration: underline; }
+  .err, .form-err { margin-top: 6px; font-size: 14px; color: var(--error); }
+  .form-err { margin: 16px 0 0; padding: 12px 14px; border: 1px solid var(--error); border-radius: var(--radius-input); }
+  .nav { display: flex; align-items: center; gap: 16px; margin-top: 28px; }
+  .nav .btn { flex: 1; }
+  .nav .btn[disabled] { opacity: .45; cursor: not-allowed; }
+  .back { min-height: 48px; padding: 0 16px; background: none; border: 0; color: var(--navy); font: 600 16px var(--font-sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .ok { padding: 24px 0; }
+  .ok:focus { outline: none; }
+  .ok h2 { font-size: 26px; line-height: 32px; margin-bottom: 10px; }
+  @media (min-width: 640px) { .cf { padding: 36px 40px 40px; } legend { font-size: 28px; line-height: 33px; } .opts--inline { grid-template-columns: repeat(4, 1fr); } .opts--inline .opt span { padding-left: 40px; } .nav .btn { flex: none; min-width: 220px; } }
+</style>
+
+<script>
+  const P = 'phig_attr';
+  const q = new URLSearchParams(location.search);
+  let attr: Record<string, string> = {};
+  try { attr = JSON.parse(sessionStorage.getItem(P) || '{}'); } catch {}
+  if (!attr.landingPage) {
+    attr = { landingPage: location.href, referrer: document.referrer || '', utmSource: q.get('utm_source') || '', utmMedium: q.get('utm_medium') || '', utmCampaign: q.get('utm_campaign') || '' };
+    try { sessionStorage.setItem(P, JSON.stringify(attr)); } catch {}
+  }
+  document.querySelectorAll<HTMLElement>('[data-cf]').forEach((root) => {
+    const form = root.querySelector<HTMLFormElement>('[data-form]')!;
+    const steps = [...root.querySelectorAll<HTMLElement>('.step')];
+    const next = root.querySelector<HTMLButtonElement>('[data-next]')!;
+    const back = root.querySelector<HTMLButtonElement>('[data-back]')!;
+    const submit = root.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const label = root.querySelector<HTMLElement>('[data-step-label]')!;
+    const bar = root.querySelector<HTMLElement>('[data-bar]')!;
+    const formErr = root.querySelector<HTMLElement>('[data-form-err]')!;
+    const el = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    const checked = (n: string) => form.querySelector<HTMLInputElement>(`input[name="${n}"]:checked`);
+    (el('ts') as HTMLInputElement).value = String(Date.now());
+    root.classList.add('js');
+    let cur = 0;
+    const need = ['status', 'income', 'household'];
+    const valid = () => cur < 3 ? !!checked(need[cur]) : cur === 3 ? (!!checked('since') && !!checked('plan')) : true;
+    const show = (i: number, focus = true) => {
+      cur = i;
+      steps.forEach((s, k) => s.classList.toggle('cur', k === i));
+      label.textContent = `Step ${i + 1} of 5`;
+      bar.setAttribute('aria-valuenow', String(i + 1));
+      bar.querySelectorAll('[data-seg]').forEach((s, k) => s.classList.toggle('on', k <= i));
+      back.hidden = i === 0; next.hidden = i === 4; submit.hidden = i !== 4;
+      next.disabled = !valid(); formErr.hidden = true;
+      if (focus) steps[i].querySelector<HTMLElement>('legend')?.setAttribute('tabindex', '-1'), steps[i].querySelector<HTMLElement>('legend')?.focus({ preventScroll: true });
+      if (focus) root.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    };
+    form.addEventListener('change', () => { next.disabled = !valid(); });
+    next.addEventListener('click', () => { if (valid() && cur < 4) show(cur + 1); });
+    back.addEventListener('click', () => { if (cur > 0) show(cur - 1); });
+    show(0, false);
+
+    const setErr = (n: string, msg: string) => {
+      const e = root.querySelector<HTMLElement>(`[data-err-for="${n}"]`);
+      if (e) { e.textContent = msg; e.hidden = !msg; }
+      el(n)?.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    };
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      formErr.hidden = true;
+      const name = el('name').value.trim(), email = el('email').value.trim();
+      const consent = (el('consent') as HTMLInputElement).checked;
+      const okName = name.length >= 2, okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      setErr('name', okName ? '' : 'Please enter your full name.');
+      setErr('email', okEmail ? '' : 'Please enter a valid email address.');
+      setErr('consent', consent ? '' : 'Please confirm your consent to continue.');
+      if (!okName || !okEmail || !consent) { form.querySelector<HTMLElement>('[aria-invalid="true"], [data-err-for="consent"]:not([hidden])')?.focus?.(); return; }
+      const v = (n: string) => checked(n)?.dataset.label || checked(n)?.value || '';
+      const income = v('income'), household = v('household'), since = v('since'), plan = v('plan');
+      const callback = (el('callback') as unknown as HTMLSelectElement).value;
+      const situation = v('status');
+      const summary = `Free consultation form | situation: ${situation} | income: ${income} | household: ${household} | in Germany: ${since} | plans to stay: ${plan} | callback: ${callback}`;
+      const payload = {
+        source: root.dataset.source || 'phig-free-consultation',
+        name, email, phone: el('phone').value.trim(),
+        status: checked('status')?.value || '',   // Employee | Self-employed | Student | Other (same values as LeadForm)
+        family: household,
+        timing: `${since}; plans to stay: ${plan}; callback: ${callback}`,
+        recommendedPath: summary,
+        consent, hp: el('company').value, ts: Number(el('ts').value),
+        pageUrl: location.href, landingPage: attr.landingPage, referrer: attr.referrer,
+        utmSource: attr.utmSource, utmMedium: attr.utmMedium, utmCampaign: attr.utmCampaign,
+      };
+      submit.disabled = true;
+      try {
+        const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        root.querySelector<HTMLElement>('.cf-top')!.hidden = true;
+        const ok = root.querySelector<HTMLElement>('[data-success]')!;
+        ok.hidden = false; ok.focus();
+      } catch {
+        formErr.textContent = 'Sorry, we could not send your request. Your answers are still here, please try again in a moment.';
+        formErr.hidden = false;
+      } finally { submit.disabled = false; }
+    });
+  });
+</script>

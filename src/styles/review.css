@@ -1,0 +1,47 @@
+/* Insurer review pages (/top-insurers/*). Shared; replaces the per-page style blocks. */
+.review-wrap { padding-top: 8px; padding-bottom: 72px; }
+.review-wrap .breadcrumb ol { display: flex; align-items: center; gap: 6px; list-style: none; flex-wrap: wrap; margin: 8px 0 24px; font-size: 14px; color: var(--text-muted); }
+.review-wrap .breadcrumb a { color: var(--text-muted); }
+.review-wrap .breadcrumb a:hover { color: var(--navy); text-decoration: underline; }
+.review-wrap .breadcrumb [aria-current="page"] { color: var(--navy); font-weight: 600; }
+.review-header { margin-bottom: 32px; max-width: 760px; }
+.review-wrap .page-tag { display: inline-block; margin-bottom: 14px; font-family: var(--font-mono); font-size: 12.5px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.review-wrap h1 { margin-bottom: 14px; }
+.review-tagline { font-size: 19px; line-height: 29px; color: var(--text); margin-bottom: 16px; }
+.meta-row { display: flex; gap: 4px 20px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted); }
+.review-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: start; }
+.scores-card { background: var(--band); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 18px 22px; margin-bottom: 36px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.score-item { display: flex; flex-direction: column; gap: 4px; }
+.score-label { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
+.score-stars { font-size: 17px; letter-spacing: 1px; color: var(--navy); }
+.review-body { font-size: 17.5px; line-height: 29px; }
+.review-body h2 { font-size: 28px; line-height: 34px; margin: 44px 0 14px; }
+.review-body h2:first-child { margin-top: 0; }
+.review-body p, .review-body ul { margin-bottom: 18px; }
+.review-body ul { padding-left: 22px; }
+.review-body li { margin-bottom: 8px; }
+.review-body table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 15px; line-height: 22px; display: block; overflow-x: auto; }
+.review-body th { text-align: left; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); padding: 10px 14px; border-bottom: 2px solid var(--navy); }
+.review-body td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.cta-inline { background: var(--band); border: 1px solid var(--border-strong); border-radius: var(--radius-card); padding: 20px 22px; margin-top: 40px; display: flex; align-items: center; justify-content: space-between; gap: 14px 24px; flex-wrap: wrap; }
+.cta-inline p { margin: 0; flex: 1 1 260px; font-weight: 600; color: var(--navy); }
+.review-wrap .btn-primary, .review-wrap .sc-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 20px; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; border-radius: var(--radius-btn); }
+.review-wrap .btn-primary::after { display: none; }
+.review-wrap .btn-primary:hover, .review-wrap .sc-btn:hover { background: var(--accent-dk); }
+.review-sidebar { position: sticky; top: calc(var(--nav-h) + 24px); display: grid; gap: 20px; }
+.sidebar-card, .sidebar-nav-card { background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-card); }
+.sc-top { display: none; }
+.sc-body, .sidebar-nav-card { padding: 20px; }
+.sc-eyebrow, .sidebar-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+.quick-facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 15px; margin-bottom: 18px; }
+.quick-facts dt { color: var(--text-muted); }
+.quick-facts dd { color: var(--navy); font-weight: 600; }
+.review-wrap .sc-btn { width: 100%; }
+.sidebar-nav-card ul { list-style: none; display: grid; gap: 2px; }
+.sidebar-nav-card a { display: block; padding: 6px 0; font-size: 15px; color: var(--navy); }
+.sidebar-nav-card a:hover { color: var(--accent); text-decoration: underline; }
+@media (max-width: 899px) {
+  .review-grid { grid-template-columns: 1fr; gap: 32px; }
+  .review-sidebar { position: static; order: 2; }
+  .scores-card { grid-template-columns: repeat(2, 1fr); }
+}

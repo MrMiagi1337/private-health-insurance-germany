@@ -54,7 +54,7 @@ const schema = {
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
 
-  <main>
+  <main id="main">
     <div class="page-wrap container">
 
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -158,7 +158,7 @@ const schema = {
   .page-header { margin-bottom: 2rem; }
   .page-tag {
     display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 999px; margin-bottom: .75rem;
+    color: var(--red); background: var(--red-lt); padding: 3px 10px; border-radius: 2px; margin-bottom: .75rem;
   }
   h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: .75rem; }
   .page-lead { font-size: 1.05rem; color: var(--muted); line-height: 1.65; max-width: 620px; }
@@ -200,7 +200,7 @@ const schema = {
   .tool-item:hover { transform: translateY(-2px); border-color: var(--red); }
   .ti-icon {
     width: 40px; height: 40px; background: var(--red-lt); color: var(--red);
-    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
   }
   .ti-title { font-size: .88rem; font-weight: 700; color: var(--text); }
   .ti-sub { font-size: .75rem; color: var(--muted); }
