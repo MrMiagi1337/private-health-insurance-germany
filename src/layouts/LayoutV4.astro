@@ -1,0 +1,95 @@
+---
+import '../styles/v4.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Private health insurance in Germany, explained in English. Check if you qualify, compare costs and talk to a licensed broker. Our whole service is free.',
+  canonicalUrl = Astro.url.href,
+  ogImage = 'https://private-health-insurance-germany.com/og-default.png',
+  noindex = false,
+} = Astro.props;
+
+const logo = (s: number) => `<svg width="${s}" height="${s}" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#F5B700"/><path d="M8 24V10h8a4.5 4.5 0 010 9H8" fill="none" stroke="#0A4D4A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 24h6" stroke="#0A4D4A" stroke-width="3.2" stroke-linecap="round"/></svg>`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:site_name" content="Private Health Insurance Germany" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script type="application/ld+json" is:inline>
+    {"@context":"https://schema.org","@graph":[
+      {"@type":"WebSite","name":"Private Health Insurance Germany","url":"https://private-health-insurance-germany.com","inLanguage":"en"},
+      {"@type":"InsuranceAgency","name":"Private Health Insurance Germany","url":"https://private-health-insurance-germany.com","email":"contact@private-health-insurance-germany.com","description":"Independent advice in English on private health insurance in Germany, from licensed §34d brokers. The whole service is free.","sameAs":["https://myhealthcarebroker.com"]}
+    ]}
+  </script>
+</head>
+<body>
+  <div class="topbar"><div class="wrap">
+    <span><b>Our whole service is free.</b> <span class="hide-m">Advice, comparison, application and paperwork.</span></span>
+    <span class="hide-m">Licensed brokers &sect; 34d GewO &middot; Advice in English</span>
+  </div></div>
+
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="/" aria-label="Private Health Insurance Germany"><Fragment set:html={logo(36)} /><span>Private Health Insurance<small>Germany</small></span></a>
+      <ul>
+        <li><a href="/#who">Who it's for</a></li>
+        <li><a href="/#costs-calculator">Costs</a></li>
+        <li><a href="/#insurers">How it works</a></li>
+        <li><a href="/guide">Guides</a></li>
+      </ul>
+      <a class="btn sm" href="/free-consultation">Free consultation</a>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
+    </div>
+    <nav class="mnav" id="mnav">
+      <a href="/#who">Who it's for</a><a href="/#costs-calculator">Costs</a><a href="/#insurers">How it works</a><a href="/guide">Guides</a>
+      <a class="btn" href="/free-consultation">Free consultation</a>
+    </nav>
+  </header>
+
+  <slot />
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div><a class="logo" href="/"><Fragment set:html={logo(32)} /><span>Private Health Insurance<small>Germany</small></span></a><p>Independent advice in English for expats, employees, freelancers, students and families.</p></div>
+        <div><h4>Explore</h4><ul><li><a href="/#who">Who it's for</a></li><li><a href="/#costs-calculator">Costs</a></li><li><a href="/guide">Guides</a></li><li><a href="/top-insurers">Insurers</a></li><li><a href="/eligibility-check">Eligibility Check</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="/free-consultation">Free consultation</a></li><li><a href="/about">About</a></li><li><a href="/how-we-get-paid">How we get paid</a></li><li><a href="/editorial-standards">Editorial standards</a></li></ul></div>
+        <div><h4>Legal</h4><ul><li><a href="/imprint">Imprint</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
+      </div>
+      <div class="legal"><span>&copy; 2026 Private Health Insurance Germany</span><span>Licensed brokers, &sect; 34d GewO</span></div>
+    </div>
+  </footer>
+
+  <script is:inline>
+    (function(){
+      var bg=document.querySelector('.burger'),mn=document.getElementById('mnav');
+      bg.addEventListener('click',function(){var o=mn.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
+      mn.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mn.classList.remove('open')})});
+    })();
+  </script>
+</body>
+</html>

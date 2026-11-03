@@ -1,203 +1,365 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Advisor from '../components/Advisor.astro';
-import LinkedInTrust from '../components/LinkedInTrust.astro';
-import Testimonials from '../components/Testimonials.astro';
-import ConsultationCTA from '../components/ConsultationCTA.astro';
-import FaqAccordion from '../components/sections/FaqAccordion.astro';
-
-const faqs = [
-  { q: 'Who can choose private health insurance in Germany?', a: 'Employees who earn above the income threshold, self-employed people and freelancers, and civil servants can usually choose private cover. Students can choose a student tariff. The Eligibility Check shows which route applies to you.' },
-  { q: 'How are private health insurance premiums calculated?', a: 'Your premium is set by your age at entry, your health and the level of cover you choose. It does not rise with your salary, which is the main difference from public health insurance.' },
-  { q: 'Do I need to speak German?', a: 'No. Our independent consultants work in English, and several insurers offer full English-language service.' },
-  { q: 'How long does it take to get covered?', a: 'Policies typically start within 2 to 4 weeks of the application. Your consultant handles the paperwork with you.' },
-  { q: 'What does the advice cost?', a: 'Nothing. The consultation and the comparison are free of charge and without obligation.' },
-  { q: 'Can I go back to public health insurance later?', a: 'Only in limited cases, for example if your income drops below the threshold for an extended period. Think carefully before you switch and talk to an independent consultant first.' },
-];
-
-const audiences = [
-  { title: 'Expats', text: 'New to Germany or settled here: what private cover means for you.', href: '/health-insurance-expats-germany' },
-  { title: 'Employees', text: 'Whether your salary lets you leave the public system.', href: '/guide/who-qualifies' },
-  { title: 'Freelancers and self-employed', text: 'You can choose freely from day one. Know the income risk.', href: '/guide/for-freelancers' },
-  { title: 'Students', text: 'Student options for your time at a German university.', href: '/guide/for-students' },
-  { title: 'Families', text: 'What changes for partners and children, and what it costs.', href: '/guide/costs-and-contributions' },
-];
-
-const steps = [
-  { t: 'Tell us your situation', d: 'Five short questions: job status, income band, household, time in Germany, contact details.' },
-  { t: 'A broker calls you back', d: 'In English, at the time you chose. You get an honest view on whether private cover fits you at all.' },
-  { t: 'Compare and decide', d: 'The broker compares insurers for your profile. You decide, with no obligation.' },
-  { t: 'Cover starts', d: 'Policies typically start within 2 to 4 weeks of the application. Your broker handles the paperwork.' },
-];
-
-const rows = [
-  { income: '€30,000', pub: '€408', priv: '€310' },
-  { income: '€50,000', pub: '€679', priv: '€310' },
-  { income: '€70,000', pub: '€899', priv: '€310' },
-  { income: '€90,000', pub: '€899 (capped)', priv: '€310' },
-];
+import Layout from '../layouts/LayoutV4.astro';
 ---
 <Layout
-  title="Private Health Insurance in Germany 2026 — Costs & Expat Guide"
-  description="Private health insurance in Germany for expats, in plain English: compare public vs private health insurance, check eligibility, estimate costs, and get matched with a broker."
+  title="Private Health Insurance Germany: Free Advice for Expats"
+  description="Private health insurance in Germany, explained in English. Check if you qualify, compare costs and talk to a licensed broker. Our whole service is free."
 >
-  <main id="main">
-    <!-- 1. Hero -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Independent advice, in English</p>
-          <h1>Private health insurance in Germany, arranged for expats</h1>
-          <p class="lead">A licensed broker compares insurers for your situation and explains every step in plain English. You pay nothing for the advice.</p>
-          <div class="hero-actions">
-            <a class="btn" href="/free-consultation">Get a free consultation</a>
-            <a class="hero-phone" href="tel:+4971196981720">or call +49 711 96 98 17 20</a>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is your service really free?","acceptedAnswer":{"@type":"Answer","text":"Yes, all of it: the consultation, the comparison, the application and the paperwork. You pay nothing extra and you are under no obligation."}},{"@type":"Question","name":"Can I get private health insurance as an employee?","acceptedAnswer":{"@type":"Answer","text":"Private health insurance is open to employees earning over €77,400 a year (2026). From 2027 the threshold is expected to rise to €84,150 (not final yet). Below that, public insurance is generally required."}},{"@type":"Question","name":"Can freelancers choose private health insurance?","acceptedAnswer":{"@type":"Answer","text":"Yes. Freelancers and self-employed people can choose private from day one. We compare it with the public option for your case."}},{"@type":"Question","name":"Do I need to speak German?","acceptedAnswer":{"@type":"Answer","text":"No. Your broker speaks English and handles the paperwork with the insurer."}}]})} />
+  <main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag">For expats, explained in English</span>
+      <h1>Private health insurance in Germany</h1>
+      <p class="lede">Is it right for you? Honest answers from licensed brokers, before you sign anything.</p>
+      <ul class="checks">
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#10201E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Free from first call to paperwork</b><span class="s">No fees, no obligation.</span></div></li>
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#10201E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Public or private, side by side</b><span class="s">If public suits you better, we say so.</span></div></li>
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#10201E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>English support after you sign</b><span class="s">Letters, claims and changes, explained.</span></div></li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn" href="/free-consultation">Free consultation <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn ghost" href="#elig">Check if you qualify</a>
+      </div>
+      <p class="hero-note">Five short questions, about two minutes. A broker calls you back in English.</p>
+    </div>
+    <div class="hero-vis">
+      <div class="hero-card"><img src="/images/photos/pastel-hero-woman-pink.webp" alt="Smiling woman checking her private health insurance on her phone" width="1024" height="1024" fetchpriority="high"></div>
+      <div class="float free"><span class="big">&euro;0</span><span>What you pay us for our whole service</span></div>
+      <figure class="float q">
+        <p>&ldquo;She was very patient with my questions and explained everything in detail with full transparency.&rdquo;</p>
+        <figcaption class="by"><svg class="li" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span><b>Rohan T.</b> on LinkedIn, Aug 2024</span></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="elig-band">
+    <div class="wrap">
+      <div class="elig" id="elig">
+        <div class="elig-side">
+          <div><span class="tag">Eligibility Check</span><h2>Can you get private health insurance?</h2></div>
+          <p>Two questions, 20 seconds. No sign-up.</p>
+        </div>
+        <div class="elig-main">
+          <div class="elig-top"><span id="elig-step">Question 1 of 2</span><span><button type="button" class="elig-back" id="elig-back" hidden>&larr; Back</button><button type="button" class="elig-again" id="elig-again" hidden>Start again</button></span></div>
+          <div class="estep" data-s="1">
+            <h3 tabindex="-1">What's your situation?</h3>
+            <div class="opts">
+              <button type="button" class="opt" data-a="emp">Employee</button>
+              <button type="button" class="opt" data-a="self">Self-employed or freelancer</button>
+              <button type="button" class="opt" data-a="stu">Student</button>
+            </div>
           </div>
-          <ul class="hero-facts">
-            <li>Licensed broker, &sect; 34d GewO</li>
-            <li>Reply within one working day</li>
-            <li>No obligation</li>
-          </ul>
-        </div>
-        <div class="hero-side">
-          <div class="photo" role="img" aria-label="Advisor photo placeholder"><span class="mono">[Advisor photo]</span></div>
-          <Advisor layout="stack" size="sm" schema />
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Who it's for -->
-    <section class="sec" id="who">
-      <div class="container two">
-        <div>
-          <p class="eyebrow">Who it&rsquo;s for</p>
-          <h2>The rules depend on your job. Start with yours.</h2>
-        </div>
-        <ul class="rowlist">
-          {audiences.map((a) => (
-            <li><a href={a.href}><span class="rl-t">{a.title}</span><span class="rl-d">{a.text}</span><span class="rl-a" aria-hidden="true">&rarr;</span></a></li>
-          ))}
-        </ul>
-      </div>
-    </section>
-
-    <!-- 3. Costs -->
-    <section class="sec sec-band" id="costs">
-      <div class="container two">
-        <div>
-          <p class="eyebrow">What it costs</p>
-          <h2>Private premiums follow age and health, not salary.</h2>
-          <p class="body">The table compares a self-employed 32-year-old on a mid-range private plan with public contributions at different incomes. Employees above the 2026 threshold of &euro;77,400 per year can choose private cover.</p>
-          <p class="links"><a href="/guide/costs-and-contributions">Costs and contributions explained</a><a href="/calculator">Cost calculator</a><a href="/eligibility-check">Eligibility Check</a></p>
-        </div>
-        <div class="tbl-wrap">
-          <table>
-            <caption>Approximate monthly cost, healthy single adult, freelancer paying the full premium</caption>
-            <thead><tr><th scope="col">Annual income</th><th scope="col">Public</th><th scope="col">Private (age 32, mid plan)</th></tr></thead>
-            <tbody>{rows.map((r) => <tr><th scope="row">{r.income}</th><td>{r.pub}</td><td>{r.priv}</td></tr>)}</tbody>
-          </table>
-          <p class="src">Source: <a href="/guide/for-freelancers">our freelancer guide</a>, 2026 figures. Your own premium depends on age, health and plan.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. How it works -->
-    <section class="sec" id="how">
-      <div class="container">
-        <p class="eyebrow">How it works</p>
-        <h2>From first question to signed policy</h2>
-        <ol class="steps">
-          {steps.map((s, i) => (
-            <li><span class="n mono">0{i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>
-          ))}
-        </ol>
-        <p class="steps-cta"><a class="btn" href="/free-consultation">Start with step 1</a></p>
-      </div>
-    </section>
-
-    <!-- 5. Trust -->
-    <Testimonials />
-    <section class="sec sec-band" id="trust">
-      <div class="container two">
-        <div>
-          <p class="eyebrow">Who you talk to</p>
-          <h2>Two named, licensed advisors.</h2>
-          <p class="body">Read what clients wrote about them, and how we are paid.</p>
-        </div>
-        <div class="trust-col">
-          <Advisor layout="stack" size="lg" />
-          <LinkedInTrust />
-          <div class="paid">
-            <p class="paid-h">How we get paid</p>
-            <p>[Placeholder: short statement on commission, independence and why the advice is free for you.] <a href="/how-we-get-paid">Read more</a></p>
+          <div class="estep" data-s="2" hidden>
+            <h3 tabindex="-1">Is your gross yearly income above &euro;77,400?</h3>
+            <p class="q-sub">That is the 2026 threshold for employees.</p>
+            <div class="opts">
+              <button type="button" class="opt" data-a="yes">Yes</button>
+              <button type="button" class="opt" data-a="no">No</button>
+              <button type="button" class="opt" data-a="unsure">Not sure</button>
+            </div>
+          </div>
+          <div class="estep" data-s="r" hidden aria-live="polite">
+            <h3 id="res-h" tabindex="-1"></h3>
+            <p class="res-text" id="res-p"></p>
+            <div class="res-actions"><a class="btn" href="/free-consultation">Get a free consultation <span aria-hidden="true">&rarr;</span></a><a class="l" href="#costs-calculator">See what it would cost</a></div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- 6. FAQ + CTA -->
-    <section class="sec" id="faq">
-      <div class="container two">
-        <div>
-          <p class="eyebrow">FAQ</p>
-          <h2>Frequently asked questions</h2>
-        </div>
-        <FaqAccordion items={faqs} />
+<section class="sec warm" id="who">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Who private health insurance <span class="acc">is for</span></h2>
+      <p>It works very differently depending on how you earn. Pick your situation.</p>
+    </div>
+    <div class="who-grid">
+      <a class="row wide reveal" href="/free-consultation"><div class="ph"><img src="/images/photos/pillar-expats-street.webp" alt="Expats walking through a German city" loading="lazy"></div><div><h3>Expats new to Germany</h3><p>Not sure how the German system works? We explain public and private health insurance in plain English first, then you decide.</p></div><span class="ar" aria-hidden="true">&rarr;</span></a>
+      <a class="row reveal" href="/free-consultation"><div class="ph" style="background:#F6D9DC"><img src="/images/photos/pastel-man-laptop-pink.webp" alt="Employee with a laptop" loading="lazy"></div><div><h3>Employees</h3><p>Open above &euro;77,400 a year. Your employer pays up to half.</p></div><span class="ar" aria-hidden="true">&rarr;</span></a>
+      <a class="row reveal" href="/free-consultation"><div class="ph"><img src="/images/photos/pastel-man-mint.webp" alt="Freelancer checking his phone" loading="lazy"></div><div><h3>Freelancers and self-employed</h3><p>You can choose private from day one, at any income.</p></div><span class="ar" aria-hidden="true">&rarr;</span></a>
+      <a class="row reveal" href="/free-consultation"><div class="ph"><img src="/images/photos/pastel-student-blue.webp" alt="Student holding a notebook" loading="lazy"></div><div><h3>Students</h3><p>One choice at the start of your studies. We check yours.</p></div><span class="ar" aria-hidden="true">&rarr;</span></a>
+      <a class="row reveal" href="/free-consultation"><div class="ph"><img src="/images/photos/pillar-family-park.webp" alt="Family walking in a park" loading="lazy"></div><div><h3>Families</h3><p>Children and partners change the maths. We show both sides.</p></div><span class="ar" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="costs-calculator">
+  <div class="wrap calc-grid">
+    <div class="calc-intro reveal">
+      <span class="tag">Costs</span>
+      <h2 style="margin-top:16px">What would private health insurance <span class="acc">cost you?</span></h2>
+      <p style="color:var(--muted);margin-top:14px;font-size:18px;max-width:520px">Set your age and income and compare public and private side by side. It is an estimate, not a quote.</p>
+      <ul class="checks">
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#10201E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Public depends on your income</b><span class="s">A share of your salary, up to the contribution ceiling.</span></div></li>
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#10201E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Private depends on you</b><span class="s">Your age when you start, your health and the plan you pick.</span></div></li>
+      </ul>
+      <div class="ph"><img src="/images/photos/nb-couple-sofa.webp" alt="Couple comparing private health insurance costs on a laptop at home" loading="lazy"></div>
+    </div>
+    <div class="calc reveal" id="calc">
+      <h3>Public vs private</h3>
+      <p class="sub">Your monthly share, 2026.</p>
+      <div class="toggle" role="group" aria-label="Employment type">
+        <button type="button" data-m="emp" aria-pressed="true">Employee</button>
+        <button type="button" data-m="self" aria-pressed="false">Self-employed</button>
       </div>
-    </section>
+      <div class="inc-row"><span class="label">Your age</span><span class="inc-val" id="agev">32</span></div>
+      <input type="range" id="age" min="20" max="60" step="1" value="32" aria-label="Your age">
+      <div class="ticks"><span>20</span><span>40</span><span>60</span></div>
+      <div class="inc-row inc-gap"><span class="label">Gross income per year</span><span class="inc-val" id="incv">&euro;85,000</span></div>
+      <input type="range" id="inc" min="20000" max="200000" step="1000" value="85000" aria-label="Gross income per year">
+      <div class="ticks"><span>&euro;20k</span><span>&euro;77.4k threshold</span><span>&euro;200k</span></div>
+      <div class="res" aria-live="polite">
+        <div class="closed" id="closed">Private health insurance is not open to employees under &euro;77,400 a year yet. Talk to us about what changes that: a raise, a job switch or self-employment.</div>
+        <div class="bar" id="bpub"><div class="n" id="pubn">Public</div><div class="track"><div class="fill pub" id="pubf"></div><span class="lbl" id="publ"></span></div></div>
+        <div class="bar" id="bpriv"><div class="n" id="privn">Private</div><div class="track"><div class="fill priv" id="privf"></div><span class="lbl" id="privl"></span></div></div>
+        <p class="note" id="note"></p>
+        <p class="age-hint" id="ageh">Over 45, private health insurance needs a careful look at long-term premiums. Talk to us before you decide.</p>
+      </div>
+      <p class="fine">Illustrative 2026 estimate, your quote depends on age, health and plan. Private range shown for a healthy person of your age starting a mid-range plan now; employer share capped at &euro;508.59 a month. No savings are guaranteed.</p>
+    </div>
+  </div>
+</section>
 
-    <ConsultationCTA />
-  </main>
-</Layout>
+<section class="sec warm" id="costs-numbers">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Three numbers that <span class="acc">decide it</span></h2></div>
+    <div class="nums reveal">
+      <div class="num"><span class="k">Income threshold 2026</span><div class="big">&euro;<span class="cu" data-to="77400">77,400</span></div><p>Employees earning more than this a year can choose private health insurance. From 2027 the threshold is expected to rise to &euro;84,150 (not final yet).</p></div>
+      <div class="num"><span class="k">Contribution ceiling 2026</span><div class="big">&euro;<span class="cu" data-to="5812.50" data-dec="2">5,812.50</span></div><p>Monthly income up to which public health insurance charges contributions.</p></div>
+      <div class="num"><span class="k">What you pay us</span><div class="big">&euro;0</div><p>For our whole service: advice, comparison, application and paperwork.</p></div>
+    </div>
+  </div>
+</section>
 
-<style>
-  .hero { padding: 24px 0 56px; border-bottom: 1px solid var(--border); background: var(--band); }
-  .hero-grid { display: grid; gap: 36px; }
-  .hero h1 { font-size: 36px; line-height: 40px; margin-bottom: 18px; }
-  .hero .lead { max-width: 560px; }
-  .hero-actions { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
-  .hero-phone { font-weight: 600; color: var(--navy); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center; }
-  .hero-facts { list-style: none; margin-top: 26px; display: flex; flex-wrap: wrap; gap: 6px 22px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .02em; color: var(--text-muted); }
-  .hero-facts li::before { content: ""; display: inline-block; width: 7px; height: 7px; background: var(--brand-coral); margin-right: 8px; }
-  .hero-side { display: grid; gap: 16px; }
-  .photo { aspect-ratio: 16 / 10; background: #DCE1EC; border-radius: var(--radius-card); display: grid; place-items: center; color: #7F8AA8; }
-  .sec { padding: var(--section-y-mobile) 0; }
-  .sec-band { background: var(--band); border-block: 1px solid var(--border); }
-  .sec h2 { max-width: 620px; }
-  .two { display: grid; gap: 32px; }
-  .rowlist { list-style: none; border-top: 2px solid var(--navy); }
-  .rowlist a { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 18px 0; border-bottom: 1px solid var(--border); color: var(--navy); align-items: center; }
-  .rl-t { font-family: var(--font-display); font-stretch: 108%; font-weight: 700; font-size: 19px; }
-  .rl-d { grid-column: 1; font-size: 15px; color: var(--text-muted); }
-  .rl-a { grid-row: 1 / span 2; grid-column: 2; font-size: 22px; color: var(--accent); transition: transform var(--dur-spring) var(--spring); }
-  .rowlist a:hover .rl-t { color: var(--accent); }
-  .rowlist a:hover .rl-a { transform: translateX(4px); }
-  .body { margin-top: 16px; max-width: 520px; font-size: 17px; line-height: 27px; }
-  .links { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
-  .links a, .src a, .paid a { font-weight: 600; color: var(--accent-dk); text-decoration: underline; text-underline-offset: 3px; }
-  .tbl-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border-strong); font-size: 15px; }
-  caption { text-align: left; padding: 0 0 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .02em; color: var(--text-muted); caption-side: top; }
-  th, td { padding: 13px 14px; text-align: left; border-bottom: 1px solid var(--border); }
-  thead th { font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); border-bottom: 2px solid var(--navy); }
-  tbody th { font-weight: 700; color: var(--navy); }
-  .src { margin-top: 12px; font-size: 13.5px; color: var(--text-muted); }
-  .steps { list-style: none; margin-top: 36px; display: grid; gap: 28px; }
-  .steps li { border-top: 2px solid var(--navy); padding-top: 14px; }
-  .n { color: var(--accent); font-size: 13px; }
-  .steps h3 { margin: 8px 0 6px; font-size: 21px; line-height: 26px; }
-  .steps p { font-size: 15.5px; line-height: 24px; }
-  .steps-cta { margin-top: 36px; }
-  .trust-col { display: grid; gap: 28px; }
-  .paid { border-top: 1px solid var(--border); padding-top: 20px; }
-  .paid-h { font-family: var(--font-display); font-stretch: 108%; font-weight: 700; font-size: 19px; color: var(--navy); margin-bottom: 8px; }
-  @media (min-width: 960px) {
-    .hero { padding: 40px 0 88px; }
-    .hero-grid { grid-template-columns: 1.15fr 1fr; gap: 72px; align-items: center; }
-    .hero h1 { font-size: 52px; line-height: 56px; }
-    .photo { aspect-ratio: 4 / 3; }
-    .sec { padding: var(--section-y) 0; }
-    .two { grid-template-columns: 5fr 7fr; gap: 80px; align-items: start; }
-    .steps { grid-template-columns: repeat(4, 1fr); gap: 28px; }
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="tag">English-speaking concierge</span><h2 style="margin-top:16px">Still here <span class="acc">after you sign</span></h2><p>Signing is not the end of it. You keep the broker who arranged your private health insurance.</p></div>
+    <div class="comp">
+      <div class="comp-row reveal"><div class="ph"><img src="/images/photos/nb-man-sofa.webp" alt="Man reading a message from his insurer on his phone" loading="lazy"></div><div><h3>German letters, explained in English</h3><p>A letter from your insurer arrives and you are not sure what it wants. Send it to us and we tell you what it means and what to do.</p></div></div>
+      <div class="comp-row reveal"><div class="ph"><img src="/images/photos/row-man-homeoffice.webp" alt="Man on a phone call in his home office" loading="lazy"></div><div><h3>Claims and doctors&rsquo; invoices</h3><p>With private health insurance you often pay the doctor first and claim it back. We help when a claim gets stuck.</p><p class="comp-q">&ldquo;Great service end to end from upfront selection and switching to on-going day to day support.&rdquo;<small>Anish P., on LinkedIn, August 2024</small></p></div></div>
+      <div class="comp-row reveal"><div class="ph"><img src="/images/photos/row-couple-balcony.webp" alt="Couple on their balcony looking at a tablet" loading="lazy"></div><div><h3>Changes when your life changes</h3><p>You marry, have a child or change jobs. We check what that means for your plan and handle the paperwork.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec warm" id="insurers">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>How it works: four steps, <span class="acc">no obligation</span></h2></div>
+    <ol class="steps reveal" style="list-style:none">
+      <li class="step"><h3>Tell us your situation</h3><p>A short form: income, job, family.</p></li>
+      <li class="step"><h3>A broker calls you back</h3><p>In English. You talk to a person, not a chatbot.</p></li>
+      <li class="step"><h3>Compare and decide</h3><p>Options side by side. Public may still be your answer.</p></li>
+      <li class="step"><h3>We handle the paperwork</h3><p>Applications, forms and the switch are on us.</p></li>
+    </ol>
+    <div class="adv reveal" style="margin-top:72px">
+      <div class="person"><img class="mono" src="/images/photos/advisor-bettina-ostermann.webp" alt="Bettina Ostermann, senior insurance advisor" width="96" height="96" loading="lazy"><div><h3>Bettina Ostermann</h3><div class="role">Senior insurance advisor</div><div class="lic">IHK-licensed broker &sect; 34d GewO</div></div></div>
+      <div class="person"><img class="mono" src="/images/photos/advisor-michael-kammerer.webp" alt="Michael Kammerer, senior insurance advisor" width="96" height="96" loading="lazy"><div><h3>Michael Kammerer</h3><div class="role">Senior insurance advisor</div><div class="lic">IHK-licensed broker &sect; 34d GewO</div></div></div>
+      <div class="adv-note"><b>Your advisors speak English and call you back themselves.</b><a class="btn yel sm" href="/free-consultation">Free consultation <span aria-hidden="true">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="reviews" aria-labelledby="rv-t">
+  <div class="wrap rv-head reveal" style="margin-bottom:40px">
+    <div class="sec-head" style="margin:0"><h2 id="rv-t">Private health insurance advice, <span class="acc">in their words</span></h2><p>Public recommendations our clients wrote for Bettina and Michael on LinkedIn, quoted word for word.</p></div>
+    <div class="rv-ctrl"><button class="rv-btn rv-prev" type="button" aria-label="Previous recommendations">&#8592;</button><button class="rv-btn rv-next" type="button" aria-label="Next recommendations">&#8594;</button></div>
+  </div>
+  <div class="rv-track" aria-label="Client recommendations">
+    <div class="rv-run">
+    <ul class="rv-list">
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Bettina on LinkedIn &middot; August 2024</span></div>
+        <h3>Patient, detailed and fully transparent</h3>
+        <div class="rv-body"><p>Bettina guided me to choose the right private health insurance for myself in Germany. She was very patient with my questions and explained everything in detail with full transparency.</p><p>I would strongly recommend Bettina and her team for private health insurance related services. Her team’s support even after you sign, is excellent!</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">RT</span><cite>Rohan T.</cite></div>
+      </blockquote></li>
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Bettina on LinkedIn &middot; August 2024</span></div>
+        <h3>Great service end to end</h3>
+        <div class="rv-body"><p>Great service end to end from upfront selection and switching to on-going day to day support from Bettina and team. Thanks</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">AP</span><cite>Anish P.</cite></div>
+      </blockquote></li>
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Michael on LinkedIn &middot; March 2024</span></div>
+        <h3>Transparent about every option, and quick to answer</h3>
+        <div class="rv-body"><p>From the initial call and throughout the onboarding process, my experience with Michael has been straightforward and positive. He was very transparent about the different insurance plans, ensuring I understood all the options available. His responsiveness stood out, as he promptly answered all my questions, no matter how many I had. Additionally, he offered valuable advice regarding my current plan and what I would need in the future, helping me make informed decisions. Based on my experience, I highly recommend him as an insurance advisor.</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">SP</span><cite>Sharvesh P.</cite></div>
+      </blockquote></li>
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Michael on LinkedIn &middot; March 2024</span></div>
+        <h3>Makes German health insurance a whole lot easier</h3>
+        <div class="rv-body"><p>Dealing with health insurance in Germany can be tricky, but having Michael Kammerer on your side makes it a whole lot easier. He's got this knack for breaking down the complicated parts so you can actually understand what's what, and he really listens to what you need.</p><p>Michael isn't just about getting you any insurance; he makes sure it's the right fit for you. He took care of all the boring paperwork and was always just a message away whenever I had a question or needed help.</p><p>I'd recommend Michael to anyone who needs to get their health insurance sorted in Germany. He's not just another broker; he's like having a buddy who knows everything about insurance and wants to help you out.</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">RB</span><cite>Raphaël B.</cite></div>
+      </blockquote></li>
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Bettina on LinkedIn &middot; October 2023</span></div>
+        <h3>Switching from public to private made simple</h3>
+        <div class="rv-body"><p>I've got to give a shoutout to Bettina for helping me switch from my old German health insurance to a private plan. She really knows her stuff and made the whole process super easy.</p><p>Bettina laid out a bunch of different private insurance options and broke down the comparisons so I could easily pick the right one for me. She also had my back when it came to all the paperwork, and she was always just a message away if I had questions.</p><p>Bettina's expertise and awesome customer service made a big difference in my insurance game. If you're looking to make the switch, I can't recommend her enough!</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">VI</span><cite>Vladimir I.</cite></div>
+      </blockquote></li>
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Bettina on LinkedIn &middot; September 2019</span></div>
+        <h3>A minefield, made simple</h3>
+        <div class="rv-body"><p>Bettina is "simply the best". It would be rude not to recommend the services that she provides. Insurances (particularly health insurances) can be something of a minefield for non-native speakers based in Germany. Bettina makes it simple and even pleasurable to handle insurance matters. Can't recommend her services highly enough. I'm continuously grateful for her support.</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">ST</span><cite>Shane T.</cite></div>
+      </blockquote></li>
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Bettina on LinkedIn &middot; February 2019</span></div>
+        <h3>Sorted out after moving from the UK</h3>
+        <div class="rv-body"><p>Bettina helped us to get private health insurance in Germany after we moved over from the U.K. We cannot speak any German yet and we were quite worried about how to organise everything. Bettina was extremely helpful, responding to emails quickly and was very proactive in getting everything sorted for us. We spoke on the phone after we received our insurance offers and she walked us through everything and explained very clearly. I would not hesitate to recommend Bettina's services!</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">ES</span><cite>Eleanor S.</cite></div>
+      </blockquote></li>
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Bettina on LinkedIn &middot; January 2019</span></div>
+        <h3>A tailored contract, without speaking German</h3>
+        <div class="rv-body"><p>Hello, I recently moved to Germany in Jan 1st 2019 and needed to get the right private insurance. Unfortunately I did not speak German and was really lost between the various offers. Bettina has been tremendously helpful in providing me with a tailored contract that fits my needs. It felt good to be supported. Clearly I recommend Bettina if you plan to move to Germany and want to obtain the right medical coverage!</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">LM</span><cite>Ludovic M.</cite></div>
+      </blockquote></li>
+      <li class="rv"><blockquote>
+        <div class="rv-src"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>For Bettina on LinkedIn &middot; May 2018</span></div>
+        <h3>Accepted in a matter of days</h3>
+        <div class="rv-body"><p>My wife and I have just moved to Germany to work for CANYON Bicycles. ExPat friends living here had suggested exploring private health insurance, but navigating through both the companies, process and our current lack of German was more than challenging. Luckily I found Bettina. She quickly and efficiently helped us look at options, settling on the best one for us. In only a matter of days, we have been accepted and have smoothly solved what could have been a tough challenge. Bettina was great!</p></div>
+        <div class="rv-by"><span class="rv-ini" aria-hidden="true">SM</span><cite>Stan M.</cite></div>
+      </blockquote></li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec warm" id="guides">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Private health insurance guides: <span class="acc">read first, call later</span></h2><p>Plain-English guides that answer the questions we hear most.</p></div>
+    <div class="g-grid">
+      <a class="g lead reveal" href="#guides"><div class="ph"><img src="/images/photos/pillar-selfemployed-studio.webp" alt="Freelancer in her studio" loading="lazy"></div><span class="tag" style="align-self:start">Guide</span><h3>Private health insurance for freelancers</h3><span class="more">Read the guide &rarr;</span></a>
+      <div class="g-side"><a class="g small reveal" href="#guides"><div class="ph"><img src="/images/photos/not-sure-man-kitchen.webp" alt="Man reading at a kitchen table" loading="lazy"></div><div><h3>Who qualifies for private health insurance</h3><span class="more">Read the guide &rarr;</span></div></a>
+      <a class="g small reveal" href="#guides"><div class="ph"><img src="/images/photos/row-woman-coworking.webp" alt="Woman working on her laptop in a bright office" loading="lazy"></div><div><h3>Private health insurance costs explained</h3><span class="more">Read the guide &rarr;</span></div></a>
+      <a class="g small reveal" href="#guides"><div class="ph"><img src="/images/photos/pastel-couple-mint.webp" alt="Couple looking into private health insurance for families" loading="lazy"></div><div><h3>Private health insurance for couples and families</h3><span class="more">Read the guide &rarr;</span></div></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap faq-grid">
+    <div class="reveal"><h2>Quick <span class="acc">answers</span></h2><p style="color:var(--muted);margin-top:14px">Something else on your mind? Ask it in the <a href="/free-consultation" style="font-weight:800;color:var(--ink)">free consultation form</a>.</p></div>
+    <div class="reveal">
+      <details open><summary>Is your service really free?</summary><p>Yes, all of it: the consultation, the comparison, the application and the paperwork. You pay nothing extra and you are under no obligation.</p></details>
+      <details><summary>Can I get private health insurance as an employee?</summary><p>Private health insurance is open to employees earning over &euro;77,400 a year (2026). From 2027 the threshold is expected to rise to &euro;84,150 (not final yet). Below that, public insurance is generally required.</p></details>
+      <details><summary>Can freelancers choose private health insurance?</summary><p>Yes. Freelancers and self-employed people can choose private from day one. We compare it with the public option for your case.</p></details>
+      <details><summary>Do I need to speak German?</summary><p>No. Your broker speaks English and handles the paperwork with the insurer.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="consult">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <div class="tx">
+        <h2>Talk to a broker <span class="acc">in English</span></h2>
+        <p>Tell us your situation. We call you back, compare the options and tell you honestly if private health insurance makes sense. Our whole service is free.</p>
+        <a class="btn yel" href="/free-consultation">Book your free consultation <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="ph"><img src="/images/photos/pastel-hero-woman-blue.webp" alt="Woman smiling at her phone" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+</main>
+  <script is:inline>
+
+(function(){
+  var inc=document.getElementById('inc'),incv=document.getElementById('incv'),mode='emp';
+  var $=function(i){return document.getElementById(i)};
+  var CEIL=5812.5,MAXPUB=1100,EMPCAP=508.59,age=$('age');
+  // Illustrative age factors relative to a 32-year-old entering a mid-range plan (premium rises with entry age).
+  var AF=[[20,.8],[25,.88],[30,.95],[32,1],[35,1.1],[40,1.3],[45,1.55],[50,1.85],[55,2.15],[60,2.4]];
+  function af(a){for(var i=1;i<AF.length;i++)if(a<=AF[i][0]){var p=AF[i-1],q=AF[i];return p[1]+(q[1]-p[1])*(a-p[0])/(q[0]-p[0])}return AF[AF.length-1][1]}
+  function share(full){return full-Math.min(full/2,EMPCAP)}
+  function eur(n){return '€'+Math.round(n).toLocaleString('en-US')}
+  // Bar length is proportional to the amount; the label moves outside when the bar is too short for it.
+  function bar(id,val,txt){
+    var f=$(id+'f'),l=$(id+'l'),pct=Math.min(val/MAXPUB,1)*100;
+    f.style.width=pct+'%';l.textContent=txt;
+    var w=f.parentNode.clientWidth*pct/100,fits=l.scrollWidth+28<=w;
+    l.classList.toggle('out',!fits);
+    l.style.left=fits?'14px':(w+12)+'px';
   }
-</style>
+  function calc(){
+    var y=+inc.value,m=y/12,a=+age.value,k=af(a);incv.textContent=eur(y);$('agev').textContent=a;
+    var pub,pl,ph,note,closed=false;
+    if(mode==='self'){
+      pub=Math.min(Math.max(m,1318.33),CEIL)*0.175;pl=300*k;ph=450*k;
+      $('pubn').innerHTML='Public<br>you pay all';$('privn').innerHTML='Private<br>you pay';
+      note='Public: 17.5% of income (14.6% general + 2.9% average additional), capped at the €5,812.50 monthly ceiling.';
+    }else{
+      pub=Math.min(m,CEIL)*0.0875;pl=share(300*k);ph=share(450*k);
+      $('pubn').innerHTML='Public<br>employee share';$('privn').innerHTML='Private<br>employee share';
+      note='Private health insurance is open to employees earning over €77,400 a year. Your employer pays up to half of the premium.';
+      if(y<77400)closed=true;
+    }
+    $('closed').style.display=closed?'block':'none';
+    $('bpriv').style.display=closed?'none':'grid';
+    bar('pub',pub,eur(pub)+' /mo');
+    bar('priv',ph,eur(pl)+'–'+eur(ph)+' /mo');
+    $('note').textContent=note;
+    $('ageh').style.display=a>45&&!closed?'block':'none';
+    if(closed)$('note').textContent='Public: your share is 8.75% of income. '+'Private is not open yet at this income.';
+  }
+  inc.addEventListener('input',calc);age.addEventListener('input',calc);
+  window.addEventListener('resize',calc);
+  document.querySelectorAll('.toggle button').forEach(function(b){
+    b.addEventListener('click',function(){
+      mode=b.dataset.m;
+      document.querySelectorAll('.toggle button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      calc();
+    });
+  });
+  calc();
+  /* Eligibility Check */
+  (function(){
+    var root=$('elig'),steps={},back=$('elig-back'),again=$('elig-again'),stepL=$('elig-step');
+    root.querySelectorAll('.estep').forEach(function(e){steps[e.dataset.s]=e});
+    var R={
+      'emp-yes':['Private health insurance is open to you.','Above \u20ac77,400 a year (2026 threshold) you can leave public insurance. Your employer pays up to half of the premium.'],
+      'emp-no':['Not yet: you stay in public insurance for now.','Private health insurance opens for employees above \u20ac77,400 a year (2026). A broker can tell you if a raise or a job change would change that.'],
+      'emp-unsure':["Let's check it together.",'The 2026 threshold is \u20ac77,400 gross a year, bonuses can count. A broker can check your contract with you.'],
+      'self':['Private health insurance is open to you, from day one.','Self-employed people and freelancers can choose private health insurance at any income. The question is whether it fits your plans.'],
+      'stu':['You can choose, once.','At the start of your studies you can opt out of public student insurance. That decision holds for your whole studies, so it is worth checking first.']
+    };
+    function show(k,focus){
+      Object.keys(steps).forEach(function(x){steps[x].hidden=(x!==k)});
+      back.hidden=(k==='1');again.hidden=(k!=='r');
+      stepL.innerHTML=k==='r'?'Your result':'Question '+k+' of 2';
+      if(focus){var h=steps[k].querySelector('h2,h3');if(h)h.focus({preventScroll:true})}
+    }
+    function result(key){var r=R[key];$('res-h').textContent=r[0];$('res-p').textContent=r[1];show('r',true)}
+    root.querySelectorAll('.opt').forEach(function(b){
+      b.addEventListener('click',function(){
+        var a=b.dataset.a;
+        if(a==='emp')show('2',true);
+        else if(a==='self'||a==='stu')result(a);
+        else result('emp-'+a);
+      });
+    });
+    back.addEventListener('click',function(){show('1',true)});
+    again.addEventListener('click',function(){show('1',true)});
+    show('1',false);
+  })();
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    els.forEach(function(e){io.observe(e)});
+  }else els.forEach(function(e){e.classList.add('in')});
+})();
+document.querySelectorAll('.rv-body').forEach(d=>{d.classList.add('clamp');if(d.scrollHeight<=d.clientHeight+2){d.classList.remove('clamp');return}const m=document.createElement('button');m.type='button';m.className='rv-more';m.textContent='Read more';m.setAttribute('aria-expanded','false');m.onclick=()=>{const o=d.classList.toggle('clamp');m.textContent=o?'Read more':'Show less';m.setAttribute('aria-expanded',String(!o))};d.after(m)});
+{const t=document.querySelector('.rv-track'),s=d=>t.scrollBy({left:d*400});document.querySelector('.rv-prev').onclick=()=>s(-1);document.querySelector('.rv-next').onclick=()=>s(1)}
+(()=>{const els=document.querySelectorAll('.cu');if(!els.length||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+const fmt=(v,d)=>v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+els.forEach(e=>{const to=+e.dataset.to,d=+(e.dataset.dec||0);e.textContent=fmt(0,d);
+const io=new IntersectionObserver(([en])=>{if(!en.isIntersecting)return;io.disconnect();const t0=performance.now(),D=1600;
+const step=t=>{const k=Math.min(1,(t-t0)/D),v=to*(1-Math.pow(1-k,4));e.textContent=fmt(k<1?(d?v:Math.round(v)):to,d);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)},{threshold:.5});io.observe(e)})})();
+
+  </script>
+</Layout>

@@ -25,16 +25,17 @@ The site exists to rank and to turn visitors into consultations. Every headline,
 ## 2. Copy rules
 - The **whole service** is free (consultation, comparison, application, paperwork), not just "the consultation". The button may stay "Free consultation".
 - Never "Quiz". Say "Eligibility Check".
+- All leads come through the funnel: the free consultation form (`/free-consultation`) or the Eligibility Check. No phone numbers, no `tel:` links anywhere on the site.
 - No invented testimonials, ratings, customer counts or savings claims. Never name competitor brokers.
 - Money and legal facts (JAEG €77,400, contribution ceiling €5,812.50/month for 2026, rates) need a source check before going live.
 - Banned words: delve, seamless(ly), unlock, effortless, supercharge, empower, journey, hassle-free, "in today's fast-paced".
 
 ## 3. Design (v3 redesign, Oct 2026: supersedes the old brand kit, DESIGN-TOKENS.md and DESIGN.md)
-Reference mockup: `../phig-redesign/design-ref/directions/v3/index.html`.
+Reference mockup: `../phig-redesign/design-ref/directions/v4/index.html` (+ `v4/free-consultation.html`). Marco prefers v4 over v3 (2026-10-22).
 - Colours: teal `#0A4D4A`, dark teal `#073937`, sand `#F0E2C8`, light sand `#F8F0E1`, cream `#FCF8EF`, mustard `#F5B700` (accent words, buttons, logo mark), ink `#10201E`. No orange or coral.
 - Fonts: Schibsted Grotesk (headings), Figtree (body and labels).
 - Highlight words by colour only. **No italic serif accent words.**
-- Never use the photo `flux-woman-videocall` or a look-alike (woman in a green sweater at a laptop). It has been deleted.
+- Never use the photo `flux-woman-videocall` (her face looked burnt). It has been deleted. Look-alikes are fine if the face looks natural, e.g. `gpt-woman-desk.jpg` (Marco, 2026-10-23).
 - Ask Marco before taking photos from MHCB or generating new images.
 
 ## Stack
